@@ -4,12 +4,10 @@ public class UserDataDTO {
 
 	private int user_seq, user_age, height, weight, final_weight;
 	private String user_memo;
-	private boolean user_black;
 	
 	public UserDataDTO() {}
 
-	public UserDataDTO(int user_seq, int user_age, int height, int weight, int final_weight, String user_memo,
-			boolean user_black) {
+	public UserDataDTO(int user_seq, int user_age, int height, int weight, int final_weight, String user_memo) {
 		super();
 		this.user_seq = user_seq;
 		this.user_age = user_age;
@@ -17,7 +15,6 @@ public class UserDataDTO {
 		this.weight = weight;
 		this.final_weight = final_weight;
 		this.user_memo = user_memo;
-		this.user_black = user_black;
 	}
 
 	public int getUser_seq() {
@@ -68,19 +65,13 @@ public class UserDataDTO {
 		this.user_memo = user_memo;
 	}
 
-	public boolean isUser_black() {
-		return user_black;
-	}
-
-	public void setUser_black(boolean user_black) {
-		this.user_black = user_black;
-	}
-
 	@Override
 	public String toString() {
 		return user_seq + " : " + user_age + " : " + height + " : "
-				+ weight + " : " + final_weight + " : " + user_memo + " : " + user_black;
+				+ weight + " : " + final_weight + " : " + user_memo;
 	}
+
+	
 	
 	
 	
