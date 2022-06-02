@@ -208,7 +208,7 @@ textarea{
 
 /*버튼*/
 #btnList{
-	background-color: #73b1a1;
+		background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
         padding: 3px;

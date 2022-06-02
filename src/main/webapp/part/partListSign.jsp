@@ -215,6 +215,15 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
+/*Pagination*/
+    .page-link{
+        color: #5a9284;
+        margin-bottom: 50px;
+    }
+    .page-link:focus{
+        color: #5a9284;
+    }
+
 
 /* 버튼 */
 .btnSubmit {
