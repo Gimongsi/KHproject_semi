@@ -203,7 +203,7 @@
         <div class="row cls_header">
             <div class="col-3 logoImg">
                 <a href="#">
-                    <img id="logoImg" src="/resources/dpt_Logo.png">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
