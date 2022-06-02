@@ -286,13 +286,13 @@
             </div>
             <div class="d-none d-md-block col-5"></div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -352,7 +352,7 @@
         <!-- 헤더 끝 -->
 
         <div class="emptyTop"></div>
-
+		<form action="/loginOk.user" method="post" id="loginForm">
         <!-- body -->
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
@@ -368,17 +368,15 @@
                     <div class="empty"></div>
                     <div class="row">
                         <div class="col-12 m-1 d-flex justify-content-center">
-                            <input type="text" placeholder="이메일을 입력하세요">
+                            <input type="text" placeholder="이메일을 입력하세요" id="user_id" name="user_id">
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-12 m-1 d-flex justify-content-center">
-                            <input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요">
+                            <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호를 입력하세요">
                         </div>
-
                     </div>
-
                     <div class="row m-2">
                         <div class="col-12 d-flex justify-content-center">
                             <button type="button" id="loginBtn">로그인</button>
@@ -402,7 +400,28 @@
                 </div>
             </div>
         </div>
-
+		</form>
+		
+		<script>
+			$("#loginBtn").on("click", function(){
+				
+				if($("#user_id").val() === ""){
+					alert("아이디를 입력해주세요.")
+					return;
+				} else if ($("#user_pw").val() === ""){
+					alert("비밀번호를 입력해주세요.")
+					return;
+				}
+				
+				$("#loginForm").submit();
+			});
+		
+			$("#signupBtn").on("click", function(){
+				location.href = "/toSignup.user";
+			})
+				
+			
+		</script>
 
 
 

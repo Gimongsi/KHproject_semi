@@ -1,8 +1,10 @@
 package com.dangpert.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -43,7 +45,7 @@ private BasicDataSource bds;
 		}
 	}
 	
-	public boolean idCheck(String user_id) throws Exception {
+	public boolean idCheck(String user_id) throws Exception { // 중복 아이디 확인
 		String sql = "select count(*) from tbl_user where user_id=?";
 		
 		try(Connection con = bds.getConnection();
@@ -63,8 +65,40 @@ private BasicDataSource bds;
 			}
 			
 		}
-		
-		
 	}
+	
+	public UserDTO loginOk(String user_id, String user_pw) throws Exception { // 아이디 비밀번호 확인
+		String sql = "select * from tbl_user where user_id=? and user_pw=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_pw);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int user_seq = rs.getInt("user_seq");
+				String user_name = rs.getString("user_name");
+				String user_phone = rs.getString("user_phone");
+				String signup_date = getStringDate(rs.getDate("signup_date"));
+				String user_auth = rs.getString("user_auth");
+				
+				return new UserDTO(user_seq, user_id, user_pw, user_name, user_phone, signup_date, user_auth);
+			} else {
+				return null;
+			}
+		}
+	}
+	
+	public String getStringDate(Date date) {
+		// 1900년 02월 02일 00시 00분 00초
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+		return sdf.format(date);
+	}
+	
+	
+	
 	
 }

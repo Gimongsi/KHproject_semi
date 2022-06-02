@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +16,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <title>운동시설 상세정보</title>
-</head>
-<body>
 <style>
     /* 폰트 */
     @font-face {
@@ -325,25 +322,27 @@
         text-decoration: none;
     }
 </style>
+</head>
+
 
 <body>
     <div class="container">
         <!-- 헤더 -->
         <div class="row cls_header">
             <div class="col-3 logoImg">
-                <a href="#">
+                <a href="/home">
                     <img id="logoImg" src="/imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -419,17 +418,17 @@
                 <div class="col-12 col-sm-5">
                     <div class="row">
                         <div class="col-8 gymTitle">
-                            <h2 style="margin: 0px; padding-left: 10px; font-weight: 600;" id="gym_name" name="gym_name">kh헬스장</h2>
+                            <h2 style="margin: 0px; padding-left: 10px; font-weight: 600;" id="gym_name">kh헬스장</h2>
                         </div>
                         <div class="col d-flex justify-content-end">
                             <span class="material-symbols-outlined" style="padding-right: 5px;">mood</span>
                             <span class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div calss="row">
+                        <div class="row">
                             <div class="empty"></div>
                             <div class="col">
-                                <h5 style="padding-left: 10px; font-weight: 600;" id="gym_extraAddr" name="gym_extraAddr">서울특별시 영등포구</h5>
+                                <h5 style="padding-left: 10px; font-weight: 600;" id="gym_extraAddr">서울특별시 영등포구</h5>
                             </div>
                         </div>
                         <div class="row">
@@ -448,8 +447,8 @@
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <select class="form-select" name="option">옵션
-                                    <option value="옵션1">옵션1</option>
+                                <select class="form-select" name="option">
+                                    <option value="옵션1" selected>옵션1</option>
                                     <option value="옵션2">옵션2</option>
                                     <option value="옵션3">옵션3</option>
                                 </select>

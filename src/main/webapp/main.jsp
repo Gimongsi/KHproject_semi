@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -340,19 +339,19 @@
         <!-- 헤더 -->
         <div class="row cls_header">
             <div class="col-3 logoImg">
-                <a href="#">
+                <a href="/home">
                     <img id="logoImg" src="imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"></div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -704,5 +703,13 @@
         </div>
         <!-- footer 끝 -->
     </div>
+    
+    <script>
+    	
+    </script>
+    
+    
+    
+    
 </body>
 </html>

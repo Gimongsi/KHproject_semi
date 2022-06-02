@@ -320,11 +320,11 @@ translateY(
 			</div>
 			<div class="d-none d-md-block col-5"></div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;"> <span>로그인</span>
+				<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
 				</a>
 			</div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;"> <span>회원가입</span>
+				<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
 				</a>
 			</div>
 			<div class="col p-0 headMenu d-flex justify-content-center">

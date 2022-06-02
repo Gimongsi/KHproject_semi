@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.dangpert.dao.UserDAO;
 import com.dangpert.dto.UserDTO;
@@ -25,7 +26,7 @@ public class UserController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String uri = request.getRequestURI();
 		
-		if(uri.equals("/signup.mem")) { // 회원가입 요청
+		if(uri.equals("/signup.user")) { // 회원가입 요청
 			String user_id = request.getParameter("user_id");
 			String user_pw = request.getParameter("user_pw");
 			String user_name = request.getParameter("user_name");
@@ -67,9 +68,33 @@ public class UserController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (uri.equals("/login.user")) { // 로그인 페이지 요청
+			response.sendRedirect("/user/login.jsp");
+		} else if (uri.equals("/loginOk.user")) { // 로그인 확인
+			String user_id = request.getParameter("user_id");
+			String user_pw = request.getParameter("user_pw");
 			
-			
-			
+			UserDAO dao = new UserDAO();
+			try {
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				
+				UserDTO dto = dao.loginOk(user_id, user_pw);
+				if (dto != null) {
+					System.out.println("로그인 성공!");
+					request.setAttribute("rs", true);
+					HttpSession session = request.getSession();
+					session.setAttribute("loginSession", dto);
+					
+				} else {
+					System.out.println("로그인 실패!");
+					request.setAttribute("rs", false);
+				}
+				request.getRequestDispatcher("/main.jsp").forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
+			response.sendRedirect("/user/signup.jsp");
 		}
 		
 		
