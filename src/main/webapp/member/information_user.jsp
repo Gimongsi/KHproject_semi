@@ -180,12 +180,12 @@
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
                 <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
                 <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -277,7 +277,7 @@
 			</tbody>
 		</table>
 	</div>
-		
+		</div>
 	<script> 
     	const btnWrite = document.getElementById("btnWrite");
     	
