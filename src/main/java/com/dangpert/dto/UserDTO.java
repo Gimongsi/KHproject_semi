@@ -3,12 +3,12 @@ package com.dangpert.dto;
 public class UserDTO {
 	
 	private int user_seq;
-	private String user_id, user_pw, user_name, user_phone, signup_date, user_auth;
+	private String user_id, user_pw, user_name, user_phone, signup_date, user_auth, user_memo;
 	
 	public UserDTO() {}
 
 	public UserDTO(int user_seq, String user_id, String user_pw, String user_name, String user_phone,
-			String signup_date, String user_auth) {
+			String signup_date, String user_auth, String user_memo) {
 		super();
 		this.user_seq = user_seq;
 		this.user_id = user_id;
@@ -17,6 +17,7 @@ public class UserDTO {
 		this.user_phone = user_phone;
 		this.signup_date = signup_date;
 		this.user_auth = user_auth;
+		this.user_memo = user_memo;
 	}
 
 	public int getUser_seq() {
@@ -73,6 +74,14 @@ public class UserDTO {
 
 	public void setUser_auth(String user_auth) {
 		this.user_auth = user_auth;
+	}
+	
+	public String getUser_memo() {
+		return user_memo;
+	}
+	
+	public void setUser_memo(String user_memo) {
+		this.user_memo = user_memo;
 	}
 
 	@Override

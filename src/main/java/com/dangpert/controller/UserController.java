@@ -36,10 +36,10 @@ public class UserController extends HttpServlet {
 			try {
 				user_pw = EncryptionUtils.getSHA512(user_pw);
 				System.out.println("user 암호화 비밀번호 :" + user_pw);
-				int rs = dao.insert(new UserDTO(0, user_id, user_pw, user_name, user_phone, null, null));
+				int rs = dao.insert(new UserDTO(0, user_id, user_pw, user_name, user_phone, null, null, null));
 				
 				if (rs > 0) {
-					response.sendRedirect("/login.jsp");
+					response.sendRedirect("/user/login.jsp");
 				}
 				
 			} catch (Exception e) {
@@ -95,6 +95,18 @@ public class UserController extends HttpServlet {
 			}
 		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
 			response.sendRedirect("/user/signup.jsp");
+		} else if (uri.equals("/userModify.user")) {	// 유저 정보 수정
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			
+			
+			
+			
+			request.setAttribute("dto", dto);
+			request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);	
+				
+		} else if (uri.equals("/userDiary.user")) {		// 유저 일기장 페이지 요청
+			response.sendRedirect("/user/myPage_diary.jsp");
 		}
 		
 		

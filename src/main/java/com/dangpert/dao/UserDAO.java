@@ -30,7 +30,7 @@ private BasicDataSource bds;
 	
 	
 	public int insert(UserDTO dto) throws Exception { // 회원가입
-		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default)";
+		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default, null)";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -84,8 +84,9 @@ private BasicDataSource bds;
 				String user_phone = rs.getString("user_phone");
 				String signup_date = getStringDate(rs.getDate("signup_date"));
 				String user_auth = rs.getString("user_auth");
+				String user_memo = rs.getString("user_memo");
 				
-				return new UserDTO(user_seq, user_id, user_pw, user_name, user_phone, signup_date, user_auth);
+				return new UserDTO(user_seq, user_id, user_pw, user_name, user_phone, signup_date, user_auth, user_memo);
 			} else {
 				return null;
 			}
@@ -98,7 +99,29 @@ private BasicDataSource bds;
 		return sdf.format(date);
 	}
 	
-	
+	public UserDTO selectBySeq(int user_seq) throws Exception {		// 유저 시퀀스를 이용해 해당 유저의 정보 보내기
+		String sql = "select * from tbl_user where user_seq = ?";
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String user_id = rs.getString("user_id");
+				String user_pw = rs.getString("user_pw");
+				String user_name = rs.getString("user_name");
+				String user_phone = rs.getString("user_phone");
+				String signup_date = rs.getString("user_signup_date");
+				String user_auth = rs.getString("user_auth");
+				String user_memo = rs.getString("user_memo");
+				
+				return new UserDTO(user_seq, user_id, user_pw, user_name, user_phone, signup_date, user_auth, user_memo);	
+			} else {
+				return null;
+			}
+		}
+	}
 	
 	
 }
