@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -117,48 +116,25 @@
 }
 
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-
-
-}
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -243,7 +219,7 @@ translateY
 /* 목록 */
 .title {
 	color: #97C4B8;
-	border-bottom: 1px solid #97C4B8; -
+	border-bottom: 1px solid #97C4B8;
 	-bs-gutter-x: 0px;
 	margin-bottom: 20px;
 	margin-top: 10px;
@@ -277,13 +253,13 @@ translateY
 .gym_input {
 	width: 100%;
 	border: none;
-	border-bottom: #37b192;
 	font-weight: 600;
 	height: 50px;
 }
 
 .gym_input:focus {
 	outline: none;
+	border-bottom: 1px solid #b6e0db;
 }
 
 input::placeholder, textarea::placeholder {
@@ -454,7 +430,7 @@ input::placeholder, textarea::placeholder {
 		<!-- 타이틀 -->
 		<div class="list-item-wrap">
 			<div class="row detailHeader">
-                <div class="detailPhoto col-12 col-sm-6">
+                <div class="detailPhoto col-12 col-md-6">
                     <div class="row detailPhotoWrap">
                         <div class="col-12 detailPhoto d-flex justify-content-end">
                             <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
@@ -466,9 +442,9 @@ input::placeholder, textarea::placeholder {
                         </div>
                     </div>
                 </div>
-                <div class="row d-sm-none" style="height: 50px;"></div>
+                <div class="row d-md-none" style="margin-top: 50px;"></div>
                 <div class="col-1"></div>
-                <div class="col-12 col-sm-5">
+                <div class="col-12 col-md-5">
                     <div class="row">
                         <div class="col-8 gymTitle align-items-center">
                             <input class="gym_input" type="text" id="gym_name" name="gym_name" style="font-size: large;" placeholder="상호명 입력">
@@ -500,21 +476,38 @@ input::placeholder, textarea::placeholder {
                             </div>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div class="row-12">
-                            <div class="col-12">
+                        <div class="row">
+                            <%-- <div class="col-12">
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <select class="form-select" name="option">옵션
-                                    <option value="옵션1">옵션1</option>
-                                    <option value="옵션2">옵션2</option>
-                                    <option value="옵션3">옵션3</option>
+                                <select class="form-select" name="option">
+                                    <option value="1month">1개월</option>
+                                    <option value="3month">3개월</option>
+                                    <option value="6month">6개월</option>
+                                    <option value="12month">12개월</option>
                                 </select>
-                            </div>
+                            </div> --%>
+                            <div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
+                        	<div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
+                        	<div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
+                        	<div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
                         </div>
                         <div class="empty"></div>
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy" type="button">회원권 구매</button>
+                            <button class="btn btnBuy" type="button">가격 등록</button>
                         </div>
                     </div>
                 </div>
@@ -532,8 +525,7 @@ input::placeholder, textarea::placeholder {
 					<div class="row">
 						<div class="col content">
 							<textarea id="gym_comment" name="gym_comment"
-								placeholder="공백 포함 500글자 이내로 입력하세요.">
-                            </textarea>
+								placeholder="공백 포함 500글자 이내로 입력하세요."></textarea>
 						</div>
 					</div>
 					<div class="empty"></div>

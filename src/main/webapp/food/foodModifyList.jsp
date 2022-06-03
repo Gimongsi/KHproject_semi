@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<title>식품 프로모션 등록페이지</title>
+<title>식품 프로모션 관리리스트</title>
 </head>
 <style>
     /* 폰트 */
@@ -27,18 +27,21 @@
         font-weight: normal;
         font-style: normal;
     }
+
     @font-face {
-    font-family: 'LeferiPoint-WhiteObliqueA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
     }
+
     /* 폰트 끝 */
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
     }
+
     .container {
         margin: auto;
     }
@@ -54,42 +57,52 @@
         font-family: '양진체';
         text-align: center;
     }
+
     .cls_header a {
         color: #97C4B8;
     }
+
     .cls_header a:hover {
-        color:#c9d4a9;
+        color: #c9d4a9;
     }
-    .dropdownBtn{
+
+    .dropdownBtn {
         background-color: #F0FFC2 !important;
-        color:#97C4B8;
+        color: #97C4B8;
         border: 1px solid white;
     }
-    .dropdownBtn:hover{
-        color:#9be5d2;
+
+    .dropdownBtn:hover {
+        color: #9be5d2;
     }
-    .headDropdown{
+
+    .headDropdown {
         background-color: #F0FFC2 !important;
     }
-    .headMenu{
+
+    .headMenu {
         justify-content: end;
     }
 
     /* 로고 */
-    .logoImg{
+    .logoImg {
         padding: 0%;
         filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg) brightness(86%) contrast(86%);
     }
+
     .logoImg:hover {
         filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg) brightness(99%) contrast(80%);
     }
+
     /* 로고 이미지 사이즈 */
-    .logoImg #logoImg{
+    .logoImg #logoImg {
         width: 50%;
         height: 50%;
     }
+
     /* 로고 효과 */
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
     .logoImg {
         position: relative;
         display: inline-block;
@@ -98,47 +111,59 @@
         animation: waviy 1s infinite;
         animation-delay: calc(.1s * var(--i));
     }
+
     @keyframes waviy {
+
         0%,
         40%,
         100% {
             transform: translateY(0)
         }
+
         20% {
             transform: translateY(-20px)
         }
     }
+
     /* 로고 효과 끝 */
     /* 네비바 */
-    .navbar{
+    .navbar {
         background-color: #F0FFC2 !important;
         font-family: '양진체';
     }
-    .container-fluid a{
-        color:#97C4B8 !important;
+
+    .container-fluid a {
+        color: #97C4B8 !important;
     }
-    .container-fluid a:hover{
-        color:#9be5d2 !important;
+
+    .container-fluid a:hover {
+        color: #9be5d2 !important;
     }
-    .container-fluid button{
+
+    .container-fluid button {
         background-color: #F0FFC2 !important;
         color: #97C4B8 !important;
     }
-    .navDropdown{
+
+    .navDropdown {
         border: 1px solid white;
         background-color: #d5fcf3 !important;
     }
-    .container-fluid button:hover{
+
+    .container-fluid button:hover {
         background-color: #97C4B8 !important;
-        color:#F0FFC2 !important;
+        color: #F0FFC2 !important;
     }
-    .container-fluid span{
+
+    .container-fluid span {
         filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg) brightness(103%) contrast(66%);
     }
-    .navSearchInput{
+
+    .navSearchInput {
         border: 1px solid white;
     }
-    .navSearchInput::placeholder{
+
+    .navSearchInput::placeholder {
         color: #FFE4C0;
     }
 
@@ -148,71 +173,14 @@
         height: 20px;
     }
 
-    /* 목록 */
-    .title {
-        color: #97C4B8;
-        border-bottom: 1px solid #97C4B8;
-        --bs-gutter-x: 0px;
-        margin-bottom: 20px;
-        margin-top: 10px;
-        font-family: '양진체';
-    }
-    .card{
-        width: 35rem;
-        border: 1px solid #c9d4a9;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-    .card img{
-        width : 100%;
-        height: 20rem;
-    }
-    .card-title{
-        margin-bottom: 0px;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-    .card a{
-        text-decoration: none;
-        color: black;
-    }
-    .card h5{
-        padding: 20px;
-    }
-    .foodPromo{
-        margin-bottom: 80px;
-    }
+    /* 버튼 */
     .btnSpace {
         margin-bottom: 10px;
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
     }
-    .input-group{
-    	width: 100%;
-    	margin-bottom: 10px;
-	}
-    .input-group-text{
-    	color: #97C4B8;
-    	background-color: #F0FFC2;
-    	font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-	.inputCls{
-		width: 100%;
-        font-weight: 600;
-        border: 1px solid #c9d4a9;
-	}
-	.inputCls:focus{
-        outline: none;
-    }
-    textarea{
-    	resize: none;
-    	height: 150px;
-    }
-    input::placeholder, textarea::placeholder{
-        color: #adcabf;
-    }
-    .btnSave, .btnAddPic, .btnCancle, .btnDel {
+
+    .btnAdd, .btnModify, .btnSave, .btnAddPic, .btnCancle {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -226,32 +194,64 @@
         margin: 5px;
     }
 
-    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover {
+    .btnAdd:hover, .btnModify:hover, .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
     }
 
+    /* 목록 */
+    .tableTitle {
+        background-color: #F0FFC2;
+        color: #74a598;
+        text-align: center;
+    }
+
+    .title {
+        color: #97C4B8;
+        border-bottom: 1px solid #97C4B8;
+        --bs-gutter-x: 0px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-family: '양진체';
+    }
+    .page-item.active .page-link{
+        color: white;
+        background-color: #73b1a1;
+        border: 1px solid #5a9284;
+    }
+    .page-link{
+        color: #5a9284;
+        margin-bottom: 50px;
+    }
+    .page-link:focus{
+        color: #5a9284;
+    }
+
     /* footer */
-    .footer{
+    .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
         font-size: small;
         color: #709c91;
         border-top: 1px solid #c9d4a9;
     }
-    .footer .row{
+
+    .footer .row {
         border-bottom: 1px solid #c9d4a9;
     }
-    .footer .footerInfo{
+
+    .footer .footerInfo {
         padding-block: 3%;
         text-align: center;
     }
-    .footerMenu{
+
+    .footerMenu {
         padding-block: 2%;
         text-align: center;
     }
-    .footerMenu a{
+
+    .footerMenu a {
         color: #709c91;
         text-decoration: none;
     }
@@ -269,12 +269,12 @@
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
                 <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                    <span style="margin: 0px;">로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
                 <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                    <span style="margin: 0px;">회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -343,59 +343,66 @@
         <div class="empty"></div>
         <div class="row title">
             <div class="col d-flex justify-content-center">
-                <h1>프로모션 수정</h1>
+                <h1>식품 프로모션 등록</h1>
             </div>
         </div>
-        <div class="foodPromo">
-        <form id="modifyForm" action="/modifyProc.food" method="post" enctype="multipart/form-data">
-            <div class="row cardList">
-                <div class="col d-flex justify-content-center">
-                    <div class="card">
-                            <c:if test="${empty dtoPic}">
-								<div class="col"><a>사진 없음</a></div>
-								<input type="file" class="form-control inputCls">
-							</c:if>
-							<c:if test="${not empty dtoPic}">
-								<div class="col header-board">
-									<img src="/files/${dtoPic.food_src}" class="card-img-top">
-								</div>
-							</c:if>
-                            <button class="btn btnAddPic" type="button">사진 등록</button>
-                        <div class="card-body">
-                        	<div class="input-group">
-                        		<span class="input-group-text">제품명</span>
-                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" value="${dto.food_name}">
-                        	</div>
-                        	<div class="input-group">
-                        		<span class="input-group-text">설명</span>
-                        		<input class="form-control inputCls" type="text" id="food_title" name="food_title" value="${dto.food_title}">
-                        	</div>
-                        	<div class="input-group">
-                        		<span class="input-group-text">가격</span>
-                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" value="${dto.food_price}">
-                        	</div>
-                        	<div class="input-group">
-                        		<span class="input-group-text">링크주소</span>
-                        		<textarea class="form-control inputCls" id="food_com" name="food_com">${dto.food_com}</textarea>
-                        	</div>
-                        </div>
-                    </div>
-                </div>
-        	</div>
-        	</form>
-        	<div class="empty"> </div>
         <div class="row">
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnCancle" type="button">취소</button>
-            </div>
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnSave" type="button">저장</button>
-            </div>
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnDel" type="button">삭제</button>
+            <div class="col btnSpace">
+                <button class="btn btnAdd" type="button">신규</button>
             </div>
         </div>
-        <div class="empty"> </div>
+            <table class="table">
+                <thead>
+                    <tr class="tableTitle">
+                        <th class="col-2">No.</th>
+                        <th class="col">프로모션 제목</th>
+                    </tr>
+                </thead>
+                <tbody class="bodyFood">
+                	<c:choose>
+                		<c:when test="${list.size() == 0}">
+                			<tr>
+								<td colspan=5>등록된 프로모션이 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto">
+                    			<tr>
+                        			<td style="text-align: center;">
+                        				${dto.food_seq}
+                        			</td>
+                        			<td style="text-align: center;">
+                        				<a href="/modify.food?food_seq=${dto.food_seq}" style="text-decoration: none; color: black;">${dto.food_name}</a>
+                        			</td>
+                    			</tr>
+                    		</c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+            	<nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    	<c:if test="${naviMap.needPrev eq true}">
+                    		<li class="page-item">
+                    			<a class="page-link" href="/modifyList.food?curPage=${naviMap.startNavi-1}">Prev</a>
+                    		</li>
+                    	</c:if>
+                    	<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}" step="1">
+                    		<li class="page-item">
+                        		<a class="page-link" href="/modifyList.food?curPage=${pageNum}">${pageNum}</a>
+                        	</li>
+                    	</c:forEach>    
+                    	<c:if test="${naviMap.needNext eq true}">
+							<li class="page-item">
+								<a class="page-link" href="/modifyList.food?curPage=${naviMap.endNavi+1}">Next</a>
+							</li>
+						</c:if>
+                    </ul>
+            	</nav>
+            </div>
+        </div>
         <!-- footer -->
         <div class="container footer">
             <div class="row footerInfo">
@@ -426,36 +433,9 @@
         <!-- footer 끝 -->
     </div>
     <script>
-    $(".btnCancle").on("click", function(){
-    	location.href = "/modifyList.food?curPage=1";
-	})
-	
-	$(".btnSave").on("click", function(){
-		if ($("#food_name").val() === "") {
-			alert("제품명을 입력하세요.");
-			$("#food_name").focus();
-			return;
-		}
-		if ($("#food_title").val() === "") {
-			alert("설명을 입력하세요.");
-			$("#food_title").focus();
-			return;
-		}
-		if ($("#food_price").val() === "") {
-			alert("가격을 입력하세요.");
-			$("#food_price").focus();
-			return;
-		}
-		if ($("#food_com").val() === "") {
-			alert("링크주소를 입력하세요.");
-			$("#food_com").focus();
-			return;
-		}
-		$("#modifyForm").submit();
-	})
-	
-	function numbeComma(number) {    
-		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+		$(".btnAdd").on("click", function(){
+			location.href = "/add.food";
+		})
     </script>
 </body>
 </html>
