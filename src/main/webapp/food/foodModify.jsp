@@ -258,9 +258,9 @@
 
 <body>
     <div class="container">
-        <!-- 헤더 -->
-        
-<c:choose>
+        <!-- 헤더 -->        
+		<c:choose>
+
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">

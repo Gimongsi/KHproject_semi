@@ -30,10 +30,12 @@ public class InformationController extends HttpServlet {
 		
 		
 		
-		if(uri.equals("/toInformation.info")) { //게시판페이지 요청
+
+		if(uri.equals("toInformation.info")) { //게시판페이지 요청
 			InformationDAO dao = new InformationDAO();
 			try {
-				ArrayList<InformationDTO> list = dao.selectAll(0, 0);
+				ArrayList<InformationDTO> list = dao.selectAll();
+
 				request.setAttribute("list", list);
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -52,7 +54,9 @@ public class InformationController extends HttpServlet {
 			try {
 				int rs = dao.write(new InformationDTO(0,qna_title,qna_content));
 				if(rs > 0) {
+
 					response.sendRedirect("/toInformation.info");
+
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -71,6 +75,7 @@ public class InformationController extends HttpServlet {
 			}
 
 			request.getRequestDispatcher("/manager/modify.jsp").forward(request, response);
+
 		}else if(uri.equals("/modifyProc.info")) { // 수정 요청
 			int qna_seq = Integer.parseInt(request.getParameter("qna_seq"));
 			String qna_title = request.getParameter("qna_title");
@@ -83,6 +88,7 @@ public class InformationController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
 		}else if(uri.equals("/deleteProc.info")) {// 삭제 요청
 			int qna_seq = Integer.parseInt(request.getParameter("qna_seq"));
 			System.out.println("qna_seq :" + qna_seq);
