@@ -1,19 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    
-    <title>FAQ</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>Insert title here</title>
 </head>
 <style>
     /* 폰트 */
@@ -42,8 +39,6 @@
         background-color: #BFFFF0;
         color: #97C4B8;
         align-items: center;
-        font-family: '양진체';
-        text-align: center;
     }
     .cls_header a {
         color: #97C4B8;
@@ -68,6 +63,7 @@
 
     /* 로고 */
     .logoImg{
+        height: 100%;
         padding: 0%;
         filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg) brightness(86%) contrast(86%);
     }
@@ -76,8 +72,8 @@
     }
     /* 로고 이미지 사이즈 */
     .logoImg #logoImg{
-        width: 50%;
-        height: 50%;
+        width: 100%;
+        height: 100%;
     }
     /* 로고 효과 */
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
@@ -135,10 +131,44 @@
     /* 공백 */
     .empty {
         background-color: white;
-        height: 20px;
+        height: 80px;
     }
 
-    /* footer */
+    /* 바디 */
+    .title {
+        border-bottom: 2px solid grey;
+        width: 250px;
+    }
+
+    .inner-container-left {
+        margin: auto;
+        border: 1px solid black;
+        height: 800px;
+    }
+
+    .inner-container-left *{
+        margin: 20px;
+    }
+
+    .contentsBox {
+        border: 1px solid black;
+        width: 650px;
+        height: 610px;
+    }
+
+    .contentsBox > .dropdown {
+        margin-top: 24px;
+        margin-left: 24px;
+        margin-bottom: 24px;
+    }
+
+    .textBox {
+        width: 600px;
+        height: 500px;
+        margin-left: 24px;
+    }
+    
+    /* 푸터 */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
@@ -147,25 +177,25 @@
         border-top: 1px solid #c9d4a9;
     }
 
-    .footer .row {
+    .footer .row{
         border-bottom: 1px solid #c9d4a9;
     }
 
-    .footer .footerInfo {
+    .footer .footerInfo{
         padding-block: 3%;
         text-align: center;
     }
 
-    .footerMenu {
+    .footerMenu{
         padding-block: 2%;
         text-align: center;
     }
 
-    .footerMenu a {
+    .footerMenu a{
         color: #709c91;
         text-decoration: none;
     }
-    /* footer 끝 */
+
 </style>
 
 <body>
@@ -174,18 +204,18 @@
         <div class="row cls_header">
             <div class="col-3 logoImg">
                 <a href="#">
-                    <img id="logoImg" src="imgs/dpt_Logo.png">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -249,77 +279,91 @@
         <!-- 네비 끝 -->
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-    <!-- 본문-->
-	<div class="container">
-		<div class="row boxBtn-top">
-			<div class="col d-flex justify-content-end">
-				<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
-			</div>
-	    </div>
-	</div>
-    <div class="container">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th class="col-md-1">글번호</th>
-					<th class="col-md-5">제목</th>
-				</tr>
-			</thead>
-			<tbody class="body-board">
-				<c:choose>
-					<c:when test="${list.size() == 0}">
-						<tr>
-							<td colspan=5>등록된 게시글이 없습니다.</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="dto">
-							<tr>
-								<td>${dto.qna_seq}</td>
-								<td>${dto.qna_title}</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
-	</div>
-	
-	<script> 
-    	const btnWrite = document.getElementById("btnWrite");
-    	
-    	btnWrite.addEventListener("click", function(e){
-    		location.href="/manager/information/write.jsp";
-    	})
-    </script>
-    <!-- 본문 끝-->
-     <!-- footer -->
-   <div class="container footer">
-        <div class="row footerInfo">
-            <div class="col-6">
-                제휴 및 서비스 이용문의<br>
-                <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-                AM 09:00 - PM 06:00<br>
-                토 일 공휴일 휴무
-            </div>
-            <div class="col-6">
-                (주)당퍼트<br>
-                서울특별시 영등포구 선유동2로 57<br>
-                대표 : 홍신영<br>
-                사업자번호 : 123-45-67890<br>
-                통신판매번호 : 제2000-서울영등포구-0000호<br>
-                kh.projectmail@gmail.com<br>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="title d-flex justify-content-center mb-4">
+                            <h5>오늘의 기록!</h5>
+                        </div>
+                    </div>
+                    <div class="row inner-container-right">
+                        <div>
+                            <div class="contentsBox">
+                                <div class="dropdown">
+                                    <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        운동부위
+                                    </a>
+                                  
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="#">팔</a></li>
+                                        <li><a class="dropdown-item" href="#">어깨</a></li>
+                                        <li><a class="dropdown-item" href="#">가슴</a></li>
+                                        <li><a class="dropdown-item" href="#">등</a></li>
+                                        <li><a class="dropdown-item" href="#">복근</a></li>
+                                        <li><a class="dropdown-item" href="#">하체</a></li>
+                                    </ul>
+                                </div>
+                                <textarea class="textBox" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn btn-primary" type="button">일기 올리기</button>
+                        <button class="btn btn-secondary" type="button">뒤로 가기</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row footerMenu">
-            <div class="col"><a href="">이용약관</a></div>
-            <div class="col"><a href="">개인정보처리방침</a></div>
-            <div class="col"><a href="">위치정보이용약관</a></div>
-            <div class="col"><a href="">센터등록요청하기</a></div>
-            <div class="col"><a href="">문의하기</a></div>
+        <!-- 바디 끝 -->
+        <div class="empty"> </div>
+        <!-- 푸터 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="">이용약관</a></div>
+                <div class="col"><a href="">개인정보처리방침</a></div>
+                <div class="col"><a href="">위치정보이용약관</a></div>
+                <div class="col"><a href="">센터등록요청하기</a></div>
+                <div class="col"><a href="">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
-        <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
     </div>
-<!-- footer 끝 -->
+    <script>
+    	document.getElementById("modifyBtn").onclick = function(){
+    		location.href = "/member/myPage_user_modify.jsp";
+    	}
+    	document.getElementById("diaryBtn").onclick = function(){
+    		location.href = "/member/myPage_diary.jsp";
+    	}
+    </script>
 </body>
 </html>

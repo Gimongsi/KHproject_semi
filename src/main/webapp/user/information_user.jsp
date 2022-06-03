@@ -13,7 +13,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    
-    <title>FAQ 등록</title>
+    <title>FAQ</title>
 </head>
 <style>
     /* 폰트 */
@@ -137,42 +137,7 @@
         background-color: white;
         height: 20px;
     }
-    /* 게시글 스타일 영역 */
-    .title{
-        padding: 10px;
-        text-align: center;
-    }
-    /* 게시글 스타일 영역 끝 */
-    /* 버튼 영역 */
-    .boxBtn{
-        height: 10%;
-    }
-	.container{
-		width: 80%;
-        height: 100%;
-		padding: 10px;
-	}
-    form, table{
-        height: 100%;
-        text-align: center;
-    }
-    tr:first-child{
-        height: 10%;
-    }
-    input{
-        width: 100%;
-        height: 100%;
-    }
-	textarea{
-		width: 100%;
-        height: 100%;
-		resize: none;
-	}
-    .boxBtn{
-        text-align: center;
-    }
-    
-    /* 버튼 영역 끝 */
+
     /* footer */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -209,18 +174,18 @@
         <div class="row cls_header">
             <div class="col-3 logoImg">
                 <a href="#">
-                    <img id="logoImg" src="imgs/dpt_Logo.png">
+                    <img id="logoImg" src="../imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -284,55 +249,44 @@
         <!-- 네비 끝 -->
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        <div class="title">
-            <h3>FAQ 등록</h3>
-        </div>
-        <form id="writeForm" action="/writeProc.bo" method="post" enctype="multipart/form-data">
-            <div class="container">
-                <div class="row">
-                    <div class="col-2 d-flex justify-content-center align-items-center">
-                        <h4>제목</h4>
-                    </div>
-                    <div class="col-10 p-2">
-                        <input type="text" class="form-control" id="title" name="title">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2 d-flex justify-content-center align-items-center">
-                        <h4>내용</h4>
-                    </div>
-                    <div class="col-10 p-2">
-                        <textarea id="content" class="form-control" id="content" name="content"></textarea>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div class="boxBtn">
-            <button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-            <button type="button" class="btn btn-primary" id="btnSave">등록</button>
-        </div>
-    
-        <script>
-            $("#btnSave").on("click", function(){
-                if($("#title").val() === ""){
-                    $("#title").val("제목없음");
-                }
-            
-                if($("#content").val() === ""){
-                    alert("내용을 입력하세요.");
-                    $("#content").focus();
-                    return;
-                }
-                $("#writeForm").submit();
-            })
-
-            const btnBack = document.getElementById("btnBack");
-    
-            btnBack.addEventListener("click", function(e){
-                location.href="/manager/information/information.jsp";
-            });
-        </script>
-   <!-- footer -->
+    <!-- 본문-->
+    <div class="container">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-md-1">글번호</th>
+					<th class="col-md-5">제목</th>
+				</tr>
+			</thead>
+			<tbody class="body-board">
+				<c:choose>
+					<c:when test="${list.size() == 0}">
+						<tr>
+							<td colspan=5>등록된 게시글이 없습니다.</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<td>${dto.qna_seq}</td>
+								<td>${dto.qna_title}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
+	</div>
+		</div>
+	<script> 
+    	const btnWrite = document.getElementById("btnWrite");
+    	
+    	btnWrite.addEventListener("click", function(e){
+    		location.href="/information/write.jsp";
+    	})
+    </script>
+    <!-- 본문 끝-->
+     <!-- footer -->
    <div class="container footer">
         <div class="row footerInfo">
             <div class="col-6">

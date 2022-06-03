@@ -1,22 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<title>식품 프로모션 등록페이지</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>Insert title here</title>
 </head>
 <style>
     /* 폰트 */
@@ -26,17 +20,12 @@
         font-weight: normal;
         font-style: normal;
     }
-    @font-face {
-    font-family: 'LeferiPoint-WhiteObliqueA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    }
     /* 폰트 끝 */
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        font-family: '양진체';
     }
     .container {
         margin: auto;
@@ -50,8 +39,6 @@
         background-color: #BFFFF0;
         color: #97C4B8;
         align-items: center;
-        font-family: '양진체';
-        text-align: center;
     }
     .cls_header a {
         color: #97C4B8;
@@ -76,6 +63,7 @@
 
     /* 로고 */
     .logoImg{
+        height: 100%;
         padding: 0%;
         filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg) brightness(86%) contrast(86%);
     }
@@ -84,8 +72,8 @@
     }
     /* 로고 이미지 사이즈 */
     .logoImg #logoImg{
-        width: 50%;
-        height: 50%;
+        width: 100%;
+        height: 100%;
     }
     /* 로고 효과 */
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
@@ -111,7 +99,6 @@
     /* 네비바 */
     .navbar{
         background-color: #F0FFC2 !important;
-        font-family: '양진체';
     }
     .container-fluid a{
         color:#97C4B8 !important;
@@ -144,116 +131,59 @@
     /* 공백 */
     .empty {
         background-color: white;
-        height: 20px;
+        height: 80px;
     }
 
-    /* 목록 */
-    .title {
-        color: #97C4B8;
-        border-bottom: 1px solid #97C4B8;
-        --bs-gutter-x: 0px;
-        margin-bottom: 20px;
-        margin-top: 10px;
-        font-family: '양진체';
-    }
-    .card{
-        width: 35rem;
-        border: 1px solid #c9d4a9;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-    .card img{
-        width : 100%;
-        height: 20rem;
-    }
-    .card-title{
-        margin-bottom: 0px;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-    .card a{
-        text-decoration: none;
-        color: black;
-    }
-    .card h5{
-        padding: 20px;
-    }
-    .foodPromo{
-        margin-bottom: 80px;
-    }
-    .btnSpace {
-        margin-bottom: 10px;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-    .input-group{
-    	width: 100%;
-    	margin-bottom: 10px;
-	}
-    .input-group-text{
-    	color: #97C4B8;
-    	background-color: #F0FFC2;
-    	font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-    }
-	.inputCls{
-		width: 100%;
-        font-weight: 600;
-        border: 1px solid #c9d4a9;
-	}
-	.inputCls:focus{
-        outline: none;
-    }
-    textarea{
-    	resize: none;
-    	height: 150px;
-    }
-    input::placeholder, textarea::placeholder{
-        color: #adcabf;
-    }
-    .btnSave, .btnAddPic, .btnCancle, .btnDel {
-        background-color: #73b1a1;
-        border: 1px solid #F0FFC2;
-        border-radius: 0.25rem;
-        padding: 3px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 8px;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-size: small;
-        color: white;
-        margin: 5px;
+    /* 바디 */
+    .inner-container-left {
+        margin: auto;
+        border: 1px solid black;
+        box-sizing: border-box;
+        height: 85%;
     }
 
-    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover {
-        background-color: #F0FFC2;
-        border: 1px solid #73b1a1;
-        color: #73b1a1;
+    .inner-container-left *{
+        margin: 20px;
+    }
+    .inner-container-right input {
+        background-color: #80808030;
+        width: 100%;
+        border: none;
     }
 
-    /* footer */
-    .footer{
+    .inner-container-right div {
+        margin: 20px;
+    }
+
+    /* 푸터 */
+    .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
         font-size: small;
         color: #709c91;
         border-top: 1px solid #c9d4a9;
     }
+
     .footer .row{
         border-bottom: 1px solid #c9d4a9;
     }
+
     .footer .footerInfo{
         padding-block: 3%;
         text-align: center;
     }
+
     .footerMenu{
         padding-block: 2%;
         text-align: center;
     }
+
     .footerMenu a{
         color: #709c91;
         text-decoration: none;
     }
+
+    
 </style>
 
 <body>
@@ -277,18 +207,18 @@
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <button type="button" class="btn dropdownBtn dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    고객센터
-                </button>
-                <ul class="dropdown-menu headDropdown">
-                    <li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-                    <li><a class="dropdown-item" href="#">이벤트</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                </ul>
+                    <button type="button" class="btn dropdownBtn dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        고객센터
+                    </button>
+                    <ul class="dropdown-menu headDropdown">
+                        <li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+                        <li><a class="dropdown-item" href="#">이벤트</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                    </ul>
             </div>
         </div>
         <!-- 네비 -->
@@ -326,8 +256,7 @@
                                 </li>
                             </ul>
                             <form class="d-flex">
-                                <input class="form-control navSearchInput me-2" type="search" placeholder="운동시설 검색"
-                                    aria-label="Search">
+                                <input class="form-control navSearchInput me-2" type="search" placeholder="운동시설 검색" aria-label="Search">
                                 <button class="btn btn-outline-light" type="submit">Search!</button>
                             </form>
                         </div>
@@ -338,64 +267,62 @@
         <!-- 네비 끝 -->
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        <!-- 식품 프로모션 목록 -->
-        <div class="empty"></div>
-        <div class="row title">
-            <div class="col d-flex justify-content-center">
-                <h1>프로모션 수정</h1>
-            </div>
-        </div>
-        <div class="foodPromo">
-        <form id="modifyForm" action="/modifyProc.food" method="post" enctype="multipart/form-data">
-            <div class="row cardList">
-                <div class="col d-flex justify-content-center">
-                    <div class="card">
-                            <c:if test="${empty dtoPic}">
-								<div class="col"><a>사진 없음</a></div>
-								<input type="file" class="form-control inputCls">
-							</c:if>
-							<c:if test="${not empty dtoPic}">
-								<div class="col header-board">
-									<img src="/files/${dtoPic.food_src}" class="card-img-top">
-								</div>
-							</c:if>
-                            <button class="btn btnAddPic" type="button">사진 등록</button>
-                        <div class="card-body">
-                        	<div class="input-group">
-                        		<span class="input-group-text">제품명</span>
-                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" value="${dto.food_name}">
-                        	</div>
-                        	<div class="input-group">
-                        		<span class="input-group-text">설명</span>
-                        		<input class="form-control inputCls" type="text" id="food_title" name="food_title" value="${dto.food_title}">
-                        	</div>
-                        	<div class="input-group">
-                        		<span class="input-group-text">가격</span>
-                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" value="${dto.food_price}">
-                        	</div>
-                        	<div class="input-group">
-                        		<span class="input-group-text">링크주소</span>
-                        		<textarea class="form-control inputCls" id="food_com" name="food_com">${dto.food_com}</textarea>
-                        	</div>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
                         </div>
                     </div>
                 </div>
-        	</div>
-        	</form>
-        	<div class="empty"> </div>
-        <div class="row">
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnCancle" type="button">취소</button>
-            </div>
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnSave" type="button">저장</button>
-            </div>
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnDel" type="button">삭제</button>
+                <div class="col-6">
+                    <h3 class="text-center mb-3">회원 정보 수정</h3>
+                    <div class="inner-container-right">
+                        <div class="mb-5">
+                            <input type="text" disabled placeholder="이메일 / 수정불가">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="현재 비밀번호">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="변경 후 비밀번호">
+                            <input type="text">
+                        </div>
+                        <div class="mb-5">
+                            <input type="text" disabled placeholder="변경 후 비밀번호 확인">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="몸무게 수정">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="목표 몸무게 수정">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary col-2" type="button">회원 탈퇴</button>
+                                <button class="btn btn-secondary col-2 invisible" type="button">더미</button>
+                                <button class="btn btn-secondary col-2" type="button">취소</button>
+                                <button class="btn btn-primary col-2" type="button">수정 완료</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- 바디 끝 -->
         <div class="empty"> </div>
-        <!-- footer -->
+        <!-- 푸터 -->
         <div class="container footer">
             <div class="row footerInfo">
                 <div class="col-6">
@@ -422,39 +349,14 @@
             </div>
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
-        <!-- footer 끝 -->
     </div>
     <script>
-    $(".btnCancle").on("click", function(){
-    	location.href = "/modifyList.food?curPage=1";
-	})
-	
-	$(".btnSave").on("click", function(){
-		if ($("#food_name").val() === "") {
-			alert("제품명을 입력하세요.");
-			$("#food_name").focus();
-			return;
-		}
-		if ($("#food_title").val() === "") {
-			alert("설명을 입력하세요.");
-			$("#food_title").focus();
-			return;
-		}
-		if ($("#food_price").val() === "") {
-			alert("가격을 입력하세요.");
-			$("#food_price").focus();
-			return;
-		}
-		if ($("#food_com").val() === "") {
-			alert("링크주소를 입력하세요.");
-			$("#food_com").focus();
-			return;
-		}
-		$("#modifyForm").submit();
-	})
-	
-	function numbeComma(number) {    
-		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+    	document.getElementById("modifyBtn").onclick = function(){
+    		location.href = "/member/myPage_user_modify.jsp";
+    	}
+    	document.getElementById("diaryBtn").onclick = function(){
+    		location.href = "/member/myPage_diary.jsp";
+    	}
     </script>
 </body>
 </html>

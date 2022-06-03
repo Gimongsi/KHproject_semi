@@ -261,32 +261,32 @@
 
 
         /* footer */
-    .footer {
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
-        font-size: small;
-        color: #709c91;
-        border-top: 1px solid #c9d4a9;
-    }
+        .footer {
+            font-family: 'LeferiPoint-WhiteObliqueA';
+            font-weight: 600;
+            font-size: small;
+            color: #709c91;
+            border-top: 1px solid #c9d4a9;
+        }
 
-    .footer .row {
-        border-bottom: 1px solid #c9d4a9;
-    }
+        .footer .row {
+            border-bottom: 1px solid #c9d4a9;
+        }
 
-    .footer .footerInfo {
-        padding-block: 3%;
-        text-align: center;
-    }
+        .footer .footerInfo {
+            padding-block: 3%;
+            text-align: center;
+        }
 
-    .footerMenu {
-        padding-block: 2%;
-        text-align: center;
-    }
+        .footerMenu {
+            padding-block: 2%;
+            text-align: center;
+        }
 
-    .footerMenu a {
-        color: #709c91;
-        text-decoration: none;
-    }
+        .footerMenu a {
+            color: #709c91;
+            text-decoration: none;
+        }
     </style>
 
     <body>
@@ -296,17 +296,17 @@
                 <div class="col-3 logoImg">
                     <a href="#">
                         <img id="logoImg"
-                            src="../imgs/dpt_Logo.png"/>
+                            src="file:///D:/Workspace_semi/KHproject_semi/src/main/webapp/resources/images/dpt_Logo.png">
                     </a>
                 </div>
                 <div class="d-none d-md-block col-5"> </div>
                 <div class="col p-0 headMenu d-flex justify-content-center">
-                    <a href="#" style="text-decoration: none;">
+                    <a href="/login.user" style="text-decoration: none;">
                         <span>로그인</span>
                     </a>
                 </div>
                 <div class="col p-0 headMenu d-flex justify-content-center">
-                    <a href="#" style="text-decoration: none;">
+                    <a href="/toSignup.user" style="text-decoration: none;">
                         <span>회원가입</span>
                     </a>
                 </div>
@@ -369,6 +369,7 @@
                     </nav>
                 </div>
             </div>
+            </div>
             <!-- 네비 끝 -->
             <!-- 헤더 끝 -->
             <div class="empty"> </div>
@@ -398,8 +399,8 @@
                                 <th scope="col">휴대폰번호</th>
                                 <th scope="col">가입날짜</th>
                                 <th scope="col">등급</th>
-                                <th scope="col">블랙리스트 여부</th>
                                 <th scope="col">메모</th>
+                                <th scope="col">수정 하기</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -414,8 +415,8 @@
                                         <td>휴대폰번호</td>
                                         <td>가입날짜</td>
                                         <td>등급</td>
-                                        <td>블랙리스트 여부</td>
                                         <td>메모</td>
+                                        <td><button type="button" class="clickBtn btn btnAdd">수정</button></td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -440,67 +441,73 @@
                             </c:if>
                         </ul>
                     </nav>
+                    <form action="user_update.manager" method="post" id="updateForm">
+                        <table class="update_table cls_table table" border="1">
+                            <thead class="update_table">
+                                <tr>
+                                    <th class="update_col"></th>
+                                    <th class="insert_col">수정 전</th>
+                                    <th class="insert_col">수정 내용</th>
+                                </tr>
+                            </thead>
+                            <tbody class="update_table">
+                                <tr>
+                                    <th class="update_col">이메일</th>
+                                    <td class="insert_col"><input type="text" class="form-control user_id" value=""
+                                            readonly></td>
+                                    <td class="insert_col"><input type="text" class="form-control user_id" value=""
+                                            readonly></td>
+                                </tr>
+                                <tr>
+                                    <th class="update_col">이름</th>
+                                    <td class="insert_col"><input type="text" class="form-control" value="" readonly>
+                                    </td>
+                                    <td class="insert_col"><input type="text" class="form-control user_name" value=""
+                                            class="update_input"></td>
+                                </tr>
+                                <tr>
+                                    <th class="update_col">휴대폰 번호</th>
+                                    <td class="insert_col"><input type="text" class="form-control" value="" readonly>
+                                    </td>
+                                    <td class="insert_col"><input type="text" class="form-control user_phone" value=""
+                                            class="update_input" placeholder="-제외"></td>
+                                </tr>
+                                <tr>
+                                    <th class="update_col">등급</th>
+                                    <td class="insert_col"><input type="text" class="form-control" value="" readonly>
+                                    </td>
+                                    <td class="insert_col"><select class="form-select user_auth">
+                                            <option value="원래등급" selected>등급 선택</option>
+                                            <option value="member">Member</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="manager">Manager</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <th class="update_col">메모</th>
+                                    <td class="insert_col"><input type="text" class="form-control" value="" readonly>
+                                    </td>
+                                    <td class="insert_col"><input type="text"
+                                            class="form-control update_input user_memo" value=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                    <table class="update_table cls_table table" border="1">
-                        <thead class="update_table">
-                            <tr>
-                                <th class="update_col"></th>
-                                <th class="insert_col">수정 전</th>
-                                <th class="insert_col">수정 내용</th>
-                            </tr>
-                        </thead>
-                        <tbody class="update_table">
-                            <tr>
-                                <th class="update_col">이메일</th>
-                                <td class="insert_col"><input type="text" class="form-control" value="" readonly></td>
-                                <td class="insert_col"><input type="text" class="form-control" value="" readonly name="user_id"></td>
-                            </tr>
-                            <tr>
-                                <th class="update_col">이름</th>
-                                <td class="insert_col"><input type="text" class="form-control" value="" readonly></td>
-                                <td class="insert_col"><input type="text" class="form-control" value=""
-                                        class="update_input" name="user_name"></td>
-                            </tr>
-                            <tr>
-                                <th class="update_col">휴대폰 번호</th>
-                                <td class="insert_col"><input type="text" class="form-control" value="" readonly></td>
-                                <td class="insert_col"><input type="text" class="form-control" value=""
-                                        class="update_input" placeholder="-제외" name="user_phone"></td>
-                            </tr>
-                            <tr>
-                                <th class="update_col">등급</th>
-                                <td class="insert_col"><input type="text" class="form-control" value="" readonly></td>
-                                <td class="insert_col"><select class="form-select" name="user_auth">
-                                        <option value="원래등급" selected>등급 선택</option>
-                                        <option value="member">Member</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="manager">Manager</option>
-                                    </select></td>
-                            </tr>
-                            <tr>
-                                <th class="update_col">메모</th>
-                                <td class="insert_col"><input type="text" class="form-control" value="" readonly></td>
-                                <td class="insert_col"><input type="text" class="form-control" value=""
-                                        class="update_input" name="user_memo"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="empty"></div>
-                    <div class="row btn-before">
-                        <div class="col-10 d-flex justify-content-end"></div>
-                        <div class="col-2"><button type="button" class="btn btnAdd" id="modify_btn">수정</button>
+                        <div class="empty"></div>
+                        <div class="row btn-before">
+                            <div class="col-10 d-flex justify-content-end"></div>
+                            <div class="col-2"><button type="button" class="btn btnAdd" id="modify_btn">수정</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="row btn-after d-none">
                         <div class="col-10 d-flex justify-content-end">
-                            <button type="button" class="btn btnAdd">수정완료</button>
+                            <buttn type="button" class="btn btnAdd toModify_btn">수정완료</buttn>
                         </div>
                         <div class="col-2"><button type="button" class="btn btnAdd" id="cancel_btn">취소</button>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
 
             <!-- footer 영역 -->
@@ -532,15 +539,35 @@
             </div>
 
             <script>
+
+                // 수정 버튼 눌렀을때 수정완료 취소 생성
                 $("#modify_btn").on("click", function () {
                     $(".btn-before").css("display", "none");
                     $(".btn-after").removeClass("d-none");
                 })
-
+                // 취소 누르면 다시 원래대로 돌리기
                 $("#cancel_btn").on("click", function () {
                     $(".btn-after").addClass("d-none");
                     $(".btn-before").css("display", "flex");
                 })
+
+                $(".toModify_btn").on("click", function(){
+                    $("#updateForm").submit();
+                })
+
+                $(".clickBtn").on("click", function(){
+                    let user_id = $(".user_select").find()
+
+                    $.ajax({
+                        url: ""
+                        , type: "get"
+                        , data: ""
+                        , dataType: ""
+                    })
+
+
+                })
+
             </script>
     </body>
 

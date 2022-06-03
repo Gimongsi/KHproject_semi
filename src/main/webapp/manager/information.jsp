@@ -179,13 +179,13 @@
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -246,10 +246,18 @@
                 </nav>
             </div>
         </div>
+        </div>
         <!-- 네비 끝 -->
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
     <!-- 본문-->
+	<div class="container">
+		<div class="row boxBtn-top">
+			<div class="col d-flex justify-content-end">
+				<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
+			</div>
+	    </div>
+	</div>
     <div class="container">
 		<table class="table table-bordered">
 			<thead>
@@ -277,12 +285,12 @@
 			</tbody>
 		</table>
 	</div>
-		
+	
 	<script> 
     	const btnWrite = document.getElementById("btnWrite");
     	
     	btnWrite.addEventListener("click", function(e){
-    		location.href="/information/write.jsp";
+    		location.href="/manager/information/write.jsp";
     	})
     </script>
     <!-- 본문 끝-->

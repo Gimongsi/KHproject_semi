@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -312,13 +311,13 @@
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -396,7 +395,7 @@
             </div>
             <div class="row d-flex justify-content-end align-items-end">
                 <div class="col">
-                    <button class="btn btnAdd" type="button">신규 등록</button>
+                    <button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
                 </div>
                 설정위치 > 서울 용산구
             </div>
@@ -715,6 +714,9 @@
 
         })
 
+        $(".btnAdd").on("click", function(){
+        	location.href = "/gymAdd.gym";
+        })
 
     </script>
 </body>

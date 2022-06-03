@@ -215,6 +215,15 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
+/*Pagination*/
+    .page-link{
+        color: #5a9284;
+        margin-bottom: 50px;
+    }
+    .page-link:focus{
+        color: #5a9284;
+    }
+
 
 /* 버튼 */
 .btnSubmit {
@@ -285,13 +294,13 @@ table {
 			</div>
 			<div class="d-none d-md-block col-5"></div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;">
-					<p style="margin: 0px;">로그인</p>
+				<a href="/login.user" style="text-decoration: none;">
+					<span>로그인</span>
 				</a>
 			</div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;">
-					<p style="margin: 0px;">회원가입</p>
+				<a href="/toSignup.user" style="text-decoration: none;">
+					<span>회원가입</span>
 				</a>
 			</div>
 			<div class="col p-0 headMenu d-flex justify-content-center">

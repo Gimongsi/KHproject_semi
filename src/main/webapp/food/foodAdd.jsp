@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +16,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<title>식품 프로모션</title>
+<title>식품 프로모션 등록페이지</title>
 </head>
 <style>
     /* 폰트 */
@@ -180,18 +181,54 @@
     .foodPromo{
         margin-bottom: 80px;
     }
-    /* 즐겨찾기 버튼 */
-    .btnFavorite{
-        border: none;
-        background-color: white;
+    .btnSpace {
+        margin-bottom: 10px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-weight: 600;
     }
-    /* 즐겨찾기 하트 */
-    .material-symbols-outlined {
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 48
+    .input-group{
+    	width: 100%;
+    	margin-bottom: 10px;
+	}
+    .input-group-text{
+    	color: #97C4B8;
+    	background-color: #F0FFC2;
+    	font-family: 'LeferiPoint-WhiteObliqueA';
+        font-weight: 600;
+    }
+	.inputCls{
+		width: 100%;
+        font-weight: 600;
+        border: 1px solid #c9d4a9;
+	}
+	.form-control:focus{
+        outline: none;
+    }
+    textarea{
+    	resize: none;
+    	height: 150px;
+    }
+    input::placeholder, textarea::placeholder{
+        color: #adcabf !important;
+    }
+    .btnSave, .btnAddPic, .btnCancle {
+        background-color: #73b1a1;
+        border: 1px solid #F0FFC2;
+        border-radius: 0.25rem;
+        padding: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-size: small;
+        color: white;
+        margin: 5px;
+    }
+
+    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
+        background-color: #F0FFC2;
+        border: 1px solid #73b1a1;
+        color: #73b1a1;
     }
 
     /* footer */
@@ -230,13 +267,13 @@
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="/login.user" style="text-decoration: none;">
-                    <span>로그인</span>
+                <a href="#" style="text-decoration: none;">
+                    <p style="margin: 0px;">로그인</p>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="/toSignup.user" style="text-decoration: none;">
-                    <span>회원가입</span>
+                <a href="#" style="text-decoration: none;">
+                    <p style="margin: 0px;">회원가입</p>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -305,168 +342,46 @@
         <div class="empty"></div>
         <div class="row title">
             <div class="col d-flex justify-content-center">
-                <h1>이달의 프로모션!</h1>
+                <h1>식품 프로모션 등록</h1>
             </div>
-            <img src="/My/imgs/KakaoTalk_20220519_230758645.jpg">
         </div>
         <div class="foodPromo">
+        	<form id="addForm" action="/addProc.food" method="post" enctype="multipart/form-data">
             <div class="row cardList">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="empty"></div>
-            <div class="row cardList">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!-- 식품 프로모션 목록 끝 -->
-            <!-- 헬린이 프로모션 목록 -->
-            <div class="row title">
                 <div class="col d-flex justify-content-center">
-                    <h1>헬린이 안성맞춤 세트</h1>
-                </div>
-            </div>
-        <div class="foodPromo">
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center">
                     <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
+                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
+                            <input type="file" class="form-control inputCls" name="food_src">
+                            <%-- <button class="btn btnAddPic" type="button">사진 등록</button> --%>
                         <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
+                        	<div class="input-group">
+                        		<span class="input-group-text">제품명</span>
+                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" placeholder="제품명 입력">
+                        	</div>
+                        	<div class="input-group">
+                        		<span class="input-group-text">설명</span>
+                        		<input class="form-control inputCls" type="text" id="food_title" name="food_title" placeholder="제품설명 입력">
+                        	</div>
+                        	<div class="input-group">
+                        		<span class="input-group-text">가격</span>
+                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" placeholder="가격 입력">
+                        	</div>
+                        	<div class="input-group">
+                        		<span class="input-group-text">링크주소</span>
+                        		<textarea class="form-control inputCls" id="food_com" name="food_com" placeholder="링크주소 입력"></textarea>
+                        	</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="empty"></div>
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        	</div>
+        	</form>
+        	<div class="empty"> </div>
+        <div class="row">
+            <div class="col btnSpace d-flex justify-content-center">
+                <button class="btn btnCancle" type="button">취소</button>
+                <button class="btn btnSave" type="button">저장</button>
             </div>
         </div>
-        <!-- 헬린이 프로모션 목록 끝 -->
         <div class="empty"> </div>
         <!-- footer -->
         <div class="container footer">
@@ -498,17 +413,36 @@
         <!-- footer 끝 -->
     </div>
     <script>
-        $(".material-symbols-outlined").on("click", function (e) {
-            let fontVariationSettings = $(e.target).css("font-variation-settings", "'FILL' 1");
-            if(fontVariationSettings = true){
-                $(e.target).css("font-variation-settings", "'FILL' 1");
-                $(e.target).css("color", "red");
-            }else{
-                $(e.target).css("font-variation-settings", "'FILL' 0");
-                $(e.target).css("color", "black");
-            }
-            
-        })
+    $(".btnCancle").on("click", function(){
+    	location.href = "/modifyList.food?curPage=1";
+	})
+	
+	$(".btnSave").on("click", function(){
+		if ($("#food_name").val() === "") {
+			alert("제품명을 입력하세요.");
+			$("#food_name").focus();
+			return;
+		}
+		if ($("#food_title").val() === "") {
+			alert("설명을 입력하세요.");
+			$("#food_title").focus();
+			return;
+		}
+		if ($("#food_price").val() === "") {
+			alert("가격을 입력하세요.");
+			$("#food_price").focus();
+			return;
+		}
+		if ($("#food_com").val() === "") {
+			alert("링크주소를 입력하세요.");
+			$("#food_com").focus();
+			return;
+		}
+		$("#addForm").submit();
+	})
+	
+	function numbeComma(number) {    
+		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
     </script>
 </body>
 </html>

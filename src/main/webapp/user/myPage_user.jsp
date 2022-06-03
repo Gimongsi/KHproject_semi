@@ -135,39 +135,40 @@
     }
 
     /* 바디 */
-    .title {
-        border-bottom: 2px solid grey;
-        width: 250px;
-    }
-
     .inner-container-left {
         margin: auto;
         border: 1px solid black;
-        height: 800px;
+        box-sizing: border-box;
+        height: 100%;
     }
 
     .inner-container-left *{
         margin: 20px;
     }
-
-    .contentsBox {
-        border: 1px solid black;
-        width: 650px;
-        height: 610px;
-    }
-
-    .contentsBox > .dropdown {
-        margin-top: 24px;
-        margin-left: 24px;
-        margin-bottom: 24px;
-    }
-
-    .textBox {
-        width: 600px;
-        height: 500px;
-        margin-left: 24px;
+    .inner-container-right {
+        height: 100%;
     }
     
+    .inner-container-right div{
+        margin: 20px;
+        margin-top: 50px;
+    }
+
+    .inner-container-right h5 {
+        border-bottom: 2px solid grey;
+        width: 400px;
+        text-align: center;
+    }
+
+    .inner-container-right button {
+        margin-right: 40px;
+    }
+
+    .bookmark {
+        border: 1px solid black;
+        height: 600px;
+    }
+
     /* 푸터 */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -196,6 +197,7 @@
         text-decoration: none;
     }
 
+    
 </style>
 
 <body>
@@ -209,13 +211,13 @@
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -294,35 +296,20 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="d-flex justify-content-center">
-                        <div class="title d-flex justify-content-center mb-4">
-                            <h5>오늘의 기록!</h5>
+                    <div class="inner-container-right">
+                        <div class="d-flex justify-content-center">
+                            <h5>목표 몸무게까지 kg 남았습니다.</h5>                            
                         </div>
-                    </div>
-                    <div class="row inner-container-right">
                         <div>
-                            <div class="contentsBox">
-                                <div class="dropdown">
-                                    <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        운동부위
-                                    </a>
-                                  
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">팔</a></li>
-                                        <li><a class="dropdown-item" href="#">어깨</a></li>
-                                        <li><a class="dropdown-item" href="#">가슴</a></li>
-                                        <li><a class="dropdown-item" href="#">등</a></li>
-                                        <li><a class="dropdown-item" href="#">복근</a></li>
-                                        <li><a class="dropdown-item" href="#">하체</a></li>
-                                    </ul>
-                                </div>
-                                <textarea class="textBox" style="resize: none;"></textarea>
-                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>마지막 접속일</button>
+                            2022년 00월 00일
                         </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-4 gap-3">
-                        <button class="btn btn-primary" type="button">일기 올리기</button>
-                        <button class="btn btn-secondary" type="button">뒤로 가기</button>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>마지막 기록일</button>
+                            2022년 00월 00일
+                        </div>
+                        <div>즐겨찾기</div>
+                        <div class="bookmark"></div>
                     </div>
                 </div>
             </div>
