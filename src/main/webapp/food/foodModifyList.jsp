@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -180,7 +179,7 @@
         font-weight: 600;
     }
 
-    .btnAdd, .btnModify, .btnSave, .btnAddPic, .btnCancle {
+    .btnAdd {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -194,19 +193,25 @@
         margin: 5px;
     }
 
-    .btnAdd:hover, .btnModify:hover, .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
+    .btnAdd:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
     }
 
     /* 목록 */
+    .tblBorder {
+    	border-right: 1px solid #e6ebd8;
+    }
+	.table td{
+		border-bottom: 1px solid #e6ebd8;
+	}
     .tableTitle {
         background-color: #F0FFC2;
         color: #74a598;
         text-align: center;
+        border-bottom: 2px solid #74a598;
     }
-
     .title {
         color: #97C4B8;
         border-bottom: 1px solid #97C4B8;
@@ -218,14 +223,19 @@
     .page-item.active .page-link{
         color: white;
         background-color: #73b1a1;
-        border: 1px solid #5a9284;
+        border: 1px solid #e6ebd8;
     }
     .page-link{
         color: #5a9284;
         margin-bottom: 50px;
+        border: 1px solid #e6ebd8;
     }
     .page-link:focus{
         color: #5a9284;
+    }
+    .page-link:hover{
+        color: #5a9284;
+        background-color: #F0FFC2;
     }
 
     /* footer */
@@ -354,7 +364,7 @@
             <table class="table">
                 <thead>
                     <tr class="tableTitle">
-                        <th class="col-2">No.</th>
+                        <th class="col-2 tblBorder">No.</th>
                         <th class="col">프로모션 제목</th>
                     </tr>
                 </thead>
@@ -368,7 +378,7 @@
 						<c:otherwise>
 							<c:forEach items="${list}" var="dto">
                     			<tr>
-                        			<td style="text-align: center;">
+                        			<td class="tblBorder" style="text-align: center;">
                         				${dto.food_seq}
                         			</td>
                         			<td style="text-align: center;">
@@ -380,13 +390,14 @@
                     </c:choose>
                 </tbody>
             </table>
+        <%--  페이징 --%>
         <div class="row">
             <div class="col d-flex justify-content-center">
             	<nav aria-label="Page navigation example">
                     <ul class="pagination">
                     	<c:if test="${naviMap.needPrev eq true}">
                     		<li class="page-item">
-                    			<a class="page-link" href="/modifyList.food?curPage=${naviMap.startNavi-1}">Prev</a>
+                    			<a class="page-link" href="/modifyList.food?curPage=${naviMap.startNavi-1}"><</a>
                     		</li>
                     	</c:if>
                     	<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}" step="1">
@@ -396,7 +407,7 @@
                     	</c:forEach>    
                     	<c:if test="${naviMap.needNext eq true}">
 							<li class="page-item">
-								<a class="page-link" href="/modifyList.food?curPage=${naviMap.endNavi+1}">Next</a>
+								<a class="page-link" href="/modifyList.food?curPage=${naviMap.endNavi+1}">></a>
 							</li>
 						</c:if>
                     </ul>
@@ -436,6 +447,7 @@
 		$(".btnAdd").on("click", function(){
 			location.href = "/add.food";
 		})
+		
     </script>
 </body>
 </html>

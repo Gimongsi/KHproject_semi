@@ -350,13 +350,13 @@
             <div class="row cardList">
                 <div class="col d-flex justify-content-center">
                     <div class="card">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <input type="file" class="form-control inputCls" name="food_src">
-                            <%-- <button class="btn btnAddPic" type="button">사진 등록</button> --%>
+                            <img src="" class="card-img-top">
+                            <%-- 사진 등록 --%>
+                            <input type="file" class="form-control inputCls" id="food_src" name="food_src"> 
                         <div class="card-body">
                         	<div class="input-group">
                         		<span class="input-group-text">제품명</span>
-                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" placeholder="제품명 입력">
+                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" placeholder="테마가 있다면 [테마명]제품명 형식">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">설명</span>
@@ -364,7 +364,7 @@
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">가격</span>
-                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" placeholder="가격 입력">
+                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" placeholder="숫자만 입력">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">링크주소</span>
@@ -418,6 +418,13 @@
 	})
 	
 	$(".btnSave").on("click", function(){
+		let regexPrice = /[0-9]/;
+		
+		if ($("#food_src").val() === "") {
+			alert("사진 등록은 필수입니다.");
+			$("#food_src").focus();
+			return;
+		}
 		if ($("#food_name").val() === "") {
 			alert("제품명을 입력하세요.");
 			$("#food_name").focus();
@@ -428,8 +435,8 @@
 			$("#food_title").focus();
 			return;
 		}
-		if ($("#food_price").val() === "") {
-			alert("가격을 입력하세요.");
+		if (!regexPrice.test($("#food_price").val())) {
+			alert("가격을 숫자로 입력하세요.");
 			$("#food_price").focus();
 			return;
 		}
