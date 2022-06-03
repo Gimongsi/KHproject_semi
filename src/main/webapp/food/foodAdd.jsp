@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -201,7 +201,7 @@
         font-weight: 600;
         border: 1px solid #c9d4a9;
 	}
-	.inputCls:focus{
+	.form-control:focus{
         outline: none;
     }
     textarea{
@@ -209,9 +209,9 @@
     	height: 150px;
     }
     input::placeholder, textarea::placeholder{
-        color: #adcabf;
+        color: #adcabf !important;
     }
-    .btnSave, .btnAddPic, .btnCancle, .btnDel {
+    .btnSave, .btnAddPic, .btnCancle {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -225,7 +225,7 @@
         margin: 5px;
     }
 
-    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover {
+    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
@@ -267,13 +267,13 @@
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="/login.user" style="text-decoration: none;">
-                    <span>로그인</span>
+                <a href="#" style="text-decoration: none;">
+                    <p style="margin: 0px;">로그인</p>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                <a href="/toSignup.user" style="text-decoration: none;">
-                    <span>회원가입</span>
+                <a href="#" style="text-decoration: none;">
+                    <p style="margin: 0px;">회원가입</p>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
@@ -342,40 +342,33 @@
         <div class="empty"></div>
         <div class="row title">
             <div class="col d-flex justify-content-center">
-                <h1>프로모션 수정</h1>
+                <h1>식품 프로모션 등록</h1>
             </div>
         </div>
         <div class="foodPromo">
-        <form id="modifyForm" action="/modifyProc.food" method="post" enctype="multipart/form-data">
+        	<form id="addForm" action="/addProc.food" method="post" enctype="multipart/form-data">
             <div class="row cardList">
                 <div class="col d-flex justify-content-center">
                     <div class="card">
-                            <c:if test="${empty dtoPic}">
-								<div class="col"><a>사진 없음</a></div>
-								<input type="file" class="form-control inputCls">
-							</c:if>
-							<c:if test="${not empty dtoPic}">
-								<div class="col header-board">
-									<img src="/files/${dtoPic.food_src}" class="card-img-top">
-								</div>
-							</c:if>
-                            <button class="btn btnAddPic" type="button">사진 등록</button>
+                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
+                            <input type="file" class="form-control inputCls" name="food_src">
+                            <%-- <button class="btn btnAddPic" type="button">사진 등록</button> --%>
                         <div class="card-body">
                         	<div class="input-group">
                         		<span class="input-group-text">제품명</span>
-                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" value="${dto.food_name}">
+                            	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" placeholder="제품명 입력">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">설명</span>
-                        		<input class="form-control inputCls" type="text" id="food_title" name="food_title" value="${dto.food_title}">
+                        		<input class="form-control inputCls" type="text" id="food_title" name="food_title" placeholder="제품설명 입력">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">가격</span>
-                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" value="${dto.food_price}">
+                        		<input class="form-control inputCls" type="text" id="food_price" name="food_price" placeholder="가격 입력">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">링크주소</span>
-                        		<textarea class="form-control inputCls" id="food_com" name="food_com">${dto.food_com}</textarea>
+                        		<textarea class="form-control inputCls" id="food_com" name="food_com" placeholder="링크주소 입력"></textarea>
                         	</div>
                         </div>
                     </div>
@@ -386,12 +379,7 @@
         <div class="row">
             <div class="col btnSpace d-flex justify-content-center">
                 <button class="btn btnCancle" type="button">취소</button>
-            </div>
-            <div class="col btnSpace d-flex justify-content-center">
                 <button class="btn btnSave" type="button">저장</button>
-            </div>
-            <div class="col btnSpace d-flex justify-content-center">
-                <button class="btn btnDel" type="button">삭제</button>
             </div>
         </div>
         <div class="empty"> </div>
@@ -450,7 +438,7 @@
 			$("#food_com").focus();
 			return;
 		}
-		$("#modifyForm").submit();
+		$("#addForm").submit();
 	})
 	
 	function numbeComma(number) {    

@@ -395,7 +395,7 @@
             </div>
             <div class="row d-flex justify-content-end align-items-end">
                 <div class="col">
-                    <button class="btn btnAdd" type="button">신규 등록</button>
+                    <button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
                 </div>
                 설정위치 > 서울 용산구
             </div>
@@ -714,6 +714,9 @@
 
         })
 
+        $(".btnAdd").on("click", function(){
+        	location.href = "/gymAdd.gym";
+        })
 
     </script>
 </body>
