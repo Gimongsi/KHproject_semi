@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,6 +142,9 @@
         padding: 10px;
         text-align: center;
     }
+     #content{
+        height: 500px;
+    }
     /* 게시글 스타일 영역 끝 */
     /* 버튼 영역 */
     .boxBtn{
@@ -205,10 +207,9 @@
 </style>
 
 <body>
-    <div class="container">
+        <div class="container">
         <!-- 헤더 -->
-        
-<c:choose>
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -436,17 +437,19 @@
 		</c:choose>
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
+        
+        <!-- FAQ 등록 -->
         <div class="title">
             <h3>FAQ 등록</h3>
         </div>
-        <form id="writeForm" action="/writeProc.info" method="post" enctype="multipart/form-data">
+        <form id="writeForm" action="/writeProc.info" method="post">
             <div class="container">
                 <div class="row">
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <h4>제목</h4>
                     </div>
                     <div class="col-10 p-2">
-                        <input type="text" class="form-control" id="title" name="title">
+                        <input type="text" class="form-control" id="title" name="qna_title">
                     </div>
                 </div>
                 <div class="row">
@@ -454,7 +457,7 @@
                         <h4>내용</h4>
                     </div>
                     <div class="col-10 p-2">
-                        <textarea id="content" class="form-control" id="content" name="content"></textarea>
+                        <textarea id="content" class="form-control" id="content" name="qna_content"></textarea>
                     </div>
                 </div>
             </div>

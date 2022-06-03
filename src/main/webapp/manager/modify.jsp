@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,8 +142,8 @@
         padding: 10px;
         text-align: center;
     }
-    .content{
-        height: 1000px;
+     #content{
+        height: 500px;
     }
     /* 게시글 스타일 영역 끝 */
      /* 버튼 영역 */
@@ -207,10 +206,9 @@
 </style>
 
 <body>
-    <div class="container">
-        <!-- 헤더 -->
-        
-<c:choose>
+        <div class="container">
+        <!-- 헤더 -->     
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -438,6 +436,8 @@
 		</c:choose>
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
+        
+        <!-- FAQ 수정 -->
 	<div class="title">
         <h3>FAQ 수정</h3>
     </div>
