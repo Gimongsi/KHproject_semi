@@ -206,7 +206,7 @@
         <div class="row cls_header">
             <div class="col-3 logoImg">
                 <a href="#">
-                    <img id="logoImg" src="/resources/dpt_Logo.png">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
@@ -287,8 +287,12 @@
                 <div class="col-3">
                     <h3 class="text-center mb-3">My Page</h3>
                     <div class="inner-container-left">
-                        <div>정보수정</div>
-                        <div>일기</div>
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -340,5 +344,13 @@
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
     </div>
+    <script>
+    	document.getElementById("modifyBtn").onclick = function(){
+    		location.href = "/member/myPage_user_modify.jsp";
+    	}
+    	document.getElementById("diaryBtn").onclick = function(){
+    		location.href = "/member/myPage_diary.jsp";
+    	}
+    </script>
 </body>
 </html>

@@ -177,7 +177,7 @@
         <div class="row cls_header">
             <div class="col-3 logoImg">
                 <a href="#">
-                    <img id="logoImg" src="/resources/dpt_Logo.png">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
@@ -267,7 +267,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/560.jpg" class="card-img-top h-100">
+                        <img src="/imgs/560.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">거북목 교정 운동법</h5>
                         </div>
@@ -275,7 +275,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/alora-griffiths-WX7FSaiYxK8-unsplash.jpg" class="card-img-top h-100">
+                        <img src="/imgs/alora-griffiths-WX7FSaiYxK8-unsplash.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">부상 위험을 줄이는 운동 전 스트레칭</h5>
                         </div>
@@ -283,7 +283,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/back-pain-g7ebabea1c_640.jpg" class="card-img-top h-100">
+                        <img src="/imgs/back-pain-g7ebabea1c_640.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">허리디스크가 의심되세요?</h5>
                         </div>
@@ -291,7 +291,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg" class="card-img-top h-100">
+                        <img src="/imgs/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">규칙적인 운동의 영향</h5>
                         </div>
@@ -299,7 +299,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/hermes-rivera-Ww8eQWjMJWk-unsplash (1).jpg" class="card-img-top h-100">
+                        <img src="/imgs/hermes-rivera-Ww8eQWjMJWk-unsplash (1).jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">간헐적 단식! 누가, 어떻게 해야 효과적인가?</h5>
                         </div>
@@ -307,7 +307,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/근육통.jpg" class="card-img-top h-100">
+                        <img src="/imgs/근육통.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">근육통 있을 때 운동해도 될까?</h5>
                         </div>
