@@ -22,9 +22,9 @@ public class GymController extends HttpServlet {
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
 		
-		if(uri.equals("/gymList.gym")) { // 운동시설 리스트로 이동
+		if(uri.equals("/list.gym")) { // 운동시설 리스트로 이동
 			response.sendRedirect("/gym/gymList.jsp");
-		}else if(uri.equals("/gymAdd.gym")) { // 운동시설 신규등록 페이지로 이동
+		}else if(uri.equals("/add.gym")) { // 운동시설 신규등록 페이지로 이동
 			response.sendRedirect("/gym/gymAdd.jsp");
 		}
 	}

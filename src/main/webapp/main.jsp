@@ -426,8 +426,13 @@ none;
 </style>
 
 <body>
+<<<<<<< HEAD
+<div class="container">
+    <c:choose>
+=======
 	<div class="container">
 		<c:choose>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -474,7 +479,11 @@ none;
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
 										<li class="nav-item"><a class="nav-link"
+<<<<<<< HEAD
+											href="/list.gym">내 주변 운동시설</a></li>
+=======
 											href="/gymList.gym">내 주변 운동시설</a></li>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
 										<li class="nav-item dropdown"><a
@@ -653,6 +662,298 @@ none;
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+<<<<<<< HEAD
+        <!-- 칼럼 -->
+        <div class="row cls_column">
+            <div class="col">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="#"><img id="calumn_src" name="calumn_src" src="/My/imgs/man-g2cdda0662_1920.jpg" class="d-block w-100"></a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 id="calumn_title" name="calumn_title">함께 하는 운동</h5>
+                                <p>Some representative placeholder content for the first slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="#"><img id="calumn_src" name="calumn_src" src="/My/imgs/crossfit-gee1621d57_1920.jpg" class="d-block w-100"></a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 id="calumn_title" name="calumn_title">근력 운동의 모든 것</h5>
+                                <p>Some representative placeholder content for the second slide.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="#"><img id="calumn_src" name="calumn_src" src="/My/imgs/sports-g92109f57b_1920.jpg" class="d-block w-100"></a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5 id="calumn_title" name="calumn_title">개구리</h5>
+                                <p>Some representative placeholder content for the third slide.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 칼럼 끝 -->
+        <div class="empty"> </div>
+        <!-- 부위별 운동-->
+        <div class="title">
+            <div class="waviy">
+                <span style="--i:1">오늘은</span>
+                <span style="--i:2">어떤&nbsp;</span>
+                <span style="--i:3">운동을&nbsp;</span>
+                <span style="--i:4">할까&nbsp;</span>
+                <span style="--i:5">?</span>
+            </div>
+        </div>
+        <div class="row cls_partEx">
+            <div class="col-6 d-flex justify-content-center">
+                <a href="#"><img style="width:100%;" src="/My/imgs/부위별01.jpg"></a>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+                <a href="#"><img style="width:100%;" src="/My/imgs/부위별05.jpg"></a>
+            </div>
+        </div>
+        <!-- 부위별 운동 끝 -->
+        <div class="empty"></div>
+        <div class="title_promo">
+            <div class="content">
+                  <span class="title-part line-4">6월 프로모션</span>
+            </div>
+        </div>
+        <!-- 프로모션 -->
+        <div class="title_promo_gym">
+            여름대비 할인 진행 중!
+        </div>
+        <!-- 헬스장 -->
+        <div class="row promo_gym">
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card card_gym" style="width: 18rem;">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+                        </div>
+                        
+                    </a>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
+                        <li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+                        <li class="list-group-item">O.T 1회 무료</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 헬스장 끝 -->
+        <!-- 식품 -->
+        <div class="title_promo_food">
+            식단관리도
+            <span>맛있게!</span>
+        </div>
+        <div class="row promo_food">
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="food_src" name="food_src" src="/My/imgs/닭01.jpg" class="card-img-top"></a>
+                    <div class="card-body">
+                        <h5 class="card-title" id="food_title" name="food_title">부드러운 식단관리</h5>
+                        <p class="card-text" id="food_name" name="food_name">닭가슴살 안심 스테이크</p>
+                        <p class="card-text"><small class="text-muted" id="food_price" name="food_price">10팩 9,900원</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="food_src" name="food_src" src="/My/imgs/닭01.jpg" class="card-img-top"></a>
+                    <div class="card-body">
+                        <h5 class="card-title" id="food_title" name="food_title">부드러운 식단관리</h5>
+                        <p class="card-text" id="food_name" name="food_name">닭가슴살 안심 스테이크</p>
+                        <p class="card-text"><small class="text-muted" id="food_price" name="food_price">10팩 9,900원</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="food_src" name="food_src" src="/My/imgs/닭01.jpg" class="card-img-top"></a>
+                    <div class="card-body">
+                        <h5 class="card-title" id="food_title" name="food_title">부드러운 식단관리</h5>
+                        <p class="card-text" id="food_name" name="food_name">닭가슴살 안심 스테이크</p>
+                        <p class="card-text"><small class="text-muted" id="food_price" name="food_price">10팩 9,900원</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3 d-flex justify-content-center">
+                <div class="card">
+                    <a href="#" style="text-decoration: none; color:black;">
+                        <img id="food_src" name="food_src" src="/My/imgs/닭01.jpg" class="card-img-top"></a>
+                    <div class="card-body">
+                        <h5 class="card-title" id="food_title" name="food_title">부드러운 식단관리</h5>
+                        <p class="card-text" id="food_name" name="food_name">닭가슴살 안심 스테이크</p>
+                        <p class="card-text"><small class="text-muted" id="food_price" name="food_price">10팩 9,900원</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 식품 끝 -->
+        <!-- 프로모션 끝 -->
+        <div class="empty"> </div>
+        <!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="">이용약관</a></div>
+                <div class="col"><a href="">개인정보처리방침</a></div>
+                <div class="col"><a href="">위치정보이용약관</a></div>
+                <div class="col"><a href="">센터등록요청하기</a></div>
+                <div class="col"><a href="">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
+    </div>
+    
+    <script>
+=======
 
 		<!-- 칼럼 -->
 		<div class="row cls_column">
@@ -986,6 +1287,7 @@ none;
 	</div>
 
 	<script>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
     	
     </script>
 
