@@ -2,69 +2,23 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-<meta charset="UTF-8">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<title>전체 메일 보내기</title>
-</head>
+<meta charset="UTF-8">
+<title>근육별 운동목록</title>
 <style>
-/* 버튼 */
-.btnSpace {
-	margin-bottom: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
-}
-
-.btnAdd {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: small;
-	color: white;
-	margin: 5px;
-}
-
-.btnAdd:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
 /* 폰트 */
-@font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'SuncheonB';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
 @font-face {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	src:
@@ -74,11 +28,20 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: '양진체';
+	src:
+		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: 'LeferiPoint-WhiteObliqueA';
 }
 
 .container {
@@ -94,6 +57,7 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -124,7 +88,6 @@
 
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -134,13 +97,11 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
-
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -161,21 +122,32 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
 %
 {
 transform
-:
-translateY(
--20px
-)
-}
-}
 
+
+:
+
+
+translateY
+(
+
+
+-20px
+
+
+)
+
+
+}
+}
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
-	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -217,48 +189,76 @@ translateY(
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 40px;
+	height: 20px;
 }
 
-/* 바디 타이틀 */
-.cls_title {
-	height: 100px;
+.emptyTop {
+	background-color: white;
+	height: 50px;
 }
 
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 300px;
-	height: 45px;
-	text-align: center;
+h2 {
 	font-family: '양진체';
+	color: #73b1a1;
 }
 
-/* 메일 타이틀 */
-.mail-title>input {
-	width: 50%;
+table {
+	border: 1px;
+	border-color: black;
 }
 
-/* 메일 내용 */
-.mail-content>textarea {
-	resize: none;
-	width: 70%;
+.tableContainer {
+	width: 80%;
 	height: 500px;
+	background-color: white;
+	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
 }
+/*Pagination*/
+    .page-link{
+        color: #5a9284;
+        margin-bottom: 50px;
+    }
+    .page-link:focus{
+        color: #5a9284;
+    }
 
-/* 보내기 버튼 */
-#sendMailBtn, #backBtn {
-	width: 100px;
-}
 
-/* footer */
-.footer {
+/* 버튼 */
+.btnSubmit {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
 	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
+	font-size: medium;
+	color: white;
+	margin: 5px;
+}
+
+#dropdownMenuButton1 {
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: medium;
+	color: white;
+	margin: 5px;
+}
+
+/*Pagination*/
+
+
+
+/*footer*/
+.footer {
+	/* font-family: 'SuncheonB';
+        font-weight: normal; */
 	font-size: small;
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
@@ -283,14 +283,13 @@ translateY(
 	text-decoration: none;
 }
 </style>
-
+</head>
 <body>
 	<div class="container">
 		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
-				<a href="#"> <img id="logoImg"
-					src="../imgs/dpt_Logo.png"/>
+				<a href="#"> <img id="logoImg" src="/imgs/dpt_Logo.png">
 				</a>
 			</div>
 			<div class="d-none d-md-block col-5"></div>
@@ -317,6 +316,7 @@ translateY(
 				</ul>
 			</div>
 		</div>
+
 		<!-- 네비 -->
 		<div class="row cls_nav">
 			<div class="col">
@@ -361,41 +361,84 @@ translateY(
 		</div>
 		<!-- 네비 끝 -->
 		<!-- 헤더 끝 -->
-		<div class="empty"></div>
 
-		<!-- 메인 영역 -->
-		<div class="row cls_body">
-			<div class="row">
-				<div class="col-12 d-flex justify-content-center title_div">
-					<h2>공지 메일 보내기</h2>
-				</div>
-			</div>
-			<div class="empty"></div>
-			<div class="row">
-				<div class="col-12 d-flex justify-content-center mail-title">
-					<input type="text" class="form-control" id="mail-title"
-						name="mail-title" placeholder="제목 입력">
-				</div>
-			</div>
-			<div class="empty"></div>
-			<div class="row">
-				<div class="col-12 d-flex justify-content-center mail-content">
-					<textarea class="form-control" id="mail-content"
-						name="mail-content"></textarea>
-				</div>
-			</div>
-			<div class="empty"></div>
-			<div class="row">
-				<div class="col btnSpace d-flex justify-content-center">
-					<button type="button" id="sendMailBtn" class="btn btnAdd">보내기</button>
-					<button type="button" id="backBtn" class="btn btnAdd">취소</button>
-				</div>
+		<div class="emptyTop"></div>
 
+		<div class="row">
+			<div class="col-12 d-flex justify-content-center">
+				<h2>근육별 운동목록</h2>
 			</div>
-			<div class="empty"></div>
-
 		</div>
 
+		<hr
+			style="height: 1px; width: 30%; border: none; background-color: gray; text-align: center; margin: auto;">
+		<div class="empty"></div>
+		<div class="row">
+			<div class="col-2 d-flex justify-content-center">
+				<button type="button" class="btnSubmit" id="btnSubmit">등록</button>
+			</div>
+			<div class="col-10 d-flex justify-content-end">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						id="dropdownMenuButton1" data-bs-toggle="dropdown"
+						aria-expanded="false">근육별 목록 선택</button>
+
+
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						<li><a class="dropdown-item" href="#">팔</a></li>
+						<li><a class="dropdown-item" href="#">어깨</a></li>
+						<li><a class="dropdown-item" href="#">승모근</a></li>
+						<li><a class="dropdown-item" href="#">가슴</a></li>
+						<li><a class="dropdown-item" href="#">배</a></li>
+						<li><a class="dropdown-item" href="#">엉덩이</a></li>
+						<li><a class="dropdown-item" href="#">허벅지</a></li>
+						<li><a class="dropdown-item" href="#">종아리</a></li>
+						<li><a class="dropdown-item" href="#">유산소</a></li>
+						<li><a class="dropdown-item" href="#">전체</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- 운동목록 테이블-->
+		<div class="tableContainer">
+			<table class="table table-bordered" id="partTable">
+				<thead class="thead-light">
+					<tr>
+						<th class="col-3">근육</th>
+						<th class="col-9">제목</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="col-3">내용</td>
+						<td class="col-9">내용</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+
+		<!-- 운동목록 테이블 끝-->
+		<div class="row">
+			<div class="col-12 d-flex justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 
 		<!-- footer -->
 		<div class="container footer">
@@ -431,7 +474,7 @@ translateY(
 			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
 		<!-- footer 끝 -->
-		</div>
-</body>
 
+	</div>
+</body>
 </html>
