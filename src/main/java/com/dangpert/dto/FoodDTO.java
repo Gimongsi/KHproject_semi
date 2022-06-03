@@ -3,19 +3,18 @@ package com.dangpert.dto;
 public class FoodDTO {
 
 	private int food_seq;
-	private String food_com, food_name, food_title, food_src;
+	private String food_com, food_name, food_title;
 	private int food_price;
 	
 	FoodDTO(){}
 
-	public FoodDTO(int food_seq, String food_com, String food_name, String food_title, int food_price, String food_src) {
+	public FoodDTO(int food_seq, String food_com, String food_name, String food_title, int food_price) {
 		super();
 		this.food_seq = food_seq;
 		this.food_com = food_com;
 		this.food_name = food_name;
 		this.food_title = food_title;
 		this.food_price = food_price;
-		this.food_src = food_src;
 	}
 
 	public int getFood_seq() {
@@ -58,18 +57,10 @@ public class FoodDTO {
 		this.food_price = food_price;
 	}
 
-	public String getFood_src() {
-		return food_src;
-	}
-
-	public void setFood_src(String food_src) {
-		this.food_src = food_src;
-	}
-
 	@Override
 	public String toString() {
 		return food_seq + " : " + food_com + " : " + food_name + " : "
-				+ food_title + " : " + food_price + " : " + food_src;
+				+ food_title + " : " + food_price;
 	}
 	
 	

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -179,7 +180,7 @@
         font-weight: 600;
     }
 
-    .btnAdd {
+    .btnAdd, .btnModify, .btnSave, .btnAddPic, .btnCancle {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -193,25 +194,19 @@
         margin: 5px;
     }
 
-    .btnAdd:hover {
+    .btnAdd:hover, .btnModify:hover, .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
     }
 
     /* 목록 */
-    .tblBorder {
-    	border-right: 1px solid #e6ebd8;
-    }
-	.table td{
-		border-bottom: 1px solid #e6ebd8;
-	}
     .tableTitle {
         background-color: #F0FFC2;
         color: #74a598;
         text-align: center;
-        border-bottom: 2px solid #74a598;
     }
+
     .title {
         color: #97C4B8;
         border-bottom: 1px solid #97C4B8;
@@ -223,19 +218,14 @@
     .page-item.active .page-link{
         color: white;
         background-color: #73b1a1;
-        border: 1px solid #e6ebd8;
+        border: 1px solid #5a9284;
     }
     .page-link{
         color: #5a9284;
         margin-bottom: 50px;
-        border: 1px solid #e6ebd8;
     }
     .page-link:focus{
         color: #5a9284;
-    }
-    .page-link:hover{
-        color: #5a9284;
-        background-color: #F0FFC2;
     }
 
     /* footer */
@@ -270,232 +260,85 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
-		<c:choose>
-			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
-					<div class="d-none d-md-block col-2"></div>
-					<div class="col-3 p-0 headMenu d-flex justify-content-center">
-						<span>${loginSession.user_name} 님 환영합니다!</span>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/toMypage.user" style="text-decoration: none;"> <span>마이페이지</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:when test="${loginSession.user_auth eq 'manager'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
-					<div class="d-none d-md-block col-2"></div>
-					<div class="col-3 p-0 headMenu d-flex justify-content-center">
-						<span>관리자님 환영합니다!</span>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:otherwise>
-				<!-- 헤더 -->
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
-					<div class="d-none d-md-block col-5"></div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
-						</a>
-					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form class="d-flex">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="submit">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:otherwise>
-		</c:choose>
+        <div class="row cls_header">
+            <div class="col-3 logoImg">
+                <a href="#">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
+                </a>
+            </div>
+            <div class="d-none d-md-block col-5"> </div>
+            <div class="col p-0 headMenu d-flex justify-content-center">
+                <a href="#" style="text-decoration: none;">
+                    <span style="margin: 0px;">로그인</span>
+                </a>
+            </div>
+            <div class="col p-0 headMenu d-flex justify-content-center">
+                <a href="#" style="text-decoration: none;">
+                    <span style="margin: 0px;">회원가입</span>
+                </a>
+            </div>
+            <div class="col p-0 headMenu d-flex justify-content-center">
+                <button type="button" class="btn dropdownBtn dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    고객센터
+                </button>
+                <ul class="dropdown-menu headDropdown">
+                    <li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+                    <li><a class="dropdown-item" href="#">이벤트</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 네비 -->
+        <div class="row cls_nav">
+            <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">칼럼</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">내 주변 운동시설</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">특가 식품</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        근육별 운동법
+                                    </a>
+                                    <ul class="dropdown-menu navDropdown" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">상체</a></li>
+                                        <li><a class="dropdown-item" href="#">하체</a></li>
+                                        <li><a class="dropdown-item" href="#">몸통</a></li>
+                                        <li><a class="dropdown-item" href="#">전체보기</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <input class="form-control navSearchInput me-2" type="search" placeholder="운동시설 검색"
+                                    aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">Search!</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- 네비 끝 -->
+        <!-- 헤더 끝 -->
+        <div class="empty"> </div>
         <!-- 식품 프로모션 목록 -->
         <div class="empty"></div>
         <div class="row title">
@@ -511,7 +354,7 @@
             <table class="table">
                 <thead>
                     <tr class="tableTitle">
-                        <th class="col-2 tblBorder">No.</th>
+                        <th class="col-2">No.</th>
                         <th class="col">프로모션 제목</th>
                     </tr>
                 </thead>
@@ -525,7 +368,7 @@
 						<c:otherwise>
 							<c:forEach items="${list}" var="dto">
                     			<tr>
-                        			<td class="tblBorder" style="text-align: center;">
+                        			<td style="text-align: center;">
                         				${dto.food_seq}
                         			</td>
                         			<td style="text-align: center;">
@@ -537,14 +380,13 @@
                     </c:choose>
                 </tbody>
             </table>
-        <%--  페이징 --%>
         <div class="row">
             <div class="col d-flex justify-content-center">
             	<nav aria-label="Page navigation example">
                     <ul class="pagination">
                     	<c:if test="${naviMap.needPrev eq true}">
                     		<li class="page-item">
-                    			<a class="page-link" href="/modifyList.food?curPage=${naviMap.startNavi-1}"><</a>
+                    			<a class="page-link" href="/modifyList.food?curPage=${naviMap.startNavi-1}">Prev</a>
                     		</li>
                     	</c:if>
                     	<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}" step="1">
@@ -554,7 +396,7 @@
                     	</c:forEach>    
                     	<c:if test="${naviMap.needNext eq true}">
 							<li class="page-item">
-								<a class="page-link" href="/modifyList.food?curPage=${naviMap.endNavi+1}">></a>
+								<a class="page-link" href="/modifyList.food?curPage=${naviMap.endNavi+1}">Next</a>
 							</li>
 						</c:if>
                     </ul>
@@ -594,7 +436,6 @@
 		$(".btnAdd").on("click", function(){
 			location.href = "/add.food";
 		})
-		
     </script>
 </body>
 </html>
