@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dangpert.dao.InformationDAO;
-import com.dangpert.dto.InfomationDTO;
+import com.dangpert.dto.InformationDTO;
 
 @WebServlet("*.info")
 public class InformationController extends HttpServlet {
@@ -30,19 +30,19 @@ public class InformationController extends HttpServlet {
 		
 		
 		
-		if(uri.equals("/information/information.jsp")) { //게시판페이지 요청
+		if(uri.equals("/toInformation.info")) { //게시판페이지 요청
 			InformationDAO dao = new InformationDAO();
 			try {
-				ArrayList<InfomationDTO> list = dao.selectAll(0, 0);
+				ArrayList<InformationDTO> list = dao.selectAll(0, 0);
 				request.setAttribute("list", list);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}			
-			request.getRequestDispatcher("/manager/information/information.jsp").forward(request, response);
+			request.getRequestDispatcher("/user/information_user.jsp").forward(request, response);
 		}else if(uri.equals("/write.info")) { // 글쓰기페이지 요청
-			response.sendRedirect("/information/write.jsp");
+			response.sendRedirect("/manager/write.jsp");
 		}else if(uri.equals("/writeProc.info")) { // 글쓰기 요청
-			InfomationDTO dto = (InfomationDTO)request.getSession().getAttribute("loginSession");
+			InformationDTO dto = (InformationDTO)request.getSession().getAttribute("loginSession");
 			String qna_title = request.getParameter("qna_title");
 			String qna_content = request.getParameter("qna_content");
 
@@ -50,9 +50,9 @@ public class InformationController extends HttpServlet {
 
 			InformationDAO dao = new InformationDAO();
 			try {
-				int rs = dao.write(new InfomationDTO(0,qna_title,qna_content));
+				int rs = dao.write(new InformationDTO(0,qna_title,qna_content));
 				if(rs > 0) {
-					response.sendRedirect("/information.info");
+					response.sendRedirect("/toInformation.info");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -64,13 +64,13 @@ public class InformationController extends HttpServlet {
 
 			InformationDAO dao = new InformationDAO();
 			try {
-				InfomationDTO dto = dao.selectBySeq(qna_seq);
+				InformationDTO dto = dao.selectBySeq(qna_seq);
 				request.setAttribute("dto", dto);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 
-			request.getRequestDispatcher("/manager/information/modify.jsp").forward(request, response);
+			request.getRequestDispatcher("/manager/modify.jsp").forward(request, response);
 		}else if(uri.equals("/modifyProc.info")) { // 수정 요청
 			int qna_seq = Integer.parseInt(request.getParameter("qna_seq"));
 			String qna_title = request.getParameter("qna_title");
@@ -78,7 +78,7 @@ public class InformationController extends HttpServlet {
 
 			InformationDAO dao = new InformationDAO();
 			try {
-				int rs = dao.modify(new InfomationDTO(0,qna_title,qna_content));
+				int rs = dao.modify(new InformationDTO(0,qna_title,qna_content));
 				
 			}catch(Exception e) {
 				e.printStackTrace();

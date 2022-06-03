@@ -1,6 +1,9 @@
 package com.dangpert.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import com.dangpert.dao.UserDAO;
 import com.dangpert.dto.UserDTO;
 import com.dangpert.utils.EncryptionUtils;
+import com.google.gson.Gson;
 
 @WebServlet("*.user")
 public class UserController extends HttpServlet {
@@ -23,6 +28,7 @@ public class UserController extends HttpServlet {
 	}
 	
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 		String uri = request.getRequestURI();
 		
@@ -36,10 +42,10 @@ public class UserController extends HttpServlet {
 			try {
 				user_pw = EncryptionUtils.getSHA512(user_pw);
 				System.out.println("user 암호화 비밀번호 :" + user_pw);
-				int rs = dao.insert(new UserDTO(0, user_id, user_pw, user_name, user_phone, null, null));
+				int rs = dao.insert(new UserDTO(0, user_id, user_pw, user_name, user_phone, null, null, null));
 				
 				if (rs > 0) {
-					response.sendRedirect("/login.jsp");
+					response.sendRedirect("/user/login.jsp");
 				}
 				
 			} catch (Exception e) {
@@ -95,7 +101,48 @@ public class UserController extends HttpServlet {
 			}
 		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
 			response.sendRedirect("/user/signup.jsp");
-		} 
+		} else if (uri.equals("/logout.user")) { // 로그아웃 요청
+			HttpSession session = request.getSession();
+			session.getAttribute("loginSession");
+			session.removeAttribute("loginSession");
+			response.sendRedirect("/main.jsp");
+			
+		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
+			response.sendRedirect("/user/mypage.jsp");
+		} else if (uri.equals("/search.user")) { // manager 유저 검색
+			UserDAO dao = new UserDAO();
+			int curPage = Integer.parseInt(request.getParameter("curPage"));
+			
+			try {
+				HashMap map = dao.getPageNavi(curPage);
+				
+				ArrayList<UserDTO> list = dao.selectAll(curPage*10-9,curPage*10);
+				request.setAttribute("list", list);
+				request.setAttribute("naviMap", map);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/manager/search.jsp").forward(request, response);
+			
+		} else if(uri.equals("/managerUpdate.user")) { // 회원 수정버튼 눌렀을때 ajax 실행
+			
+			int user_seq = Integer.parseInt(request.getParameter("user_seq"));
+			System.out.println(user_seq);
+			UserDAO dao = new UserDAO();
+			try {
+				UserDTO dto = dao.selectBySeq(user_seq);
+				Gson gson = new Gson();
+				String rs = gson.toJson(dto);
+				response.getWriter().append(rs);
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
 		
 		
