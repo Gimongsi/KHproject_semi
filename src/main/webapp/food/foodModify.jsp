@@ -259,7 +259,12 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
+<<<<<<< HEAD
         <c:choose>
+=======
+        
+<c:choose>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -485,6 +490,11 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+<<<<<<< HEAD
+=======
+        <!-- 헤더 끝 -->
+        <div class="empty"> </div>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
         <!-- 식품 프로모션 목록 -->
         <div class="empty"></div>
         <div class="row title">

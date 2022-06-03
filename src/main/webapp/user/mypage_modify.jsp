@@ -136,35 +136,24 @@
     }
 
     /* 바디 */
-    .title {
-        border-bottom: 2px solid grey;
-        width: 250px;
-    }
-
     .inner-container-left {
         margin: auto;
         border: 1px solid black;
-        height: 800px;
+        box-sizing: border-box;
+        height: 85%;
     }
 
     .inner-container-left *{
         margin: 20px;
     }
-    .inner-container-right {
-        
-        height: 80%;
+    .inner-container-right input {
+        background-color: #80808030;
+        width: 100%;
+        border: none;
     }
 
-    .inner-contents-left {
-        margin: none;
-        border: 1px solid black;
-        height: 100%;
-    }
-
-    .inner-contents-right {
-        margin: none;
-        border: 1px solid black;
-        height: 100%;
+    .inner-container-right div {
+        margin: 20px;
     }
 
     /* 푸터 */
@@ -441,49 +430,40 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="d-flex justify-content-center">
-                        <div class="title d-flex justify-content-center mb-4">
-                            <h5>오늘의 기록!</h5>
+                    <h3 class="text-center mb-3">회원 정보 수정</h3>
+                    <div class="inner-container-right">
+                        <div class="mb-5">
+                            <input type="text" disabled placeholder="이메일 / 수정불가">
+                            <input type="text">
                         </div>
-                    </div>
-                    <div class="row inner-container-right">
-                        <div class="col-7">
-                            <div class="inner-contents-left">
-                                <div>
-                                    내용1
-                                </div>
-                                <div>
-                                    내용2 줄이 바뀔 정도로 길게 쓰여진 내용이 들어갔을 때 날짜는 내용2의 첫줄에 맞춰야 함
-                                </div>
-                                <div>
-                                    내용3 내용과 날짜가 서로 매칭시키기
-                                </div>
-                                <div>
-                                    내용4
-                                </div>
+                        <div>
+                            <input type="text" disabled placeholder="현재 비밀번호">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="변경 후 비밀번호">
+                            <input type="text">
+                        </div>
+                        <div class="mb-5">
+                            <input type="text" disabled placeholder="변경 후 비밀번호 확인">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="몸무게 수정">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <input type="text" disabled placeholder="목표 몸무게 수정">
+                            <input type="text">
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary col-2" type="button">회원 탈퇴</button>
+                                <button class="btn btn-secondary col-2 invisible" type="button">더미</button>
+                                <button class="btn btn-secondary col-2" type="button">취소</button>
+                                <button class="btn btn-primary col-2" type="button">수정 완료</button>
                             </div>
                         </div>
-                        <div class="col-5">
-                            <div class="inner-contents-right">
-                                <div>
-                                    날짜1
-                                </div>
-                                <div>
-                                    날짜2
-                                </div>
-                                <div>
-                                    날짜3
-                                </div>
-                                <div>
-                                    날짜4
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-4 gap-3">
-                        <button class="btn btn-primary" type="button">일기 쓰기</button>
-                        <button class="btn btn-primary" type="button">일기 수정</button>
-                        <button class="btn btn-secondary" type="button">일기 삭제</button>
                     </div>
                 </div>
             </div>

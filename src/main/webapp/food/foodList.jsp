@@ -451,6 +451,11 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+<<<<<<< HEAD
+=======
+        <!-- 헤더 끝 -->
+        <div class="empty"> </div>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
         <!-- 식품 프로모션 목록 -->
         <div class="empty"></div>
         <div class="row title">
