@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    
-    <title>FAQ 수정</title>
+    <title>FAQ 등록</title>
 </head>
 <style>
     /* 폰트 */
@@ -142,12 +143,9 @@
         padding: 10px;
         text-align: center;
     }
-     #content{
-        height: 500px;
-    }
     /* 게시글 스타일 영역 끝 */
-     /* 버튼 영역 */
-     .boxBtn{
+    /* 버튼 영역 */
+    .boxBtn{
         height: 10%;
     }
 	.container{
@@ -174,6 +172,7 @@
     .boxBtn{
         text-align: center;
     }
+    
     /* 버튼 영역 끝 */
     /* footer */
     .footer {
@@ -206,9 +205,10 @@
 </style>
 
 <body>
-        <div class="container">
-        <!-- 헤더 -->     
-		<c:choose>
+    <div class="container">
+        <!-- 헤더 -->
+        
+<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -436,57 +436,55 @@
 		</c:choose>
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        
-        <!-- FAQ 수정 -->
-	<div class="title">
-        <h3>FAQ 수정</h3>
-    </div>
-    <form id="modifyForm" action="/modifyProc.info" method="post">
-	    <div class="container">
-	    	<div class="row">
-	    		<div class="col-2 d-flex justify-content-center align-items-center">
-	    			<h4>제목</h4>
-	    		</div>
-	    		<div class="col-10 p-2">
-	    			<input type="text" class="form-control" id="title" name="title" value="${dto.qna_title}">
-	    		</div>
-	    	</div>
-	    	<div class="row">
-	    		<div class="col-2 d-flex justify-content-center align-items-center">
-	    			<h4>내용</h4>
-	    		</div>
-	    		<div class="col-10 p-2">
-	    			<textarea id="content" class="form-control" id="content" name="content" value="${dto.qna_content}"></textarea>
-	    		</div>
-	    	</div>
-	    </div>
-    </form>
-    <div class="boxBtn">
-        <button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-        <button type="button" class="btn btn-primary" id="btnComplete">수정</button>
-    </div>
+        <div class="title">
+            <h3>FAQ 등록</h3>
+        </div>
+        <form id="writeForm" action="/writeProc.info" method="post" enctype="multipart/form-data">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <h4>제목</h4>
+                    </div>
+                    <div class="col-10 p-2">
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <h4>내용</h4>
+                    </div>
+                    <div class="col-10 p-2">
+                        <textarea id="content" class="form-control" id="content" name="content"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="boxBtn">
+            <button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
+            <button type="button" class="btn btn-primary" id="btnSave">등록</button>
+        </div>
+    
+        <script>
+            $("#btnSave").on("click", function(){
+                if($("#title").val() === ""){
+                    $("#title").val("제목없음");
+                }
+            
+                if($("#content").val() === ""){
+                    alert("내용을 입력하세요.");
+                    $("#content").focus();
+                    return;
+                }
+                $("#writeForm").submit();
+            })
 
-    <script>
-    $("#btnComplete").on("click", function(){
-		if($("#title").val() === ""){
-			$("#title").val("제목없음");
-		}
-		
-		if($("#content").val() === ""){
-			alert("내용을 입력하세요.");
-			$("#content").focus();
-			return;
-		}
-		$("#modifyForm").submit();
-	})
-	
-	const btnBack = document.getElementById("btnBack");
+            const btnBack = document.getElementById("btnBack");
     
             btnBack.addEventListener("click", function(e){
                 location.href="/manager/information/information.jsp";
             });
-    </script>
-     <!-- footer -->
+        </script>
+   <!-- footer -->
    <div class="container footer">
         <div class="row footerInfo">
             <div class="col-6">

@@ -1,13 +1,13 @@
 package com.dangpert.dto;
 
-public class InfomationDTO {
+public class InformationDTO {
 	
 	private int qna_seq;
 	private String qna_title, qna_content;
 	
-	public InfomationDTO() {}
+	public InformationDTO() {}
 
-	public InfomationDTO(int qna_seq, String qna_title, String qna_content) {
+	public InformationDTO(int qna_seq, String qna_title, String qna_content) {
 		super();
 		this.qna_seq = qna_seq;
 		this.qna_title = qna_title;

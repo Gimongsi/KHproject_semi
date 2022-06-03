@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    
-    <title>FAQ 수정</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>식품 프로모션</title>
 </head>
 <style>
     /* 폰트 */
@@ -23,12 +26,17 @@
         font-weight: normal;
         font-style: normal;
     }
+    @font-face {
+    font-family: 'LeferiPoint-WhiteObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
     /* 폰트 끝 */
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: '양진체';
     }
     .container {
         margin: auto;
@@ -103,6 +111,7 @@
     /* 네비바 */
     .navbar{
         background-color: #F0FFC2 !important;
+        font-family: '양진체';
     }
     .container-fluid a{
         color:#97C4B8 !important;
@@ -137,78 +146,86 @@
         background-color: white;
         height: 20px;
     }
-    /* 게시글 스타일 영역 */
-    .title{
-        padding: 10px;
-        text-align: center;
+
+    /* 목록 */
+    .title {
+        color: #97C4B8;
+        border-bottom: 1px solid #97C4B8;
+        --bs-gutter-x: 0px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-family: '양진체';
     }
-     #content{
-        height: 500px;
+    .card{
+        width: 35rem;
+        border: 1px solid #c9d4a9;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-weight: 600;
+        margin-bottom: 20px;
     }
-    /* 게시글 스타일 영역 끝 */
-     /* 버튼 영역 */
-     .boxBtn{
-        height: 10%;
+    .card img{
+        width : 100%;
+        height: 20rem;
     }
-	.container{
-		width: 80%;
-        height: 100%;
-		padding: 10px;
-	}
-    form, table{
-        height: 100%;
-        text-align: center;
+    .card-title{
+        margin-bottom: 0px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-weight: 600;
     }
-    tr:first-child{
-        height: 10%;
+    .card a{
+        text-decoration: none;
+        color: black;
     }
-    input{
-        width: 100%;
-        height: 100%;
+    .card h5{
+        padding: 20px;
     }
-	textarea{
-		width: 100%;
-        height: 100%;
-		resize: none;
-	}
-    .boxBtn{
-        text-align: center;
+    .foodPromo{
+        margin-bottom: 80px;
     }
-    /* 버튼 영역 끝 */
+    /* 즐겨찾기 버튼 */
+    .btnFavorite{
+        border: none;
+        background-color: white;
+    }
+    /* 즐겨찾기 하트 */
+    .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48
+    }
+
     /* footer */
-    .footer {
+    .footer{
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
         font-size: small;
         color: #709c91;
         border-top: 1px solid #c9d4a9;
     }
-
-    .footer .row {
+    .footer .row{
         border-bottom: 1px solid #c9d4a9;
     }
-
-    .footer .footerInfo {
+    .footer .footerInfo{
         padding-block: 3%;
         text-align: center;
     }
-
-    .footerMenu {
+    .footerMenu{
         padding-block: 2%;
         text-align: center;
     }
-
-    .footerMenu a {
+    .footerMenu a{
         color: #709c91;
         text-decoration: none;
     }
-    /* footer 끝 */
 </style>
 
 <body>
-        <div class="container">
-        <!-- 헤더 -->     
-		<c:choose>
+    <div class="container">
+        <!-- 헤더 -->
+        
+<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -434,85 +451,139 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+<<<<<<< HEAD
+=======
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        
-        <!-- FAQ 수정 -->
-	<div class="title">
-        <h3>FAQ 수정</h3>
+>>>>>>> 7dfcff180747207d7648fce01882998316aced07
+        <!-- 식품 프로모션 목록 -->
+        <div class="empty"></div>
+        <div class="row title">
+            <div class="col d-flex justify-content-center">
+                <h1>이달의 프로모션!</h1>
+            </div>
+            <img src="/imgs/banner.jpg">
+        </div>
+        <div class="foodPromo">
+            <div class="row cardList">
+            	<c:choose>
+            		<c:when test="${listPromo.size() == 0}">
+            			<div>등록된 프로모션이 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach items="${listPromo}" var="dtoPromo">
+                			<div class="col-6 d-flex justify-content-center">
+                    			<div class="card">
+                        			<a href="${dtoPromo.food_com}">
+                            			<img src="/files/${dtoPromo.food_src}" class="card-img-top">
+                            			<h5 class="card-title">${dtoPromo.food_name}</h5>
+                        			</a>
+                        		<div class="card-body">
+                            		<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
+                            		<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
+                            		<div class="col favorite d-flex justify-content-end">
+                                		<button type="button" class="btnFavorite">
+                                    		<span class="material-symbols-outlined">favorite</span>
+                                		</button>
+                            		</div>
+                        		</div>
+                    		</div>
+                		</div>
+                	</c:forEach>
+            	</c:otherwise>
+            </c:choose>
+            <div class="empty"></div>
+            <div class="empty"></div>
+        </div>
+            <!-- 식품 프로모션 목록 끝 -->
+            <!-- 헬린이 프로모션 목록 -->
+            <div class="row title">
+                <div class="col d-flex justify-content-center">
+                    <h1>헬린이 안성맞춤 세트</h1>
+                </div>
+            </div>
+        <div class="foodPromo">
+            <div class="row cardList">
+            	<c:choose>
+            		<c:when test="${list.size() == 0}">
+            			<div>등록된 프로모션이 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach items="${list}" var="dto">
+                			<div class="col-6 d-flex justify-content-center">
+                    			<div class="card">
+                        			<a href="${dto.food_com}">
+                            			<img src="/files/${dto.food_src}" class="card-img-top">
+                            			<h5 class="card-title">${dto.food_name}</h5>
+                        			</a>
+                        		<div class="card-body">
+                            		<p id="food_title" class="card-text">${dto.food_title}</p>
+                            		<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
+                            		<div class="col favorite d-flex justify-content-end">
+                                		<button type="button" class="btnFavorite">
+                                    		<span class="material-symbols-outlined">favorite</span>
+                                		</button>
+                            		</div>
+                        		</div>
+                    		</div>
+                		</div>
+                	</c:forEach>
+            	</c:otherwise>
+            </c:choose>
+            </div>
+        </div>
+        </div>
+        <!-- 헬린이 프로모션 목록 끝 -->
+        <div class="empty"> </div>
+        <!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="">이용약관</a></div>
+                <div class="col"><a href="">개인정보처리방침</a></div>
+                <div class="col"><a href="">위치정보이용약관</a></div>
+                <div class="col"><a href="">센터등록요청하기</a></div>
+                <div class="col"><a href="">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
     </div>
-    <form id="modifyForm" action="/modifyProc.info" method="post">
-	    <div class="container">
-	    	<div class="row">
-	    		<div class="col-2 d-flex justify-content-center align-items-center">
-	    			<h4>제목</h4>
-	    		</div>
-	    		<div class="col-10 p-2">
-	    			<input type="text" class="form-control" id="title" name="title" value="${dto.qna_title}">
-	    		</div>
-	    	</div>
-	    	<div class="row">
-	    		<div class="col-2 d-flex justify-content-center align-items-center">
-	    			<h4>내용</h4>
-	    		</div>
-	    		<div class="col-10 p-2">
-	    			<textarea id="content" class="form-control" id="content" name="content" value="${dto.qna_content}"></textarea>
-	    		</div>
-	    	</div>
-	    </div>
-    </form>
-    <div class="boxBtn">
-        <button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-        <button type="button" class="btn btn-primary" id="btnComplete">수정</button>
-    </div>
-
     <script>
-    $("#btnComplete").on("click", function(){
-		if($("#title").val() === ""){
-			$("#title").val("제목없음");
-		}
-		
-		if($("#content").val() === ""){
-			alert("내용을 입력하세요.");
-			$("#content").focus();
-			return;
-		}
-		$("#modifyForm").submit();
-	})
-	
-	const btnBack = document.getElementById("btnBack");
-    
-            btnBack.addEventListener("click", function(e){
-                location.href="/manager/information/information.jsp";
-            });
+        $(".material-symbols-outlined").on("click", function (e) {
+            let fontVariationSettings = $(e.target).css("font-variation-settings", "'FILL' 1");
+            if(fontVariationSettings = true){
+                $(e.target).css("font-variation-settings", "'FILL' 1");
+                $(e.target).css("color", "red");
+            }else{
+                $(e.target).css("font-variation-settings", "'FILL' 0");
+                $(e.target).css("color", "black");
+            }
+        })
+        
+         
+        /* let num =  $(".food_price").html();
+        function numbeComma(num){
+        	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        console.log(numbeComma(15315)); */
+        
+        
     </script>
-     <!-- footer -->
-   <div class="container footer">
-        <div class="row footerInfo">
-            <div class="col-6">
-                제휴 및 서비스 이용문의<br>
-                <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-                AM 09:00 - PM 06:00<br>
-                토 일 공휴일 휴무
-            </div>
-            <div class="col-6">
-                (주)당퍼트<br>
-                서울특별시 영등포구 선유동2로 57<br>
-                대표 : 홍신영<br>
-                사업자번호 : 123-45-67890<br>
-                통신판매번호 : 제2000-서울영등포구-0000호<br>
-                kh.projectmail@gmail.com<br>
-            </div>
-        </div>
-        <div class="row footerMenu">
-            <div class="col"><a href="">이용약관</a></div>
-            <div class="col"><a href="">개인정보처리방침</a></div>
-            <div class="col"><a href="">위치정보이용약관</a></div>
-            <div class="col"><a href="">센터등록요청하기</a></div>
-            <div class="col"><a href="">문의하기</a></div>
-        </div>
-        <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-    </div>
-<!-- footer 끝 -->
 </body>
 </html>

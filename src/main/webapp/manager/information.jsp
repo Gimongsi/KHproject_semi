@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>    
-    <title>FAQ 수정</title>
+    <title>FAQ</title>
 </head>
 <style>
     /* 폰트 */
@@ -137,44 +138,7 @@
         background-color: white;
         height: 20px;
     }
-    /* 게시글 스타일 영역 */
-    .title{
-        padding: 10px;
-        text-align: center;
-    }
-     #content{
-        height: 500px;
-    }
-    /* 게시글 스타일 영역 끝 */
-     /* 버튼 영역 */
-     .boxBtn{
-        height: 10%;
-    }
-	.container{
-		width: 80%;
-        height: 100%;
-		padding: 10px;
-	}
-    form, table{
-        height: 100%;
-        text-align: center;
-    }
-    tr:first-child{
-        height: 10%;
-    }
-    input{
-        width: 100%;
-        height: 100%;
-    }
-	textarea{
-		width: 100%;
-        height: 100%;
-		resize: none;
-	}
-    .boxBtn{
-        text-align: center;
-    }
-    /* 버튼 영역 끝 */
+
     /* footer */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -206,9 +170,10 @@
 </style>
 
 <body>
-        <div class="container">
-        <!-- 헤더 -->     
-		<c:choose>
+    <div class="container">
+        <!-- 헤더 -->
+        
+<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -436,56 +401,50 @@
 		</c:choose>
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        
-        <!-- FAQ 수정 -->
-	<div class="title">
-        <h3>FAQ 수정</h3>
-    </div>
-    <form id="modifyForm" action="/modifyProc.info" method="post">
-	    <div class="container">
-	    	<div class="row">
-	    		<div class="col-2 d-flex justify-content-center align-items-center">
-	    			<h4>제목</h4>
-	    		</div>
-	    		<div class="col-10 p-2">
-	    			<input type="text" class="form-control" id="title" name="title" value="${dto.qna_title}">
-	    		</div>
-	    	</div>
-	    	<div class="row">
-	    		<div class="col-2 d-flex justify-content-center align-items-center">
-	    			<h4>내용</h4>
-	    		</div>
-	    		<div class="col-10 p-2">
-	    			<textarea id="content" class="form-control" id="content" name="content" value="${dto.qna_content}"></textarea>
-	    		</div>
-	    	</div>
+    <!-- 본문-->
+	<div class="container">
+		<div class="row boxBtn-top">
+			<div class="col d-flex justify-content-end">
+				<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
+			</div>
 	    </div>
-    </form>
-    <div class="boxBtn">
-        <button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-        <button type="button" class="btn btn-primary" id="btnComplete">수정</button>
-    </div>
-
-    <script>
-    $("#btnComplete").on("click", function(){
-		if($("#title").val() === ""){
-			$("#title").val("제목없음");
-		}
-		
-		if($("#content").val() === ""){
-			alert("내용을 입력하세요.");
-			$("#content").focus();
-			return;
-		}
-		$("#modifyForm").submit();
-	})
+	</div>
+    <div class="container">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-md-1">글번호</th>
+					<th class="col-md-5">제목</th>
+				</tr>
+			</thead>
+			<tbody class="body-board">
+				<c:choose>
+					<c:when test="${list.size() == 0}">
+						<tr>
+							<td colspan=5>등록된 게시글이 없습니다.</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<td>${dto.qna_seq}</td>
+								<td>${dto.qna_title}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
+	</div>
 	
-	const btnBack = document.getElementById("btnBack");
-    
-            btnBack.addEventListener("click", function(e){
-                location.href="/manager/information/information.jsp";
-            });
+	<script> 
+    	const btnWrite = document.getElementById("btnWrite");
+    	
+    	btnWrite.addEventListener("click", function(e){
+    		location.href="/manager/information/write.jsp";
+    	})
     </script>
+    <!-- 본문 끝-->
      <!-- footer -->
    <div class="container footer">
         <div class="row footerInfo">
