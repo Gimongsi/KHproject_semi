@@ -258,6 +258,20 @@
             'GRAD' 0,
             'opsz' 48
     }
+    .ImgFavorite {
+    	width: 20px;
+    	height: 20px;
+    	
+    }
+   #redHeart {
+   		width: 100%;
+    	height: 100%;
+    	display:none;
+   }
+   #emptyHeart{
+   		width: 100%;
+    	height: 100%;
+   }
 
     /* 종류 표시 버튼 */
     .buttonImg {
@@ -661,9 +675,12 @@
                                 <span class="buttonImg" style="margin-right:5px;">P.T</span>
                                 <span class="buttonImg" style="margin-right:5px;">G.X</span>
                                 <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
+                                	<div class="ImgFavorite">
+                                		<span><img src="/imgs/empty heart.png" id="emptyHeart" value="${dto.gym_seq}"></span>
+                                		<span><img src="/imgs/red heart.png" id="redHeart" value="${dto.gym_seq}"></span>
+                                	</div>
+                              		
+                                   
                                 </div>
                             </div>
                         </div>
@@ -702,20 +719,40 @@
         </div>
         <!-- footer 끝 -->
     </div>
-    <script>
-        $(".btnFavorite").on("click", function (e) {
-            let fontVariationSettings = $(e.target).css("font-variation-settings", "'FILL' 1");
-            if (fontVariationSettings = true) {
-                $(e.target).css("font-variation-settings", "'FILL' 1");
-                $(e.target).css("color", "red");
-            } else {
-                $(e.target).css("font-variation-settings", "'FILL' 0");
-                $(e.target).css("color", "black");
-            }
 
-        })
+    <c:choose>
+    	<c:when test="${not empty loginSession}">
+    	    <script>
+    	$("#emptyHeart").on("click",function(e){ //빈 하트 눌렀을 때(찜하기 실행)
+    		$("#emptyHeart").css("display" , "none");
+    		$("#redHeart").css("display", "block");
+    		
+    		$.ajax({
+    			uri : "/interestAdd.in"
+    			,type:"post"
+    			,date : "$(dto.gym_seq)"
+    			,success : function(data){
+    				console.log(data);
+    			},error :function(e){
+    				console.log(e);
+    			}
+    		})
+    		
+    	
+    	
+			//location.href ="/interestAdd.in";
+ 		})
+	
+		$("#redHeart").on("click" , function(e){ //빨간 하트 눌렀을 때(찜하기 해제)
+			$("#redHeart").css("display" , "none");
+    		$("#emptyHeart").css("display", "block");
+    		
+    		//location.href="/interestOut.in"
+		})
+   		 </script>
+    	
+    	</c:when>
+    </c:choose>
 
-
-    </script>
 </body>
 </html>
