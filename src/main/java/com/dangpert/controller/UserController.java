@@ -95,7 +95,7 @@ public class UserController extends HttpServlet {
 			}
 		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
 			response.sendRedirect("/user/signup.jsp");
-		}
+		} 
 		
 		
 		
