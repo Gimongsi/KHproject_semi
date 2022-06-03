@@ -104,7 +104,7 @@
     const btnBack = document.getElementById("btnBack");
     
     	btnBack.addEventListener("click", function(e){
-        	location.href="/information/information.jsp";
+        	location.href="/member/information/information_user.jsp";
     	});
 	</script>
 	

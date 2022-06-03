@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dangpert.dao.InformationDAO;
 import com.dangpert.dto.InfomationDTO;
 
-@WebServlet("/.info")
+@WebServlet("*.info")
 public class InformationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doAction(request, response);
@@ -30,15 +30,15 @@ public class InformationController extends HttpServlet {
 		
 		
 		
-		if(uri.equals("/information/information.jsp")) { //게시판페이지 요청
+		if(uri.equals("toInformation.info")) { //게시판페이지 요청
 			InformationDAO dao = new InformationDAO();
 			try {
-				ArrayList<InfomationDTO> list = dao.selectAll(0, 0);
+				ArrayList<InfomationDTO> list = dao.selectAll();
 				request.setAttribute("list", list);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}			
-			request.getRequestDispatcher("/manager/information/information.jsp").forward(request, response);
+			request.getRequestDispatcher("/user/information_user.jsp").forward(request, response);
 		}else if(uri.equals("/write.info")) { // 글쓰기페이지 요청
 			response.sendRedirect("/information/write.jsp");
 		}else if(uri.equals("/writeProc.info")) { // 글쓰기 요청
@@ -52,7 +52,7 @@ public class InformationController extends HttpServlet {
 			try {
 				int rs = dao.write(new InfomationDTO(0,qna_title,qna_content));
 				if(rs > 0) {
-					response.sendRedirect("/information.info");
+					response.sendRedirect("/toinformation.info");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -69,8 +69,8 @@ public class InformationController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-
 			request.getRequestDispatcher("/manager/information/modify.jsp").forward(request, response);
+			
 		}else if(uri.equals("/modifyProc.info")) { // 수정 요청
 			int qna_seq = Integer.parseInt(request.getParameter("qna_seq"));
 			String qna_title = request.getParameter("qna_title");
@@ -83,6 +83,7 @@ public class InformationController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
 		}else if(uri.equals("/deleteProc.info")) {// 삭제 요청
 			int qna_seq = Integer.parseInt(request.getParameter("qna_seq"));
 			System.out.println("qna_seq :" + qna_seq);

@@ -142,8 +142,8 @@
         padding: 10px;
         text-align: center;
     }
-    .content{
-        height: 1000px;
+     #content{
+        height: 500px;
     }
     /* 게시글 스타일 영역 끝 */
      /* 버튼 영역 */

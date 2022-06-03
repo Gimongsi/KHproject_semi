@@ -57,15 +57,11 @@ public class InformationDAO {
 		}
 	}
 
-	public ArrayList<InfomationDTO> selectAll(int start, int end) throws Exception{
-		String sql = "select * from (select tbl_infomation.*, row_number() over(order by seq_board desc) as num from tbl_board)"
-					+ " where num between ? and ?";
+	public ArrayList<InfomationDTO> selectAll() throws Exception{
+		String sql = "select * from tbl_infomation order by infomation_seq desc";
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
-
 			ResultSet rs = pstmt.executeQuery();
 			ArrayList<InfomationDTO> list = new ArrayList<>();
 			while(rs.next()) {
@@ -81,7 +77,7 @@ public class InformationDAO {
 	public int delete(int qna_seq) throws Exception{
 		String sql = "delete from tbl_infomation where infomation_seq = ?";
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setInt(1, qna_seq);
 			int rs = pstmt.executeUpdate();
@@ -90,9 +86,9 @@ public class InformationDAO {
 	}
 
 	public int modify(InfomationDTO dto) throws Exception{
-		String sql = "update tbl_infomation set title=?, content=? where sinfomation_seq=?";
+		String sql = "update tbl_infomation set qna_title=?, qna_content=? where infomation_seq=?";
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setInt(3, dto.getQna_seq());
 			pstmt.setString(1, dto.getQna_title());
@@ -103,12 +99,11 @@ public class InformationDAO {
 	}
 
 	public int write(InfomationDTO dto) throws Exception{
-		String sql = "insert into tbl_board values(?,?,?)";
+		String sql = "insert into tbl_infomation values(infomation_seq.nextval,?,?)";
 
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
-
-			pstmt.setInt(3, dto.getQna_seq());
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
 			pstmt.setString(1, dto.getQna_title());
 			pstmt.setString(2, dto.getQna_content());
 
@@ -121,7 +116,7 @@ public class InformationDAO {
 		String sql = "select * from tbl_infomation where infomation_seq = ?";
 
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);){
+			PreparedStatement pstmt = con.prepareStatement(sql);){
 
 			pstmt.setInt(1, seq_board);
 			ResultSet rs = pstmt.executeQuery();

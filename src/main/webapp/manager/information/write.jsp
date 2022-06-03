@@ -142,6 +142,9 @@
         padding: 10px;
         text-align: center;
     }
+     #content{
+        height: 500px;
+    }
     /* 게시글 스타일 영역 끝 */
     /* 버튼 영역 */
     .boxBtn{
@@ -287,14 +290,14 @@
         <div class="title">
             <h3>FAQ 등록</h3>
         </div>
-        <form id="writeForm" action="/writeProc.bo" method="post" enctype="multipart/form-data">
+        <form id="writeForm" action="/writeProc.info" method="post">
             <div class="container">
                 <div class="row">
                     <div class="col-2 d-flex justify-content-center align-items-center">
                         <h4>제목</h4>
                     </div>
                     <div class="col-10 p-2">
-                        <input type="text" class="form-control" id="title" name="title">
+                        <input type="text" class="form-control" id="title" name="qna_title">
                     </div>
                 </div>
                 <div class="row">
@@ -302,7 +305,7 @@
                         <h4>내용</h4>
                     </div>
                     <div class="col-10 p-2">
-                        <textarea id="content" class="form-control" id="content" name="content"></textarea>
+                        <textarea id="content" class="form-control" id="content" name="qna_content"></textarea>
                     </div>
                 </div>
             </div>
