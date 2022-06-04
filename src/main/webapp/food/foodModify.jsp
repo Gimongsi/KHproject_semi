@@ -258,9 +258,8 @@
 
 <body>
     <div class="container">
-        <!-- 헤더 -->        
-		<c:choose>
-
+        <!-- 헤더 -->
+        <c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -486,8 +485,6 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
-        <!-- 헤더 끝 -->
-        <div class="empty"> </div>
         <!-- 식품 프로모션 목록 -->
         <div class="empty"></div>
         <div class="row title">
@@ -501,19 +498,20 @@
                 <div class="col d-flex justify-content-center">
                     <div class="card">
                             <c:if test="${empty dtoPic}">
-								<div class="col"><a>사진 없음</a></div>
-								<input type="file" class="form-control inputCls">
+								<div class="col p-4" style="text-align: center;"><a>사진 없음</a></div>
+								<input type="file" class="form-control inputCls" id="food_src" name="food_src"> 
 							</c:if>
 							<c:if test="${not empty dtoPic}">
 								<div class="col header-board">
 									<img src="/files/${dtoPic.food_src}" class="card-img-top">
+									<input type="file" class="form-control inputCls" id="food_src" name="food_src"> 
 								</div>
 							</c:if>
-                            <button class="btn btnAddPic" type="button">사진 등록</button>
                         <div class="card-body">
                         	<div class="input-group">
                         		<span class="input-group-text">제품명</span>
                             	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" value="${dto.food_name}">
+                            	<input class="form-control inputCls d-none" type="text" id="food_seq" name="food_seq" value="${dto.food_seq}">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">설명</span>
@@ -574,7 +572,6 @@
         </div>
         <!-- footer 끝 -->
     </div>
-    </div>
     <script>
     $(".btnCancle").on("click", function(){
     	location.href = "/modifyList.food?curPage=1";
@@ -601,11 +598,18 @@
 			$("#food_com").focus();
 			return;
 		}
+		let answer = confirm("정말 수정하시겠습니까?");
 		$("#modifyForm").submit();
 	})
 	
-	function numbeComma(number) {    
-		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+	$(".btnDel").on("click", function(){
+		let answer = confirm("정말 삭제하시겠습니까?");
+		console.log(answer);
+		if(answer){
+			location.href = "/deleteProc.food?food_seq=${dto.food_seq}";
+		}
+	})
+		
     </script>
 </body>
 </html>

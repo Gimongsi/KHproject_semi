@@ -39,7 +39,7 @@ public class FoodDAO {
 		}
 	}
 	
-	public FoodFolderDTO selectFile(int food_seq) throws Exception{
+	public FoodFolderDTO selectPic(int food_seq) throws Exception{
 		String sql = "select * from tbl_food_folder where food_seq=?";
 		
 		try(Connection con = bds.getConnection();
@@ -58,6 +58,7 @@ public class FoodDAO {
 		}
 	}
 	
+
 	public int modifyPic(FoodFolderDTO dto) throws Exception{
 		String sql = "update tbl_food_folder set food_src=? where food_seq=?";
 		
@@ -66,6 +67,18 @@ public class FoodDAO {
 			
 			pstmt.setInt(1, dto.getFood_seq());
 			pstmt.setString(2, dto.getFood_src());
+			
+			return pstmt.executeUpdate();
+		}
+	}
+	
+	public int delete(int food_seq) throws Exception{
+		String sql = "delete from tbl_food where food_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setInt(1, food_seq);
 			
 			return pstmt.executeUpdate();
 		}
@@ -99,9 +112,56 @@ public class FoodDAO {
 				String food_title = rs.getString("food_title");
 				int food_price = rs.getInt("food_price");
 				
-				return new FoodDTO(food_seq, food_com, food_name, food_title, food_price);
+				return new FoodDTO(food_seq, food_com, food_name, food_title, food_price, null);
 			}
 			return null;
+		}
+	}
+	
+	public ArrayList<FoodDTO> selectPromo() throws Exception{
+		String sql = "select * from tbl_food f join tbl_food_folder p on f.food_seq = p.food_seq and food_name not like '%헬린이%'";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<FoodDTO> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				int food_seq = rs.getInt("food_seq");
+				String food_com = rs.getString("food_com");
+				String food_name = rs.getString("food_name");
+				String food_title = rs.getString("food_title");
+				int food_price = rs.getInt("food_price");
+				String food_src = rs.getString("food_src");
+				
+				list.add(new FoodDTO(food_seq, food_com, food_name, food_title, food_price, food_src));
+			}
+			return list;
+		}
+	}
+	
+	public ArrayList<FoodDTO> selectHellin() throws Exception{
+		String sql = " select * from tbl_food f join tbl_food_folder p on f.food_seq = p.food_seq and food_name like '%헬린이%'";
+//		String sql = "select * from tbl_food where food_name like '%헬린이%'";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<FoodDTO> list = new ArrayList<>();
+			
+			while(rs.next()) {
+				int food_seq = rs.getInt("food_seq");
+				String food_com = rs.getString("food_com");
+				String food_name = rs.getString("food_name");
+				String food_title = rs.getString("food_title");
+				int food_price = rs.getInt("food_price");
+				String food_src = rs.getString("food_src");
+				
+				list.add(new FoodDTO(food_seq, food_com, food_name, food_title, food_price, food_src));
+			}
+			return list;
 		}
 	}
 	
@@ -124,7 +184,7 @@ public class FoodDAO {
 				String food_title = rs.getString("food_title");
 				int food_price = rs.getInt("food_price");
 				
-				list.add(new FoodDTO(food_seq, food_com, food_name, food_title, food_price));
+				list.add(new FoodDTO(food_seq, food_com, food_name, food_title, food_price, null));
 			}
 			return list;
 		}

@@ -157,6 +157,7 @@
         border: 1px solid #c9d4a9;
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
+        margin-bottom: 20px;
     }
     .card img{
         width : 100%;
@@ -233,8 +234,7 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
-        
-<c:choose>
+        <c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -460,90 +460,44 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
-        <!-- 헤더 끝 -->
-        <div class="empty"> </div>
         <!-- 식품 프로모션 목록 -->
         <div class="empty"></div>
         <div class="row title">
             <div class="col d-flex justify-content-center">
                 <h1>이달의 프로모션!</h1>
             </div>
-            <img src="/My/imgs/KakaoTalk_20220519_230758645.jpg">
+            <img src="/imgs/banner.jpg">
         </div>
         <div class="foodPromo">
             <div class="row cardList">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            	<c:choose>
+            		<c:when test="${listPromo.size() == 0}">
+            			<div>등록된 프로모션이 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach items="${listPromo}" var="dtoPromo">
+                			<div class="col-6 d-flex justify-content-center">
+                    			<div class="card">
+                        			<a href="${dtoPromo.food_com}">
+                            			<img src="/files/${dtoPromo.food_src}" class="card-img-top">
+                            			<h5 class="card-title">${dtoPromo.food_name}</h5>
+                        			</a>
+                        		<div class="card-body">
+                            		<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
+                            		<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
+                            		<div class="col favorite d-flex justify-content-end">
+                                		<button type="button" class="btnFavorite">
+                                    		<span class="material-symbols-outlined">favorite</span>
+                                		</button>
+                            		</div>
+                        		</div>
+                    		</div>
+                		</div>
+                	</c:forEach>
+            	</c:otherwise>
+            </c:choose>
             <div class="empty"></div>
-            <div class="row cardList">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="empty"></div>
         </div>
             <!-- 식품 프로모션 목록 끝 -->
             <!-- 헬린이 프로모션 목록 -->
@@ -553,6 +507,7 @@
                 </div>
             </div>
         <div class="foodPromo">
+<<<<<<< HEAD
             <div class="row">
                 <div class="col-6 d-flex justify-content-center">
                     <div class="card">
@@ -626,6 +581,35 @@
                         </div>
                     </div>
                 </div>
+=======
+            <div class="row cardList">
+            	<c:choose>
+            		<c:when test="${list.size() == 0}">
+            			<div>등록된 프로모션이 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach items="${list}" var="dto">
+                			<div class="col-6 d-flex justify-content-center">
+                    			<div class="card">
+                        			<a href="${dto.food_com}">
+                            			<img src="/files/${dto.food_src}" class="card-img-top">
+                            			<h5 class="card-title">${dto.food_name}</h5>
+                        			</a>
+                        		<div class="card-body">
+                            		<p id="food_title" class="card-text">${dto.food_title}</p>
+                            		<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
+                            		<div class="col favorite d-flex justify-content-end">
+                                		<button type="button" class="btnFavorite">
+                                    		<span class="material-symbols-outlined">favorite</span>
+                                		</button>
+                            		</div>
+                        		</div>
+                    		</div>
+                		</div>
+                	</c:forEach>
+            	</c:otherwise>
+            </c:choose>
+>>>>>>> 552f8f61d5ab4b3ad77824a52c03b0e107d16a55
             </div>
         </div>
         <!-- 헬린이 프로모션 목록 끝 -->
@@ -659,6 +643,7 @@
         </div>
         <!-- footer 끝 -->
     </div>
+<<<<<<< HEAD
 
 	 <!--<c:choose>
     	<c:when test="${not empty loginSession}">-->
@@ -684,5 +669,28 @@
     	 -->
   
 
+=======
+    <script>
+        $(".material-symbols-outlined").on("click", function (e) {
+            let fontVariationSettings = $(e.target).css("font-variation-settings", "'FILL' 1");
+            if(fontVariationSettings = true){
+                $(e.target).css("font-variation-settings", "'FILL' 1");
+                $(e.target).css("color", "red");
+            }else{
+                $(e.target).css("font-variation-settings", "'FILL' 0");
+                $(e.target).css("color", "black");
+            }
+        })
+        
+         
+        /* let num =  $(".food_price").html();
+        function numbeComma(num){
+        	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        console.log(numbeComma(15315)); */
+        
+        
+    </script>
+>>>>>>> 552f8f61d5ab4b3ad77824a52c03b0e107d16a55
 </body>
 </html>

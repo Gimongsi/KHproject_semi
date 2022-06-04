@@ -36,12 +36,24 @@ public class FoodController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 
 		if (uri.equals("/list.food")) { // 식품 프로모션 페이지 요청
-			response.sendRedirect("/food/foodList.jsp");
-		} else if (uri.equals("/modifyList.food")) { // 식품 프로모션 관리자페이지 요청
 			FoodDAO dao = new FoodDAO();
 
-//			int curPage = Integer.parseInt(request.getParameter("curPage"));
-			int curPage = 1;
+			try {
+				ArrayList<FoodDTO> listPromo = dao.selectPromo();
+				ArrayList<FoodDTO> list = dao.selectHellin();
+				
+				request.setAttribute("listPromo", listPromo);
+				request.setAttribute("list", list);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/food/foodList.jsp").forward(request, response);
+		
+		}else if (uri.equals("/modifyList.food")) { // 식품 프로모션 관리자페이지 요청
+			FoodDAO dao = new FoodDAO();
+
+			int curPage = Integer.parseInt(request.getParameter("curPage"));
 			try {
 				HashMap map = dao.getPageNavi(curPage);
 
@@ -82,7 +94,7 @@ public class FoodController extends HttpServlet {
 
 				int food_seq = dao.getNewSeq();
 
-				int rs = dao.insert(new FoodDTO(food_seq, food_com, food_name, food_title, food_price));
+				int rs = dao.insert(new FoodDTO(food_seq, food_com, food_name, food_title, food_price, food_src));
 				int rsFile = dao.addPic(new FoodFolderDTO(food_seq, food_src));
 
 				if (rs > 0 && rsFile > 0) {
@@ -103,13 +115,13 @@ public class FoodController extends HttpServlet {
 				System.out.println(dto);
 				request.setAttribute("dto", dto);
 
-				FoodFolderDTO dtoPic = dao.selectFile(food_seq);
+				FoodFolderDTO dtoPic = dao.selectPic(food_seq);
 				request.setAttribute("dtoPic", dtoPic);
 				request.getRequestDispatcher("/food/foodModify.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (uri.equals("/modifyProc.food")) {
+		} else if (uri.equals("/modifyProc.food")) { // 식품 프로모션 수정 요청
 			FoodDAO dao = new FoodDAO();
 			String filePath = request.getServletContext().getRealPath("files");
 			File dir = new File(filePath);
@@ -129,20 +141,21 @@ public class FoodController extends HttpServlet {
 				String food_name = multi.getParameter("food_name");
 				String food_title = multi.getParameter("food_title");
 				int food_price = Integer.parseInt(multi.getParameter("food_price"));
-				System.out.println(food_com + food_name + food_title + food_price);
+				System.out.println(food_seq + food_com + food_name + food_title + food_price);
 				
 				String food_src = multi.getFilesystemName("food_src");
 
-				int rs = dao.modify(new FoodDTO(food_seq, food_com, food_name, food_title, food_price));
+				int rs = dao.modify(new FoodDTO(food_seq, food_com, food_name, food_title, food_price, food_src));
 				int rsFile = dao.modifyPic(new FoodFolderDTO(food_seq, food_src));
 				
-				if (rs > 0 && rsFile > 0) {
+				if (rs > 0 || rsFile > 0) {
 					System.out.println("수정 성공");
 					response.sendRedirect("/modify.food?food_seq=" + food_seq);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+<<<<<<< HEAD
 			
 		}else if(uri.equals("/interestOut.food")) { //찜하기 해제? 
 			int food_seq = Integer.parseInt(request.getParameter("food_seq"));
@@ -156,7 +169,24 @@ public class FoodController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+=======
+		}else if(uri.equals("/deleteProc.food")) { // 식품 프로모션 삭제 요청
+			FoodDAO dao = new FoodDAO();
+			int food_seq = Integer.parseInt(request.getParameter("food_seq"));
+			System.out.println(food_seq);
+>>>>>>> 552f8f61d5ab4b3ad77824a52c03b0e107d16a55
 			
+			try {
+				int rs = dao.delete(food_seq);
+				
+				if(rs > 0) {
+					System.out.println("삭제 성공");
+					response.sendRedirect("/modifyList.food?curPage=1");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

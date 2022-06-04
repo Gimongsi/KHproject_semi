@@ -30,7 +30,7 @@ public class GymController extends HttpServlet {
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
 		
-		if(uri.equals("/gymList.gym")) { // 운동시설 리스트로 이동
+		if(uri.equals("/list.gym")) { // 운동시설 리스트로 이동
 			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
 			GymDAO dao = new GymDAO(); 
@@ -53,7 +53,7 @@ public class GymController extends HttpServlet {
 			
 			
 			
-		}else if(uri.equals("/gymAdd.gym")) { // 운동시설 신규등록 페이지로 이동
+		}else if(uri.equals("/add.gym")) { // 운동시설 신규등록 페이지로 이동
 			response.sendRedirect("/gym/gymAdd.jsp");
 			
 		}else if(uri.equals("/interest.gym")) { // 운동 시설 즐겨찾기에 추가
