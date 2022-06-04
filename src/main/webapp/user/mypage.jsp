@@ -514,16 +514,19 @@ translateY(
 								</thead>
 								<tbody>
 									<c:choose>
-										<c:when test="${list.size() == 0}">
-											<tr col-5>
+										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
+											<tr>
 												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<c:forEach items="${list}" var="dto">
+											<tr>
+												헬스장
+											</tr>
+											<c:forEach items="${}" var="dto">
 												<tr>
 													<td>${dto.gym_seq}</td>
-													<td><a href="">${dto.gym_name}</a></td>
+													<td><a href="">${ugi_dto.gym_name}</a></td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>

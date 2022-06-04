@@ -619,8 +619,8 @@
                             <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
                             <div class="col favorite d-flex justify-content-end">
                                 	<div class="ImgFavorite">
-                                		<span><img src="/imgs/empty heart.png" id="emptyHeart" value="${dto.food_seq}"></span>
-                                		<span><img src="/imgs/red heart.png" id="redHeart" value="${dto.food_seq}"></span>
+                                		<span><img src="/imgs/empty heart.png" id="emptyHeart" ></span>
+                                		<span><img src="/imgs/red heart.png" id="redHeart"></span>
                                 	</div>
                             </div>
                         </div>
@@ -660,16 +660,15 @@
         <!-- footer 끝 -->
     </div>
 
-
-    <c:choose>
-    	<c:when test="${not empty loginSession}">
+	 <!--<c:choose>
+    	<c:when test="${not empty loginSession}">-->
     	    <script>
     	$("#emptyHeart").on("click",function(e){ //빈 하트 눌렀을 때(찜하기 실행)
     		$("#emptyHeart").css("display" , "none");
     		$("#redHeart").css("display", "block");
     		   	   	
     	
-			//location.href ="/interestAdd.food";
+			//location.href ="/";
  		})
 	
 		$("#redHeart").on("click" , function(e){ //빨간 하트 눌렀을 때(찜하기 해제)
@@ -679,10 +678,11 @@
     		//location.href="/interestOut.food"
 		})
    		 </script>
-    	
+    	<!-- 
     	</c:when>
     </c:choose>
-
+    	 -->
+  
 
 </body>
 </html>

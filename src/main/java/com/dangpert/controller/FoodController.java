@@ -143,7 +143,19 @@ public class FoodController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(uri.equals("/delete.food")) {
+			
+		}else if(uri.equals("/interestOut.food")) { //찜하기 해제? 
+			int food_seq = Integer.parseInt(request.getParameter("food_seq"));
+			FoodDAO dao = new FoodDAO();
+			
+			try {
+				int rs = dao.delInterestFood(food_seq);
+				if(rs>0) {
+					response.sendRedirect("/interestOut.food");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 			
 		}
 	}

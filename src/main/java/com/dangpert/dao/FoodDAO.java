@@ -214,4 +214,16 @@ public class FoodDAO {
 			return map;
 		}
 	}
+	
+	public int delInterestFood (int food_seq) throws Exception{
+		String sql = "delete from user_food_interest where food_seq = ?";
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, food_seq);
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}	
+	}
+	
 }
