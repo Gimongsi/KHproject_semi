@@ -11,7 +11,7 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.dangpert.dto.InfomationDTO;
+import com.dangpert.dto.InformationDTO;
 
 public class InformationDAO {
 	private BasicDataSource bds;
@@ -38,7 +38,7 @@ public class InformationDAO {
 		}
 	}
 
-	public ArrayList<InfomationDTO> searchByTitle(String searchKeyword) throws Exception{
+	public ArrayList<InformationDTO> searchByTitle(String searchKeyword) throws Exception{
 		String sql = "select * from tbl_infomation where title like '%'||?||'%' order by 1 desc";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
@@ -46,42 +46,40 @@ public class InformationDAO {
 			pstmt.setString(1, searchKeyword);
 			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<InfomationDTO> list = new ArrayList<>();
+			ArrayList<InformationDTO> list = new ArrayList<>();
 			while(rs.next()) {
 				int qna_seq = rs.getInt("qna_seq");
 				String qna_title = rs.getString("qna_title");
 				String qna_content = rs.getString("qna_content");
-				list.add(new InfomationDTO(qna_seq,qna_title,qna_content));
+				list.add(new InformationDTO(qna_seq,qna_title,qna_content));
 			}
 			return list;
 		}
 	}
 
-	public ArrayList<InfomationDTO> selectAll(int start, int end) throws Exception{
-		String sql = "select * from (select tbl_infomation.*, row_number() over(order by seq_board desc) as num from tbl_board)"
+	public ArrayList<InformationDTO> selectAll() throws Exception{
+		String sql = "select * from (select tbl_infomation.*, row_number() over(order by qna_seq desc) as num from tbl_information)"
 					+ " where num between ? and ?";
-		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
-			
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
 
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<InfomationDTO> list = new ArrayList<>();
+			ArrayList<InformationDTO> list = new ArrayList<>();
 			while(rs.next()) {
 				int qna_seq = rs.getInt("qna_seq");
 				String qna_title = rs.getString("qna_title");
 				String qna_content = rs.getString("qna_content");
-				list.add(new InfomationDTO(qna_seq,qna_title,qna_content));
+				list.add(new InformationDTO(qna_seq,qna_title,qna_content));
 			}
 			return list;
 		}
 	}
 
 	public int delete(int qna_seq) throws Exception{
-		String sql = "delete from tbl_infomation where infomation_seq = ?";
+		String sql = "delete from tbl_infomation where qna_seq = ?";
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setInt(1, qna_seq);
 			int rs = pstmt.executeUpdate();
@@ -89,10 +87,11 @@ public class InformationDAO {
 		}
 	}
 
-	public int modify(InfomationDTO dto) throws Exception{
-		String sql = "update tbl_infomation set title=?, content=? where sinfomation_seq=?";
+	public int modify(InformationDTO dto) throws Exception{
+		String sql = "update tbl_infomation set title=?, content=? where qna_seq=?";
+
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setInt(3, dto.getQna_seq());
 			pstmt.setString(1, dto.getQna_title());
@@ -102,13 +101,13 @@ public class InformationDAO {
 		}
 	}
 
-	public int write(InfomationDTO dto) throws Exception{
-		String sql = "insert into tbl_board values(?,?,?)";
+	public int write(InformationDTO dto) throws Exception{
+		String sql = "insert into tbl_information values(infomation_seq.nextval,?,?)";
+
 
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
-
-			pstmt.setInt(3, dto.getQna_seq());
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
 			pstmt.setString(1, dto.getQna_title());
 			pstmt.setString(2, dto.getQna_content());
 
@@ -117,20 +116,19 @@ public class InformationDAO {
 		}
 	}
 
-	public InfomationDTO selectBySeq(int seq_board) throws Exception{
-		String sql = "select * from tbl_infomation where infomation_seq = ?";
+	public InformationDTO selectBySeq(int qna_seq) throws Exception{
+		String sql = "select * from tbl_infomation where qna_seq = ?";
 
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql);){
+			PreparedStatement pstmt = con.prepareStatement(sql);){
 
-			pstmt.setInt(1, seq_board);
+			pstmt.setInt(1, qna_seq);
 			ResultSet rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				int qna_seq = rs.getInt("qna_seq");
 				String qna_title = rs.getString("qna_title");
 				String qna_content = rs.getString("qna_content");
-				InfomationDTO dto = new InfomationDTO(qna_seq, qna_title, qna_content);
+				InformationDTO dto = new InformationDTO(qna_seq, qna_title, qna_content);
 				return dto;
 			}
 			return null;

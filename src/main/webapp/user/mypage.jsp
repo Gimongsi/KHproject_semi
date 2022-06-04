@@ -10,41 +10,37 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
-<title>근육별 운동목록</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<title>Insert title here</title>
+</head>
 <style>
 /* 폰트 */
 @font-face {
-    font-family: 'LeferiPoint-WhiteObliqueA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-family: '양진체';
+	src:
+		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
-  @font-face {
-        font-family: '양진체';
-        src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-    }
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-family: '양진체';
 }
-
 
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -53,8 +49,6 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
-	font-family: '양진체';
-	text-align: center;
 }
 
 .cls_header a {
@@ -85,6 +79,7 @@
 
 /* 로고 */
 .logoImg {
+	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -96,8 +91,8 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 50%;
-	height: 50%;
+	width: 100%;
+	height: 100%;
 }
 /* 로고 효과 */
 @import
@@ -173,33 +168,53 @@ translateY(
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 20px;
-}
-.emptyTop{
-	background-color: white;
-	height: 50px;
+	height: 80px;
 }
 
-h2{
-	color:#73b1a1;
-	font-family: '양진체';
+/* 바디 */
+.inner-container-left {
+	margin: auto;
+	border: 1px solid black;
+	box-sizing: border-box;
+	height: 100%;
 }
 
-.pertList {
-	height: 800px;
-	background-color: white;
-	padding: 20px;
+.inner-container-left>div>a {
+	color: black;
+}
+
+.inner-container-left * {
 	margin: 20px;
 }
 
-.card-img-top {
-	height: 250px;
+.inner-container-right {
+	height: 100%;
 }
 
-/*footer*/
+.inner-container-right div {
+	margin: 20px;
+	margin-top: 50px;
+}
+
+.inner-container-right h5 {
+	border-bottom: 2px solid grey;
+	width: 400px;
+	text-align: center;
+}
+
+.inner-container-right button {
+	margin-right: 40px;
+}
+
+.bookmark {
+	border: 1px solid black;
+	height: 600px;
+}
+
+/* 푸터 */
 .footer {
-	/* font-family: 'SuncheonB';
-        font-weight: normal; */
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
 	font-size: small;
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
@@ -225,17 +240,13 @@ h2{
 }
 </style>
 
-</head>
 <body>
-	<div class="empty"></div>
-	<div class="empty"></div>
-
 	<div class="container">
-
 		<!-- 헤더 -->
-		
-<c:choose>
-			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
+
+		<c:choose>
+			<c:when
+				test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
 						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
@@ -257,7 +268,8 @@ h2{
 						<button type="button" class="btn dropdownBtn dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
 						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="/toInformation.info">자주
+									묻는 질문</a></li>
 							<li><a class="dropdown-item" href="#">이벤트</a></li>
 						</ul>
 					</div>
@@ -296,7 +308,8 @@ h2{
 												<li><a class="dropdown-item" href="#">전체보기</a></li>
 											</ul></li>
 									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
+									<form action="search.gym" method="post"
+										class="d-flex searchForm">
 										<input class="form-control navSearchInput me-2" type="search"
 											placeholder="운동시설 검색" aria-label="Search">
 										<button class="btn btn-outline-light" type="button">Search!</button>
@@ -324,7 +337,8 @@ h2{
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
+						<a href="/search.user?curPage=1" style="text-decoration: none;">
+							<span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
@@ -374,7 +388,8 @@ h2{
 												<li><a class="dropdown-item" href="#">전체보기</a></li>
 											</ul></li>
 									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
+									<form action="search.gym" method="post"
+										class="d-flex searchForm">
 										<input class="form-control navSearchInput me-2" type="search"
 											placeholder="운동시설 검색" aria-label="Search">
 										<button class="btn btn-outline-light" type="button">Search!</button>
@@ -461,129 +476,100 @@ h2{
 			</c:otherwise>
 		</c:choose>
 		<!-- 헤더 끝 -->
-
-		<div class="emptyTop"></div>
-		
-		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
-				<h2>근육별 운동목록</h2>
-			</div>
-		</div>
-
-		<hr style="height: 2px; width: 30%; border: none; background-color: gray; text-align: center; margin: auto;">
 		<div class="empty"></div>
-
-		<!-- 근육 목록 시작 -->
-		<div class="pertList">
-			<div class="row">
-				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">팔</p>
+		<!-- 바디 -->
+		<div class="cls_body">
+			<div class="row justify-content-evenly">
+				<div class="col-3">
+					<h3 class="text-center mb-3">My Page</h3>
+					<div class="inner-container-left">
+						<div>
+							<a href="#">정보수정</a>
+						</div>
+						<div>
+							<a href="#">일기</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/어깨근육.jpg" class="card-img-top" id="sholder" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">어깨</p>
+				<div class="col-6">
+					<div class="inner-container-right">
+						<div class="d-flex justify-content-center">
+							<h5>목표 몸무게까지 kg 남았습니다.</h5>
 						</div>
-					</div>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">가슴</p>
+						<div>
+							<button type="button" class="btn btn-sm btn-outline-secondary"
+								disabled>마지막 접속일</button>
+							2022년 00월 00일
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="empty"></div>
-			<div class="row">
-				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">허벅지</p>
+						<div>
+							<button type="button" class="btn btn-sm btn-outline-secondary"
+								disabled>마지막 기록일</button>
+							2022년 00월 00일
 						</div>
-					</div>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">엉덩이</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">복근</p>
+						<div>즐겨찾기</div>
+						<div class="bookmark">
+						<table>
+								<thead>
+									<th>프로모션</th>
+								</thead>
+								<tbody>
+									<c:choose>
+										<c:when test="${list.size() == 0}">
+											<tr col-5>
+												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${list}" var="dto">
+												<tr>
+													<td>${dto.gym_seq}</td>
+													<td><a href="">${dto.gym_name}</a></td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- 근육 목록 끝 -->
-	
-		<!-- footer -->
-    <div class="container footer">
-        <div class="row footerInfo">
-            <div class="col-6">
-                제휴 및 서비스 이용문의<br>
-                <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-                AM 09:00 - PM 06:00<br>
-                토 일 공휴일 휴무
-            </div>
-            <div class="col-6">
-                (주)당퍼트<br>
-                서울특별시 영등포구 선유동2로 57<br>
-                대표 : 홍신영<br>
-                사업자번호 : 123-45-67890<br>
-                통신판매번호 : 제2000-서울영등포구-0000호<br>
-                kh.projectmail@gmail.com<br>
-            </div>
-        </div>
-        <div class="row footerMenu">
-            <div class="col"><a href="">이용약관</a></div>
-            <div class="col"><a href="">개인정보처리방침</a></div>
-            <div class="col"><a href="">위치정보이용약관</a></div>
-            <div class="col"><a href="">센터등록요청하기</a></div>
-            <div class="col"><a href="">문의하기</a></div>
-        </div>
-        <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-    </div>
-    <!-- footer 끝 -->
-
+		<!-- 바디 끝 -->
+		<div class="empty"></div>
+		<!-- 푸터 -->
+		<div class="container footer">
+			<div class="row footerInfo">
+				<div class="col-6">
+					제휴 및 서비스 이용문의<br>
+					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+				</div>
+				<div class="col-6">
+					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+					kh.projectmail@gmail.com<br>
+				</div>
+			</div>
+			<div class="row footerMenu">
+				<div class="col">
+					<a href="">이용약관</a>
+				</div>
+				<div class="col">
+					<a href="">개인정보처리방침</a>
+				</div>
+				<div class="col">
+					<a href="">위치정보이용약관</a>
+				</div>
+				<div class="col">
+					<a href="">센터등록요청하기</a>
+				</div>
+				<div class="col">
+					<a href="">문의하기</a>
+				</div>
+			</div>
+			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+		</div>
 	</div>
-
-	<script>
-		$("#arm").on("click",function(){ //팔운동 페이지 요청
-			location.href="/";
-		})
-		$("#sholder").on("click", function(){ //어깨운동 페이지 요청
-			location.href="/";
-		})
-		$("#chest").on("click", function(){ //가슴 운동 페이지 요청
-			location.href="/";
-		})
-		$("#thigh").on("click", function(){ //허벅지 운동 페이지 요청
-			location.href="/";
-		})
-		$("#butt").on("click", function(){ //엉덩이 운동 페이지 요청
-			location.href="/";
-		})
-		$("#abs").on("click", function(){ //복근 운동 페이지 요청
-			location.href="/";
-		})
-	
-	</script>
-
-
 </body>
 </html>

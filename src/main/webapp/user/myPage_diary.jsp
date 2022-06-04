@@ -2,21 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<title>식품 프로모션</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>Insert title here</title>
 </head>
 <style>
     /* 폰트 */
@@ -26,21 +21,17 @@
         font-weight: normal;
         font-style: normal;
     }
-    @font-face {
-    font-family: 'LeferiPoint-WhiteObliqueA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    }
     /* 폰트 끝 */
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        font-family: '양진체';
     }
     .container {
         margin: auto;
     }
+
     /* 헤더 */
     .cls_header {
         height: 150px;
@@ -49,8 +40,6 @@
         background-color: #BFFFF0;
         color: #97C4B8;
         align-items: center;
-        font-family: '양진체';
-        text-align: center;
     }
     .cls_header a {
         color: #97C4B8;
@@ -72,8 +61,10 @@
     .headMenu{
         justify-content: end;
     }
+
     /* 로고 */
     .logoImg{
+        height: 100%;
         padding: 0%;
         filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg) brightness(86%) contrast(86%);
     }
@@ -82,8 +73,8 @@
     }
     /* 로고 이미지 사이즈 */
     .logoImg #logoImg{
-        width: 50%;
-        height: 50%;
+        width: 100%;
+        height: 100%;
     }
     /* 로고 효과 */
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
@@ -109,7 +100,6 @@
     /* 네비바 */
     .navbar{
         background-color: #F0FFC2 !important;
-        font-family: '양진체';
     }
     .container-fluid a{
         color:#97C4B8 !important;
@@ -138,96 +128,74 @@
     .navSearchInput::placeholder{
         color: #FFE4C0;
     }
+
     /* 공백 */
     .empty {
         background-color: white;
-        height: 20px;
+        height: 80px;
     }
-    /* 목록 */
+
+    /* 바디 */
     .title {
-        color: #97C4B8;
-        border-bottom: 1px solid #97C4B8;
-        --bs-gutter-x: 0px;
-        margin-bottom: 20px;
-        margin-top: 10px;
-        font-family: '양진체';
+        border-bottom: 2px solid grey;
+        width: 250px;
     }
-    .card{
-        width: 35rem;
-        border: 1px solid #c9d4a9;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
+
+    .inner-container-left {
+        margin: auto;
+        border: 1px solid black;
+        height: 800px;
     }
-    .card img{
-        width : 100%;
-        height: 20rem;
+
+    .inner-container-left *{
+        margin: 20px;
     }
-    .card-title{
-        margin-bottom: 0px;
-        font-family: 'LeferiPoint-WhiteObliqueA';
-        font-weight: 600;
+    .inner-container-right {
+        
+        height: 80%;
     }
-    .card a{
-        text-decoration: none;
-        color: black;
+
+    .inner-contents-left {
+        margin: none;
+        border: 1px solid black;
+        height: 100%;
     }
-    .card h5{
-        padding: 20px;
+
+    .inner-contents-right {
+        margin: none;
+        border: 1px solid black;
+        height: 100%;
     }
-    .foodPromo{
-        margin-bottom: 80px;
-    }
-    /* 즐겨찾기 버튼 */
-    .btnFavorite{
-        border: none;
-        background-color: white;
-    }
-    /* 즐겨찾기 하트 */
-    .material-symbols-outlined {
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 48
-    }
-     .ImgFavorite {
-     	width: 20px;
-    	height: 20px;
-    	
-    }
-   #redHeart {
-   		width: 100%;
-    	height: 100%;
-    	display:none;
-   }
-   #emptyHeart{
-   		width: 100%;
-    	height: 100%;
-   }
-    
-    /* footer */
-    .footer{
+
+    /* 푸터 */
+    .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
         font-size: small;
         color: #709c91;
         border-top: 1px solid #c9d4a9;
     }
+
     .footer .row{
         border-bottom: 1px solid #c9d4a9;
     }
+
     .footer .footerInfo{
         padding-block: 3%;
         text-align: center;
     }
+
     .footerMenu{
         padding-block: 2%;
         text-align: center;
     }
+
     .footerMenu a{
         color: #709c91;
         text-decoration: none;
     }
+
+    
 </style>
 
 <body>
@@ -462,175 +430,67 @@
 		</c:choose>
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        <!-- 식품 프로모션 목록 -->
-        <div class="empty"></div>
-        <div class="row title">
-            <div class="col d-flex justify-content-center">
-                <h1>이달의 프로모션!</h1>
-            </div>
-            <img src="/My/imgs/KakaoTalk_20220519_230758645.jpg">
-        </div>
-        <div class="foodPromo">
-            <div class="row cardList">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>정보수정</div>
+                        <div>일기</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="title d-flex justify-content-center mb-4">
+                            <h5>오늘의 기록!</h5>
+                        </div>
+                    </div>
+                    <div class="row inner-container-right">
+                        <div class="col-7">
+                            <div class="inner-contents-left">
+                                <div>
+                                    내용1
+                                </div>
+                                <div>
+                                    내용2 줄이 바뀔 정도로 길게 쓰여진 내용이 들어갔을 때 날짜는 내용2의 첫줄에 맞춰야 함
+                                </div>
+                                <div>
+                                    내용3 내용과 날짜가 서로 매칭시키기
+                                </div>
+                                <div>
+                                    내용4
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="inner-contents-right">
+                                <div>
+                                    날짜1
+                                </div>
+                                <div>
+                                    날짜2
+                                </div>
+                                <div>
+                                    날짜3
+                                </div>
+                                <div>
+                                    날짜4
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="empty"></div>
-            <div class="row cardList">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/닭01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[맛있닭] 닭가슴살 스테이크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">맛잇는 식단관리</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">5,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn btn-primary" type="button">일기 쓰기</button>
+                        <button class="btn btn-primary" type="button">일기 수정</button>
+                        <button class="btn btn-secondary" type="button">일기 삭제</button>
                     </div>
                 </div>
             </div>
         </div>
-            <!-- 식품 프로모션 목록 끝 -->
-            <!-- 헬린이 프로모션 목록 -->
-            <div class="row title">
-                <div class="col d-flex justify-content-center">
-                    <h1>헬린이 안성맞춤 세트</h1>
-                </div>
-            </div>
-        <div class="foodPromo">
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="empty"></div>
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                <button type="button" class="btnFavorite">
-                                    <span class="material-symbols-outlined">favorite</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/음료01.jpg" class="card-img-top">
-                            <h5 id="food_name" name="food_name" class="card-title">[타브카] 에너지 드링크1</h5>
-                        </a>
-                        <div class="card-body">
-                            <p id="food_title" name="food_title" class="card-text">에너지 드링크</p>
-                            <p id="food_price" name="food_price" class="card-text d-flex justify-content-end">2,900원</p>
-                            <div class="col favorite d-flex justify-content-end">
-                                	<div class="ImgFavorite">
-                                		<span><img src="/imgs/empty heart.png" id="emptyHeart" value="${dto.food_seq}"></span>
-                                		<span><img src="/imgs/red heart.png" id="redHeart" value="${dto.food_seq}"></span>
-                                	</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 헬린이 프로모션 목록 끝 -->
+        <!-- 바디 끝 -->
         <div class="empty"> </div>
-        <!-- footer -->
+        <!-- 푸터 -->
         <div class="container footer">
             <div class="row footerInfo">
                 <div class="col-6">
@@ -657,32 +517,6 @@
             </div>
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
-        <!-- footer 끝 -->
     </div>
-
-
-    <c:choose>
-    	<c:when test="${not empty loginSession}">
-    	    <script>
-    	$("#emptyHeart").on("click",function(e){ //빈 하트 눌렀을 때(찜하기 실행)
-    		$("#emptyHeart").css("display" , "none");
-    		$("#redHeart").css("display", "block");
-    		   	   	
-    	
-			//location.href ="/interestAdd.food";
- 		})
-	
-		$("#redHeart").on("click" , function(e){ //빨간 하트 눌렀을 때(찜하기 해제)
-			$("#redHeart").css("display" , "none");
-    		$("#emptyHeart").css("display", "block");
-    		
-    		//location.href="/interestOut.food"
-		})
-   		 </script>
-    	
-    	</c:when>
-    </c:choose>
-
-
 </body>
 </html>

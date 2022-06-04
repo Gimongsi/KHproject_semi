@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -117,48 +117,25 @@
 }
 
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-
-
-}
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -243,7 +220,7 @@ translateY
 /* 목록 */
 .title {
 	color: #97C4B8;
-	border-bottom: 1px solid #97C4B8; -
+	border-bottom: 1px solid #97C4B8;
 	-bs-gutter-x: 0px;
 	margin-bottom: 20px;
 	margin-top: 10px;
@@ -277,13 +254,13 @@ translateY
 .gym_input {
 	width: 100%;
 	border: none;
-	border-bottom: #37b192;
 	font-weight: 600;
 	height: 50px;
 }
 
 .gym_input:focus {
 	outline: none;
+	border-bottom: 1px solid #b6e0db;
 }
 
 input::placeholder, textarea::placeholder {
@@ -377,84 +354,239 @@ input::placeholder, textarea::placeholder {
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-		<div class="row cls_header">
-			<div class="col-3 logoImg">
-				<a href="#"> <img id="logoImg" src="/imgs/dpt_Logo.png">
-				</a>
-			</div>
-			<div class="d-none d-md-block col-5"></div>
-			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;">
-					<p style="margin: 0px;">로그인</p>
-				</a>
-			</div>
-			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;">
-					<p style="margin: 0px;">회원가입</p>
-				</a>
-			</div>
-			<div class="col p-0 headMenu d-flex justify-content-center">
-				<button type="button" class="btn dropdownBtn dropdown-toggle"
-					data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-				<ul class="dropdown-menu headDropdown">
-					<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
-					<li>
-						<hr class="dropdown-divider">
-					</li>
-					<li><a class="dropdown-item" href="#">로그아웃</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- 네비 -->
-		<div class="row cls_nav">
-			<div class="col">
-				<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-					<div class="container-fluid">
-						<button class="navbar-toggler" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#navbarSupportedContent"
-							aria-controls="navbarSupportedContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">내 주변
-										운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="#">특가 식품</a>
-								</li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
-							</ul>
-							<form class="d-flex">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="submit">Search!</button>
-							</form>
-						</div>
+		
+<c:choose>
+			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
+				<div class="row cls_header">
+					<div class="col-3 logoImg">
+						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						</a>
 					</div>
-				</nav>
-			</div>
-		</div>
-		<!-- 네비 끝 -->
+					<div class="d-none d-md-block col-2"></div>
+					<div class="col-3 p-0 headMenu d-flex justify-content-center">
+						<span>${loginSession.user_name} 님 환영합니다!</span>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="/toMypage.user" style="text-decoration: none;"> <span>마이페이지</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<button type="button" class="btn dropdownBtn dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+						<ul class="dropdown-menu headDropdown">
+							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="#">이벤트</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 헤더 끝 -->
+				<!-- 네비 -->
+				<div class="row cls_nav">
+					<div class="col">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+							<div class="container-fluid">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse"
+									id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+										<li class="nav-item"><a class="nav-link active"
+											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+											role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												근육별 운동법 </a>
+											<ul class="dropdown-menu navDropdown"
+												aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">상체</a></li>
+												<li><a class="dropdown-item" href="#">하체</a></li>
+												<li><a class="dropdown-item" href="#">몸통</a></li>
+												<li><a class="dropdown-item" href="#">전체보기</a></li>
+											</ul></li>
+									</ul>
+									<form action="search.gym" method="post" class="d-flex searchForm">
+										<input class="form-control navSearchInput me-2" type="search"
+											placeholder="운동시설 검색" aria-label="Search">
+										<button class="btn btn-outline-light" type="button">Search!</button>
+									</form>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!-- 네비 끝 -->
+				<div class="empty"></div>
+			</c:when>
+			<c:when test="${loginSession.user_auth eq 'manager'}">
+				<div class="row cls_header">
+					<div class="col-3 logoImg">
+						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						</a>
+					</div>
+					<div class="d-none d-md-block col-2"></div>
+					<div class="col-3 p-0 headMenu d-flex justify-content-center">
+						<span>관리자님 환영합니다!</span>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<button type="button" class="btn dropdownBtn dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+						<ul class="dropdown-menu headDropdown">
+							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="#">이벤트</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 헤더 끝 -->
+				<!-- 네비 -->
+				<div class="row cls_nav">
+					<div class="col">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+							<div class="container-fluid">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse"
+									id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+										<li class="nav-item"><a class="nav-link active"
+											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+											role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												근육별 운동법 </a>
+											<ul class="dropdown-menu navDropdown"
+												aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">상체</a></li>
+												<li><a class="dropdown-item" href="#">하체</a></li>
+												<li><a class="dropdown-item" href="#">몸통</a></li>
+												<li><a class="dropdown-item" href="#">전체보기</a></li>
+											</ul></li>
+									</ul>
+									<form action="search.gym" method="post" class="d-flex searchForm">
+										<input class="form-control navSearchInput me-2" type="search"
+											placeholder="운동시설 검색" aria-label="Search">
+										<button class="btn btn-outline-light" type="button">Search!</button>
+									</form>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!-- 네비 끝 -->
+				<div class="empty"></div>
+			</c:when>
+			<c:otherwise>
+				<!-- 헤더 -->
+				<div class="row cls_header">
+					<div class="col-3 logoImg">
+						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						</a>
+					</div>
+					<div class="d-none d-md-block col-5"></div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
+						</a>
+					</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<button type="button" class="btn dropdownBtn dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+						<ul class="dropdown-menu headDropdown">
+							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="#">이벤트</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 헤더 끝 -->
+				<!-- 네비 -->
+				<div class="row cls_nav">
+					<div class="col">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+							<div class="container-fluid">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse"
+									id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+										<li class="nav-item"><a class="nav-link active"
+											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+											role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												근육별 운동법 </a>
+											<ul class="dropdown-menu navDropdown"
+												aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">상체</a></li>
+												<li><a class="dropdown-item" href="#">하체</a></li>
+												<li><a class="dropdown-item" href="#">몸통</a></li>
+												<li><a class="dropdown-item" href="#">전체보기</a></li>
+											</ul></li>
+									</ul>
+									<form class="d-flex">
+										<input class="form-control navSearchInput me-2" type="search"
+											placeholder="운동시설 검색" aria-label="Search">
+										<button class="btn btn-outline-light" type="submit">Search!</button>
+									</form>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!-- 네비 끝 -->
+				<div class="empty"></div>
+			</c:otherwise>
+		</c:choose>
 		<!-- 헤더 끝 -->
 		<div class="empty"></div>
 		<!-- 타이틀 -->
 		<div class="list-item-wrap">
 			<div class="row detailHeader">
-                <div class="detailPhoto col-12 col-sm-6">
+                <div class="detailPhoto col-12 col-md-6">
                     <div class="row detailPhotoWrap">
                         <div class="col-12 detailPhoto d-flex justify-content-end">
                             <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
@@ -466,9 +598,9 @@ input::placeholder, textarea::placeholder {
                         </div>
                     </div>
                 </div>
-                <div class="row d-sm-none" style="height: 50px;"></div>
+                <div class="row d-md-none" style="margin-top: 50px;"></div>
                 <div class="col-1"></div>
-                <div class="col-12 col-sm-5">
+                <div class="col-12 col-md-5">
                     <div class="row">
                         <div class="col-8 gymTitle align-items-center">
                             <input class="gym_input" type="text" id="gym_name" name="gym_name" style="font-size: large;" placeholder="상호명 입력">
@@ -500,21 +632,38 @@ input::placeholder, textarea::placeholder {
                             </div>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div class="row-12">
-                            <div class="col-12">
+                        <div class="row">
+                            <%-- <div class="col-12">
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
-                                <select class="form-select" name="option">옵션
-                                    <option value="옵션1">옵션1</option>
-                                    <option value="옵션2">옵션2</option>
-                                    <option value="옵션3">옵션3</option>
+                                <select class="form-select" name="option">
+                                    <option value="1month">1개월</option>
+                                    <option value="3month">3개월</option>
+                                    <option value="6month">6개월</option>
+                                    <option value="12month">12개월</option>
                                 </select>
-                            </div>
+                            </div> --%>
+                            <div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
+                        	<div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
+                        	<div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
+                        	<div class="col-3">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                        	</div>
                         </div>
                         <div class="empty"></div>
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy" type="button">회원권 구매</button>
+                            <button class="btn btnBuy" type="button">가격 등록</button>
                         </div>
                     </div>
                 </div>
@@ -532,8 +681,7 @@ input::placeholder, textarea::placeholder {
 					<div class="row">
 						<div class="col content">
 							<textarea id="gym_comment" name="gym_comment"
-								placeholder="공백 포함 500글자 이내로 입력하세요.">
-                            </textarea>
+								placeholder="공백 포함 500글자 이내로 입력하세요."></textarea>
 						</div>
 					</div>
 					<div class="empty"></div>

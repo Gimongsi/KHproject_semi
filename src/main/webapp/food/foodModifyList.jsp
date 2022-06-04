@@ -1,16 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<html lang="en">
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<title>식품 프로모션 관리리스트</title>
 </head>
 <style>
     /* 폰트 */
@@ -20,13 +27,21 @@
         font-weight: normal;
         font-style: normal;
     }
+
+    @font-face {
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+
     /* 폰트 끝 */
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        font-family: '양진체';
     }
+
     .container {
         margin: auto;
     }
@@ -39,44 +54,55 @@
         background-color: #BFFFF0;
         color: #97C4B8;
         align-items: center;
+        font-family: '양진체';
+        text-align: center;
     }
+
     .cls_header a {
         color: #97C4B8;
     }
+
     .cls_header a:hover {
-        color:#c9d4a9;
+        color: #c9d4a9;
     }
-    .dropdownBtn{
+
+    .dropdownBtn {
         background-color: #F0FFC2 !important;
-        color:#97C4B8;
+        color: #97C4B8;
         border: 1px solid white;
     }
-    .dropdownBtn:hover{
-        color:#9be5d2;
+
+    .dropdownBtn:hover {
+        color: #9be5d2;
     }
-    .headDropdown{
+
+    .headDropdown {
         background-color: #F0FFC2 !important;
     }
-    .headMenu{
+
+    .headMenu {
         justify-content: end;
     }
 
     /* 로고 */
-    .logoImg{
-        height: 100%;
+    .logoImg {
         padding: 0%;
         filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg) brightness(86%) contrast(86%);
     }
+
     .logoImg:hover {
         filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg) brightness(99%) contrast(80%);
     }
+
     /* 로고 이미지 사이즈 */
-    .logoImg #logoImg{
-        width: 100%;
-        height: 100%;
+    .logoImg #logoImg {
+        width: 50%;
+        height: 50%;
     }
+
     /* 로고 효과 */
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
     .logoImg {
         position: relative;
         display: inline-block;
@@ -85,90 +111,124 @@
         animation: waviy 1s infinite;
         animation-delay: calc(.1s * var(--i));
     }
+
     @keyframes waviy {
+
         0%,
         40%,
         100% {
             transform: translateY(0)
         }
+
         20% {
             transform: translateY(-20px)
         }
     }
+
     /* 로고 효과 끝 */
     /* 네비바 */
-    .navbar{
+    .navbar {
         background-color: #F0FFC2 !important;
+        font-family: '양진체';
     }
-    .container-fluid a{
-        color:#97C4B8 !important;
+
+    .container-fluid a {
+        color: #97C4B8 !important;
     }
-    .container-fluid a:hover{
-        color:#9be5d2 !important;
+
+    .container-fluid a:hover {
+        color: #9be5d2 !important;
     }
-    .container-fluid button{
+
+    .container-fluid button {
         background-color: #F0FFC2 !important;
         color: #97C4B8 !important;
     }
-    .navDropdown{
+
+    .navDropdown {
         border: 1px solid white;
         background-color: #d5fcf3 !important;
     }
-    .container-fluid button:hover{
+
+    .container-fluid button:hover {
         background-color: #97C4B8 !important;
-        color:#F0FFC2 !important;
+        color: #F0FFC2 !important;
     }
-    .container-fluid span{
+
+    .container-fluid span {
         filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg) brightness(103%) contrast(66%);
     }
-    .navSearchInput{
+
+    .navSearchInput {
         border: 1px solid white;
     }
-    .navSearchInput::placeholder{
+
+    .navSearchInput::placeholder {
         color: #FFE4C0;
     }
 
     /* 공백 */
     .empty {
         background-color: white;
-        height: 80px;
+        height: 20px;
     }
 
-    /* 바디 */
+    /* 버튼 */
+    .btnSpace {
+        margin-bottom: 10px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-weight: 600;
+    }
+
+    .btnAdd, .btnModify, .btnSave, .btnAddPic, .btnCancle {
+        background-color: #73b1a1;
+        border: 1px solid #F0FFC2;
+        border-radius: 0.25rem;
+        padding: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 8px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-size: small;
+        color: white;
+        margin: 5px;
+    }
+
+    .btnAdd:hover, .btnModify:hover, .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
+        background-color: #F0FFC2;
+        border: 1px solid #73b1a1;
+        color: #73b1a1;
+    }
+
+    /* 목록 */
+    .tableTitle {
+        background-color: #F0FFC2;
+        color: #74a598;
+        text-align: center;
+    }
+
     .title {
-        border-bottom: 2px solid grey;
-        width: 250px;
+        color: #97C4B8;
+        border-bottom: 1px solid #97C4B8;
+        --bs-gutter-x: 0px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        font-family: '양진체';
+    }
+    .page-item.active .page-link{
+        color: white;
+        background-color: #73b1a1;
+        border: 1px solid #5a9284;
+    }
+    .page-link{
+        color: #5a9284;
+        margin-bottom: 50px;
+    }
+    .page-link:focus{
+        color: #5a9284;
     }
 
-    .inner-container-left {
-        margin: auto;
-        border: 1px solid black;
-        height: 800px;
-    }
-
-    .inner-container-left *{
-        margin: 20px;
-    }
-
-    .contentsBox {
-        border: 1px solid black;
-        width: 650px;
-        height: 610px;
-    }
-
-    .contentsBox > .dropdown {
-        margin-top: 24px;
-        margin-left: 24px;
-        margin-bottom: 24px;
-    }
-
-    .textBox {
-        width: 600px;
-        height: 500px;
-        margin-left: 24px;
-    }
-    
-    /* 푸터 */
+    /* footer */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
@@ -177,25 +237,24 @@
         border-top: 1px solid #c9d4a9;
     }
 
-    .footer .row{
+    .footer .row {
         border-bottom: 1px solid #c9d4a9;
     }
 
-    .footer .footerInfo{
+    .footer .footerInfo {
         padding-block: 3%;
         text-align: center;
     }
 
-    .footerMenu{
+    .footerMenu {
         padding-block: 2%;
         text-align: center;
     }
 
-    .footerMenu a{
+    .footerMenu a {
         color: #709c91;
         text-decoration: none;
     }
-
 </style>
 
 <body>
@@ -204,33 +263,33 @@
         <div class="row cls_header">
             <div class="col-3 logoImg">
                 <a href="#">
-                    <img id="logoImg" src="/resources/dpt_Logo.png">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
                 </a>
             </div>
             <div class="d-none d-md-block col-5"> </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
                 <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">로그인</p>
+                    <span style="margin: 0px;">로그인</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
                 <a href="#" style="text-decoration: none;">
-                    <p style="margin: 0px;">회원가입</p>
+                    <span style="margin: 0px;">회원가입</span>
                 </a>
             </div>
             <div class="col p-0 headMenu d-flex justify-content-center">
-                    <button type="button" class="btn dropdownBtn dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        고객센터
-                    </button>
-                    <ul class="dropdown-menu headDropdown">
-                        <li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-                        <li><a class="dropdown-item" href="#">이벤트</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                    </ul>
+                <button type="button" class="btn dropdownBtn dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    고객센터
+                </button>
+                <ul class="dropdown-menu headDropdown">
+                    <li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+                    <li><a class="dropdown-item" href="#">이벤트</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                </ul>
             </div>
         </div>
         <!-- 네비 -->
@@ -268,7 +327,8 @@
                                 </li>
                             </ul>
                             <form class="d-flex">
-                                <input class="form-control navSearchInput me-2" type="search" placeholder="운동시설 검색" aria-label="Search">
+                                <input class="form-control navSearchInput me-2" type="search" placeholder="운동시설 검색"
+                                    aria-label="Search">
                                 <button class="btn btn-outline-light" type="submit">Search!</button>
                             </form>
                         </div>
@@ -279,53 +339,71 @@
         <!-- 네비 끝 -->
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
-        <!-- 바디 -->
-        <div class="cls_body">
-            <div class="row justify-content-evenly">
-                <div class="col-3">
-                    <h3 class="text-center mb-3">My Page</h3>
-                    <div class="inner-container-left">
-                        <div>정보수정</div>
-                        <div>일기</div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="d-flex justify-content-center">
-                        <div class="title d-flex justify-content-center mb-4">
-                            <h5>오늘의 기록!</h5>
-                        </div>
-                    </div>
-                    <div class="row inner-container-right">
-                        <div>
-                            <div class="contentsBox">
-                                <div class="dropdown">
-                                    <a class="btn btn-outline-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        운동부위
-                                    </a>
-                                  
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">팔</a></li>
-                                        <li><a class="dropdown-item" href="#">어깨</a></li>
-                                        <li><a class="dropdown-item" href="#">가슴</a></li>
-                                        <li><a class="dropdown-item" href="#">등</a></li>
-                                        <li><a class="dropdown-item" href="#">복근</a></li>
-                                        <li><a class="dropdown-item" href="#">하체</a></li>
-                                    </ul>
-                                </div>
-                                <textarea class="textBox" style="resize: none;"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-4 gap-3">
-                        <button class="btn btn-primary" type="button">일기 올리기</button>
-                        <button class="btn btn-secondary" type="button">뒤로 가기</button>
-                    </div>
-                </div>
+        <!-- 식품 프로모션 목록 -->
+        <div class="empty"></div>
+        <div class="row title">
+            <div class="col d-flex justify-content-center">
+                <h1>식품 프로모션 등록</h1>
             </div>
         </div>
-        <!-- 바디 끝 -->
-        <div class="empty"> </div>
-        <!-- 푸터 -->
+        <div class="row">
+            <div class="col btnSpace">
+                <button class="btn btnAdd" type="button">신규</button>
+            </div>
+        </div>
+            <table class="table">
+                <thead>
+                    <tr class="tableTitle">
+                        <th class="col-2">No.</th>
+                        <th class="col">프로모션 제목</th>
+                    </tr>
+                </thead>
+                <tbody class="bodyFood">
+                	<c:choose>
+                		<c:when test="${list.size() == 0}">
+                			<tr>
+								<td colspan=5>등록된 프로모션이 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto">
+                    			<tr>
+                        			<td style="text-align: center;">
+                        				${dto.food_seq}
+                        			</td>
+                        			<td style="text-align: center;">
+                        				<a href="/modify.food?food_seq=${dto.food_seq}" style="text-decoration: none; color: black;">${dto.food_name}</a>
+                        			</td>
+                    			</tr>
+                    		</c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+            	<nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                    	<c:if test="${naviMap.needPrev eq true}">
+                    		<li class="page-item">
+                    			<a class="page-link" href="/modifyList.food?curPage=${naviMap.startNavi-1}">Prev</a>
+                    		</li>
+                    	</c:if>
+                    	<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}" step="1">
+                    		<li class="page-item">
+                        		<a class="page-link" href="/modifyList.food?curPage=${pageNum}">${pageNum}</a>
+                        	</li>
+                    	</c:forEach>    
+                    	<c:if test="${naviMap.needNext eq true}">
+							<li class="page-item">
+								<a class="page-link" href="/modifyList.food?curPage=${naviMap.endNavi+1}">Next</a>
+							</li>
+						</c:if>
+                    </ul>
+            	</nav>
+            </div>
+        </div>
+        <!-- footer -->
         <div class="container footer">
             <div class="row footerInfo">
                 <div class="col-6">
@@ -352,6 +430,12 @@
             </div>
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
+        <!-- footer 끝 -->
     </div>
+    <script>
+		$(".btnAdd").on("click", function(){
+			location.href = "/add.food";
+		})
+    </script>
 </body>
 </html>

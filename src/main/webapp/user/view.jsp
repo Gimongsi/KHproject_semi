@@ -4,21 +4,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<title>Insert title here</title>
-</head>
+<title>FAQ 보기</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
+	/* 버튼 */
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+.btnAdd {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: small;
+	color: white;
+	margin: 5px;
+}
+
+.btnAdd:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
@@ -28,12 +43,30 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'SuncheonB';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
@@ -48,6 +81,7 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
 }
 
 .cls_header a {
@@ -88,11 +122,13 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
+
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
 	width: 100%;
 	height: 100%;
 }
+
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -122,10 +158,12 @@ translateY(
 )
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -167,47 +205,74 @@ translateY(
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 80px;
-}
-
-/* 바디 */
-.inner-container-left {
-	margin: auto;
-	border: 1px solid black;
-	box-sizing: border-box;
-	height: 100%;
-}
-
-.inner-container-left * {
-	margin: 20px;
-}
-
-.inner-container-right {
-	height: 100%;
-}
-
-.inner-container-right div {
-	margin: 20px;
-	margin-top: 50px;
-}
-
-.inner-container-right h5 {
-	border-bottom: 2px solid grey;
-	width: 400px;
-	text-align: center;
-}
-
-.inner-container-right button {
-	margin-right: 40px;
-}
-
-.bookmark {
-	border: 1px solid black;
-	height: 600px;
+	height: 20px;
 }
 
 
-/* 푸터 */
+	/* 게시글 스타일 영역*/
+	.container-board{
+		width: 80%;
+	}
+	.container-board div[class*=row]:not(:first-child){
+	    border: 1px solid lightgrey;
+	}
+	.container-board div[class*=col-2]{
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    font-weight: bold;
+	    border-left: 1px solid lightgrey;
+	    border-right: 1px solid lightgrey;
+	}
+	.container-board div[class*=col]:not(.content-board:last-child){
+	    display: flex;
+	    align-items: center;
+	}
+	.container-board div[class*=col] > p{
+	    margin: 0;
+	    padding: 5px;
+	}
+	.title-board{
+	    height: 50px;
+	}
+	.header-board{
+	    height: 50px;
+	}
+	.content-board{
+	    height: 600px;
+	}
+	/* 게시글 스타일 끝*/
+	  /* 버튼 영역 */
+     .boxBtn{
+        height: 10%;
+    }
+	.container{
+		width: 80%;
+        height: 100%;
+		padding: 10px;
+	}
+    form, table{
+        height: 100%;
+        text-align: center;
+    }
+    tr:first-child{
+        height: 10%;
+    }
+    input{
+        width: 100%;
+        height: 100%;
+    }
+	textarea{
+		width: 100%;
+        height: 100%;
+		resize: none;
+	}
+    .boxBtn{
+        text-align: center;
+    }
+    /* 버튼 영역 끝 */
+    
+    /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
@@ -234,25 +299,25 @@ translateY(
 	color: #709c91;
 	text-decoration: none;
 }
-</style>
 
+/* footer 끝 */
+</style>
+</head>
 <body>
-	<div class="container">
+<div class="container">
 		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
-				<a href="#"> <img id="logoImg" src="/resources/dpt_Logo.png">
+				<a href="#"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
 			</div>
 			<div class="d-none d-md-block col-5"></div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;">
-					<p style="margin: 0px;">로그인</p>
+				<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
 				</a>
 			</div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
-				<a href="#" style="text-decoration: none;">
-					<p style="margin: 0px;">회원가입</p>
+				<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
 				</a>
 			</div>
 			<div class="col p-0 headMenu d-flex justify-content-center">
@@ -268,6 +333,7 @@ translateY(
 				</ul>
 			</div>
 		</div>
+
 		<!-- 네비 -->
 		<div class="row cls_nav">
 			<div class="col">
@@ -310,101 +376,80 @@ translateY(
 				</nav>
 			</div>
 		</div>
-		<!-- 네비 끝 -->
-		<!-- 헤더 끝 -->
-		<div class="empty"></div>
-		<!-- 바디 -->
-		<div class="cls_body">
-			<div class="row justify-content-evenly">
-				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
-					<div class="inner-container-left">
-						<div>정보수정</div>
-						<div>일기</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="inner-container-right">
-						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 kg 남았습니다.</h5>
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 접속일</button>
-							2022년 00월 00일
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 기록일</button>
-							2022년 00월 00일
-						</div>
-						<div>즐겨찾기</div>
-						<div class="bookmark">
-							<table>
-								<thead>
-									<th>프로모션</th>
-								</thead>
-								<tbody>
-									<c:choose>
-										<c:when test="${list.size() == 0}">
-											<tr col-5>
-												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<c:forEach items="${list}" var="dto">
-												<tr>
-													<td>${dto.gym_seq}</td>
-													<td><a href="">${dto.gym_name}</a></td>
-												</tr>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tbody>
-							</table>
-							
-							
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
 	</div>
+	<!-- 네비 끝 -->
+	<!-- 헤더 끝 -->
+	<div class="empty"></div>
+    <!-- 게시글 영역 -->
+    <div class="container container-board">
+        <div class="row p-5">
+            <h3 class="text-center">FAQ 보기</h3>
+        </div>
+        <div class="row">
+            <div class="col-2 title-board">
+                <p>제목</p>
+            </div>
+            <div class="col-10 title-board">
+                <p>${dto.qna_title}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 content-board">
+                <p>내용</p>
+            </div>
+            <div class="col-10 content-board">
+                <p>${dto.qna_content}</p>
+            </div>
+        </div>
+    </div>
+	<!-- 게시글 영역 끝-->
+	<div class="boxBtn">
+        <button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
+    </div>
+    
+    <div class="empty"></div>
+	<!-- footer -->
+	<div class="container footer">
+		<div class="row footerInfo">
+			<div class="col-6">
+				제휴 및 서비스 이용문의<br>
+				<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+				AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+			</div>
+			<div class="col-6">
+				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
+				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+				kh.projectmail@gmail.com<br>
+			</div>
+		</div>
+		<div class="row footerMenu">
+			<div class="col">
+				<a href="">이용약관</a>
+			</div>
+			<div class="col">
+				<a href="">개인정보처리방침</a>
+			</div>
+			<div class="col">
+				<a href="">위치정보이용약관</a>
+			</div>
+			<div class="col">
+				<a href="">센터등록요청하기</a>
+			</div>
+			<div class="col">
+				<a href="">문의하기</a>
+			</div>
+		</div>
+		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+	</div>
+	<!-- footer 끝 -->
+    <script>
+    
+    const btnBack = document.getElementById("btnBack");
+    
+    	btnBack.addEventListener("click", function(e){
+        	location.href="/user/information_user.jsp";
+    	});
+	</script>
+	
 </body>
 </html>

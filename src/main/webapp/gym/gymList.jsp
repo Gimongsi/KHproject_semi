@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <html>
@@ -676,7 +677,7 @@
                                 <span class="buttonImg" style="margin-right:5px;">G.X</span>
                                 <div class="col d-flex justify-content-end favorite">
                                 	<div class="ImgFavorite">
-                                		<span><img src="/imgs/empty heart.png" id="emptyHeart" value="${dto.gym_seq}"></span>
+                                		<a id="interest" value="interest"><img src="/imgs/empty heart.png" id="emptyHeart" value="${dto.gym_seq}"></a>
                                 		<span><img src="/imgs/red heart.png" id="redHeart" value="${dto.gym_seq}"></span>
                                 	</div>
                               		
@@ -727,27 +728,17 @@
     		$("#emptyHeart").css("display" , "none");
     		$("#redHeart").css("display", "block");
     		
-    		$.ajax({
-    			uri : "/interestAdd.in"
-    			,type:"post"
-    			,date : "$(dto.gym_seq)"
-    			,success : function(data){
-    				console.log(data);
-    			},error :function(e){
-    				console.log(e);
-    			}
-    		})
+			alert("")
+			
+			
     		
-    	
-    	
-			//location.href ="/interestAdd.in";
  		})
 	
 		$("#redHeart").on("click" , function(e){ //빨간 하트 눌렀을 때(찜하기 해제)
 			$("#redHeart").css("display" , "none");
     		$("#emptyHeart").css("display", "block");
     		
-    		//location.href="/interestOut.in"
+    		
 		})
    		 </script>
     	
