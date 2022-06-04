@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,7 +201,9 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
+
         <c:choose>
+
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -246,10 +249,16 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link">
+
 											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/foodList.food">특가 식품</a></li>
+
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -324,10 +333,16 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link">
+
 											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/foodList.food">특가 식품</a></li>
+
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -396,10 +411,16 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link">
+
 											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/foodList.food">특가 식품</a></li>
+
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">

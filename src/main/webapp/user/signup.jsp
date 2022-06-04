@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -359,10 +360,16 @@ translateY(
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link">
+
 											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/foodList.food">특가 식품</a></li>
+
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -437,10 +444,16 @@ translateY(
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link">
+
 											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/foodList.food">특가 식품</a></li>
+
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -509,10 +522,16 @@ translateY(
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
+										<li class="nav-item"><a class="nav-link">
+										
 											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/foodList.food">특가 식품</a></li>
+
+											href="/list.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -539,6 +558,7 @@ translateY(
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+
 	<!-- 헤더 끝 -->
 	<div class="empty"></div>
 	<form action="/signup.user" id="joinForm">
@@ -620,8 +640,6 @@ translateY(
 	</form>
 
 
-
-
 	<div class="empty"></div>
 	<!-- footer -->
 	<div class="container footer">
@@ -655,6 +673,7 @@ translateY(
 			</div>
 		</div>
 		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+	</div>
 	</div>
 	<!-- footer 끝 -->
 
