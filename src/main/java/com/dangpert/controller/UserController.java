@@ -105,10 +105,7 @@ public class UserController extends HttpServlet {
 		} else if (uri.equals("/userModify.user")) {	// 유저 정보 수정
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
-			
-			
-			
-			
+	
 			request.setAttribute("dto", dto);
 			request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);	
 				
@@ -122,7 +119,7 @@ public class UserController extends HttpServlet {
 			response.sendRedirect("/main.jsp");
 			
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
-			response.sendRedirect("/user/mypage.jsp");
+			response.sendRedirect("/user/myPage_user.jsp");
 		} else if (uri.equals("/search.user")) { // manager 유저 검색
 			UserDAO dao = new UserDAO();
 			int curPage = Integer.parseInt(request.getParameter("curPage"));

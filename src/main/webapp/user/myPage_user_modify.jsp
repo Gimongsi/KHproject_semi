@@ -451,7 +451,7 @@
                             <input type="text">
                         </div>
                         <div>
-                            <input type="text" disabled placeholder="몸무게 수정" value="${dataDTO.final_weight}">
+                            <input type="text" disabled placeholder="몸무게 수정">
                             <input type="text">
                         </div>
                         <div>
