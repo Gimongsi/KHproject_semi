@@ -33,7 +33,7 @@ private BasicDataSource bds;
 	
 	
 	public int insert(UserDTO dto) throws Exception { // 회원가입
-		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default)";
+		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default, null)";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -211,7 +211,6 @@ private BasicDataSource bds;
 			
 			return map;
 		}
-		
 	}
 	
 	
