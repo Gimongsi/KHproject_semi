@@ -474,7 +474,7 @@ none;
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/gymList.gym">내 주변 운동시설</a></li>
+											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
 										<li class="nav-item dropdown"><a
@@ -513,11 +513,11 @@ none;
 						<span>관리자님 환영합니다!</span>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
+						<a href="/toSendmail.manager" style="text-decoration: none;"> <span>메일보내기</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
+						<a href="/userSerch.manager?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
@@ -798,8 +798,8 @@ none;
 						</div>
 					</a>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
-						<li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+						<li class="list-group-item" id="gym_month">3개월</li>
+						<li class="list-group-item" id="gym_price">250,000원</li>
 						<li class="list-group-item">O.T 1회 무료</li>
 					</ul>
 				</div>
@@ -810,12 +810,12 @@ none;
 						id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg"
 						class="card-img-top">
 						<div class="card-body">
-							<h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+							<h5 class="card-title" id="gym_name">MCT GYM</h5>
 						</div>
 					</a>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
-						<li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+						<li class="list-group-item" id="gym_month">3개월</li>
+						<li class="list-group-item" id="gym_price">250,000원</li>
 						<li class="list-group-item">O.T 1회 무료</li>
 					</ul>
 				</div>
@@ -826,12 +826,12 @@ none;
 						id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg"
 						class="card-img-top">
 						<div class="card-body">
-							<h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+							<h5 class="card-title" id="gym_name">MCT GYM</h5>
 						</div>
 					</a>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
-						<li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+						<li class="list-group-item" id="gym_month">3개월</li>
+						<li class="list-group-item" id="gym_price">250,000원</li>
 						<li class="list-group-item">O.T 1회 무료</li>
 					</ul>
 				</div>
@@ -842,12 +842,12 @@ none;
 						id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg"
 						class="card-img-top">
 						<div class="card-body">
-							<h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+							<h5 class="card-title" id="gym_name">MCT GYM</h5>
 						</div>
 					</a>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
-						<li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+						<li class="list-group-item" id="gym_month">3개월</li>
+						<li class="list-group-item" id="gym_price">250,000원</li>
 						<li class="list-group-item">O.T 1회 무료</li>
 					</ul>
 				</div>
@@ -858,18 +858,19 @@ none;
 						id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg"
 						class="card-img-top">
 						<div class="card-body">
-							<h5 class="card-title" id="gym_name" name="gym_name">MCT GYM</h5>
+							<h5 class="card-title" id="gym_name">MCT GYM</h5>
 						</div>
 
 					</a>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item" id="gym_month" name="gym_month">3개월</li>
-						<li class="list-group-item" id="gym_price" name="gym_price">250,000원</li>
+						<li class="list-group-item" id="gym_month">3개월</li>
+						<li class="list-group-item" id="gym_price">250,000원</li>
 						<li class="list-group-item">O.T 1회 무료</li>
 					</ul>
 				</div>
 			</div>
 		</div>
+		
 		<!-- 헬스장 끝 -->
 		<!-- 식품 -->
 		<div class="title_promo_food">

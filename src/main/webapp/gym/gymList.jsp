@@ -309,7 +309,7 @@
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -383,7 +383,7 @@
 			<c:when test="${loginSession.user_auth eq 'manager'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -462,7 +462,7 @@
 				<!-- 헤더 -->
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-5"></div>

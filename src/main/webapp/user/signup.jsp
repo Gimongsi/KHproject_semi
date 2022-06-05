@@ -557,7 +557,7 @@ translateY(
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="col-9 d-flex align-items-center justify-content-center">
 					<input type="text" class="form-control" id="user_id" name="user_id"
-						placeholder="아이디" readonly>
+						placeholder="이메일" readonly>
 				</div>
 				<div class="col-3">
 					<button type="button" class="btn btnAdd overBtn">중복확인</button>
@@ -575,7 +575,7 @@ translateY(
 				<div
 					class="col-12 inputDiv d-flex align-items-center justify-content-center">
 					<input type="password" class="form-control textInput" id="user_pw"
-						name="user_pw" placeholder="비밀번호">
+						name="user_pw" placeholder="비밀번호 (6~20자 특수문자(~!@#$%^&*))">
 				</div>
 			</div>
 			<div class="empty"></div>
@@ -591,7 +591,7 @@ translateY(
 				<div
 					class="col-12 inputDiv d-flex align-items-center justify-content-center">
 					<input type="text" class="form-control textInput" id="user_phone"
-						name="user_phone" placeholder="핸드폰 번호">
+						name="user_phone" placeholder="핸드폰 번호 (-제외)">
 				</div>
 			</div>
 			<div class="empty2"></div>
