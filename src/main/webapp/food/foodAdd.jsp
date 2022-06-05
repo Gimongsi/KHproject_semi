@@ -211,7 +211,7 @@
     input::placeholder, textarea::placeholder{
         color: #adcabf !important;
     }
-    .btnSave, .btnAddPic, .btnCancle {
+    .btnSave, .btnAddPic, .btnCancle, .btnPics {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -225,7 +225,7 @@
         margin: 5px;
     }
 
-    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover {
+    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnPics:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
@@ -263,7 +263,7 @@
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -337,7 +337,7 @@
 			<c:when test="${loginSession.user_auth eq 'manager'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -416,7 +416,7 @@
 				<!-- 헤더 -->
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-5"></div>
@@ -497,9 +497,10 @@
             <div class="row cardList">
                 <div class="col d-flex justify-content-center">
                     <div class="card">
-                            <img src="" class="card-img-top">
+                            <img src="" class="card-img-top" id="food_src_img">
                             <%-- 사진 등록 --%>
-                            <input type="file" class="form-control inputCls" id="food_src" name="food_src"> 
+                            <label class="btn btnPics" for="food_src">사진 등록</label>
+                            <input type="file" class="form-control inputCls" id="food_src" name="food_src" style="display: none;"> 
                         <div class="card-body">
                         	<div class="input-group">
                         		<span class="input-group-text">제품명</span>
@@ -522,6 +523,7 @@
                 </div>
         	</div>
         	</form>
+        </div>
         	<div class="empty"> </div>
         <div class="row">
             <div class="col btnSpace d-flex justify-content-center">
@@ -594,6 +596,21 @@
 		}
 		$("#addForm").submit();
 	})
+	
+	// 이미지 미리보기
+	$("#food_src").change(function(){
+    	setImageFromFile(this, "#food_src_img");
+	});
+
+	function setImageFromFile(input, expression) {
+    	if (input.files && input.files[0]) {
+        	var reader = new FileReader();
+        	reader.onload = function (e) {
+          	  $(expression).attr("src", e.target.result);
+        	}
+        reader.readAsDataURL(input.files[0]);
+    	}
+	}
 	
 	function numbeComma(number) {    
 		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}

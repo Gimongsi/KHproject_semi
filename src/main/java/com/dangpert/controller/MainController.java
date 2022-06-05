@@ -1,11 +1,18 @@
 package com.dangpert.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.dangpert.dao.FoodDAO;
+import com.dangpert.dao.GymDAO;
+import com.dangpert.dto.FoodDTO;
+import com.dangpert.dto.GymInfoDTO;
 
 @WebServlet("*.main")
 public class MainController extends HttpServlet {
@@ -20,7 +27,21 @@ public class MainController extends HttpServlet {
 		String uri = request.getRequestURI(); 
 		System.out.println("요청 uri : " + uri);
 		
-		if(uri.equals("")) {
+		if (uri.equals("/home.main")) { // 식품 프로모션 페이지 요청
+			FoodDAO foodDAO = new FoodDAO();
+			GymDAO gymDAO = new GymDAO();
+
+			try {
+				ArrayList<GymInfoDTO> gymList = gymDAO.selectAllGym();
+				ArrayList<FoodDTO> foodList = foodDAO.selectPromo();
+					
+				request.setAttribute("gymList", gymList);
+				request.setAttribute("foodList", foodList);
+					
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 			
 		}
 		

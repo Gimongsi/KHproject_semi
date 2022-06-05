@@ -65,8 +65,8 @@ public class FoodDAO {
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
 			
-			pstmt.setInt(1, dto.getFood_seq());
-			pstmt.setString(2, dto.getFood_src());
+			pstmt.setString(1, dto.getFood_src());
+			pstmt.setInt(2, dto.getFood_seq());
 			
 			return pstmt.executeUpdate();
 		}
@@ -143,7 +143,6 @@ public class FoodDAO {
 	
 	public ArrayList<FoodDTO> selectHellin() throws Exception{
 		String sql = " select * from tbl_food f join tbl_food_folder p on f.food_seq = p.food_seq and food_name like '%헬린이%'";
-//		String sql = "select * from tbl_food where food_name like '%헬린이%'";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -273,5 +272,16 @@ public class FoodDAO {
 			
 			return map;
 		}
+	}
+	
+	public int delInterestFood (int food_seq) throws Exception{ // 즐겨찾기
+		String sql = "delete from user_food_interest where food_seq = ?";
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, food_seq);
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}	
 	}
 }
