@@ -1,5 +1,6 @@
 package com.dangpert.dao;
 
+import java.security.interfaces.RSAKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -116,14 +117,24 @@ public class GymDAO {
 				list.add(new GymInfoDTO(gym_seq, gym_name,gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment));
 			}
 			return list;
-		}
-		
-		
-		
-		
+		}	
 	}
 	
-	
+	public int delInterestGym(int gym_seq, int user_seq) throws Exception {
+		String sql = "delete from user_gym_interest values(? , ?)";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, gym_seq);
+			pstmt.setInt(2, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+			
+		}
+		
+	}
 
 	
 }

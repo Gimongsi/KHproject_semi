@@ -599,9 +599,6 @@
                             		<p id="food_title" class="card-text">${dto.food_title}</p>
                             		<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
                             		<div class="col favorite d-flex justify-content-end">
-                                		<button type="button" class="btnFavorite">
-                                    		<span class="material-symbols-outlined">favorite</span>
-                                		</button>
                             		</div>
                         		</div>
                     		</div>
@@ -609,7 +606,7 @@
                 	</c:forEach>
             	</c:otherwise>
             </c:choose>
->>>>>>> 552f8f61d5ab4b3ad77824a52c03b0e107d16a55
+
             </div>
         </div>
         <!-- 헬린이 프로모션 목록 끝 -->

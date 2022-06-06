@@ -520,13 +520,18 @@ translateY(
 											</tr>
 										</c:when>
 										<c:otherwise>
-											<tr>
-												헬스장
-											</tr>
-											<c:forEach items="${}" var="dto">
+											<th>헬스장 프로모션</th>
+											<c:forEach items="${ugi_dto}" var="dto">  <!-- items 안에 뭐 써야하는지... -->
 												<tr>
-													<td>${dto.gym_seq}</td>
+													<td>${gym_dto.gym_seq}</td>
 													<td><a href="">${ugi_dto.gym_name}</a></td>
+												</tr>
+											</c:forEach>
+											<th>푸드 프로모션</th>
+											<c:forEach items="${listInterest}" var="dto">
+												<tr>
+													<td>${gym_dto.food_seq}</td>
+													<td><a href="">${ufi_dto.food_name}</a></td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>
