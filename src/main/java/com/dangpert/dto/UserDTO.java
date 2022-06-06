@@ -109,7 +109,6 @@ public class UserDTO {
 	}
 
 
-
 	public String getUser_memo() {
 		return user_memo;
 	}

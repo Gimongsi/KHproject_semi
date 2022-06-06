@@ -201,8 +201,9 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
-        
-<c:choose>
+
+        <c:choose>
+
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -248,10 +249,16 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link">
+
+											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+
 											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -326,10 +333,16 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link">
+
+											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+
 											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -398,10 +411,16 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link">
+
+											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+
 											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -436,8 +455,12 @@
                 <div class="col-3">
                     <h3 class="text-center mb-3">My Page</h3>
                     <div class="inner-container-left">
-                        <div>정보수정</div>
-                        <div>일기</div>
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
@@ -518,5 +541,13 @@
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
     </div>
+    <script>
+    document.getElementById("modifyBtn").onclick = function(){
+		location.href = "/userModify.user";
+	}
+	document.getElementById("diaryBtn").onclick = function(){
+		location.href = "/userDiary.user";
+	}
+    </script>
 </body>
 </html>

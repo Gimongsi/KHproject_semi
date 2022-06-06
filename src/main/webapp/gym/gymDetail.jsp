@@ -185,8 +185,7 @@
         font-weight: 600;
     }
 
-    .btnAdd,
-    .btnBuy {
+    .btnAdd, .btnBuy, .btnModify, .btnDel {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -199,8 +198,7 @@
         margin: 5px;
     }
 
-    .btnAdd:hover,
-    .btnBuy:hover {
+    .btnAdd:hover, .btnBuy:hover, .btnModify:hover, .btnDel:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
@@ -325,16 +323,14 @@
 </style>
 </head>
 
-
 <body>
     <div class="container">
         <!-- 헤더 -->
-        
-<c:choose>
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -408,7 +404,7 @@
 			<c:when test="${loginSession.user_auth eq 'manager'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -487,7 +483,7 @@
 				<!-- 헤더 -->
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-5"></div>
@@ -557,19 +553,23 @@
 			</c:otherwise>
 		</c:choose>
         <!-- 헤더 끝 -->
-        <div class="empty"> </div>
         <!-- 타이틀 -->
         <div class="list-item-wrap">
             <div class="row detailHeader">
                 <div class="detailPhoto col-12 col-sm-6">
-                    <img src="/My/imgs/gym01.jpg">
+                	<c:if test="${empty dto.gym_src_main}">
+                    	사진 없음
+                    </c:if>
+                    <c:if test="${not empty dto.gym_src_main}">
+                    	<img src="/files/${dto.gym_src_main}">
+                    </c:if>
                 </div>
                 <div class="row d-sm-none" style="height: 30px;"></div>
                 <div class="col-1"></div>
                 <div class="col-12 col-sm-5">
                     <div class="row">
                         <div class="col-8 gymTitle">
-                            <h2 style="margin: 0px; padding-left: 10px; font-weight: 600;" id="gym_name">kh헬스장</h2>
+                            <h2 style="margin: 0px; padding-left: 10px; font-weight: 600;" id="gym_name">${dto.gym_name}</h2>
                         </div>
                         <div class="col d-flex justify-content-end">
                             <span class="material-symbols-outlined" style="padding-right: 5px;">mood</span>
@@ -579,7 +579,8 @@
                         <div class="row">
                             <div class="empty"></div>
                             <div class="col">
-                                <h5 style="padding-left: 10px; font-weight: 600;" id="gym_extraAddr">서울특별시 영등포구</h5>
+                                <h5 style="padding-left: 10px; font-weight: 600;" id="gym_extraAddr">${dto.gym_extraAddr}</h5>
+                                <input type="text" id="mapAddr" value="${dto.gym_roadAddr} ${dto.gym_detailAddr}" style="display: none">
                             </div>
                         </div>
                         <div class="row">
@@ -589,7 +590,7 @@
                                     </span>
                             </div>
                             <div class="col">
-                                <p>070-0000-0000</p>
+                                <p>${dto.gym_phone}</p>
                             </div>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
@@ -623,16 +624,7 @@
                     </div>
                     <div class="row">
                         <div class="col content">
-                            <textarea id="gym_comment" name="gym_comment" readonly>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                                내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내 공백포함 1000byte
-                            </textarea>
+                            <textarea id="gym_comment" name="gym_comment" readonly>${dto.gym_comment}</textarea>
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -646,8 +638,7 @@
                     </div>
                     <div class="row">
                         <div class="col content">
-                            <textarea id="gym_time" name="gym_time" readonly>AM 08:00 ~ PM 22:00
-                                연중무휴</textarea>
+                            <textarea id="gym_time" name="gym_time" readonly>${dto.gym_time}</textarea>
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -660,7 +651,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col content">내용
+                        <div class="col content">${dto.gym_month} ${dto.gym_price}
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -733,7 +724,7 @@
                             var geocoder = new kakao.maps.services.Geocoder();
 
                             // 주소로 좌표를 검색합니다
-                            let gym_extraAddr = $("#gym_extraAddr").html();
+                            let gym_extraAddr = $("#mapAddr").val();
                             console.log(gym_extraAddr);
                             geocoder.addressSearch(gym_extraAddr, function (result, status) {
 
@@ -767,8 +758,8 @@
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="button" class="btn btnAdd"> 수정 </button>
-                    <button type="button" class="btn btnAdd"> 삭제 </button>
+                    <button type="button" class="btn btnModify"> 수정 </button>
+                    <button type="button" class="btn btnDel"> 삭제 </button>
                 </div>
             </div>
         </div>
@@ -803,19 +794,16 @@
     </div>
     <!-- footer 끝 -->
     <script>
-        
-        // function textareaHeight(){
-        //     let textEle = $("textarea");
-        //     textEle[0].style.height = "auto";
-        //     let textEleHeight = textEle.prop("scrollHeight");
-        //     textEle.css(textEleHeight);
-        // };
-
-        // let textEle = $("textarea");
-        // textEle.on("keyup", function(){
-        //     textareaHeight();
-        // });
-
+        $(".btnDel").on("click", function(){
+        	let answer = confirm("정말 삭제하시겠습니까?");
+    		console.log(answer);
+    		if(answer){
+    			location.href = "/deleteProc.gym?gym_seq=${dto.gym_seq}";
+    		}
+        })
+		$(".btnModify").on("click", function(){
+			location.href = "/modify.gym?gym_seq=${dto.gym_seq}";
+		})
     </script>
 </body>
 </html>

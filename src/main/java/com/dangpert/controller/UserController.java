@@ -54,7 +54,7 @@ public class UserController extends HttpServlet {
 			}
 			
 			
-		} else if (uri.equals("/idCheckPopup.user")) {
+		} else if (uri.equals("/idCheckPopup.user")) { // 팝업 띄우기
 			response.sendRedirect("/user/popup.jsp");
 			
 		} else if (uri.equals("/idCheck.user")) { // 아이디 체크
@@ -114,6 +114,17 @@ public class UserController extends HttpServlet {
 			}
 		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
 			response.sendRedirect("/user/signup.jsp");
+
+		} else if (uri.equals("/userModify.user")) {	// 유저 정보 수정
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+	
+			request.setAttribute("dto", dto);
+			request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);	
+				
+		} else if (uri.equals("/userDiary.user")) {		// 유저 일기장 페이지 요청
+			response.sendRedirect("/user/myPage_diary.jsp");
+
 		} else if (uri.equals("/logout.user")) { // 로그아웃 요청
 			HttpSession session = request.getSession();
 			session.getAttribute("loginSession");
@@ -122,6 +133,39 @@ public class UserController extends HttpServlet {
 			
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
 			response.sendRedirect("/user/mypage.jsp");
+			response.sendRedirect("/user/myPage_user.jsp");
+		} else if (uri.equals("/search.user")) { // manager 유저 검색
+			UserDAO dao = new UserDAO();
+			int curPage = Integer.parseInt(request.getParameter("curPage"));
+			
+			try {
+				HashMap map = dao.getPageNavi(curPage);
+				
+				ArrayList<UserDTO> list = dao.selectAll(curPage*10-9,curPage*10);
+				request.setAttribute("list", list);
+				request.setAttribute("naviMap", map);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/manager/search.jsp").forward(request, response);
+			
+		} else if(uri.equals("/managerUpdate.user")) { // 회원 수정버튼 눌렀을때 ajax 실행
+			
+			int user_seq = Integer.parseInt(request.getParameter("user_seq"));
+			System.out.println(user_seq);
+			UserDAO dao = new UserDAO();
+			try {
+				UserDTO dto = dao.selectBySeq(user_seq);
+				Gson gson = new Gson();
+				String rs = gson.toJson(dto);
+				response.getWriter().append(rs);
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 		
 		
