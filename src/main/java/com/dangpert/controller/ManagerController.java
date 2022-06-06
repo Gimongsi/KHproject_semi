@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dangpert.dao.UserDAO;
 import com.dangpert.dto.UserDTO;
+import com.dangpert.mail.SendMail;
 import com.google.gson.Gson;
 
 @WebServlet("*.manager")
@@ -65,7 +66,11 @@ public class ManagerController extends HttpServlet {
 			
 		} else if (uri.equals("/toSendmail.manager")) { // 유저 메일보내기 페이지 이동
 			response.sendRedirect("/manager/sendmail.jsp");
-		} else if (uri.equals("")) { //  유저 메일 보내기
+		} else if (uri.equals("/test.manager")) { //  유저 메일 보내기
+			// 메일 보내보기
+			SendMail sm = new SendMail();
+			sm.sendMail();
+			
 			
 		}
 	
