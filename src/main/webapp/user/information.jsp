@@ -34,7 +34,6 @@
     .container {
         margin: auto;
     }
-
     /* 헤더 */
     .cls_header {
         height: 150px;
@@ -66,7 +65,6 @@
     .headMenu{
         justify-content: end;
     }
-
     /* 로고 */
     .logoImg{
         padding: 0%;
@@ -132,13 +130,11 @@
     .navSearchInput::placeholder{
         color: #FFE4C0;
     }
-
     /* 공백 */
     .empty {
         background-color: white;
         height: 20px;
     }
-
     /* footer */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -147,21 +143,17 @@
         color: #709c91;
         border-top: 1px solid #c9d4a9;
     }
-
     .footer .row {
         border-bottom: 1px solid #c9d4a9;
     }
-
     .footer .footerInfo {
         padding-block: 3%;
         text-align: center;
     }
-
     .footerMenu {
         padding-block: 2%;
         text-align: center;
     }
-
     .footerMenu a {
         color: #709c91;
         text-decoration: none;
@@ -172,6 +164,7 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
+       
        
 <c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
@@ -274,7 +267,7 @@
 						<button type="button" class="btn dropdownBtn dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
 						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
 							<li><a class="dropdown-item" href="#">이벤트</a></li>
 						</ul>
 					</div>
@@ -346,7 +339,7 @@
 						<button type="button" class="btn dropdownBtn dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
 						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
 							<li><a class="dropdown-item" href="#">이벤트</a></li>
 						</ul>
 					</div>
@@ -402,40 +395,114 @@
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
     <!-- 본문-->
-    <div class="container">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th class="col-md-1">글번호</th>
-					<th class="col-md-5">제목</th>
-				</tr>
-			</thead>
-			<tbody class="body-board">
-				<c:choose>
-					<c:when test="${list.size() == 0}">
+    <c:choose>
+    	<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
+    		<div class="container">
+				<div class="row boxBtn-top">
+					<div class="col d-flex justify-content-end">
+						<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
+					</div>
+			    </div>
+			</div>
+		    <div class="container">
+				<table class="table table-bordered">
+					<thead>
 						<tr>
-							<td colspan=5>등록된 게시글이 없습니다.</td>
+							<th class="col-md-1">글번호</th>
+							<th class="col-md-5">제목</th>
 						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${list}" var="dto">
-							<tr>
-								<td>${dto.qna_seq}</td>
-								<td>${dto.qna_title}</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
-	</div>
-		</div>
+					</thead>
+					<tbody class="body-board">
+						<c:choose>
+							<c:when test="${list.size() == 0}">
+								<tr>
+									<td colspan=5>등록된 게시글이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="dto">
+									<tr>
+										<td>${dto.qna_seq}</td>
+										<td>${dto.qna_title}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
+    	</c:when>
+    	<c:when test="${loginSession.user_auth eq 'manager'}">
+    		<div class="container">
+				<div class="row boxBtn-top">
+					<div class="col d-flex justify-content-end">
+						<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
+					</div>
+			    </div>
+			</div>
+		    <div class="container">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="col-md-1">글번호</th>
+							<th class="col-md-5">제목</th>
+						</tr>
+					</thead>
+					<tbody class="body-board">
+						<c:choose>
+							<c:when test="${list.size() == 0}">
+								<tr>
+									<td colspan=5>등록된 게시글이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="dto">
+									<tr>
+										<td>${dto.qna_seq}</td>
+										<td><a href="/member/view.info?qna_seq=${dto.qna_seq}">${dto.title}</a></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
+    	</c:when>
+    	<c:otherwise>
+    		<div class="container">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="col-md-1">글번호</th>
+							<th class="col-md-5">제목</th>
+						</tr>
+					</thead>
+					<tbody class="body-board">
+						<c:choose>
+							<c:when test="${list.size() == 0}">
+								<tr>
+									<td colspan=5>등록된 게시글이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="dto">
+									<tr>
+										<td>${dto.qna_seq}</td>
+										<td>${dto.qna_title}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
+    	</c:otherwise>
+    </c:choose>
+		
 	<script> 
-    	const btnWrite = document.getElementById("btnWrite");
-    	
-    	btnWrite.addEventListener("click", function(e){
-    		location.href="/information/write.jsp";
-    	})
+		$("#btnWrite").on("click", function(){
+			location.href = "/write.info";
+		})
     </script>
     <!-- 본문 끝-->
      <!-- footer -->

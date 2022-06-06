@@ -58,8 +58,7 @@ public class InformationDAO {
 	}
 
 	public ArrayList<InformationDTO> selectAll() throws Exception{
-		String sql = "select * from (select tbl_infomation.*, row_number() over(order by qna_seq desc) as num from tbl_information)"
-					+ " where num between ? and ?";
+		String sql = "select * from tbl_infomation";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
@@ -102,7 +101,7 @@ public class InformationDAO {
 	}
 
 	public int write(InformationDTO dto) throws Exception{
-		String sql = "insert into tbl_information values(infomation_seq.nextval,?,?)";
+		String sql = "insert into tbl_infomation values(infomation_seq.nextval,?,?)";
 
 
 		try(Connection con = bds.getConnection();
