@@ -465,12 +465,13 @@
             			<div>등록된 프로모션이 없습니다.</div>
             		</c:when>
             		<c:otherwise>
-            			<c:forEach items="${listPromo}" var="dtoPromo">
+            			<c:forEach items="${listPromo}" var="dtoPromo" end="3">
                 			<div class="col-6 d-flex justify-content-center">
                     			<div class="card">
                         			<a href="${dtoPromo.food_com}">
                             			<img src="/files/${dtoPromo.food_src}" class="card-img-top">
                             			<h5 class="card-title">${dtoPromo.food_name}</h5>
+                            			<input type="text" class="d-none" value="${dtoPromo.food_seq}">
                         			</a>
                         		<div class="card-body">
                             		<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
@@ -481,14 +482,14 @@
                                 		</button>
                             		</div>
                         		</div>
-                    		</div>
-                		</div>
-                	</c:forEach>
-            	</c:otherwise>
-            </c:choose>
-            <div class="empty"></div>
-            <div class="empty"></div>
-        </div>
+                    			</div>
+                			</div>
+                		</c:forEach>
+            		</c:otherwise>
+            	</c:choose>
+            	<div class="empty"></div>
+            	<div class="empty"></div>
+        	</div>
             <!-- 식품 프로모션 목록 끝 -->
             <!-- 헬린이 프로모션 목록 -->
             <div class="row title">
@@ -503,12 +504,13 @@
             			<div>등록된 프로모션이 없습니다.</div>
             		</c:when>
             		<c:otherwise>
-            			<c:forEach items="${list}" var="dto">
+            			<c:forEach items="${list}" var="dto" end="3">
                 			<div class="col-6 d-flex justify-content-center">
                     			<div class="card">
                         			<a href="${dto.food_com}">
                             			<img src="/files/${dto.food_src}" class="card-img-top">
                             			<h5 class="card-title">${dto.food_name}</h5>
+                            			<input type="text" class="d-none" value="${dto.food_seq}">
                         			</a>
                         		<div class="card-body">
                             		<p id="food_title" class="card-text">${dto.food_title}</p>
@@ -525,6 +527,7 @@
             	</c:otherwise>
             </c:choose>
             </div>
+        </div>
         </div>
         <!-- 헬린이 프로모션 목록 끝 -->
         <div class="empty"> </div>

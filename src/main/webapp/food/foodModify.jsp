@@ -211,7 +211,7 @@
     input::placeholder, textarea::placeholder{
         color: #adcabf;
     }
-    .btnSave, .btnAddPic, .btnCancle, .btnDel {
+    .btnSave, .btnAddPic, .btnCancle, .btnDel, .btnPics {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -225,7 +225,7 @@
         margin: 5px;
     }
 
-    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover {
+    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover, .btnPics:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
@@ -498,14 +498,15 @@
                 <div class="col d-flex justify-content-center">
                     <div class="card">
                             <c:if test="${empty dtoPic}">
-								<div class="col p-4" style="text-align: center;"><a>사진 없음</a></div>
-								<input type="file" class="form-control inputCls" id="food_src" name="food_src"> 
+								<div class="col p-4" style="text-align: center;">사진 없음</div>
+								<label class="btn btnPics" for="food_src" style="width:100%;">사진 등록</label>
+                            	<input type="file" class="form-control inputCls" id="food_src" name="food_src" style="display: none;">
 							</c:if>
 							<c:if test="${not empty dtoPic}">
-								<div class="col header-board">
-									<img src="/files/${dtoPic.food_src}" class="card-img-top">
-									<input type="file" class="form-control inputCls" id="food_src" name="food_src"> 
-								</div>
+									<img src="/files/${dtoPic.food_src}" class="card-img-top" id="food_src_img">
+									<%-- 사진 등록 --%>
+									<label class="btn btnPics" for="food_src">사진 수정</label>
+                            		<input type="file" class="form-control inputCls" id="food_src" name="food_src" style="display: none;">
 							</c:if>
                         <div class="card-body">
                         	<div class="input-group">
@@ -541,6 +542,7 @@
             <div class="col btnSpace d-flex justify-content-center">
                 <button class="btn btnDel" type="button">삭제</button>
             </div>
+        </div>
         </div>
         <div class="empty"> </div>
         <!-- footer -->
@@ -599,7 +601,9 @@
 			return;
 		}
 		let answer = confirm("정말 수정하시겠습니까?");
-		$("#modifyForm").submit();
+		if(answer){
+			$("#modifyForm").submit();
+		}
 	})
 	
 	$(".btnDel").on("click", function(){
@@ -610,6 +614,20 @@
 		}
 	})
 		
+	// 이미지 미리보기
+	$("#food_src").change(function(){
+    	setImageFromFile(this, "#food_src_img");
+	});
+
+	function setImageFromFile(input, expression) {
+    	if (input.files && input.files[0]) {
+        	var reader = new FileReader();
+        	reader.onload = function (e) {
+          	  $(expression).attr("src", e.target.result);
+        	}
+        reader.readAsDataURL(input.files[0]);
+    	}
+	}
     </script>
 </body>
 </html>

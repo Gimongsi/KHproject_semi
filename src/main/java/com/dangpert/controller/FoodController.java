@@ -64,6 +64,7 @@ public class FoodController extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.getRequestDispatcher("/food/foodModifyList.jsp").forward(request, response);
+			
 		} else if (uri.equals("/add.food")) { // 식품 프로모션 등록 페이지 요청
 			response.sendRedirect("/food/foodAdd.jsp");
 		} else if (uri.equals("/addProc.food")) { // 식품 프로모션 등록 요청
@@ -81,8 +82,6 @@ public class FoodController extends HttpServlet {
 			try {
 				MultipartRequest multi = new MultipartRequest(request, filePath, maxSize, "utf-8",
 						new DefaultFileRenamePolicy());
-
-				// 관리자 로그인 세션 연동해야함
 
 				String food_com = multi.getParameter("food_com");
 				String food_name = multi.getParameter("food_name");
@@ -117,15 +116,16 @@ public class FoodController extends HttpServlet {
 
 				FoodFolderDTO dtoPic = dao.selectPic(food_seq);
 				request.setAttribute("dtoPic", dtoPic);
-				request.getRequestDispatcher("/food/foodModify.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			request.getRequestDispatcher("/food/foodModify.jsp").forward(request, response);
+			
 		} else if (uri.equals("/modifyProc.food")) { // 식품 프로모션 수정 요청
 			FoodDAO dao = new FoodDAO();
 			String filePath = request.getServletContext().getRealPath("files");
 			File dir = new File(filePath);
-			System.out.println(dir);
+//			System.out.println(dir);
 
 			if (!dir.exists()) {
 				dir.mkdirs();
