@@ -20,62 +20,59 @@
 
 <title>근육별 상세페이지</title>
 <style>
-/* 폰트 */
-@font-face {
+    /* 폰트 */
+    @font-face {
+        font-family: '양진체';
+        src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
     font-family: 'LeferiPoint-WhiteObliqueA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
-/* 폰트 끝 */
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-}
-
-.container {
-	margin: auto;
-}
-
-/* 헤더 */
-.cls_header {
-	height: 150px;
-	width: 100%;
-	margin: 0%;
-	background-color: #BFFFF0;
-	color: #97C4B8;
-	align-items: center;
-	font-family: '양진체';
-	text-align: center;
-}
-
-.cls_header a {
-	color: #97C4B8;
-}
-
-.cls_header a:hover {
-	color: #c9d4a9;
-}
-
-.dropdownBtn {
-	background-color: #F0FFC2 !important;
-	color: #97C4B8;
-	border: 1px solid white;
-}
-
-.dropdownBtn:hover {
-	color: #9be5d2;
-}
-
-.headDropdown {
-	background-color: #F0FFC2 !important;
-}
-
-.headMenu {
-	justify-content: end;
-}
+    }
+    /* 폰트 끝 */
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        margin: auto;
+    }
+    /* 헤더 */
+    .cls_header {
+        height: 150px;
+        width: 100%;
+        margin: 0%;
+        background-color: #BFFFF0;
+        color: #97C4B8;
+        align-items: center;
+        font-family: '양진체';
+        text-align: center;
+    }
+    .cls_header a {
+        color: #97C4B8;
+    }
+    .cls_header a:hover {
+        color: #c9d4a9;
+    }
+    .dropdownBtn {
+        background-color: #F0FFC2 !important;
+        color: #97C4B8;
+        border: 1px solid white;
+    }
+    .dropdownBtn:hover {
+        color: #9be5d2;
+    }
+    .headDropdown {
+        background-color: #F0FFC2 !important;
+    }
+    .headMenu {
+        justify-content: end;
+    }
 
 /* 로고 */
 .logoImg {
@@ -95,9 +92,7 @@
 }
 /* 로고 효과 */
 @import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
+	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 .logoImg {
 	position: relative;
 	display: inline-block;
@@ -126,6 +121,7 @@ translateY(
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	 font-family: '양진체';
 }
 
 .container-fluid a {
@@ -276,8 +272,7 @@ textarea{
 	<div class="container">
 
 		<!-- 헤더 -->
-		
-<c:choose>
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">

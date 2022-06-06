@@ -521,7 +521,7 @@ translateY(
 										</c:when>
 										<c:otherwise>
 											<th>헬스장 프로모션</th>
-											<c:forEach items="${ugi_dto}" var="dto">  <!-- items 안에 뭐 써야하는지... -->
+											<c:forEach items="${ugi_dto}" var="dto"> 
 												<tr>
 													<td>${gym_dto.gym_seq}</td>
 													<td><a href="">${ugi_dto.gym_name}</a></td>

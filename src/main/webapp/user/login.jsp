@@ -210,7 +210,6 @@
 
         #searchPwBtn {
             margin-right: 15px;
-            margin-right: 15px;
             border-radius: 0.25rem;
             padding: 3px;
             padding-left: 10px;
@@ -235,16 +234,10 @@
             width: 200px;
         }
 
-        #kakaoBtn {
+        #kakaoImg {
             margin-right: 15px;
-            margin-right: 15px;
-            border-radius: 0.25rem;
-            padding: 3px;
-            padding-left: 10px;
-            padding-right: 10px;
-            font-family: 'LeferiPoint-WhiteObliqueA';
-            font-size: medium;
             margin: 5px;
+            height:33px;
         }
 
 
@@ -279,13 +272,12 @@
 </head>
 <body>
 	<div class="container">
-		<!-- 헤더 -->
-
-        <c:choose>
+        <!-- 헤더 -->
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -327,16 +319,10 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link">
-
-											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/foodList.food">특가 식품</a></li>
-
 											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
-
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -365,7 +351,7 @@
 			<c:when test="${loginSession.user_auth eq 'manager'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -411,16 +397,10 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link">
-
-											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/foodList.food">특가 식품</a></li>
-
 											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
-
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -450,7 +430,7 @@
 				<!-- 헤더 -->
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-5"></div>
@@ -489,16 +469,10 @@
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link">
-
-											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/foodList.food">특가 식품</a></li>
-
 											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
-
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -570,7 +544,7 @@
                     <div class="row m-2">
                         <div class="col-11 d-flex justify-content-end">
                             <button type="button" id="signupBtn">회원가입 하기</button>
-                            <button type="button" class="btn btn-warning" id="kakaoBtn">카카오 로그인</button>
+                            <img id="kakaoImg" src="../imgs/kakao_login_medium_narrow.png">
                         </div>
                     </div>
                 </div>
