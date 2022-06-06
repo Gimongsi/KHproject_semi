@@ -526,6 +526,7 @@ translateY(
 				</div>
 			</div>
 			<div class="empty"></div>
+			<form action="/sendMail.manager" method="post" id="mailForm">
 			<div class="row">
 				<div class="col-12 d-flex justify-content-center mail-title">
 					<input type="text" class="form-control" id="mail-title"
@@ -542,15 +543,15 @@ translateY(
 			<div class="empty"></div>
 			<div class="row">
 				<div class="col btnSpace d-flex justify-content-center">
-					<button type="button" id="sendMailBtn" class="btn btnAdd">보내기</button>
+					<button type="submit" id="sendMailBtn" class="btn btnAdd">보내기</button>
 					<button type="button" id="backBtn" class="btn btnAdd">취소</button>
 				</div>
 
 			</div>
+			</form>
 			<div class="empty"></div>
-
 		</div>
-
+		
 
 		<!-- footer -->
 		<div class="container footer">

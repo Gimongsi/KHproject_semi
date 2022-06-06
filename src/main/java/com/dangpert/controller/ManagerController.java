@@ -66,16 +66,36 @@ public class ManagerController extends HttpServlet {
 			
 		} else if (uri.equals("/toSendmail.manager")) { // 유저 메일보내기 페이지 이동
 			response.sendRedirect("/manager/sendmail.jsp");
-		} else if (uri.equals("/test.manager")) { //  유저 메일 보내기
-			// 메일 보내보기
-			SendMail sm = new SendMail();
-			sm.sendMail();
 			
+		} else if (uri.equals("/sendMail.manager")) { // 전체 유저 메일 보내기
+			String title = request.getParameter("mail-title");
+			String content = request.getParameter("mail-content");
+			UserDAO UserDao = new UserDAO();
+			try {
+				
+				ArrayList<UserDTO> userList = UserDao.selectAllMail();
+				SendMail sm = new SendMail();
+				
+				if(userList.size() > 0) {
+					for(UserDTO dto : userList) {
+						String user_id = dto.getUser_id();
+						String user_name = dto.getUser_name();
+						sm.sendMail(title, content, user_id, user_name);
+					}
+					System.out.println("전체 메일 보내기 성공");
+				} else {
+					System.out.println("메일을 보낼 유저가 업습니다.");
+				}
+				response.sendRedirect("/toSendmail.manager");
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if (uri.equals("")) {
 			
 		}
 	
-	
-	
-	}
+	} 
 
 }

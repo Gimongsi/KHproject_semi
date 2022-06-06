@@ -12,6 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.eclipse.jdt.internal.compiler.ast.NullAnnotationMatching;
 
 import com.dangpert.dto.UserDTO;
 import com.dangpert.dto.UserDataDTO;
@@ -33,7 +34,7 @@ private BasicDataSource bds;
 	
 	
 	public int insert(UserDTO dto) throws Exception { // 회원가입
-		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default)";
+		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default, null)";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -124,6 +125,26 @@ private BasicDataSource bds;
 		}
 
 	}
+	
+	public ArrayList<UserDTO> selectAllMail() throws Exception { // 유저 아이디들만 반환
+		String sql = "select * from tbl_user";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<UserDTO> list = new ArrayList<UserDTO>();
+			
+			while(rs.next()) {
+				String user_id = rs.getString("user_id");
+				String user_name = rs.getString("user_name");
+				
+				list.add(new UserDTO(0, user_id, null, user_name, null, null, null, null));
+			}
+			return list;
+		}
+	}
+	
 	
 	public UserDTO selectBySeq(int user_seq) throws Exception {
 		String sql = "select * from tbl_user where user_seq=?";

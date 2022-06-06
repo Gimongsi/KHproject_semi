@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -16,49 +16,93 @@
 <title>아이디 중복 확인</title>
 </head>
 <body>
-	<form action="/idCheck.user" method="get" id="checkIdForm">
-		<div class='container'>
+
+	<div class='container'>
+		<form action="/idCheck.user" method="get" id="checkIdForm">
 			<div class='row'>
 				<div class="col-6 m-2">
-					<input type="text" class="form-control" value="${user_id}" id="user_id"
-						pattern="^[a-zA-Z0-9_]{6,12}$" name="user_id" placeholder="id 입력">
+					<input type="text" class="form-control" value="${user_id}"
+						id="user_id" pattern="^[a-zA-Z0-9_]{6,12}$" name="user_id"
+						placeholder="id 입력">
 				</div>
 				<div class='col-3 m-2'>
 					<button type="button" class="btn btn-success" id="checkId">중복확인</button>
 				</div>
+
 			</div>
-			<div class="row m-2">
-				<div class="col-4">
-					<span>확인결과 : </span>
-				</div>
-				<div class="col-8">
-					<c:if test="${rs eq 'ok'}">
-						<span>사용 가능한 아이디입니다.</span>
-					</c:if>
-					<c:if test="${rs eq 'no'}">
-						<span>사용 불가한 아이디입니다.</span>
-					</c:if>
-				</div>
+		</form>
+		<div class="row m-2">
+			<div class="col-4">
+				<span>확인결과 : </span>
 			</div>
-			<div class="row m-2">
-				<div class="col-4 d-flex justify-content-end">
-					<button type="button" class="btn btn-primary" id="useBtn" disabled>사용</button>
-				</div>
-				<div class="col-4">
-					<button type="button" class="btn btn-secondary" id="cancleBtn">취소</button>
-				</div>
+			<div class="col-8">
+				<c:if test="${rs eq 'ok'}">
+					<span>사용 가능한 아이디입니다.</span>
+				</c:if>
+				<c:if test="${rs eq 'no'}">
+					<span>사용 불가한 아이디입니다.</span>
+				</c:if>
 			</div>
 		</div>
-	</form>
+		<c:if test="${rs eq 'ok'}">
+			<form action="/compare.user" method="post" id="compareForm">
+				<div class="row m-2">
+					<div>
+						<input type="text" class="d-none" name="compareUser" value="${user_id}">
+					</div>
+					<div class="col-4">
+						<span>인증 번호 입력 : </span>
+					</div>
+					<div class="col-6">
+						<input type="text" class="form-control" id="compare"
+							name="compare">
+					</div>
+					<div class="col-2">
+						<button type="button" id="compareBtn" class="btn btn-primary">확인</button>
+					</div>
+				</div>
+			</form>
+
+		</c:if>
+		<div class="row m-2">
+			<div class="col-4 d-flex justify-content-end">
+				<button type="button" class="btn btn-primary" id="useBtn" disabled>사용</button>
+			</div>
+			<div class="col-4">
+				<button type="button" class="btn btn-secondary" id="cancleBtn">취소</button>
+			</div>
+		</div>
+	</div>
+
 
 	<script>
+	
 		let useBtn = document.getElementById("useBtn");
-		console.log("${rs}");
+		$("#compareBtn").on("click",function(){
+			compareRegex = /[0-9]{6}/;
+			console.log(${compareNum});
+			console.log($("#compare").val());
+			if(!compareRegex.test($("#compare").val())){
+				alert("인증번호를 정확히 입력해주세요");
+				return;
+			}
+			if ("${compareNum}" === $("#compare").val()) { // 사용가능한 아이디라면
+				useBtn.disabled = false; // disabled 속성 해지
+			} else {
+				alert("인증번호가 올바르지 않습니다.");
+				useBtn.disabled = true; // disabled 속성 적용
+				return;
+			}
+			
+		})
+		
+		/*
 		if ("${rs}" === "ok") { // 사용가능한 아이디라면
 			useBtn.disabled = false; // disabled 속성 해지
 		} else {
 			useBtn.disabled = true; // disabled 속성 적용
 		}
+		*/
 
 		useBtn.onclick = function() { // 사용버튼 클릭
 			let regexId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
@@ -73,7 +117,8 @@
 			// 2. 팝업창을 닫음.
 			// 팝업창을 열어줬던 부모를 칭하는 객체 opener
 			// 왼쪽은 부모창(회원가입창)의 id input 요소  /  오른쪽은 팝업창의 id input 요소
-			opener.document.getElementById("user_id").value = document.getElementById("user_id").value;
+			opener.document.getElementById("user_id").value = document
+					.getElementById("user_id").value;
 			self.close(); // 내 자신 창을 닫겠다!
 		};
 
@@ -82,7 +127,7 @@
 		};
 
 		// 중복확인 버튼을 눌렀을 때 id 값이 유요한 값이 체크 후에 서버로 중복확인 요청
-		$("#checkId").on("click", function() {
+		$("#checkId").on("click",function() {
 			let regexId = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
 			if (!regexId.test($("#user_id").val())) {
@@ -91,8 +136,6 @@
 			}
 			$("#checkIdForm").submit();
 		})
-		
-		
 	</script>
 </body>
 </html>
