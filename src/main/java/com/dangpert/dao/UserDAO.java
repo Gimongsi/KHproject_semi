@@ -147,7 +147,27 @@ private BasicDataSource bds;
 	}
 	
 	
-	
+	public UserDataDTO DataSelect(int user_seq) throws Exception {
+		String sql = "select * from user_data where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int age = rs.getInt("user_age");
+				int height = rs.getInt("height");
+				int weight = rs.getInt("weight");
+				int final_weight = rs.getInt("final_weight");
+				
+				return new UserDataDTO(user_seq, age, height, weight, final_weight);
+			}
+			return null;
+		}
+	}
+
+
 	public String getStringDate(Date date) {
 		// 1900년 02월 02일 00시 00분 00초
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");

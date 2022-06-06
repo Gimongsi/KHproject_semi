@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -452,11 +453,18 @@
                         </div>
                         <div>
                             <input type="text" disabled placeholder="몸무게 수정">
-                            <input type="text">
+                            <input type="text" value="${data_dto.weight} ">
                         </div>
                         <div>
                             <input type="text" disabled placeholder="목표 몸무게 수정">
-                            <input type="text" name="final_weight">
+                            <c:choose>
+                            	<c:when test="${data_dto eq null}">
+                            		<input type="text" name="final_weight">
+                            	</c:when>
+                            	<c:otherwise>
+                            		 <input type="text" name="final_weight" value="${data_dto.final_weight}">
+                            	</c:otherwise>
+                            </c:choose>
                         </div>
                         <div>
                             <div class="d-flex justify-content-between">
@@ -464,6 +472,7 @@
                                 <button class="btn btn-secondary col-2 invisible" type="button">더미</button>
                                 <button class="btn btn-secondary col-2" type="button">취소</button>
                                 <button class="btn btn-primary col-2" type="button">수정 완료</button>
+         
                             </div>
                         </div>
                     </div>

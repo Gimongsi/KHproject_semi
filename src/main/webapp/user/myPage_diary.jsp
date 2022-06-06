@@ -504,7 +504,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-4 gap-3">
-                        <button class="btn btn-primary" type="button">일기 쓰기</button>
+                        <button class="btn btn-primary" id="btnWrite" type="button">일기 쓰기</button>
                         <button class="btn btn-primary" type="button">일기 수정</button>
                         <button class="btn btn-secondary" type="button">일기 삭제</button>
                     </div>
@@ -547,6 +547,9 @@
 	}
 	document.getElementById("diaryBtn").onclick = function(){
 		location.href = "/userDiary.user";
+	}
+	document.getElementByID("btnWrite").onclick = function(){
+		location.href = "/userDiaryWrite.user";
 	}
     </script>
 </body>

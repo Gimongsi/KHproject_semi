@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dangpert.dao.UserDAO;
 import com.dangpert.dto.UserDTO;
+import com.dangpert.dto.UserDataDTO;
 import com.dangpert.utils.EncryptionUtils;
 import com.google.gson.Gson;
 
@@ -105,8 +106,20 @@ public class UserController extends HttpServlet {
 		} else if (uri.equals("/userModify.user")) {	// 유저 정보 수정
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
-	
-			request.setAttribute("dto", dto);
+			UserDAO dao = new UserDAO();
+			try {
+				System.out.println(dto.getUser_seq());
+				UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+				
+				
+				
+				request.setAttribute("dto", dto);
+				request.setAttribute("data_dto", data_dto);
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);	
 				
 		} else if (uri.equals("/userDiary.user")) {		// 유저 일기장 페이지 요청
@@ -120,6 +133,10 @@ public class UserController extends HttpServlet {
 			
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
 			response.sendRedirect("/user/myPage_user.jsp");
+			
+		} else if (uri.equals("/userDiaryWrite.user")) {	// 일기쓰기 페이지 요청
+			response.sendRedirect("/user/myPage_diary_write.jsp");
+			
 		} else if (uri.equals("/search.user")) { // manager 유저 검색
 			UserDAO dao = new UserDAO();
 			int curPage = Integer.parseInt(request.getParameter("curPage"));
