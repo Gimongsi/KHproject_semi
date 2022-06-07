@@ -164,22 +164,36 @@ keyframes waviy { 0%, 40%, 100% {
 20
 
 
+
+
 %
 {
 transform
 
 
+
+
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 -20px
 
 
+
+
 )
+
+
 
 
 }

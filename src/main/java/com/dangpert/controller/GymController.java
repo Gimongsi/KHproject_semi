@@ -34,7 +34,6 @@ public class GymController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		if(uri.equals("/list.gym")) { // 운동시설 리스트로 이동
-			response.sendRedirect("/gym/gymList.jsp");
 			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
 			

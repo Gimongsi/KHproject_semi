@@ -31,7 +31,7 @@ public class InformationController extends HttpServlet {
 		
 		
 
-		if(uri.equals("toInformation.info")) { //게시판페이지 요청
+		if(uri.equals("/toInformation.info")) { //게시판페이지 요청
 			InformationDAO dao = new InformationDAO();
 			try {
 				ArrayList<InformationDTO> list = dao.selectAll();
