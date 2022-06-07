@@ -13,6 +13,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.dangpert.dto.FoodDTO;
 import com.dangpert.dto.FoodFolderDTO;
+import com.dangpert.dto.UserfoodInterestDTO;
 
 public class FoodDAO {
 	private BasicDataSource bds;
@@ -274,14 +275,52 @@ public class FoodDAO {
 		}
 	}
 	
-	public int delInterestFood (int food_seq) throws Exception{ // 즐겨찾기
-		String sql = "delete from user_food_interest where food_seq = ?";
+	public int insertInterestFood(int food_seq , int user_seq) throws Exception{
+		String sql = "insert into user_food_interest values (? , ? )";
+		
 		try(Connection con = bds.getConnection();
-				PreparedStatement pstmt = con.prepareStatement(sql)){
+			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			pstmt.setInt(1, food_seq);
+			pstmt.setInt(2, user_seq);
+			
 			int rs = pstmt.executeUpdate();
 			return rs;
-		}	
+		}
+		
+	}
+	public ArrayList<UserfoodInterestDTO> interestFood(int user_seq) throws Exception{
+		String sql = "select * from user_food_interest where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1,user_seq);
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<UserfoodInterestDTO> list = new ArrayList<UserfoodInterestDTO>();
+			
+			while(rs.next()) {
+				int food_seq = rs.getInt("food_seq");
+				
+				list.add(new UserfoodInterestDTO(food_seq, user_seq));
+			}
+			return list;
+		}
+	}
+	
+	public int delInterestFood(int food_seq, int user_seq) throws Exception {
+		String sql = "delete from user_food_interest values(? , ?)";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, food_seq);
+			pstmt.setInt(2, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+			
+		}
+		
 	}
 }

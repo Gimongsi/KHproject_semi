@@ -34,6 +34,7 @@ public class GymController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		if(uri.equals("/list.gym")) { // 운동시설 리스트로 이동
+			response.sendRedirect("/gym/gymList.jsp");
 			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
 			
@@ -130,6 +131,7 @@ public class GymController extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.getRequestDispatcher("/gym/gymModify.jsp").forward(request, response);
+			
 		}else if(uri.equals("/modifyProc.gym")) { // 운동시설 수정 요청
 			GymDAO dao = new GymDAO();
 			String filePath = request.getServletContext().getRealPath("files");
@@ -220,7 +222,24 @@ public class GymController extends HttpServlet {
 			}
 			
 				
+		}else if (uri.equals("delInterest.gym")) {
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO) session.getAttribute("loginSession");
+			int gym_seq = Integer.parseInt(request.getParameter("gym_seq"));
+			GymDAO dao = new GymDAO();
+
+			try {
+				int rs = dao.delInterestGym(gym_seq, dto.getUser_seq());
+
+				if (rs > 0) {
+					System.out.println("헬스장 프로모션 즐겨찾기 삭제 성공");
+					response.sendRedirect("/gym/gymList.jsp");
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 	}
-
 }
