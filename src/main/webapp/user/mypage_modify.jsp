@@ -432,39 +432,39 @@
                 <div class="col-6">
                     <h3 class="text-center mb-3">회원 정보 수정</h3>
                     <div class="inner-container-right">
-                        <div class="mb-5">
-                            <input type="text" disabled placeholder="이메일 / 수정불가">
-                            <input type="text">
-                        </div>
-                        <div>
-                            <input type="text" disabled placeholder="현재 비밀번호">
-                            <input type="text">
-                        </div>
-                        <div>
-                            <input type="text" disabled placeholder="변경 후 비밀번호">
-                            <input type="text">
-                        </div>
-                        <div class="mb-5">
-                            <input type="text" disabled placeholder="변경 후 비밀번호 확인">
-                            <input type="text">
-                        </div>
-                        <div>
-                            <input type="text" disabled placeholder="몸무게 수정">
-                            <input type="text">
-                        </div>
-                        <div>
-                            <input type="text" disabled placeholder="목표 몸무게 수정">
-                            <input type="text">
-                        </div>
-                        <div>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-secondary col-2" type="button">회원 탈퇴</button>
-                                <button class="btn btn-secondary col-2 invisible" type="button">더미</button>
-                                <button class="btn btn-secondary col-2" type="button">취소</button>
-                                <button class="btn btn-primary col-2" type="button">수정 완료</button>
-                            </div>
-                        </div>
-                    </div>
+						<div class="mb-5">
+							<input type="text" disabled placeholder="이메일 / 수정불가">
+							<input type="text">
+						</div>
+						<div>
+							<input type="text" disabled placeholder="현재 비밀번호">
+							<input type="text">
+						</div>
+						<div>
+							<input type="text" disabled placeholder="변경 후 비밀번호">
+							<input type="text">
+						</div>
+						<div class="mb-5">
+							<input type="text" disabled placeholder="변경 후 비밀번호 확인">
+							<input type="text">
+						</div>
+						<div>
+							<input type="text" disabled placeholder="몸무게 수정">
+							<input type="text">
+						</div>
+						<div>
+							<input type="text" disabled placeholder="목표 몸무게 수정">
+							<input type="text">
+						</div>
+						<div>
+							<div class="d-flex justify-content-between">
+								<button class="btn btn-secondary col-2" type="button">회원 탈퇴</button>
+								<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
+								<button class="btn btn-secondary col-2" type="button">취소</button>
+								<button class="btn btn-primary col-2" type="button">수정 완료</button>
+							</div>
+						</div>
+					</div>
                 </div>
             </div>
         </div>

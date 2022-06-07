@@ -83,6 +83,7 @@ public class UserController extends HttpServlet {
 			
 			UserDAO dao = new UserDAO();
 			try {
+				System.out.println(user_pw);
 				user_pw = EncryptionUtils.getSHA512(user_pw);
 				
 				UserDTO dto = dao.loginOk(user_id, user_pw);
@@ -92,8 +93,10 @@ public class UserController extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("loginSession", dto);
 					
+					
 				} else {
 					System.out.println("로그인 실패!");
+					System.out.println(user_pw);
 					request.setAttribute("rs", false);
 				}
 				request.getRequestDispatcher("/main.jsp").forward(request, response);
@@ -103,15 +106,12 @@ public class UserController extends HttpServlet {
 		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
 			response.sendRedirect("/user/signup.jsp");
 
-		} else if (uri.equals("/userModify.user")) {	// 유저 정보 수정
+		} else if (uri.equals("/userModify.user")) {	// 수정페이지 유저 정보 뿌려주기
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
 			UserDAO dao = new UserDAO();
 			try {
-				System.out.println(dto.getUser_seq());
 				UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
-				
-				
 				
 				request.setAttribute("dto", dto);
 				request.setAttribute("data_dto", data_dto);
@@ -122,6 +122,30 @@ public class UserController extends HttpServlet {
 			
 			request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);	
 				
+		} else if (uri.equals("/userDataModify.user")) {	// 유저 정보 변경
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			String user_pw = request.getParameter("user_pw");
+			int weight = Integer.parseInt(request.getParameter("weight"));
+			int final_weight = Integer.parseInt(request.getParameter("final_weight"));
+			UserDAO dao = new UserDAO();
+			
+			try {
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				int rs = dao.update(user_pw, dto.getUser_seq());
+				int rs2 = dao.DataUpdate(weight, final_weight, dto.getUser_seq());
+				if (rs > 0 && rs2 > 0) {
+					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+					request.setAttribute("dto", dto);
+					request.setAttribute("data_dto", data_dto);
+					request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
 		} else if (uri.equals("/userDiary.user")) {		// 유저 일기장 페이지 요청
 			response.sendRedirect("/user/myPage_diary.jsp");
 
@@ -169,11 +193,53 @@ public class UserController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		}
+		} else if(uri.equals("/pwOk.user")) { // 수정페이지 비밀번호 확인
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			String user_pw = request.getParameter("beforPw");
+			UserDAO dao = new UserDAO();
+			
+			try {
+				request.setAttribute("user_pw", user_pw);
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				System.out.println(user_pw);
+				
+				if(user_pw.equals(dto.getUser_pw())) {
+					request.setAttribute("rs", "ok");
+					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+					request.setAttribute("data_dto", data_dto);
+					request.setAttribute("dto", dto);
+				} else {
+					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+					request.setAttribute("rs", "no");
+					request.setAttribute("data_dto", data_dto);
+					request.setAttribute("dto", dto);
+				}
+				
+				request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);
 		
-		
-		
-		
-	}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	
 
+		} else if(uri.equals("/userDelete.user")) {
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			UserDAO dao = new UserDAO();
+			
+			try {
+				int rs = dao.delete(dto.getUser_seq());
+				if(rs > 0) {
+					session.removeAttribute("loginSession");
+					response.sendRedirect("/home");
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+
+	}
 }

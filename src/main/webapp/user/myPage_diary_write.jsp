@@ -493,7 +493,7 @@
                     </div>
                     <div class="d-flex justify-content-end mt-4 gap-3">
                         <button class="btn btn-primary" type="button">일기 올리기</button>
-                        <button class="btn btn-secondary" type="button">뒤로 가기</button>
+                        <button class="btn btn-secondary" id="backBtn" type="button">뒤로 가기</button>
                     </div>
                 </div>
             </div>
@@ -533,6 +533,9 @@
 			location.href = "/userModify.user";
 		}
 		document.getElementById("diaryBtn").onclick = function(){
+			location.href = "/userDiary.user";
+		}
+		document.getElementById("backBtn").onclick = function(){
 			location.href = "/userDiary.user";
 		}
     </script>

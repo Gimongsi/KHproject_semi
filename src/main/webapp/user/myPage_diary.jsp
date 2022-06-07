@@ -548,7 +548,7 @@
 	document.getElementById("diaryBtn").onclick = function(){
 		location.href = "/userDiary.user";
 	}
-	document.getElementByID("btnWrite").onclick = function(){
+	document.getElementById("btnWrite").onclick = function(){
 		location.href = "/userDiaryWrite.user";
 	}
     </script>
