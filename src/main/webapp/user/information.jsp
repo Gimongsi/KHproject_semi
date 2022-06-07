@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,7 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>FAQ</title>
 </head>
 <style>
 /* 폰트 */
@@ -40,7 +43,6 @@
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -49,6 +51,8 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -76,10 +80,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -91,8 +93,8 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
 @import
@@ -112,28 +114,15 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
 %
 {
 transform
-
-
 :
-
-
 translateY
 (
-
-
 -20px
-
-
 )
-
-
 }
 }
 /* 로고 효과 끝 */
@@ -177,54 +166,21 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 80px;
+	height: 20px;
 }
-
-/* 바디 */
-.inner-container-left {
-	margin: auto;
-	border: 1px solid black;
-	box-sizing: border-box;
-	height: 100%;
-}
-
-.inner-container-left>div>a {
-	color: black;
-}
-
-.inner-container-left * {
-	margin: 20px;
-}
-
-.inner-container-right {
-	height: 100%;
-}
-
-.inner-container-right div {
-	margin: 20px;
-	margin-top: 50px;
-}
-
-.inner-container-right h5 {
-	border-bottom: 2px solid grey;
-	width: 400px;
+/* 게시글 스타일 영역 */
+.title {
+	padding: 10px;
 	text-align: center;
 }
 
-.inner-container-right button {
-	margin-right: 40px;
+#content {
+	height: 500px;
 }
-
-.bookmark {
-	border: 1px solid black;
-	height: 600px;
-}
-
-/* 푸터 */
+/* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
@@ -251,10 +207,12 @@ translateY
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
 	<div class="container">
+		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -363,75 +321,52 @@ translateY
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-		<!-- 바디 -->
-		<div class="cls_body">
-			<div class="row justify-content-evenly">
-				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
-					<div class="inner-container-left">
-						<div>
-							<a href="#">정보수정</a>
-						</div>
-						<div>
-							<a href="#">일기</a>
-						</div>
+		<!-- FAQ 리스트 -->
+		<div class="title">
+        	<h3>FAQ</h3>
+    	</div>
+		<div class="container">
+			<c:if test="${loginSession.user_auth eq 'manager'}">
+				<div class="row boxBtn-top">
+					<div class="col d-flex justify-content-end">
+						<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
 					</div>
 				</div>
-				<div class="col-6">
-					<div class="inner-container-right">
-						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 kg 남았습니다.</h5>
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 접속일</button>
-							2022년 00월 00일
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 기록일</button>
-							2022년 00월 00일
-						</div>
-						<div>즐겨찾기</div>
-						<div class="bookmark">
-							<table>
-								<thead>
-									<th>프로모션</th>
-								</thead>
-								<tbody>
-									<c:choose>
-										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
-											<tr>
-												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<th>헬스장 프로모션</th>
-											<c:forEach items="${ugi_dto}" var="dto">
-												<tr>
-													<td>${gym_dto.gym_seq}</td>
-													<td><a href="">${ugi_dto.gym_name}</a></td>
-												</tr>
-											</c:forEach>
-											<th>푸드 프로모션</th>
-											<c:forEach items="${listInterest}" var="dto">
-												<tr>
-													<td>${gym_dto.food_seq}</td>
-													<td><a href="">${ufi_dto.food_name}</a></td>
-												</tr>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+			</c:if>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="col-md-1">글번호</th>
+						<th class="col-md-5">제목</th>
+					</tr>
+				</thead>
+				<tbody class="body-board">
+					<c:choose>
+						<c:when test="${list.size() == 0}">
+							<tr>
+								<td colspan=5>등록된 게시글이 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto">
+								<tr>
+									<td>${dto.qna_seq}</td>
+									<td><a href="view.info?qna_seq=${dto.qna_seq}">${dto.qna_title}</a></td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
 		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
+		<script>
+			$("#btnWrite").on("click", function() {
+				location.href = "/write.info";
+			})
+		</script>
+		<!-- FAQ 리스트 끝-->
+		
+		<!-- footer -->
 		<div class="container footer">
 			<div class="row footerInfo">
 				<div class="col-6">
@@ -464,6 +399,6 @@ translateY
 			</div>
 			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-	</div>
+		<!-- footer 끝 -->
 </body>
 </html>

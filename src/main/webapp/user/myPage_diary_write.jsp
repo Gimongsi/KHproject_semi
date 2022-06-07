@@ -113,13 +113,26 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
 %
 {
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
+
+
 )
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -430,12 +443,12 @@ translateY(
 		</div>
 	</div>
 	<script>
-	    document.getElementById("modifyBtn").onclick = function(){
+		document.getElementById("modifyBtn").onclick = function() {
 			location.href = "/userModify.user";
 		}
-		document.getElementById("diaryBtn").onclick = function(){
+		document.getElementById("diaryBtn").onclick = function() {
 			location.href = "/userDiary.user";
 		}
-    </script>
+	</script>
 </body>
 </html>

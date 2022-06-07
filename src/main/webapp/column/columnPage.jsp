@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>Column</title>
 </head>
 <style>
 /* 폰트 */
@@ -317,17 +317,23 @@ translateY(
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
 
-		<!-- 바디 영역 -->
+		<!-- Column 시작 -->
 		<div class="cls_body">
 			<div class="d-flex justify-content-center">
 				<div class="title d-flex justify-content-center">
 					<h3>칼럼</h3>
 				</div>
 			</div>
-
-			<div>
-				<button type="button" class="btn btn-primary mb-3">칼럼 등록</button>
+			<div class="container">
+				<c:if test="${loginSession.user_auth eq 'manager'}">
+					<div class="row boxBtn-top">
+						<div class="col d-flex justify-content-end">
+							<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
+						</div>
+					</div>
+				</c:if>
 			</div>
+			
 			<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
 				<div class="col">
 					<div class="card w-75 h-100">
@@ -399,7 +405,12 @@ translateY(
 				</nav>
 			</div>
 		</div>
-		<!-- 바디 끝 -->
+		<script>
+			$("#btnWrite").on("click", function() {
+				location.href = "/write.column";
+			})
+		</script>
+		<!-- Column 끝 -->
 		<div class="empty"></div>
 		<!-- 푸터 -->
 		<div class="container footer">

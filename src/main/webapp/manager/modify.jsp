@@ -39,11 +39,9 @@
 	box-sizing: border-box;
 	font-family: '양진체';
 }
-
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -55,40 +53,32 @@
 	font-family: '양진체';
 	text-align: center;
 }
-
 .cls_header a {
 	color: #97C4B8;
 }
-
 .cls_header a:hover {
 	color: #c9d4a9;
 }
-
 .dropdownBtn {
 	background-color: #F0FFC2 !important;
 	color: #97C4B8;
 	border: 1px solid white;
 }
-
 .dropdownBtn:hover {
 	color: #9be5d2;
 }
-
 .headDropdown {
 	background-color: #F0FFC2 !important;
 }
-
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
 }
-
 .logoImg:hover {
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
@@ -102,7 +92,6 @@
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
 	;
-
 .logoImg {
 	position: relative;
 	display: inline-block;
@@ -111,33 +100,19 @@
 	animation: waviy 1s infinite;
 	animation-delay: calc(.1s * var(- -i));
 }
-
 @
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
 %
 {
 transform
-
-
 :
-
-
 translateY
 (
-
-
 -20px
-
-
 )
-
-
 }
 }
 /* 로고 효과 끝 */
@@ -145,43 +120,34 @@ translateY
 .navbar {
 	background-color: #F0FFC2 !important;
 }
-
 .container-fluid a {
 	color: #97C4B8 !important;
 }
-
 .container-fluid a:hover {
 	color: #9be5d2 !important;
 }
-
 .container-fluid button {
 	background-color: #F0FFC2 !important;
 	color: #97C4B8 !important;
 }
-
 .navDropdown {
 	border: 1px solid white;
 	background-color: #d5fcf3 !important;
 }
-
 .container-fluid button:hover {
 	background-color: #97C4B8 !important;
 	color: #F0FFC2 !important;
 }
-
 .container-fluid span {
 	filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg)
 		brightness(103%) contrast(66%);
 }
-
 .navSearchInput {
 	border: 1px solid white;
 }
-
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
@@ -192,7 +158,6 @@ translateY
 	padding: 10px;
 	text-align: center;
 }
-
 #content {
 	height: 500px;
 }
@@ -201,33 +166,27 @@ translateY
 .boxBtn {
 	height: 10%;
 }
-
 .container {
 	width: 80%;
 	height: 100%;
 	padding: 10px;
 }
-
 form, table {
 	height: 100%;
 	text-align: center;
 }
-
 tr:first-child {
 	height: 10%;
 }
-
 input {
 	width: 100%;
 	height: 100%;
 }
-
 textarea {
 	width: 100%;
 	height: 100%;
 	resize: none;
 }
-
 .boxBtn {
 	text-align: center;
 }
@@ -240,21 +199,17 @@ textarea {
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
 }
-
 .footer .row {
 	border-bottom: 1px solid #c9d4a9;
 }
-
 .footer .footerInfo {
 	padding-block: 3%;
 	text-align: center;
 }
-
 .footerMenu {
 	padding-block: 2%;
 	text-align: center;
 }
-
 .footerMenu a {
 	color: #709c91;
 	text-decoration: none;
@@ -421,7 +376,7 @@ textarea {
 	const btnBack = document.getElementById("btnBack");
     
             btnBack.addEventListener("click", function(e){
-                location.href="/manager/information/information.jsp";
+            	location.href="/view.info?qna_seq="+qna_seq;
             });
     </script>
 	<!-- footer -->
