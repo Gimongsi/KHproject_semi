@@ -317,7 +317,7 @@ input::placeholder, textarea::placeholder {
 	<div class="container">
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
-				<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
 			</div>
 			<c:choose>

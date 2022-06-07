@@ -61,6 +61,9 @@
 						<button type="button" id="compareBtn" class="btn btn-primary">확인</button>
 					</div>
 				</div>
+				<div class="row m-2 d-none" id="okMessage">
+					<div class="col-12"><span>인증이 완료되었습니다.</span></div>
+				</div>
 			</form>
 
 		</c:if>
@@ -88,6 +91,7 @@
 			}
 			if ("${compareNum}" === $("#compare").val()) { // 사용가능한 아이디라면
 				useBtn.disabled = false; // disabled 속성 해지
+				$("#okMessage").removeClass("d-none");
 			} else {
 				alert("인증번호가 올바르지 않습니다.");
 				useBtn.disabled = true; // disabled 속성 적용
