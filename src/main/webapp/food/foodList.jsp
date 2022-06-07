@@ -41,7 +41,6 @@
     .container {
         margin: auto;
     }
-
     /* 헤더 */
     .cls_header {
         height: 150px;
@@ -73,7 +72,6 @@
     .headMenu{
         justify-content: end;
     }
-
     /* 로고 */
     .logoImg{
         padding: 0%;
@@ -140,13 +138,11 @@
     .navSearchInput::placeholder{
         color: #FFE4C0;
     }
-
     /* 공백 */
     .empty {
         background-color: white;
         height: 20px;
     }
-
     /* 목록 */
     .title {
         color: #97C4B8;
@@ -195,7 +191,29 @@
             'GRAD' 0,
             'opsz' 48
     }
+    
+        .ImgFavorite {
+	width: 20px;
+	height: 20px;
+	}
 
+	#redHeart {
+	width: 20px;
+	height: 20px;
+	}
+
+	#emptyHeart {
+	width: 20px;
+	height: 20px;
+	}
+
+	.heartBtn {
+	border: none;
+	background-color: white;
+	}
+    
+    
+    
     /* footer */
     .footer{
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -477,9 +495,26 @@
                             		<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
                             		<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
                             		<div class="col favorite d-flex justify-content-end">
-                                		<button type="button" class="btnFavorite">
-                                    		<span class="material-symbols-outlined">favorite</span>
-                                		</button>
+                                		<c:choose>
+										<c:when test="${listInterest.food_seq eq list.food_seq}">
+											<c:forEach items="${listInterest}" var="listInterest">
+												<div class="ImgFavorite">
+													<button type="button" class="heartBtn" id="redHeartBtn"
+														value="${list.food_seq}">
+														<img id="redHeart" src="../imgs/red heart.png">
+													</button>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div class="ImgFavorite">
+												<button type="button" class="heartBtn" id="emptyHeartBtn"
+													value="${list.food_seq}">
+													<img id="emptyHeart" src="../imgs/empty heart.png">
+												</button>
+											</div>
+										</c:otherwise>
+									</c:choose>
                             		</div>
                         		</div>
                     			</div>
@@ -516,9 +551,26 @@
                             		<p id="food_title" class="card-text">${dto.food_title}</p>
                             		<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
                             		<div class="col favorite d-flex justify-content-end">
-                                		<button type="button" class="btnFavorite">
-                                    		<span class="material-symbols-outlined">favorite</span>
-                                		</button>
+                                		<c:choose>
+										<c:when test="${listInterest.food_seq eq dto.food_seq}">
+											<c:forEach items="${listInterest}" var="listInterest">
+												<div class="ImgFavorite">
+													<button type="button" class="heartBtn" id="redHeartBtn"
+														value="${dto.food_seq}">
+														<img id="redHeart" src="../imgs/red heart.png">
+													</button>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div class="ImgFavorite">
+												<button type="button" class="heartBtn" id="emptyHeartBtn"
+													value="${dto.food_seq}">
+													<img id="emptyHeart" src="../imgs/empty heart.png">
+												</button>
+											</div>
+										</c:otherwise>
+									</c:choose>
                             		</div>
                         		</div>
                     		</div>
@@ -561,21 +613,25 @@
         <!-- footer 끝 -->
     </div>
     <script>
-        $(".material-symbols-outlined").on("click", function (e) {
-            let fontVariationSettings = $(e.target).css("font-variation-settings", "'FILL' 1");
-            if(fontVariationSettings = true){
-                $(e.target).css("font-variation-settings", "'FILL' 1");
-                $(e.target).css("color", "red");
-            }else{
-                $(e.target).css("font-variation-settings", "'FILL' 0");
-                $(e.target).css("color", "black");
-            }
-        })
+    $("#emptyHeartBtn").on("click", function(e) {
+		let yn = confirm("즐겨찾기에 추가하시겠습니까?");
+
+		if (yn) {
+			location.href = "/interest.food";
+		}else {
+			return false;
+		}
+
+	})
+	$("#redHeartBtn").on("click", function(e){
+		alert("즐겨찾기에서 삭제하시겠습니까?");
+		location.href="/delInterest.food";
+	})
         
          
         /* let num =  $(".food_price").html();
-        function numbeComma(num){
-        	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        function numbeComma(num){
+        	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
         console.log(numbeComma(15315)); */
         
