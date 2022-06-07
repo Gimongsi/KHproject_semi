@@ -325,7 +325,7 @@ translateY
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-		<!-- FAQ 보기 -->
+		<!-- FAQ 리스트 -->
 		<div class="title">
         	<h3>FAQ</h3>
     	</div>
@@ -369,7 +369,7 @@ translateY
 				location.href = "/write.info";
 			})
 		</script>
-		<!-- FAQ 보기 끝-->
+		<!-- FAQ 리스트 끝-->
 		
 		<!-- footer -->
 		<div class="container footer">
