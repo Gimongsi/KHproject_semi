@@ -507,7 +507,38 @@ translateY(
 							2022년 00월 00일
 						</div>
 						<div>즐겨찾기</div>
-						<div class="bookmark"></div>
+						<div class="bookmark">
+						<table>
+								<thead>
+									<th>프로모션</th>
+								</thead>
+								<tbody>
+									<c:choose>
+										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
+											<tr>
+												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<th>헬스장 프로모션</th>
+											<c:forEach items="${ugi_dto}" var="dto"> 
+												<tr>
+													<td>${gym_dto.gym_seq}</td>
+													<td><a href="">${ugi_dto.gym_name}</a></td>
+												</tr>
+											</c:forEach>
+											<th>푸드 프로모션</th>
+											<c:forEach items="${listInterest}" var="dto">
+												<tr>
+													<td>${gym_dto.food_seq}</td>
+													<td><a href="">${ufi_dto.food_name}</a></td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -41,7 +41,6 @@
     .container {
         margin: auto;
     }
-
     /* 헤더 */
     .cls_header {
         height: 150px;
@@ -73,7 +72,6 @@
     .headMenu{
         justify-content: end;
     }
-
     /* 로고 */
     .logoImg{
         padding: 0%;
@@ -140,13 +138,11 @@
     .navSearchInput::placeholder{
         color: #FFE4C0;
     }
-
     /* 공백 */
     .empty {
         background-color: white;
         height: 20px;
     }
-
     /* 목록 */
     .title {
         color: #97C4B8;
@@ -224,13 +220,11 @@
         color: white;
         margin: 5px;
     }
-
     .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnPics:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
     }
-
     /* footer */
     .footer{
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -601,7 +595,6 @@
 	$("#food_src").change(function(){
     	setImageFromFile(this, "#food_src_img");
 	});
-
 	function setImageFromFile(input, expression) {
     	if (input.files && input.files[0]) {
         	var reader = new FileReader();
@@ -612,8 +605,8 @@
     	}
 	}
 	
-	function numbeComma(number) {    
-		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+	function numbeComma(number) {    
+		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
     </script>
 </body>
 </html>

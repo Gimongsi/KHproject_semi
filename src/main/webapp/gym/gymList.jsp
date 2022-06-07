@@ -29,25 +29,21 @@
         font-weight: normal;
         font-style: normal;
     }
-
     @font-face {
     font-family: 'LeferiPoint-WhiteObliqueA';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     }
-
     /* 폰트 끝 */
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
     }
-
     .container {
         margin: auto;
     }
-
     /* 헤더 */
     .cls_header {
         height: 150px;
@@ -59,52 +55,41 @@
         font-family: '양진체';
         text-align: center;
     }
-
     .cls_header a {
         color: #97C4B8;
     }
-
     .cls_header a:hover {
         color: #c9d4a9;
     }
-
     .dropdownBtn {
         background-color: #F0FFC2 !important;
         color: #97C4B8;
         border: 1px solid white;
     }
-
     .dropdownBtn:hover {
         color: #9be5d2;
     }
-
     .headDropdown {
         background-color: #F0FFC2 !important;
     }
-
     .headMenu {
         justify-content: end;
     }
-
     /* 로고 */
     .logoImg {
         padding: 0%;
         filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg) brightness(86%) contrast(86%);
     }
-
     .logoImg:hover {
         filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg) brightness(99%) contrast(80%);
     }
-
     /* 로고 이미지 사이즈 */
     .logoImg #logoImg {
         width: 50%;
         height: 50%;
     }
-
     /* 로고 효과 */
     @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
-
     .logoImg {
         position: relative;
         display: inline-block;
@@ -113,68 +98,54 @@
         animation: waviy 1s infinite;
         animation-delay: calc(.1s * var(--i));
     }
-
     @keyframes waviy {
-
         0%,
         40%,
         100% {
             transform: translateY(0)
         }
-
         20% {
             transform: translateY(-20px)
         }
     }
-
     /* 로고 효과 끝 */
     /* 네비바 */
     .navbar {
         background-color: #F0FFC2 !important;
         font-family: '양진체';
     }
-
     .container-fluid a {
         color: #97C4B8 !important;
     }
-
     .container-fluid a:hover {
         color: #9be5d2 !important;
     }
-
     .container-fluid button {
         background-color: #F0FFC2 !important;
         color: #97C4B8 !important;
     }
-
     .navDropdown {
         border: 1px solid white;
         background-color: #d5fcf3 !important;
     }
-
     .container-fluid button:hover {
         background-color: #97C4B8 !important;
         color: #F0FFC2 !important;
     }
-
     .container-fluid span {
         filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg) brightness(103%) contrast(66%);
     }
-
     .navSearchInput {
         border: 1px solid white;
     }
-
     .navSearchInput::placeholder {
         color: #FFE4C0;
     }
-
     /* 공백 */
     .empty {
         background-color: white;
         height: 20px;
     }
-
     /* 운동시설 목록 */
     .title {
         color: #97C4B8;
@@ -184,7 +155,6 @@
         margin-top: 10px;
         font-family: '양진체';
     }
-
     /* 버튼 */
     .btnSpace {
         margin-bottom: 10px;
@@ -208,7 +178,6 @@
         border: 1px solid #73b1a1;
         color: #73b1a1;
     }
-
     /* 운동시설 목록 */
     #searchLocation{
     	text-align: end;
@@ -218,12 +187,10 @@
 		border: 1px solid #97C4B8;
 		margin-right: 10px;
 	}
-
 	#searchLocation:focus {
 		outline: none;
 		border-bottom: 1px solid #b6e0db;
 	}
-
 	#searchLocation::placeholder {
 		color: #adcabf;
 	}
@@ -237,46 +204,38 @@
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: 600;
     }
-
     .card img {
         width: 100%;
         height: 15rem;
     }
-
     .card-title {
         margin-bottom: 0px;
         font-family: 'LeferiPoint-WhiteObliqueA';
         font-weight: bold;
     }
-
     .card a {
         text-decoration: none;
         color: black;
     }
-
     .card h5 {
         padding-left: 10px;
         padding-top: 10px;
     }
-
     .card-body {
         padding: 20px;
         padding-bottom: 10px;
     }
-
     .gymPromo {
         margin-bottom: 80px;
     }
     .gymPlace{
     	margin-bottom: 80px;
     }
-
     /* 즐겨찾기 버튼 */
     .btnFavorite {
         border: none;
         background-color: white;
     }
-
     /* 즐겨찾기 하트 */
     .material-symbols-outlined {
         font-variation-settings:
@@ -285,7 +244,29 @@
             'GRAD' 200,
             'opsz' 48
     }
+    
+    .ImgFavorite {
+	width: 20px;
+	height: 20px;
+	}
 
+	#redHeart {
+	width: 20px;
+	height: 20px;
+	}
+
+	#emptyHeart {
+	width: 20px;
+	height: 20px;
+	}
+
+	.heartBtn {
+	border: none;
+	background-color: white;
+	}
+    
+    
+    
     /* 종류 표시 버튼 */
     .buttonImg {
         background-color: #73b1a1;
@@ -298,7 +279,6 @@
         /* font-family: 'SuncheonB'; */
         font-size: small;
     }
-
     /* footer */
     .footer {
         font-family: 'LeferiPoint-WhiteObliqueA';
@@ -307,21 +287,17 @@
         color: #709c91;
         border-top: 1px solid #c9d4a9;
     }
-
     .footer .row {
         border-bottom: 1px solid #c9d4a9;
     }
-
     .footer .footerInfo {
         padding-block: 3%;
         text-align: center;
     }
-
     .footerMenu {
         padding-block: 2%;
         text-align: center;
     }
-
     .footerMenu a {
         color: #709c91;
         text-decoration: none;
@@ -599,9 +575,26 @@
                                 			<span class="buttonImg" style="margin-right:5px;">G.X</span>
                                 			<span class="buttonImg" style="margin-right:5px;">요가</span>
                                 			<div class="col d-flex justify-content-end favorite">
-                                    			<button type="button" class="btnFavorite">
-                                        			<span class="material-symbols-outlined">favorite</span>
-                                    			</button>
+                                    			<c:choose>
+										<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
+											<c:forEach items="${ugi_dto}" var="ugi_dto">
+												<div class="ImgFavorite">
+													<button type="button" class="heartBtn" id="redHeartBtn"
+														value="${gym_dto.gym_seq}">
+														<img id="redHeart" src="../imgs/red heart.png">
+													</button>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div class="ImgFavorite">
+												<button type="button" class="heartBtn" id="emptyHeartBtn"
+													value="${gym_dto.gym_seq}">
+													<img id="emptyHeart" src="../imgs/empty heart.png">
+												</button>
+											</div>
+										</c:otherwise>
+									</c:choose>
                                 			</div>
                             			</div>
                         			</div>
@@ -642,9 +635,26 @@
                                 			<span class="buttonImg" style="margin-right:5px;">G.X</span>
                                 			<span class="buttonImg" style="margin-right:5px;">요가</span>
                                 			<div class="col d-flex justify-content-end favorite">
-                                    			<button type="button" class="btnFavorite">
-                                        			<span class="material-symbols-outlined">favorite</span>
-                                    			</button>
+                                    			<c:choose>
+										<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
+											<c:forEach items="${ugi_dto}" var="ugi_dto">
+												<div class="ImgFavorite">
+													<button type="button" class="heartBtn" id="redHeartBtn"
+														value="${gym_dto.gym_seq}">
+														<img id="redHeart" src="../imgs/red heart.png">
+													</button>
+												</div>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+											<div class="ImgFavorite">
+												<button type="button" class="heartBtn" id="emptyHeartBtn"
+													value="${gym_dto.gym_seq}">
+													<img id="emptyHeart" src="../imgs/empty heart.png">
+												</button>
+											</div>
+										</c:otherwise>
+									</c:choose>
                                 			</div>
                             			</div>
                         			</div>
@@ -743,7 +753,6 @@
             			<img src="/files/${dtoPromo.gym_src_main}" class="card-img-top">
             			<h5 class="card-title">${dtoPromo.gym_name}</h5>
         			</a>
-
         			<div class="card-body">
             			<p class="card-text d-flex justify-content-end">${dtoPromo.gym_month}개월 ${dtoPromo.gym_price}원</p>
             			<div class="col btnImg d-flex">
@@ -763,6 +772,23 @@
         	})
         	
         })
+        
+        /*즐겨찾기 버튼 효과*/
+        $("#emptyHeartBtn").on("click", function(e) {
+			let yn = confirm("즐겨찾기에 추가하시겠습니까?");
+
+			if (yn) {
+				location.href = "/interest.gym";
+			}else {
+				return false;
+			}
+
+		})
+		$("#redHeartBtn").on("click", function(e){
+			alert("즐겨찾기에서 삭제하시겠습니까?");
+			location.href="/delInterest.gym";
+		})
+        
         
     </script>
 </body>
