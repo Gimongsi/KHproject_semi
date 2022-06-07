@@ -2,41 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>FAQ 보기</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<title>FAQ 수정</title>
+</head>
 <style>
-/* 버튼 */
-.btnSpace {
-	margin-bottom: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
-}
-
-.btnAdd {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: small;
-	color: white;
-	margin: 5px;
-}
-
-.btnAdd:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
@@ -46,30 +32,12 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
-@font-face {
-	font-family: 'SuncheonB';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: '양진체';
 }
 
 .container {
@@ -85,6 +53,7 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -115,7 +84,6 @@
 
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -125,13 +93,11 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
-
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -150,42 +116,14 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
-
-
 %
 {
 transform
-
-
-
-
 :
-
-
-
-
-translateY
-
-
-(
-
-
-
-
+translateY(
 -20px
-
-
-
-
 )
-
-
-
-
 }
 }
 
@@ -193,7 +131,6 @@ translateY
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
-	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -237,47 +174,16 @@ translateY
 	background-color: white;
 	height: 20px;
 }
-
-/* 게시글 스타일 영역*/
-.container-board {
-	width: 80%;
+/* 게시글 스타일 영역 */
+.title {
+	padding: 10px;
+	text-align: center;
 }
 
-.container-board div[class*=row]:not(:first-child) {
-	border: 1px solid lightgrey;
+#content {
+	height: 500px;
 }
-
-.container-board div[class*=col-2] {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-weight: bold;
-	border-left: 1px solid lightgrey;
-	border-right: 1px solid lightgrey;
-}
-
-.container-board div[class*=col]:not(.content-board:last-child) {
-	display: flex;
-	align-items: center;
-}
-
-.container-board div[class*=col]>p {
-	margin: 0;
-	padding: 5px;
-}
-
-.title-board {
-	height: 50px;
-}
-
-.header-board {
-	height: 50px;
-}
-
-.content-board {
-	height: 600px;
-}
-/* 게시글 스타일 끝*/
+/* 게시글 스타일 영역 끝 */
 /* 버튼 영역 */
 .boxBtn {
 	height: 10%;
@@ -313,7 +219,6 @@ textarea {
 	text-align: center;
 }
 /* 버튼 영역 끝 */
-
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -341,13 +246,11 @@ textarea {
 	color: #709c91;
 	text-decoration: none;
 }
-
 /* footer 끝 */
 </style>
-</head>
+
 <body>
 	<div class="container">
-		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -456,37 +359,68 @@ textarea {
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-		<!-- 헤더 끝 -->
-		<div class="empty"></div>
-		<!-- 게시글 영역 -->
-		<div class="container container-board">
-			<div class="row p-5">
-				<h3 class="text-center">FAQ 보기</h3>
-			</div>
-			<div class="row">
-				<div class="col-2 title-board">
-					<p>제목</p>
-				</div>
-				<div class="col-10 title-board">
-					<p>${dto.qna_title}</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2 content-board">
-					<p>내용</p>
-				</div>
-				<div class="col-10 content-board">
-					<p>${dto.qna_content}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 게시글 영역 끝-->
-	<div class="boxBtn">
-		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
 	</div>
 
-	<div class="empty"></div>
+		<!-- FAQ 보기 -->
+		<div class="title">
+			<h3>FAQ</h3>
+		</div>
+		<form id="formModify" action="/modify.info" method="post">
+			<div class="container">
+				<div class="row">
+					<div class="col-2 d-flex justify-content-center align-items-center">
+						<h4>제목</h4>
+					</div>
+					<div class="col-10 p-2">
+						<input type="text" id="qna_seq" class="form-control d-none" name="qna_seq" value="${dto.getQna_seq()}">
+						<input type="text" id="qna_title" class="form-control" name="qna_title" value="${dto.getQna_title()}" readonly>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2 d-flex justify-content-center align-items-center">
+						<h4>내용</h4>
+					</div>
+					<div class="col-10 p-2">
+						<textarea id="content" class="form-control" id="content"
+							name="qna_content" readonly>${dto.getQna_content()}</textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- FAQ 보기 끝-->
+	<div class="boxBtn">
+		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
+		<c:if test="${loginSession.user_auth eq 'manager'}">
+			<button type="button" class="btn btn-primary" id="modifyBtn">수정하기</button>
+			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		</c:if>
+	</div>
+
+	<script>
+		const btnBack = document.getElementById("btnBack");
+
+		btnBack.addEventListener("click", function(e) {
+			location.href = "/toInformation.info";
+		});
+
+		$("#modifyBtn").on("click", function(e) {
+			$("#formModify").submit();
+		});
+
+		let btnDelete = document.getElementById("btnDelete");
+
+		btnDelete.addEventListener("click", function(e) {
+			let qna_seq = $("#qna_seq").val();
+			let answer = confirm("지금 삭제하시면 복구가 불가합니다. 정말 삭제하겠습니까?");
+			console.log(answer);
+			if (answer) {
+				location.href = "/deleteProc.info?qna_seq=${dto.qna_seq}";
+			}
+		})
+	</script>
+
 	<!-- footer -->
 	<div class="container footer">
 		<div class="row footerInfo">
@@ -520,14 +454,7 @@ textarea {
 		</div>
 		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 	</div>
+	</div>
 	<!-- footer 끝 -->
-	<script>
-    
-    const btnBack = document.getElementById("btnBack");
-    
-    	btnBack.addEventListener("click", function(e){
-        	location.href="/user/information_user.jsp";
-    	});
-	</script>
 </body>
 </html>

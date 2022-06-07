@@ -116,7 +116,6 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
 %
 {
@@ -127,6 +126,7 @@ translateY(
 )
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -393,25 +393,26 @@ textarea {
 		</div>
 	</div>
 	<script>
-            $("#btnSave").on("click", function(){
-                if($("#title").val() === ""){
-                    $("#title").val("제목없음");
-                }
-            
-                if($("#content").val() === ""){
-                    alert("내용을 입력하세요.");
-                    $("#content").focus();
-                    return;
-                }
-                $("#writeForm").submit();
-            })
+		$("#btnSave").on("click", function() {
+			if ($("#title").val() === "") {
+				$("#title").val("제목없음");
+			}
 
-            const btnBack = document.getElementById("btnBack");
-    
-            btnBack.addEventListener("click", function(e){
-                location.href="/manager/information/information.jsp";
-            });
-        </script>
+			if ($("#content").val() === "") {
+				alert("내용을 입력하세요.");
+				$("#content").focus();
+				return;
+			}
+			$("#writeForm").submit();
+		})
+
+		const btnBack = document.getElementById("btnBack");
+
+		btnBack.addEventListener("click", function(e) {
+			location.href = "/toInformation.info";
+		});
+	</script>
+	<!-- FAQ 등록 끝 -->
 	<!-- footer -->
 	<div class="container footer">
 		<div class="row footerInfo">

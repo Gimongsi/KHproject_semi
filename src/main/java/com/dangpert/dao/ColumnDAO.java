@@ -11,12 +11,12 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.dangpert.dto.InformationDTO;
+import com.dangpert.dto.CalumnDTO;
 
-public class InformationDAO {
+public class ColumnDAO {
 	private BasicDataSource bds;
 
-	public InformationDAO() {
+	public ColumnDAO() {
 		try {
 			Context iCtx = new InitialContext();
 			Context envCtx = (Context)iCtx.lookup("java:comp/env");
@@ -27,96 +27,99 @@ public class InformationDAO {
 	}
 	
 	public int getNewSeq() throws Exception{
-		String sql = "select infomation_seq.nextval from dual";
+		String sql = "select calumn_seq.nextval from dual";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			int qna_seq = rs.getInt(1);
-			return qna_seq;			
+			int calumn_seq = rs.getInt(1);
+			return calumn_seq;			
 		}
 	}
 
-	public ArrayList<InformationDTO> searchByTitle(String searchKeyword) throws Exception{
-		String sql = "select * from tbl_infomation where title like '%'||?||'%' order by 1 desc";
+	public ArrayList<CalumnDTO> searchByTitle(String searchKeyword) throws Exception{
+		String sql = "select * from tbl_calumn where title like '%'||?||'%' order by 1 desc";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setString(1, searchKeyword);
 			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<InformationDTO> list = new ArrayList<>();
+			ArrayList<CalumnDTO> list = new ArrayList<>();
 			while(rs.next()) {
-				int qna_seq = rs.getInt("qna_seq");
-				String qna_title = rs.getString("qna_title");
-				String qna_content = rs.getString("qna_content");
-				list.add(new InformationDTO(qna_seq,qna_title,qna_content));
+				int calumn_seq = rs.getInt("calumn_seq");
+				String calumn_title = rs.getString("calumn_title");
+				String calumn_content = rs.getString("calumn_content");
+				String calumn_date = rs.getString("calumn_date");
+				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
 			}
 			return list;
 		}
 	}
 
-	public ArrayList<InformationDTO> selectAll() throws Exception{
-		String sql = "select * from tbl_infomation";
+	public ArrayList<CalumnDTO> selectAll() throws Exception{
+		String sql = "select * from tbl_calumn";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<InformationDTO> list = new ArrayList<>();
+			ArrayList<CalumnDTO> list = new ArrayList<>();
 			while(rs.next()) {
-				int qna_seq = rs.getInt("qna_seq");
-				String qna_title = rs.getString("qna_title");
-				String qna_content = rs.getString("qna_content");
-				list.add(new InformationDTO(qna_seq,qna_title,qna_content));
+				int calumn_seq = rs.getInt("calumn_seq");
+				String calumn_title = rs.getString("calumn_title");
+				String calumn_content = rs.getString("calumn_content");
+				String calumn_date = rs.getString("calumn_date");
+				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
 			}
 			return list;
 		}
 	}
 
-	public int delete(int qna_seq) throws Exception{
-		String sql = "delete from tbl_infomation where qna_seq = ?";
+	public int delete(int calumn_seq) throws Exception{
+		String sql = "delete from tbl_calumn where calumn_seq = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
-			pstmt.setInt(1, qna_seq);
+			pstmt.setInt(1, calumn_seq);
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public int modify(InformationDTO dto) throws Exception{
-		String sql = "update tbl_infomation set qna_title=?, qna_content=? where qna_seq=?";
+	public int modify(CalumnDTO dto) throws Exception{
+		String sql = "update tbl_calumn set calumn_title=?, calumn_content=? where calumn_seq=?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
-			pstmt.setInt(3, dto.getQna_seq());
-			pstmt.setString(1, dto.getQna_title());
-			pstmt.setString(2, dto.getQna_content());
+			pstmt.setInt(3, dto.getCalumn_seq());
+			pstmt.setString(1, dto.getCalumn_title());
+			pstmt.setString(2, dto.getCalumn_content());
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public int write(InformationDTO dto) throws Exception{
-		String sql = "insert into tbl_infomation values(infomation_seq.nextval,?,?)";
+	public int write(CalumnDTO dto) throws Exception{
+		String sql = "insert into tbl_calumn values(infomation_seq.nextval,?,?,?)";
 
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, dto.getQna_title());
-			pstmt.setString(2, dto.getQna_content());
+			pstmt.setString(1, dto.getCalumn_title());
+			pstmt.setString(2, dto.getCalumn_content());
+			pstmt.setString(3, dto.getCalumn_date());
 
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public InformationDTO selectBySeq(int qna_seq) throws Exception{
-		String sql = "select * from tbl_infomation where qna_seq = ?";
+	public CalumnDTO selectBySeq(int qna_seq) throws Exception{
+		String sql = "select * from tbl_calumn where qna_seq = ?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -125,9 +128,11 @@ public class InformationDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				String qna_title = rs.getString("qna_title");
-				String qna_content = rs.getString("qna_content");
-				InformationDTO dto = new InformationDTO(qna_seq, qna_title, qna_content);
+				int calumn_seq = rs.getInt("calumn_seq");
+				String calumn_title = rs.getString("calumn_title");
+				String calumn_content = rs.getString("calumn_content");
+				String calumn_date = rs.getString("calumn_date");
+				CalumnDTO dto = new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date);
 				return dto;
 			}
 			return null;
@@ -135,7 +140,7 @@ public class InformationDAO {
 	}
 
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception{
-		String sql = "select count(*) as totalCnt from tbl_infomation";
+		String sql = "select count(*) as totalCnt from tbl_calumn";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -189,4 +194,3 @@ public class InformationDAO {
 	}
 	
 }
-
