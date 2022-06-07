@@ -355,100 +355,94 @@ translateY
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-		<!-- 바디 -->
-		<div class="cls_body">
-			<div class="row justify-content-evenly">
-				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
-					<div class="inner-container-left">
-						<div>
-							<button type="button" id="modifyBtn"
-								style="border: none; background: none;">정보수정</button>
-						</div>
-						<div>
-							<button type="button" id="diaryBtn"
-								style="border: none; background: none;">일기</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="d-flex justify-content-center">
-						<div class="title d-flex justify-content-center mb-4">
-							<h5>오늘의 기록!</h5>
-						</div>
-					</div>
-					<div class="row inner-container-right">
-						<div>
-							<div class="contentsBox">
-								<div class="dropdown">
-									<a class="btn btn-outline-dark dropdown-toggle" href="#"
-										role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-										aria-expanded="false"> 운동부위 </a>
+        <div class="empty"> </div>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="title d-flex justify-content-center mb-4">
+                            <h5>오늘의 기록!</h5>
+                        </div>
+                    </div>
+                    <div class="row inner-container-right">
+                        <div>
+                            <div class="contentsBox">
+	                            <form action="/diaryWrite.diary" method="post" id="partForm">
+	                            	<label class="label" style="width: 60px; margin: 24px 24px;">운동부위</label>
+	                            	<select name="diary_part" style="margin-right: 20px;">
+	                            		<option value="arm" selected>팔</option>
+	                            		<option value="shoulder">어깨</option>
+	                            		<option value="chest">가슴</option>
+	                            		<option value="back">등</option>
+	                            		<option value="belly">복근</option>
+	                            		<option value="lowerBody">하체</option>
+	                            		<option value="etc">기타</option>
+	                            	</select>
+	                            	무게<input type="text" id="weight" name="diary_weight" style="width: 60px; margin-left: 30px;">                        
+	                                
+	                                <textarea class="textBox" style="resize: none;" name="diary_content"></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn btn-primary" id="writeBtn" type="button">일기 올리기</button>
+                        <button class="btn btn-secondary" id="backBtn" type="button">뒤로 가기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 바디 끝 -->
+        <div class="empty"> </div>
+        <!-- 푸터 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="#">이용약관</a></div>
+                <div class="col"><a href="#">개인정보처리방침</a></div>
+                <div class="col"><a href="#">위치정보이용약관</a></div>
+                <div class="col"><a href="#">센터등록요청하기</a></div>
+                <div class="col"><a href="#">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+	    document.getElementById("modifyBtn").onclick = function(){
 
-									<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-										<li><a class="dropdown-item" href="#">팔</a></li>
-										<li><a class="dropdown-item" href="#">어깨</a></li>
-										<li><a class="dropdown-item" href="#">가슴</a></li>
-										<li><a class="dropdown-item" href="#">등</a></li>
-										<li><a class="dropdown-item" href="#">복근</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-									</ul>
-								</div>
-								<textarea class="textBox" style="resize: none;"></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="d-flex justify-content-end mt-4 gap-3">
-						<button class="btn btn-primary" type="button">일기 올리기</button>
-						<button class="btn btn-secondary" type="button">뒤로 가기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-	</div>
-	<script>
-		document.getElementById("modifyBtn").onclick = function() {
 			location.href = "/userModify.user";
 		}
 		document.getElementById("diaryBtn").onclick = function() {
 			location.href = "/userDiary.user";
 		}
+
 	</script>
 </body>
 </html>

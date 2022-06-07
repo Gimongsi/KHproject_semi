@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.activation.DataContentHandler;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -168,7 +169,69 @@ private BasicDataSource bds;
 	}
 	
 	
+	public UserDataDTO DataSelect(int user_seq) throws Exception {
+		String sql = "select * from user_data where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int age = rs.getInt("user_age");
+				int height = rs.getInt("height");
+				int weight = rs.getInt("weight");
+				int final_weight = rs.getInt("final_weight");
+				
+				return new UserDataDTO(user_seq, age, height, weight, final_weight);
+			}
+			return null;
+		}
+	}
 	
+	public int update(String user_pw, int user_seq) throws Exception {	// 회원 DTO 값 수정
+		String sql = "update tbl_user set user_pw=? where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, user_pw);
+			pstmt.setInt(2, user_seq);
+			int rs = pstmt.executeUpdate();
+			
+			return rs;
+		}
+	}
+	
+	public int DataUpdate(int weight, int final_weight, int user_seq) throws Exception {	// 회원 DataDTO 값 수정
+		String sql = "update user_data set weight=?, final_weight=? where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, weight);
+			pstmt.setInt(2, final_weight);
+			pstmt.setInt(3, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+			
+		}
+	}
+	
+	public int delete(int user_seq) throws Exception {
+		String sql = "delete from tbl_user where user_seq=?";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+
+
 	public String getStringDate(Date date) {
 		// 1900년 02월 02일 00시 00분 00초
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
@@ -233,6 +296,8 @@ private BasicDataSource bds;
 			return map;
 		}
 	}
+	
+	
 	
 	
 }

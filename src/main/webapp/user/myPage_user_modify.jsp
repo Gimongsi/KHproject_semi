@@ -114,26 +114,13 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
-
-
 %
 {
 transform
-
-
 :
-
-
-translateY
-(
-
-
+translateY(
 -20px
-
-
 )
-
-
 }
 }
 /* 로고 효과 끝 */
@@ -237,14 +224,15 @@ translateY
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
-			<div class="col-3 logoImg">
-				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
-				</a>
-			</div>
-			<c:choose>
-				<c:when
-					test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
+		<!-- 헤더 -->
+		<c:choose>
+			<c:when
+				test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
+				<div class="row cls_header">
+					<div class="col-3 logoImg">
+						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						</a>
+					</div>
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>${loginSession.user_name} 님 환영합니다!</span>
@@ -257,28 +245,151 @@ translateY
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-				</c:when>
-				<c:when test="${loginSession.user_auth eq 'manager'}">
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<button type="button" class="btn dropdownBtn dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+						<ul class="dropdown-menu headDropdown">
+							<li><a class="dropdown-item" href="/toInformation.info">자주
+									묻는 질문</a></li>
+							<li><a class="dropdown-item" href="#">이벤트</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 헤더 끝 -->
+				<!-- 네비 -->
+				<div class="row cls_nav">
+					<div class="col">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+							<div class="container-fluid">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse"
+									id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+										<li class="nav-item"><a class="nav-link active"
+											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/gymList.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+											role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												근육별 운동법 </a>
+											<ul class="dropdown-menu navDropdown"
+												aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">상체</a></li>
+												<li><a class="dropdown-item" href="#">하체</a></li>
+												<li><a class="dropdown-item" href="#">몸통</a></li>
+												<li><a class="dropdown-item" href="#">전체보기</a></li>
+											</ul></li>
+									</ul>
+									<form action="search.gym" method="post"
+										class="d-flex searchForm">
+										<input class="form-control navSearchInput me-2" type="search"
+											placeholder="운동시설 검색" aria-label="Search">
+										<button class="btn btn-outline-light" type="button">Search!</button>
+									</form>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!-- 네비 끝 -->
+				<div class="empty"></div>
+			</c:when>
+			<c:when test="${loginSession.user_auth eq 'manager'}">
+				<div class="row cls_header">
+					<div class="col-3 logoImg">
+						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						</a>
+					</div>
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>관리자님 환영합니다!</span>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/toSendmail.manager" style="text-decoration: none;">
-							<span>메일보내기</span>
+						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/userSerch.manager?curPage=1"
-							style="text-decoration: none;"> <span>회원 검색</span>
+						<a href="/search.user?curPage=1" style="text-decoration: none;">
+							<span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-				</c:when>
-				<c:otherwise>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<button type="button" class="btn dropdownBtn dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+						<ul class="dropdown-menu headDropdown">
+							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="#">이벤트</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 헤더 끝 -->
+				<!-- 네비 -->
+				<div class="row cls_nav">
+					<div class="col">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+							<div class="container-fluid">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse"
+									id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+										<li class="nav-item"><a class="nav-link active"
+											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/gymList.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+											role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												근육별 운동법 </a>
+											<ul class="dropdown-menu navDropdown"
+												aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">상체</a></li>
+												<li><a class="dropdown-item" href="#">하체</a></li>
+												<li><a class="dropdown-item" href="#">몸통</a></li>
+												<li><a class="dropdown-item" href="#">전체보기</a></li>
+											</ul></li>
+									</ul>
+									<form action="search.gym" method="post"
+										class="d-flex searchForm">
+										<input class="form-control navSearchInput me-2" type="search"
+											placeholder="운동시설 검색" aria-label="Search">
+										<button class="btn btn-outline-light" type="button">Search!</button>
+									</form>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!-- 네비 끝 -->
+				<div class="empty"></div>
+			</c:when>
+			<c:otherwise>
+				<!-- 헤더 -->
+				<div class="row cls_header">
+					<div class="col-3 logoImg">
+						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						</a>
+					</div>
 					<div class="d-none d-md-block col-5"></div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
@@ -288,62 +399,64 @@ translateY
 						<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
 						</a>
 					</div>
-				</c:otherwise>
-			</c:choose>
-			<div class="col p-0 headMenu d-flex justify-content-center">
-				<button type="button" class="btn dropdownBtn dropdown-toggle"
-					data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-				<ul class="dropdown-menu headDropdown">
-					<li><a class="dropdown-item" href="/toInformation.info">자주
-							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
-				</ul>
-			</div>
-		</div>
-		<!-- 헤더 끝 -->
-		<!-- 네비 -->
-		<div class="row cls_nav">
-			<div class="col">
-				<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-					<div class="container-fluid">
-						<button class="navbar-toggler" type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#navbarSupportedContent"
-							aria-controls="navbarSupportedContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
-							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
-						</div>
+					<div class="col p-0 headMenu d-flex justify-content-center">
+						<button type="button" class="btn dropdownBtn dropdown-toggle"
+							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+						<ul class="dropdown-menu headDropdown">
+							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+							<li><a class="dropdown-item" href="#">이벤트</a></li>
+						</ul>
 					</div>
-				</nav>
-			</div>
-		</div>
-		<!-- 네비 끝 -->
+				</div>
+				<!-- 헤더 끝 -->
+				<!-- 네비 -->
+				<div class="row cls_nav">
+					<div class="col">
+						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+							<div class="container-fluid">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#navbarSupportedContent"
+									aria-controls="navbarSupportedContent" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+								<div class="collapse navbar-collapse"
+									id="navbarSupportedContent">
+									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+										<li class="nav-item"><a class="nav-link active"
+											aria-current="page" href="#">칼럼</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/gymList.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+										<li class="nav-item dropdown"><a
+											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+											role="button" data-bs-toggle="dropdown" aria-expanded="false">
+												근육별 운동법 </a>
+											<ul class="dropdown-menu navDropdown"
+												aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">상체</a></li>
+												<li><a class="dropdown-item" href="#">하체</a></li>
+												<li><a class="dropdown-item" href="#">몸통</a></li>
+												<li><a class="dropdown-item" href="#">전체보기</a></li>
+											</ul></li>
+									</ul>
+									<form class="d-flex">
+										<input class="form-control navSearchInput me-2" type="search"
+											placeholder="운동시설 검색" aria-label="Search">
+										<button class="btn btn-outline-light" type="submit">Search!</button>
+									</form>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+				<!-- 네비 끝 -->
+				<div class="empty"></div>
+			</c:otherwise>
+		</c:choose>
+		<!-- 헤더 끝 -->
 		<div class="empty"></div>
 		<!-- 바디 -->
 		<div class="cls_body">
@@ -364,40 +477,68 @@ translateY
 				<div class="col-6">
 					<h3 class="text-center mb-3">회원 정보 수정</h3>
 					<div class="inner-container-right">
-						<div class="mb-5">
-							<input type="text" disabled placeholder="이메일 / 수정불가"> <input
-								type="text" value="${dto.getUser_id()}" disabled>
-						</div>
-						<div>
-							<input type="text" disabled placeholder="현재 비밀번호"> <input
-								type="text">
-						</div>
-						<div>
-							<input type="text" disabled placeholder="변경 후 비밀번호"> <input
-								type="text">
-						</div>
-						<div class="mb-5">
-							<input type="text" disabled placeholder="변경 후 비밀번호 확인"> <input
-								type="text">
-						</div>
-						<div>
-							<input type="text" disabled placeholder="몸무게 수정"> <input
-								type="text">
-						</div>
-						<div>
-							<input type="text" disabled placeholder="목표 몸무게 수정"> <input
-								type="text" name="final_weight">
-						</div>
-						<div>
-							<div class="d-flex justify-content-between">
-								<button class="btn btn-secondary col-2" type="button">회원
-									탈퇴</button>
-								<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
-								<button class="btn btn-secondary col-2" type="button">취소</button>
-								<button class="btn btn-primary col-2" type="button">수정
-									완료</button>
+							<form action="/pwOk.user" method="post" id="pwOkForm">
+							<div class="mb-5">
+								<input type="text" disabled placeholder="이메일 / 수정불가"> <input
+									type="text" value="${dto.getUser_id()}" name="user_id" disabled>
 							</div>
-						</div>
+							<div>
+								<input type="text" disabled placeholder="현재 비밀번호"> <input
+									type="password" id="beforePw" name="beforPw" value="${user_pw}">
+								<button type="button" id="pwOk">비밀번호 확인</button>
+							</div>
+							</form>
+							<c:choose>
+								<c:when test="${rs eq 'no'}">
+									<div>
+										<span>비밀번호가 일치하지 않습니다</span>
+									</div>
+								</c:when>
+								<c:when test="${rs eq 'ok'}">
+									<div>
+										<span>비밀번호가 일치합니다.</span>
+									</div>
+								</c:when>
+							</c:choose>
+						<form action="/userDataModify.user" method="post" id="modifyForm">
+							<input type="text" class="d-none" value="${dto.user_id}" name="user_id">
+							<div>
+								<input type="text" disabled placeholder="변경 후 비밀번호"> <input
+									type="text" id="afterPw" name="user_pw">
+							</div>
+							<div class="mb-5">
+								<input type="text" disabled placeholder="변경 후 비밀번호 확인">
+								<input type="text" id="afterPwCheck" name="user_pw_check">
+							</div>
+							<div>
+								<input type="text" disabled placeholder="몸무게 수정"> <input
+									type="text" id="weight" value="${data_dto.weight}"
+									name="weight">
+							</div>
+							<div>
+								<input type="text" disabled placeholder="목표 몸무게 수정">
+								<c:choose>
+									<c:when test="${data_dto eq null}">
+										<input type="text" name="final_weight">
+									</c:when>
+									<c:otherwise>
+										<input type="text" name="final_weight"
+											value="${data_dto.final_weight}">
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div>
+								<div class="d-flex justify-content-between">
+									<button class="btn btn-secondary col-2" id="deleteBtn"
+										type="button">회원 탈퇴</button>
+									<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
+									<button class="btn btn-secondary col-2" id="cancleBtn" type="button">취소</button>
+									<button class="btn btn-primary col-2" id="submitBtn"
+										type="button">수정 완료</button>
+
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -439,12 +580,40 @@ translateY
 		</div>
 	</div>
 	<script>
-		document.getElementById("modifyBtn").onclick = function() {
+	    document.getElementById("modifyBtn").onclick = function(){
 			location.href = "/userModify.user";
 		}
-		document.getElementById("diaryBtn").onclick = function() {
+		document.getElementById("diaryBtn").onclick = function(){
 			location.href = "/userDiary.user";
 		}
-	</script>
+		document.getElementById("cancleBtn").onclick = function(){
+			location.href = "/toMypage.user"
+		}
+		
+		$("#pwOk").on("click", function(){
+			$("#pwOkForm").submit();
+		})
+		
+		
+		$("#submitBtn").on("click", function(e){ //
+		
+			if($("#afterPw").val() !== $("#afterPwCheck").val()){
+				alert("변경후 비밀번호가 맞지않습니다.");
+				return;
+			}
+			$("#modifyForm").submit();	
+		})
+		
+		$("#deleteBtn").on("click", function(e){
+			if(confirm("정말 회원탈퇴 하시겠습니까?")){
+				alert("회원탈퇴 되었습니다.");
+				location.href = "/userDelete.user";
+			} else {
+				return;
+			}
+			
+		})
+		
+    </script>
 </body>
 </html>
