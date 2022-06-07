@@ -114,28 +114,15 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
 %
 {
 transform
-
-
 :
-
-
 translateY
 (
-
-
 -20px
-
-
 )
-
-
 }
 }
 /* 로고 효과 끝 */
@@ -183,6 +170,15 @@ translateY
 .empty {
 	background-color: white;
 	height: 20px;
+}
+/* 게시글 스타일 영역 */
+.title {
+	padding: 10px;
+	text-align: center;
+}
+
+#content {
+	height: 500px;
 }
 /* footer */
 .footer {
@@ -362,7 +358,6 @@ translateY
 					</c:choose>
 				</tbody>
 			</table>
-		</div>
 		</div>
 		<script>
 			$("#btnWrite").on("click", function() {
