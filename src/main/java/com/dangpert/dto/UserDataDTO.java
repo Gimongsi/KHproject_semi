@@ -3,18 +3,16 @@ package com.dangpert.dto;
 public class UserDataDTO {
 
 	private int user_seq, user_age, height, weight, final_weight;
-	private String user_memo;
 	
 	public UserDataDTO() {}
 
-	public UserDataDTO(int user_seq, int user_age, int height, int weight, int final_weight, String user_memo) {
+	public UserDataDTO(int user_seq, int user_age, int height, int weight, int final_weight) {
 		super();
 		this.user_seq = user_seq;
 		this.user_age = user_age;
 		this.height = height;
 		this.weight = weight;
 		this.final_weight = final_weight;
-		this.user_memo = user_memo;
 	}
 
 	public int getUser_seq() {
@@ -57,18 +55,10 @@ public class UserDataDTO {
 		this.final_weight = final_weight;
 	}
 
-	public String getUser_memo() {
-		return user_memo;
-	}
-
-	public void setUser_memo(String user_memo) {
-		this.user_memo = user_memo;
-	}
-
 	@Override
 	public String toString() {
 		return user_seq + " : " + user_age + " : " + height + " : "
-				+ weight + " : " + final_weight + " : " + user_memo;
+				+ weight + " : " + final_weight + " : ";
 	}
 
 	

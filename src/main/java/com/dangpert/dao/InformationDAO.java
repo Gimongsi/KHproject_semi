@@ -87,7 +87,7 @@ public class InformationDAO {
 	}
 
 	public int modify(InformationDTO dto) throws Exception{
-		String sql = "update tbl_infomation set title=?, content=? where qna_seq=?";
+		String sql = "update tbl_infomation set qna_title=?, qna_content=? where qna_seq=?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){

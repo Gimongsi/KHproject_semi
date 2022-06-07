@@ -12,9 +12,9 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<!-- 구글 아이콘 -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<!-- 구글 아이콘 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -198,7 +198,7 @@
 	font-weight: 600;
 }
 
-.btnAdd, .btnMainPic, .btnPics, .btnBuy {
+.btnAdd, .btnMainPic, .btnPics, .btnBuy, .btnCancle, .btnAddr {
 	background-color: #73b1a1;
 	border: 1px solid #F0FFC2;
 	border-radius: 0.25rem;
@@ -211,7 +211,7 @@
 	margin: 5px;
 }
 
-.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover {
+.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover, .btnCancle:hover, .btnAddr:hover {
 	background-color: #F0FFC2;
 	border: 1px solid #73b1a1;
 	color: #73b1a1;
@@ -246,7 +246,7 @@
 	height: 90%;
 }
 
-.detailPhoto>img {
+.detailPhoto img {
 	width: 100%;
 	height: 100%;
 }
@@ -354,12 +354,11 @@ input::placeholder, textarea::placeholder {
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-		
-<c:choose>
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -433,7 +432,7 @@ input::placeholder, textarea::placeholder {
 			<c:when test="${loginSession.user_auth eq 'manager'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-2"></div>
@@ -512,7 +511,7 @@ input::placeholder, textarea::placeholder {
 				<!-- 헤더 -->
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 						</a>
 					</div>
 					<div class="d-none d-md-block col-5"></div>
@@ -582,19 +581,22 @@ input::placeholder, textarea::placeholder {
 			</c:otherwise>
 		</c:choose>
 		<!-- 헤더 끝 -->
-		<div class="empty"></div>
 		<!-- 타이틀 -->
 		<div class="list-item-wrap">
+			<form id="addForm" action="/addProc.gym" method="post" enctype="multipart/form-data">
 			<div class="row detailHeader">
                 <div class="detailPhoto col-12 col-md-6">
                     <div class="row detailPhotoWrap">
                         <div class="col-12 detailPhoto d-flex justify-content-end">
-                            <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
+                        	<img src="" id="gym_src_img">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btnMainPic" style="width: 100%;" type="button">사진 등록</button>
+                        <%-- 사진 등록 --%>
+                        	<label class="btn btnPics" for="gym_src_main" style="width:100%;">사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src_main" name="gym_src_main" 
+                            style="display: none;">
                         </div>
                     </div>
                 </div>
@@ -610,10 +612,10 @@ input::placeholder, textarea::placeholder {
                             <span class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div calss="row">
+                        <div class="row">
                             <div class="col d-flex justify-content-end">
                                 <input class="gym_input" type="text" id="gym_postcode" name="gym_postcode" style="width: 100px;" placeholder="우편번호" readonly>
-                                <button class="btn btnAdd" type="button" onclick="daumPostcode()">주소찾기</button>
+                                <button class="btn btnAddr" type="button" onclick="daumPostcode()">주소찾기</button>
                             </div>
                             <div class="col-12">
                                 <input class="gym_input" type="text" id="gym_roadAddr" name="gym_roadAddr" placeholder="도로명주소" readonly>
@@ -648,7 +650,7 @@ input::placeholder, textarea::placeholder {
                              <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
                              <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
                         	</div>
-                        	<div class="col-3">
+                        	<%--<div class="col-3">
                              <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
                              <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
                         	</div>
@@ -659,7 +661,7 @@ input::placeholder, textarea::placeholder {
                         	<div class="col-3">
                              <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
                              <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
-                        	</div>
+                        	</div> --%>
                         </div>
                         <div class="empty"></div>
                         <div class="col d-flex justify-content-center">
@@ -697,8 +699,7 @@ input::placeholder, textarea::placeholder {
 					<div class="row">
 						<div class="col content">
 							<textarea id="gym_time" name="gym_time"
-								placeholder="예)AM 08:00 ~ PM 22:00
-                            연중무휴"></textarea>
+								placeholder="예)AM 08:00 ~ PM 22:00 연중무휴"></textarea>
 						</div>
 					</div>
 					<div class="empty"></div>
@@ -724,8 +725,9 @@ input::placeholder, textarea::placeholder {
 							<h4 class="gymContentsText">운동시설 사진</h4>
 						</div>
 						<div class="col d-flex justify-content-center">
-							<button class="btn btnPics" type="button"
-								style="margin-bottom: 50px;">사진 등록</button>
+							<label class="btn btnPics" for="input-file"
+								style="margin-bottom: 50px;">사진 등록</label>
+							<input type="file" id="input-file" style="display: none;">
 						</div>
 					</div>
 					<div class="row content_img">
@@ -775,17 +777,17 @@ input::placeholder, textarea::placeholder {
 							<div class="col content" id="map"
 								style="width: 500px; height: 400px;"></div>
 						</div>
-
-						<!-- 카카오 맵 -->
+						<!-- 카카오 맵 끝 -->
 					</div>
 					<div class="empty"></div>
 				</div>
 				<hr
 					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
 			</div>
+			</form>
 			<div class="row">
 				<div class="col-12 d-flex justify-content-end">
-					<button type="button" class="btn btnAdd">취소</button>
+					<button type="button" class="btn btnCancle">취소</button>
 					<button type="button" class="btn btnAdd">완료</button>
 				</div>
 			</div>
@@ -828,105 +830,137 @@ input::placeholder, textarea::placeholder {
 	</div>
 
 	<script>
-		/* 다음 주소 */
-		function daumPostcode() {
-			new daum.Postcode(
-					{
-						oncomplete : function(data) {
-							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	$(".btnCancle").on("click", function(){
+    	location.href = "/list.gym";
+	})
+	
+	$(".btnAdd").on("click", function(){
+		let regexPrice = /[0-9]/;
+		
+		if ($("#gym_src_main").val() === "") {
+			alert("사진 등록은 필수입니다.");
+			$("#gym_src").focus();
+			return;
+		}
+		if ($("#gym_name").val() === "") {
+			alert("상호를 입력하세요.");
+			$("#gym_name").focus();
+			return;
+		}
+		if ($("#gym_comment").val() === "") {
+			alert("설명을 입력하세요.");
+			$("#gym_comment").focus();
+			return;
+		}
+		if (!regexPrice.test($("#gym_price").val())) {
+			alert("가격을 숫자로 입력하세요.");
+			$("#gym_price").focus();
+			return;
+		}
+		
+		$("#addForm").submit();
+	})
+		
+	// 이미지 미리보기
+	$("#gym_src_main").change(function(){
+    	setImageFromFile(this, "#gym_src_img");
+	});
 
-							// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-							var roadAddr = data.roadAddress; // 도로명 주소 변수
-							var extraRoadAddr = ''; // 참고 항목 변수
+	function setImageFromFile(input, expression) {
+    	if (input.files && input.files[0]) {
+        	var reader = new FileReader();
+        	reader.onload = function (e) {
+          	  $(expression).attr("src", e.target.result);
+        	}
+        reader.readAsDataURL(input.files[0]);
+    	}
+	}
+	
+	/* 다음 주소 */
+	function daumPostcode() {
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-							if (data.bname !== ''
-									&& /[동|로|가]$/g.test(data.bname)) {
-								extraRoadAddr += data.bname;
-							}
-							// ㅇㅇ시 ㅇㅇ구 엑스트라 주소
-							if (extraRoadAddr !== '') {
-								extraRoadAddr = data.sido + ' ' + data.sigungu;
-							}
+						// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var roadAddr = data.roadAddress; // 도로명 주소 변수
+						var extraRoadAddr = ''; // 참고 항목 변수
 
-							// 우편번호와 주소 정보를 해당 필드에 넣는다.
-							document.getElementById('gym_postcode').value = data.zonecode;
-							document.getElementById("gym_roadAddr").value = roadAddr;
-							// 커서를 상세주소 필드로 이동한다.
-							document.getElementById("gym_detailAddr").focus();
-
-							// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-							if (roadAddr !== '') {
-								document.getElementById("gym_extraAddr").value = extraRoadAddr;
-							} else {
-								document.getElementById("gym_extraAddr").value = '';
-							}
+						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						if (data.bname !== ''
+								&& /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
 						}
-					}).open();
-		};
+						// ㅇㅇ시 ㅇㅇ구 엑스트라 주소
+						if (extraRoadAddr !== '') {
+							extraRoadAddr = data.sido + ' ' + data.sigungu;
+						}
 
-		/* 다음 주소 끝 */
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						document.getElementById('gym_postcode').value = data.zonecode;
+						document.getElementById("gym_roadAddr").value = roadAddr;
+						// 커서를 상세주소 필드로 이동한다.
+						document.getElementById("gym_detailAddr").focus();
+						
+						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+						if (roadAddr !== '') {
+							document.getElementById("gym_extraAddr").value = extraRoadAddr;
+						} else {
+							document.getElementById("gym_extraAddr").value = '';
+						}
+					}
+				}).open();
+	};
 
-		/* 카카오 맵 */
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
+	/* 카카오 맵 */
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level : 3 // 지도의 확대 레벨
+	};
 
-		// 지도를 생성합니다    
-		var map = new kakao.maps.Map(mapContainer, mapOption);
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption);
 
-		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new kakao.maps.services.Geocoder();
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
 
-		// 주소로 좌표를 검색합니다
-		let gym_extraAddr = $("#gym_roadAddr").val();
-		console.log(gym_extraAddr);
-		geocoder
-				.addressSearch(
-						gym_extraAddr,
-						function(result, status) {
+	// 주소로 좌표를 검색합니다
+	let gym_extraAddr = $("#gym_roadAddr").val();
+	console.log(gym_extraAddr);
+	geocoder
+			.addressSearch(
+					gym_extraAddr,
+					function(result, status) {
 
-							// 정상적으로 검색이 완료됐으면 
-							if (status === kakao.maps.services.Status.OK) {
+						// 정상적으로 검색이 완료됐으면 
+						if (status === kakao.maps.services.Status.OK) {
 
-								var coords = new kakao.maps.LatLng(result[0].y,
-										result[0].x);
+							var coords = new kakao.maps.LatLng(result[0].y,
+									result[0].x);
+							
+							// 결과값으로 받은 위치를 마커로 표시합니다
+							var marker = new kakao.maps.Marker({
+								map : map,
+								position : coords
+							});
 
-								// 결과값으로 받은 위치를 마커로 표시합니다
-								var marker = new kakao.maps.Marker({
-									map : map,
-									position : coords
-								});
+							// 인포윈도우로 장소에 대한 설명을 표시합니다
+							var infowindow = new kakao.maps.InfoWindow(
+									{
+										content : '<div style="width:150px;text-align:center;padding:6px 0;">'
+												+ $("#gym_name").html()
+												+ '</div>'
+									});
+							infowindow.open(map, marker);
 
-								// 인포윈도우로 장소에 대한 설명을 표시합니다
-								var infowindow = new kakao.maps.InfoWindow(
-										{
-											content : '<div style="width:150px;text-align:center;padding:6px 0;">'
-													+ $("#gym_name").html()
-													+ '</div>'
-										});
-								infowindow.open(map, marker);
-
-								// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-								map.setCenter(coords);
-							}
-						});
-		// function textareaHeight(){
-		//     let textEle = $("textarea");
-		//     textEle[0].style.height = "auto";
-		//     let textEleHeight = textEle.prop("scrollHeight");
-		//     textEle.css(textEleHeight);
-		// };
-
-		// let textEle = $("textarea");
-		// textEle.on("keyup", function(){
-		//     textareaHeight();
-		// });
+							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+							map.setCenter(coords);
+						}
+					});
 	</script>
 </body>
 </html>

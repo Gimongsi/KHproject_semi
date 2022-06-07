@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- 다음 주소 -->
+   <script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -207,6 +210,27 @@
     }
 
     /* 운동시설 목록 */
+    #searchLocation{
+    	text-align: end;
+		width: 25%;
+		font-weight: 600;
+		height: 40px;
+		border: 1px solid #97C4B8;
+		margin-right: 10px;
+	}
+
+	#searchLocation:focus {
+		outline: none;
+		border-bottom: 1px solid #b6e0db;
+	}
+
+	#searchLocation::placeholder {
+		color: #adcabf;
+	}
+	
+	#location{
+		color: #97C4B8;
+	}
     .card {
         width: 30rem;
         border: 1px solid #c9d4a9;
@@ -243,6 +267,9 @@
     .gymPromo {
         margin-bottom: 80px;
     }
+    .gymPlace{
+    	margin-bottom: 80px;
+    }
 
     /* 즐겨찾기 버튼 */
     .btnFavorite {
@@ -253,9 +280,9 @@
     /* 즐겨찾기 하트 */
     .material-symbols-outlined {
         font-variation-settings:
-            'FILL' 0,
+            'FILL' 1,
             'wght' 400,
-            'GRAD' 0,
+            'GRAD' 200,
             'opsz' 48
     }
 
@@ -304,8 +331,7 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
-        
-<c:choose>
+		<c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -536,292 +562,100 @@
         <div class="empty"></div>
         <div class="row title">
             <div class="col d-flex justify-content-center">
-                <h1>나에게 맞는 운동시설은?</h1>
+                <h1>내 주변 운동시설 둘러보기</h1>
             </div>
         </div>
-        <!-- 등록 버튼 / 위치 설정 -->
+        <div class="gymPlace">
+        <!-- 주변 운동시설 목록 -->
         <div class="row btnSpace">
-            <div class="col d-flex justify-content-end">위치설정&nbsp;
-                <span class="material-symbols-outlined">add_circle</span>
+            <div class="col d-flex justify-content-end">
+            	<input class="form-control" type="text" id="searchLocation" name="searchLocation" placeholder="관심 지역 검색">
+                <span class="material-symbols-outlined d-flex align-items-center" id="location" style="cursor:pointer;">add_circle</span>
             </div>
             <div class="row d-flex justify-content-end align-items-end">
                 <div class="col">
                     <button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
                 </div>
-                설정위치 > 서울 용산구
             </div>
         </div>
+            <div class="row cardListLocation">
+            	<c:choose>
+            		<c:when test="${gym_dto.size() == 0}">
+            			<div>등록된 프로모션이 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach items="${gym_dto}" var="dtoPromo">
+            				<div class="col-6 col-md-4 d-flex justify-content-center">
+                    			<div class="card">
+                        			<a href="/detail.gym?gym_seq=${dtoPromo.gym_seq}">
+                            			<img src="/files/${dtoPromo.gym_src_main}" class="card-img-top">
+                            			<h5 class="card-title">${dtoPromo.gym_name}</h5>
+                        			</a>
+                        			<div class="card-body">
+                            			<p class="card-text d-flex justify-content-end">${dtoPromo.gym_month}개월 ${dtoPromo.gym_price}원</p>
+                            			<div class="col btnImg d-flex">
+                                			<span class="buttonImg" style="margin-right:5px;">헬스</span>
+                                			<span class="buttonImg" style="margin-right:5px;">P.T</span>
+                                			<span class="buttonImg" style="margin-right:5px;">G.X</span>
+                                			<span class="buttonImg" style="margin-right:5px;">요가</span>
+                                			<div class="col d-flex justify-content-end favorite">
+                                    			<button type="button" class="btnFavorite">
+                                        			<span class="material-symbols-outlined">favorite</span>
+                                    			</button>
+                                			</div>
+                            			</div>
+                        			</div>
+                    			</div>
+                			</div>
+            			</c:forEach>
+            		</c:otherwise>
+            	</c:choose>
+            </div>
+        </div>
+        <!-- 주변 운동시설 목록 끝 -->
+        <div class="empty"> </div>
         <!-- 운동시설 프로모션 목록 -->
+        <div class="row title">
+            <div class="col d-flex justify-content-center">
+                <h1>나에게 맞는 운동시설은?</h1>
+            </div>
+        </div>
         <div class="gymPromo">
             <div class="row cardList">
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <span class="buttonImg" style="margin-right:5px;">요가</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex justify-content-center">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <c:choose>
+            		<c:when test="${gym_dto.size() == 0}">
+            			<div>등록된 프로모션이 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach items="${gym_dto}" var="dtoPromo">
+            				<div class="col-6 col-md-4 d-flex justify-content-center">
+                    			<div class="card">
+                        			<a href="/detail.gym?gym_seq=${dtoPromo.gym_seq}">
+                            			<img src="/files/${dtoPromo.gym_src_main}" class="card-img-top">
+                            			<h5 class="card-title">${dtoPromo.gym_name}</h5>
+                        			</a>
+                        			<div class="card-body">
+                            			<p class="card-text d-flex justify-content-end">${dtoPromo.gym_month}개월 ${dtoPromo.gym_price}원</p>
+                            			<div class="col btnImg d-flex">
+                                			<span class="buttonImg" style="margin-right:5px;">헬스</span>
+                                			<span class="buttonImg" style="margin-right:5px;">P.T</span>
+                                			<span class="buttonImg" style="margin-right:5px;">G.X</span>
+                                			<span class="buttonImg" style="margin-right:5px;">요가</span>
+                                			<div class="col d-flex justify-content-end favorite">
+                                    			<button type="button" class="btnFavorite">
+                                        			<span class="material-symbols-outlined">favorite</span>
+                                    			</button>
+                                			</div>
+                            			</div>
+                        			</div>
+                    			</div>
+                			</div>
+            			</c:forEach>
+            		</c:otherwise>
+            	</c:choose>
             </div>
         </div>
         <!-- 운동시설 프로모션 목록 끝 -->
-        <div class="empty"> </div>
-        <!-- 주변 운동시설 목록 -->
-        <div class="row title">
-            <div class="col d-flex justify-content-center">
-                <h1>내 주변 운동시설 둘러보기</h1>
-            </div>
-        </div>
-        <div class="gymPromo">
-            <div class="row cardList">
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title" id="gym_name" name="gym_name">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title" id="gym_name" name="gym_name">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title" id="gym_name" name="gym_name">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title" id="gym_name" name="gym_name">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title" id="gym_name" name="gym_name">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 d-flex justify-content-center">
-                    <div class="card">
-                        <a href="">
-                            <img src="/My/imgs/gym01.jpg" class="card-img-top">
-                            <h5 class="card-title" id="gym_name" name="gym_name">아현 운동하는날</h5>
-                        </a>
-                        <div class="card-body">
-                            <p class="card-text">친절함</p>
-                            <div class="col btnImg d-flex">
-                                <span class="buttonImg" style="margin-right:5px;">헬스</span>
-                                <span class="buttonImg" style="margin-right:5px;">P.T</span>
-                                <span class="buttonImg" style="margin-right:5px;">G.X</span>
-                                <div class="col d-flex justify-content-end favorite">
-                                    <button type="button" class="btnFavorite">
-                                        <span class="material-symbols-outlined">favorite</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 헬린이 프로모션 목록 끝 -->
         <div class="empty"> </div>
         <!-- footer -->
         <div class="container footer">
@@ -853,23 +687,83 @@
         <!-- footer 끝 -->
     </div>
     <script>
-        $(".btnFavorite").on("click", function (e) {
-            let fontVariationSettings = $(e.target).css("font-variation-settings", "'FILL' 1");
-            console.log(fontVariationSettings);
-            if (fontVariationSettings = true) {
-                $(e.target).css("font-variation-settings", "'FILL' 1");
-                $(e.target).css("color", "red");
-            } else {
-                $(e.target).css("font-variation-settings", "'FILL' 0");
-                $(e.target).css("color", "black");
-            }
-
-        })
-
         $(".btnAdd").on("click", function(){
-        	location.href = "/gymAdd.gym";
+        	location.href = "/add.gym";
         })
+        $("#location").on("click", function(){
+        	let location = $("#searchLocation").val();
+        	console.log(location);
+        	
+        	$.ajax({
+        		url: "/searchProc.gym?searchLocation="+location
+        		, type: "get"
+        		, dataType: "json"
+        		, success: function(data){
+        			console.log(data);
+        			$(".cardListLocation").empty();
+        			if(data.length == 0){
+        				let div = $("<div>").html("아직 준비중인 지역입니다.");
+        				$(".cardListLocation").append(div);
+        			}else {
+        				for(let dtoPromo of data){
+        					console.log(dtoPromo);
+        					
+        					let img = $('<img class="card-img-top">').attr("src", "/files/"+dtoPromo.gym_src_main)
+        					let h5 = $('<h5 class="card-title">').html(dtoPromo.gym_name)
+        					let a = $('<a>').attr("href", "/detail.gym?gym_seq="+dtoPromo.gym_seq).append(img, h5);
+        					
+        					
+        					let spanFavorite = $('<span class="material-symbols-outlined">').html('favorite');
+        					let button = $('<button type="button" class="btnFavorite">').append(spanFavorite);
+        					let div3 = $('<div class="col d-flex justify-content-end favorite">').append(button);
+        					let span1 = $('<span class="buttonImg" style="margin-right:5px;">').html('헬스');
+        					let span2 = $('<span class="buttonImg" style="margin-right:5px;">').html('P.T');
+        					let span3 = $('<span class="buttonImg" style="margin-right:5px;">').html('G.X');
+        					let span4 = $('<span class="buttonImg" style="margin-right:5px;">').html('요가');
+        					let div4 = $('<div class="col btnImg d-flex">').append(span1, span2, span3, span4, div3);
+        					let p = $('<p class="card-text d-flex justify-content-end">').html(dtoPromo.gym_month + '개월 ' + dtoPromo.gym_price + '원');
+        					let div5 = $('<div class="card-body">').append(p, div4);
+        					
+        					let div2 = $('<div class="card">').append(a, div5);
+        					
+        					let div = $('<div class="col-6 col-md-4 d-flex justify-content-center">').append(div2);
+        					
+        					$(".cardListLocation").append(div);
+        				
+        				
+        				}
+        			}
+        		}, error: function(e){
+        			console.log(e);
+        		}
+        		
+        /* <div class="col-6 col-md-4 d-flex justify-content-center">
+    			<div class="card">
+        			<a href="/detail.gym?gym_seq=${dtoPromo.gym_seq}">
+            			<img src="/files/${dtoPromo.gym_src_main}" class="card-img-top">
+            			<h5 class="card-title">${dtoPromo.gym_name}</h5>
+        			</a>
 
+        			<div class="card-body">
+            			<p class="card-text d-flex justify-content-end">${dtoPromo.gym_month}개월 ${dtoPromo.gym_price}원</p>
+            			<div class="col btnImg d-flex">
+                			<span class="buttonImg" style="margin-right:5px;">헬스</span>
+                			<span class="buttonImg" style="margin-right:5px;">P.T</span>
+                			<span class="buttonImg" style="margin-right:5px;">G.X</span>
+                			<span class="buttonImg" style="margin-right:5px;">요가</span>
+                			<div class="col d-flex justify-content-end favorite">
+                    			<button type="button" class="btnFavorite">
+                        			<span class="material-symbols-outlined">favorite</span>
+                    			</button>
+                			</div>
+            			</div>
+        			</div>
+    			</div>
+			</div> */
+        	})
+        	
+        })
+        
     </script>
 </body>
 </html>

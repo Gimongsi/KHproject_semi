@@ -175,6 +175,83 @@
 <body>
     <div class="container">
         <!-- 헤더 -->
+        <div class="row cls_header">
+            <div class="col-3 logoImg">
+                <a href="#">
+                    <img id="logoImg" src="/imgs/dpt_Logo.png">
+                </a>
+            </div>
+            <div class="d-none d-md-block col-5"> </div>
+            <div class="col p-0 headMenu d-flex justify-content-center">
+                <a href="/login.user" style="text-decoration: none;">
+                    <span>로그인</span>
+                </a>
+            </div>
+            <div class="col p-0 headMenu d-flex justify-content-center">
+                <a href="/toSignup.user" style="text-decoration: none;">
+                    <span>회원가입</span>
+                </a>
+            </div>
+            <div class="col p-0 headMenu d-flex justify-content-center">
+                    <button type="button" class="btn dropdownBtn dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        고객센터
+                    </button>
+                    <ul class="dropdown-menu headDropdown">
+                        <li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
+                        <li><a class="dropdown-item" href="#">이벤트</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                    </ul>
+            </div>
+        </div>
+        <!-- 네비 -->
+        <div class="row cls_nav">
+            <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">칼럼</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">내 주변 운동시설</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">특가 식품</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        근육별 운동법
+                                    </a>
+                                    <ul class="dropdown-menu navDropdown" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">상체</a></li>
+                                        <li><a class="dropdown-item" href="#">하체</a></li>
+                                        <li><a class="dropdown-item" href="#">몸통</a></li>
+                                        <li><a class="dropdown-item" href="#">전체보기</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <input class="form-control navSearchInput me-2" type="search" placeholder="운동시설 검색" aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">Search!</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- 네비 끝 -->
+
        
 <c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
@@ -402,6 +479,7 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+
         <!-- 헤더 끝 -->
         <div class="empty"> </div>
 
@@ -419,7 +497,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/560.jpg" class="card-img-top h-100">
+                        <img src="/imgs/560.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">거북목 교정 운동법</h5>
                         </div>
@@ -427,7 +505,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/alora-griffiths-WX7FSaiYxK8-unsplash.jpg" class="card-img-top h-100">
+                        <img src="/imgs/alora-griffiths-WX7FSaiYxK8-unsplash.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">부상 위험을 줄이는 운동 전 스트레칭</h5>
                         </div>
@@ -435,7 +513,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/back-pain-g7ebabea1c_640.jpg" class="card-img-top h-100">
+                        <img src="/imgs/back-pain-g7ebabea1c_640.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">허리디스크가 의심되세요?</h5>
                         </div>
@@ -443,7 +521,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg" class="card-img-top h-100">
+                        <img src="/imgs/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">규칙적인 운동의 영향</h5>
                         </div>
@@ -451,7 +529,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/hermes-rivera-Ww8eQWjMJWk-unsplash (1).jpg" class="card-img-top h-100">
+                        <img src="/imgs/hermes-rivera-Ww8eQWjMJWk-unsplash (1).jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">간헐적 단식! 누가, 어떻게 해야 효과적인가?</h5>
                         </div>
@@ -459,7 +537,7 @@
                 </div>
                 <div class="col">
                     <div class="card w-75 h-100">
-                        <img src="/resources/근육통.jpg" class="card-img-top h-100">
+                        <img src="/imgs/근육통.jpg" class="card-img-top h-100">
                         <div class="card-body">
                             <h5 class="card-title text-center">근육통 있을 때 운동해도 될까?</h5>
                         </div>

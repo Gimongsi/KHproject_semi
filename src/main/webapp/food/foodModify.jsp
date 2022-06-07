@@ -211,7 +211,7 @@
     input::placeholder, textarea::placeholder{
         color: #adcabf;
     }
-    .btnSave, .btnAddPic, .btnCancle, .btnDel {
+    .btnSave, .btnAddPic, .btnCancle, .btnDel, .btnPics {
         background-color: #73b1a1;
         border: 1px solid #F0FFC2;
         border-radius: 0.25rem;
@@ -225,7 +225,7 @@
         margin: 5px;
     }
 
-    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover {
+    .btnSave:hover, .btnAddPic:hover, .btnCancle:hover, .btnDel:hover, .btnPics:hover {
         background-color: #F0FFC2;
         border: 1px solid #73b1a1;
         color: #73b1a1;
@@ -258,9 +258,8 @@
 
 <body>
     <div class="container">
-        <!-- 헤더 -->        
-		<c:choose>
-
+        <!-- 헤더 -->
+        <c:choose>
 			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
@@ -486,8 +485,6 @@
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
-        <!-- 헤더 끝 -->
-        <div class="empty"> </div>
         <!-- 식품 프로모션 목록 -->
         <div class="empty"></div>
         <div class="row title">
@@ -501,19 +498,21 @@
                 <div class="col d-flex justify-content-center">
                     <div class="card">
                             <c:if test="${empty dtoPic}">
-								<div class="col"><a>사진 없음</a></div>
-								<input type="file" class="form-control inputCls">
+								<div class="col p-4" style="text-align: center;">사진 없음</div>
+								<label class="btn btnPics" for="food_src" style="width:100%;">사진 등록</label>
+                            	<input type="file" class="form-control inputCls" id="food_src" name="food_src" style="display: none;">
 							</c:if>
 							<c:if test="${not empty dtoPic}">
-								<div class="col header-board">
-									<img src="/files/${dtoPic.food_src}" class="card-img-top">
-								</div>
+									<img src="/files/${dtoPic.food_src}" class="card-img-top" id="food_src_img">
+									<%-- 사진 등록 --%>
+									<label class="btn btnPics" for="food_src">사진 수정</label>
+                            		<input type="file" class="form-control inputCls" id="food_src" name="food_src" style="display: none;">
 							</c:if>
-                            <button class="btn btnAddPic" type="button">사진 등록</button>
                         <div class="card-body">
                         	<div class="input-group">
                         		<span class="input-group-text">제품명</span>
                             	<input class="form-control inputCls p-3" type="text" id="food_name" name="food_name" value="${dto.food_name}">
+                            	<input class="form-control inputCls d-none" type="text" id="food_seq" name="food_seq" value="${dto.food_seq}">
                         	</div>
                         	<div class="input-group">
                         		<span class="input-group-text">설명</span>
@@ -543,6 +542,7 @@
             <div class="col btnSpace d-flex justify-content-center">
                 <button class="btn btnDel" type="button">삭제</button>
             </div>
+        </div>
         </div>
         <div class="empty"> </div>
         <!-- footer -->
@@ -574,7 +574,6 @@
         </div>
         <!-- footer 끝 -->
     </div>
-    </div>
     <script>
     $(".btnCancle").on("click", function(){
     	location.href = "/modifyList.food?curPage=1";
@@ -601,11 +600,34 @@
 			$("#food_com").focus();
 			return;
 		}
-		$("#modifyForm").submit();
+		let answer = confirm("정말 수정하시겠습니까?");
+		if(answer){
+			$("#modifyForm").submit();
+		}
 	})
 	
-	function numbeComma(number) {    
-		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+	$(".btnDel").on("click", function(){
+		let answer = confirm("정말 삭제하시겠습니까?");
+		console.log(answer);
+		if(answer){
+			location.href = "/deleteProc.food?food_seq=${dto.food_seq}";
+		}
+	})
+		
+	// 이미지 미리보기
+	$("#food_src").change(function(){
+    	setImageFromFile(this, "#food_src_img");
+	});
+
+	function setImageFromFile(input, expression) {
+    	if (input.files && input.files[0]) {
+        	var reader = new FileReader();
+        	reader.onload = function (e) {
+          	  $(expression).attr("src", e.target.result);
+        	}
+        reader.readAsDataURL(input.files[0]);
+    	}
+	}
     </script>
 </body>
 </html>
