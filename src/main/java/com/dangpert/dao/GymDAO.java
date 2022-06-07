@@ -10,8 +10,7 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.dangpert.dto.FoodDTO;
-import com.dangpert.dto.FoodFolderDTO;
+
 import com.dangpert.dto.GymFolderDTO;
 import com.dangpert.dto.GymInfoDTO;
 import com.dangpert.dto.UserDTO;
@@ -193,7 +192,7 @@ public class GymDAO {
 	}
 	
 	public int addPic(GymFolderDTO dto) throws Exception{
-		String sql = "insert into tbl_food_folder values(?, ?)";
+		String sql = "insert into tbl_gym_folder values(?, ?)";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -264,6 +263,22 @@ public class GymDAO {
 			}
 			return list;
 		}
+	}
+	
+	public int delInterestGym(int gym_seq, int user_seq) throws Exception {
+		String sql = "delete from user_gym_interest values(? , ?)";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, gym_seq);
+			pstmt.setInt(2, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+			
+		}
+		
 	}
 	
 }

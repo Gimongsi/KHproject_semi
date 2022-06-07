@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>FAQ 수정</title>
+<title>FAQ</title>
 </head>
 <style>
 /* 폰트 */
@@ -117,40 +118,13 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
-
-
-
-
 %
 {
 transform
-
-
-
-
 :
-
-
-
-
-translateY
-
-
-(
-
-
-
-
+translateY(
 -20px
-
-
-
-
 )
-
-
-
-
 }
 }
 /* 로고 효과 끝 */
@@ -200,51 +174,7 @@ translateY
 	background-color: white;
 	height: 20px;
 }
-/* 게시글 스타일 영역 */
-.title {
-	padding: 10px;
-	text-align: center;
-}
 
-#content {
-	height: 500px;
-}
-/* 게시글 스타일 영역 끝 */
-/* 버튼 영역 */
-.boxBtn {
-	height: 10%;
-}
-
-.container {
-	width: 80%;
-	height: 100%;
-	padding: 10px;
-}
-
-form, table {
-	height: 100%;
-	text-align: center;
-}
-
-tr:first-child {
-	height: 10%;
-}
-
-input {
-	width: 100%;
-	height: 100%;
-}
-
-textarea {
-	width: 100%;
-	height: 100%;
-	resize: none;
-}
-
-.boxBtn {
-	text-align: center;
-}
-/* 버튼 영역 끝 */
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -386,96 +316,50 @@ textarea {
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
 	</div>
-	<!-- FAQ 수정 -->
-	<div class="title">
-		<<<<<<< HEAD
-		<h3>FAQ 수정</h3>
-	</div>
-	<form id="modifyForm" action="/modifyProc.info" method="post">
-		<input class="d-none" value="${dto.qna_seq}" name="qna_seq"
-			id="qna_seq">
-		<div class="container">
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>제목</h4>
-				</div>
-				<div class="col-10 p-2">
-					<input type="text" class="form-control" id="title" name="qna_title"
-						value="${dto.qna_title}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>내용</h4>
-				</div>
-				<div class="col-10 p-2">
-					<textarea id="content" class="form-control" id="content"
-						name="qna_content">${dto.qna_content}</textarea>
-				</div>
+	<!-- 본문-->
+	<div class="container">
+		<div class="row boxBtn-top">
+			<div class="col d-flex justify-content-end">
+				<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
 			</div>
 		</div>
-	</form>
-	<div class="boxBtn">
-		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnModify">수정</button>
+	</div>
+	<div class="container">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-md-1">글번호</th>
+					<th class="col-md-5">제목</th>
+				</tr>
+			</thead>
+			<tbody class="body-board">
+				<c:choose>
+					<c:when test="${list.size() == 0}">
+						<tr>
+							<td colspan=5>등록된 게시글이 없습니다.</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<td>${dto.qna_seq}</td>
+								<td>${dto.qna_title}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
 	</div>
 
-	<script>
-    $("#btnModify").on("click", function(){
-=======
-		<h3>FAQ 수정</h3>
-	</div>
-	<form id="modifyForm" action="/modifyProc.info" method="post">
-		<div class="container">
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>제목</h4>
-				</div>
-				<div class="col-10 p-2">
-					<input type="text" class="form-control" id="title" name="title"
-						value="${dto.qna_title}">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>내용</h4>
-				</div>
-				<div class="col-10 p-2">
-					<textarea id="content" class="form-control" id="content"
-						name="content" value="${dto.qna_content}"></textarea>
-				</div>
-			</div>
-		</div>
-	</form>
-	<div class="boxBtn">
-		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnComplete">수정</button>
-	</div>
-
-	<script>
-    $("#btnComplete").on("click", function(){
-		if($("#title").val() === ""){
-			$("#title").val("제목없음");
-		}
-		
-		if($("#content").val() === ""){
-			alert("내용을 입력하세요.");  
-			$("#content").focus();
-			return;
-		}
-		$("#modifyForm").submit();
-	})
-	
-	let btnBack = document.getElementById("btnBack");
-    
-    btnBack.addEventListener("click", function(e){
-    	let qna_seq = $("#qna_seq").val();
-            	
-    	location.href="/view.info?qna_seq="+qna_seq;
-    })
-   
+	<script> 
+    	const btnWrite = document.getElementById("btnWrite");
+    	
+    	btnWrite.addEventListener("click", function(e){
+    		location.href="/manager/information/write.jsp";
+    	})
     </script>
-
+	<!-- 본문 끝-->
 	<!-- footer -->
 	<div class="container footer">
 		<div class="row footerInfo">
@@ -510,41 +394,5 @@ textarea {
 		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 	</div>
 	<!-- footer 끝 -->
-	=======
-	<!-- footer -->
-	<div class="container footer">
-		<div class="row footerInfo">
-			<div class="col-6">
-				제휴 및 서비스 이용문의<br>
-				<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-				AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-			</div>
-			<div class="col-6">
-				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
-				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-				kh.projectmail@gmail.com<br>
-			</div>
-		</div>
-		<div class="row footerMenu">
-			<div class="col">
-				<a href="">이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">개인정보처리방침</a>
-			</div>
-			<div class="col">
-				<a href="">위치정보이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">센터등록요청하기</a>
-			</div>
-			<div class="col">
-				<a href="">문의하기</a>
-			</div>
-		</div>
-		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-	</div>
-	<!-- footer 끝 -->
-	>>>>>>> fc74648d3a490b8b6156f54e4b0fe40962f81429
 </body>
 </html>

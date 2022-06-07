@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dangpert.dao.UserDAO;
 import com.dangpert.dto.UserDTO;
+import com.dangpert.mail.SendMail;
 import com.dangpert.utils.EncryptionUtils;
 import com.google.gson.Gson;
 
@@ -53,16 +54,20 @@ public class UserController extends HttpServlet {
 			}
 			
 			
-		} else if (uri.equals("/idCheckPopup.user")) {
+		} else if (uri.equals("/idCheckPopup.user")) { // 팝업 띄우기
 			response.sendRedirect("/user/popup.jsp");
-		} else if (uri.equals("/idCheck.user")) {
+			
+		} else if (uri.equals("/idCheck.user")) { // 아이디 체크
 			String user_id = request.getParameter("user_id");
 			System.out.println(user_id);
+			SendMail sm = new SendMail();
 			UserDAO dao = new UserDAO();
 			try {
 				boolean rs = dao.idCheck(user_id);
 				if (rs) {
 					request.setAttribute("rs","ok");
+					int RanNum = sm.compare(user_id);
+					request.setAttribute("compareNum", RanNum);
 				} else {
 					request.setAttribute("rs", "no");
 				}
@@ -74,6 +79,14 @@ public class UserController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(uri.equals("/compare.user")){ // 유저 인증
+			String user_id = request.getParameter("compareUser");
+			
+			request.setAttribute("user_id", user_id);
+			request.getRequestDispatcher("/user/popup.jsp").forward(request, response);
+			
+			
+			
 		} else if (uri.equals("/login.user")) { // 로그인 페이지 요청
 			response.sendRedirect("/user/login.jsp");
 		} else if (uri.equals("/loginOk.user")) { // 로그인 확인
@@ -119,6 +132,7 @@ public class UserController extends HttpServlet {
 			response.sendRedirect("/main.jsp");
 			
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
+			response.sendRedirect("/user/mypage.jsp");
 			response.sendRedirect("/user/myPage_user.jsp");
 		} else if (uri.equals("/search.user")) { // manager 유저 검색
 			UserDAO dao = new UserDAO();

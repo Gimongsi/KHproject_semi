@@ -156,23 +156,30 @@ keyframes waviy { 0%, 40%, 100% {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %
 {
 transform
 
-
-
-
 :
-
-
 
 
 translateY
 
-
 (
-
 
 
 
@@ -181,7 +188,35 @@ translateY
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -347,14 +382,14 @@ textarea {
 </head>
 <body>
 	<div class="container">
-		<!-- 헤더 -->
-		<c:choose>
-			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
+		<div class="row cls_header">
+			<div class="col-3 logoImg">
+				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
+				</a>
+			</div>
+			<c:choose>
+				<c:when
+					test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>${loginSession.user_name} 님 환영합니다!</span>
@@ -367,152 +402,28 @@ textarea {
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주
-									묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post"
-										class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:when test="${loginSession.user_auth eq 'manager'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
+				</c:when>
+				<c:when test="${loginSession.user_auth eq 'manager'}">
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>관리자님 환영합니다!</span>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
+						<a href="/toSendmail.manager" style="text-decoration: none;">
+							<span>메일보내기</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;">
-							<span>회원 검색</span>
+						<a href="/userSerch.manager?curPage=1"
+							style="text-decoration: none;"> <span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주
-									묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post"
-										class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:otherwise>
-				<!-- 헤더 -->
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
+				</c:when>
+				<c:otherwise>
 					<div class="d-none d-md-block col-5"></div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
@@ -522,15 +433,28 @@ textarea {
 						<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주
-									묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
+				</c:otherwise>
+			</c:choose>
+			<div class="col p-0 headMenu d-flex justify-content-center">
+				<button type="button" class="btn dropdownBtn dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+				<ul class="dropdown-menu headDropdown">
+					<li><a class="dropdown-item" href="/toInformation.info">자주
+							묻는 질문</a></li>
+					<li><a class="dropdown-item" href="#">이벤트</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- 헤더 끝 -->
+		<div class="empty"></div>
+		<!-- 게시글 영역 -->
+		<div class="container container-board">
+			<div class="row p-5">
+				<h3 class="text-center">FAQ 보기</h3>
+			</div>
+			<div class="row">
+				<div class="col-2 title-board">
+					<p>제목</p>
 				</div>
 				<!-- 헤더 끝 -->
 				<!-- 네비 -->
@@ -578,33 +502,46 @@ textarea {
 				</div>
 				<!-- 네비 끝 -->
 				<div class="empty"></div>
-			</c:otherwise>
-		</c:choose>
-		<div class="empty"></div>
-		
-		<!-- FAQ 보기 -->
-		<div class="title">
-        	<h3>FAQ</h3>
-    	</div>
-		<form id="formModify" action="/modify.info" method="post">
-			<div class="container container-board">
-				<table class="table table-bordered tbl-board">
-					<tr>
-						<th colspan="2">제목</th>
-						<td colspan="10"><input type="text" id="qna_seq"
-							class="form-control d-none" name="qna_seq" value="${dto.getQna_seq()}">
-							<input type="text" id="qna_title" class="form-control"
-							name="qna_title" value="${dto.getQna_title()}" readonly></td>
-					</tr>
-					<tr>
-						<th colspan="2">내용</th>
-						<td colspan="10"><textarea id="qna_content"
-								class="form-control" name="qna_content" readonly>${dto.getQna_content()}</textarea></td>
-					</tr>
-				</table>
+				<div class="empty"></div>
+
+				<!-- FAQ 보기 -->
+				<div class="title">
+					<h3>FAQ</h3>
+				</div>
+				<form id="formModify" action="/modify.info" method="post">
+					<div class="container container-board">
+						<table class="table table-bordered tbl-board">
+							<tr>
+								<th colspan="2">제목</th>
+								<td colspan="10"><input type="text" id="qna_seq"
+									class="form-control d-none" name="qna_seq"
+									value="${dto.getQna_seq()}"> <input type="text"
+									id="qna_title" class="form-control" name="qna_title"
+									value="${dto.getQna_title()}" readonly></td>
+							</tr>
+							<tr>
+								<th colspan="2">내용</th>
+								<td colspan="10"><textarea id="qna_content"
+										class="form-control" name="qna_content" readonly>${dto.getQna_content()}</textarea></td>
+							</tr>
+						</table>
+						<div class="col-10 title-board">
+							<p>${dto.qna_title}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2 content-board">
+							<p>내용</p>
+						</div>
+						<div class="col-10 content-board">
+							<p>${dto.qna_content}</p>
+						</div>
+					</div>
+				</form>
 			</div>
-		</form>
-		
+		</div>
+		<!-- 게시글 영역 끝-->
+
 		<!-- FAQ 보기 끝-->
 		<div class="boxBtn">
 			<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
@@ -649,29 +586,29 @@ textarea {
 			</div>
 			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-		</div>
-		<!-- footer 끝 -->
-		<script>
-			const btnBack = document.getElementById("btnBack");
+	</div>
+	<!-- footer 끝 -->
+	<script>
+		const btnBack = document.getElementById("btnBack");
 
-			btnBack.addEventListener("click", function(e) {
-				location.href = "/toInformation.info";
-			});
-			
-			$("#modifyBtn").on("click", function(e) {
-				$("#formModify").submit();
-			});
-			
-			let btnDelete = document.getElementById("btnDelete");
-		    
-			btnDelete.addEventListener("click", function(e){
-		    	let qna_seq = $("#qna_seq").val();
-		    	let answer = confirm("지금 삭제하시면 복구가 불가합니다. 정말 삭제하겠습니까?");
-				console.log(answer);
-				if(answer){
-					location.href="/deleteProc.info?qna_seq=${dto.qna_seq}";
-				}
-		    })
-		</script>
+		btnBack.addEventListener("click", function(e) {
+			location.href = "/toInformation.info";
+		});
+
+		$("#modifyBtn").on("click", function(e) {
+			$("#formModify").submit();
+		});
+
+		let btnDelete = document.getElementById("btnDelete");
+
+		btnDelete.addEventListener("click", function(e) {
+			let qna_seq = $("#qna_seq").val();
+			let answer = confirm("지금 삭제하시면 복구가 불가합니다. 정말 삭제하겠습니까?");
+			console.log(answer);
+			if (answer) {
+				location.href = "/deleteProc.info?qna_seq=${dto.qna_seq}";
+			}
+		})
+	</script>
 </body>
 </html>
