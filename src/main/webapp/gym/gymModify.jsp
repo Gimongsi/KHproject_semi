@@ -117,25 +117,34 @@
 }
 
 /* 로고 효과 */
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
-    .logoImg {
-        position: relative;
-        display: inline-block;
-        color: #fff;
-        text-transform: uppercase;
-        animation: waviy 1s infinite;
-        animation-delay: calc(.1s * var(--i));
-    }
-    @keyframes waviy {
-        0%,
-        40%,
-        100% {
-            transform: translateY(0)
-        }
-        20% {
-            transform: translateY(-20px)
-        }
-    }
+@import
+	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
+	;
+
+.logoImg {
+	position: relative;
+	display: inline-block;
+	color: #fff;
+	text-transform: uppercase;
+	animation: waviy 1s infinite;
+	animation-delay: calc(.1s * var(- -i));
+}
+
+@
+keyframes waviy { 0%, 40%, 100% {
+	transform: translateY(0)
+}
+
+20
+%
+{
+transform
+:
+translateY(
+-20px
+)
+}
+}
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -211,7 +220,8 @@
 	margin: 5px;
 }
 
-.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover, .btnCancle:hover, .btnAddr:hover {
+.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover,
+	.btnCancle:hover, .btnAddr:hover {
 	background-color: #F0FFC2;
 	border: 1px solid #73b1a1;
 	color: #73b1a1;
@@ -353,14 +363,14 @@ input::placeholder, textarea::placeholder {
 
 <body>
 	<div class="container">
-		<!-- 헤더 -->
-		<c:choose>
-			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
-						</a>
-					</div>
+		<div class="row cls_header">
+			<div class="col-3 logoImg">
+				<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
+				</a>
+			</div>
+			<c:choose>
+				<c:when
+					test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>${loginSession.user_name} 님 환영합니다!</span>
@@ -373,147 +383,28 @@ input::placeholder, textarea::placeholder {
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:when test="${loginSession.user_auth eq 'manager'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
-						</a>
-					</div>
+				</c:when>
+				<c:when test="${loginSession.user_auth eq 'manager'}">
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>관리자님 환영합니다!</span>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
+						<a href="/toSendmail.manager" style="text-decoration: none;">
+							<span>메일보내기</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
+						<a href="/userSerch.manager?curPage=1"
+							style="text-decoration: none;"> <span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:otherwise>
-				<!-- 헤더 -->
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
-						</a>
-					</div>
+				</c:when>
+				<c:otherwise>
 					<div class="d-none d-md-block col-5"></div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
@@ -523,124 +414,140 @@ input::placeholder, textarea::placeholder {
 						<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form class="d-flex">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="submit">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:otherwise>
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
+			<div class="col p-0 headMenu d-flex justify-content-center">
+				<button type="button" class="btn dropdownBtn dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+				<ul class="dropdown-menu headDropdown">
+					<li><a class="dropdown-item" href="/toInformation.info">자주
+							묻는 질문</a></li>
+					<li><a class="dropdown-item" href="#">이벤트</a></li>
+				</ul>
+			</div>
+		</div>
 		<!-- 헤더 끝 -->
+		<!-- 네비 -->
+		<div class="row cls_nav">
+			<div class="col">
+				<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+					<div class="container-fluid">
+						<button class="navbar-toggler" type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<li class="nav-item"><a class="nav-link active"
+									aria-current="page" href="#">칼럼</a></li>
+								<li class="nav-item"><a class="nav-link" href="/list.gym">내
+										주변 운동시설</a></li>
+								<li class="nav-item"><a class="nav-link" href="/list.food">특가
+										식품</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										근육별 운동법 </a>
+									<ul class="dropdown-menu navDropdown"
+										aria-labelledby="navbarDropdown">
+										<li><a class="dropdown-item" href="#">상체</a></li>
+										<li><a class="dropdown-item" href="#">하체</a></li>
+										<li><a class="dropdown-item" href="#">몸통</a></li>
+										<li><a class="dropdown-item" href="#">전체보기</a></li>
+									</ul></li>
+							</ul>
+							<form action="search.gym" method="post" class="d-flex searchForm">
+								<input class="form-control navSearchInput me-2" type="search"
+									placeholder="운동시설 검색" aria-label="Search">
+								<button class="btn btn-outline-light" type="button">Search!</button>
+							</form>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!-- 네비 끝 -->
+		<div class="empty"></div>
 		<!-- 타이틀 -->
 		<div class="list-item-wrap">
-			<form id="modifyForm" action="/addProc.gym" method="post" enctype="multipart/form-data">
-			<div class="row detailHeader">
-                <div class="detailPhoto col-12 col-md-6">
-                    <div class="row detailPhotoWrap">
-                        <div class="col-12 detailPhoto d-flex justify-content-end">
-                        	<c:if test="${empty dto.gym_src_main}">
-								<img src="" id="gym_src_img">
-							</c:if>
-							<c:if test="${not empty dto.gym_src_main}">
+			<form id="modifyForm" action="/addProc.gym" method="post"
+				enctype="multipart/form-data">
+				<div class="row detailHeader">
+					<div class="detailPhoto col-12 col-md-6">
+						<div class="row detailPhotoWrap">
+							<div class="col-12 detailPhoto d-flex justify-content-end">
+								<c:if test="${empty dto.gym_src_main}">
+									<img src="" id="gym_src_img">
+								</c:if>
+								<c:if test="${not empty dto.gym_src_main}">
 									<img src="/files/${dto.gym_src_main}" id="gym_src_img">
-							</c:if>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-center">
-                        <%-- 사진 등록 --%>
-                        	<label class="btn btnPics" for="gym_src_main" style="width:100%;">사진 등록</label>
-                            <input class="form-control" type="file" id="gym_src_main" name="gym_src_main" 
-                            style="display: none;">
-                        </div>
-                    </div>
-                </div>
-                <div class="row d-md-none" style="margin-top: 50px;"></div>
-                <div class="col-1"></div>
-                <div class="col-12 col-md-5">
-                    <div class="row">
-                        <div class="col-8 gymTitle align-items-center">
-                            <input class="gym_input" type="text" id="gym_name" name="gym_name" style="font-size: large;" placeholder="상호명 입력" value="${dto.gym_name}">
-                        </div>
-                        <div class="col d-flex justify-content-end">
-                            <span class="material-symbols-outlined" style="padding-right: 5px;">mood</span>
-                            <span class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
-                        </div>
-                        <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div class="row">
-                            <div class="col d-flex justify-content-end">
-                                <input class="gym_input" type="text" id="gym_postcode" name="gym_postcode" style="width: 100px;" placeholder="우편번호" value="${dto.gym_postcode}" readonly >
-                                <button class="btn btnAddr" type="button" onclick="daumPostcode()">주소찾기</button>
-                            </div>
-                            <div class="col-12">
-                                <input class="gym_input" type="text" id="gym_roadAddr" name="gym_roadAddr" placeholder="도로명주소" value="${dto.gym_roadAddr}" readonly>
-                                <input class="gym_input" type="text" id="gym_detailAddr" name="gym_detailAddr" placeholder="상세주소 입력" value="${dto.gym_detailAddr}">
-                                <input class="gym_input" type="text" id="gym_extraAddr" name="gym_extraAddr" placeholder="표시될 주소" value="${dto.gym_extraAddr}" readonly>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-1 d-flex align-items-center">
-                                <span class="material-symbols-outlined">
-                                    call <!-- android_dialer 갑자기 안먹힘 -->
-                                </span>
-                            </div>
-                            <div class="col d-flex align-items-center">
-                                <input class="gym_input" type="text" id="gym_phone" name="gym_phone" placeholder="전화번호 입력" value="${dto.gym_phone}">
-                            </div>
-                        </div>
-                        <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div class="row">
-                            <%-- <div class="col-12">
+								</c:if>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 d-flex justify-content-center">
+								<%-- 사진 등록 --%>
+								<label class="btn btnPics" for="gym_src_main"
+									style="width: 100%;">사진 등록</label> <input class="form-control"
+									type="file" id="gym_src_main" name="gym_src_main"
+									style="display: none;">
+							</div>
+						</div>
+					</div>
+					<div class="row d-md-none" style="margin-top: 50px;"></div>
+					<div class="col-1"></div>
+					<div class="col-12 col-md-5">
+						<div class="row">
+							<div class="col-8 gymTitle align-items-center">
+								<input class="gym_input" type="text" id="gym_name"
+									name="gym_name" style="font-size: large;" placeholder="상호명 입력"
+									value="${dto.gym_name}">
+							</div>
+							<div class="col d-flex justify-content-end">
+								<span class="material-symbols-outlined"
+									style="padding-right: 5px;">mood</span> <span
+									class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
+							</div>
+							<hr
+								style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+							<div class="row">
+								<div class="col d-flex justify-content-end">
+									<input class="gym_input" type="text" id="gym_postcode"
+										name="gym_postcode" style="width: 100px;" placeholder="우편번호"
+										value="${dto.gym_postcode}" readonly>
+									<button class="btn btnAddr" type="button"
+										onclick="daumPostcode()">주소찾기</button>
+								</div>
+								<div class="col-12">
+									<input class="gym_input" type="text" id="gym_roadAddr"
+										name="gym_roadAddr" placeholder="도로명주소"
+										value="${dto.gym_roadAddr}" readonly> <input
+										class="gym_input" type="text" id="gym_detailAddr"
+										name="gym_detailAddr" placeholder="상세주소 입력"
+										value="${dto.gym_detailAddr}"> <input
+										class="gym_input" type="text" id="gym_extraAddr"
+										name="gym_extraAddr" placeholder="표시될 주소"
+										value="${dto.gym_extraAddr}" readonly>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-1 d-flex align-items-center">
+									<span class="material-symbols-outlined"> call <!-- android_dialer 갑자기 안먹힘 -->
+									</span>
+								</div>
+								<div class="col d-flex align-items-center">
+									<input class="gym_input" type="text" id="gym_phone"
+										name="gym_phone" placeholder="전화번호 입력"
+										value="${dto.gym_phone}">
+								</div>
+							</div>
+							<hr
+								style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+							<div class="row">
+								<%-- <div class="col-12">
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
@@ -651,132 +558,136 @@ input::placeholder, textarea::placeholder {
                                     <option value="12month">12개월</option>
                                 </select>
                             </div> --%>
-                            <div class="col-3">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력" value="${dto.gym_month}">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력" value="${dto.gym_price}">
-                        	</div>
-                        </div>
-                        <div class="empty"></div>
-                        <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy" type="button">가격 등록</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<!-- 상세페이지 헤더 끝-->
-			<div class="row detailBody">
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192;">
-				<div class="notice">
-					<div class="row">
-						<div class="col">
-							<h4 class="gymContentsText">공지사항</h4>
+								<div class="col-3">
+									<input class="gym_input" type="text" id="gym_month"
+										name="gym_month" style="text-align: center;"
+										placeholder="개월수입력" value="${dto.gym_month}"> <input
+										class="gym_input" type="text" id="gym_price" name="gym_price"
+										style="text-align: center;" placeholder="가격입력"
+										value="${dto.gym_price}">
+								</div>
+							</div>
+							<div class="empty"></div>
+							<div class="col d-flex justify-content-center">
+								<button class="btn btnBuy" type="button">가격 등록</button>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col content">
-							<textarea id="gym_comment" name="gym_comment"
-								placeholder="공백 포함 500글자 이내로 입력하세요.">${dto.gym_comment}</textarea>
-						</div>
-					</div>
-					<div class="empty"></div>
 				</div>
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-				<div class="noticeTime">
-					<div class="row">
-						<div class="col">
-							<h4 class="gymContentsText">운영시간</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col content">
-							<textarea id="gym_time" name="gym_time"
-								placeholder="예)AM 08:00 ~ PM 22:00 연중무휴">${dto.gym_time}</textarea>
-						</div>
-					</div>
-					<div class="empty"></div>
-				</div>
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-				<div class="noticeInfo">
-					<div class="row">
-						<div class="col">
-							<h4 class="gymContentsText">운동시설 정보</h4>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col content">내용</div>
-					</div>
-					<div class="empty"></div>
-				</div>
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-				<div class="noticePic">
-					<div class="row">
-						<div class="col-12">
-							<h4 class="gymContentsText">운동시설 사진</h4>
-						</div>
-						<div class="col d-flex justify-content-center">
-							<label class="btn btnPics" for="input-file"
-								style="margin-bottom: 50px;">사진 등록</label>
-							<input type="file" id="input-file" style="display: none;">
-						</div>
-					</div>
-					<div class="row content_img">
-						<div class="col">
-							<img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/girl-g1a48332a8_1920.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/man-g2cdda0662_1920.jpg">
-						</div>
-					</div>
-					<div class="row content_img">
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-					</div>
-					<div class="row content_img">
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-					</div>
-					<div class="empty"></div>
-				</div>
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-				<div class="noticeMap">
-					<div class="row">
-						<div class="col">
-							<h4 class="gymContentsText">운동시설 위치</h4>
-						</div>
-						<!-- 카카오 맵 -->
+				<!-- 상세페이지 헤더 끝-->
+				<div class="row detailBody">
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+					<div class="notice">
 						<div class="row">
-							<div class="col content" id="map"
-								style="width: 500px; height: 400px;"></div>
+							<div class="col">
+								<h4 class="gymContentsText">공지사항</h4>
+							</div>
 						</div>
-						<!-- 카카오 맵 끝 -->
+						<div class="row">
+							<div class="col content">
+								<textarea id="gym_comment" name="gym_comment"
+									placeholder="공백 포함 500글자 이내로 입력하세요.">${dto.gym_comment}</textarea>
+							</div>
+						</div>
+						<div class="empty"></div>
 					</div>
-					<div class="empty"></div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="noticeTime">
+						<div class="row">
+							<div class="col">
+								<h4 class="gymContentsText">운영시간</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col content">
+								<textarea id="gym_time" name="gym_time"
+									placeholder="예)AM 08:00 ~ PM 22:00 연중무휴">${dto.gym_time}</textarea>
+							</div>
+						</div>
+						<div class="empty"></div>
+					</div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="noticeInfo">
+						<div class="row">
+							<div class="col">
+								<h4 class="gymContentsText">운동시설 정보</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col content">내용</div>
+						</div>
+						<div class="empty"></div>
+					</div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="noticePic">
+						<div class="row">
+							<div class="col-12">
+								<h4 class="gymContentsText">운동시설 사진</h4>
+							</div>
+							<div class="col d-flex justify-content-center">
+								<label class="btn btnPics" for="input-file"
+									style="margin-bottom: 50px;">사진 등록</label> <input type="file"
+									id="input-file" style="display: none;">
+							</div>
+						</div>
+						<div class="row content_img">
+							<div class="col">
+								<img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
+							</div>
+							<div class="col">
+								<img src="/My/imgs/girl-g1a48332a8_1920.jpg">
+							</div>
+							<div class="col">
+								<img src="/My/imgs/man-g2cdda0662_1920.jpg">
+							</div>
+						</div>
+						<div class="row content_img">
+							<div class="col">
+								<img src="/My/imgs/gym01.jpg">
+							</div>
+							<div class="col">
+								<img src="/My/imgs/gym01.jpg">
+							</div>
+							<div class="col">
+								<img src="/My/imgs/gym01.jpg">
+							</div>
+						</div>
+						<div class="row content_img">
+							<div class="col">
+								<img src="/My/imgs/gym01.jpg">
+							</div>
+							<div class="col">
+								<img src="/My/imgs/gym01.jpg">
+							</div>
+							<div class="col">
+								<img src="/My/imgs/gym01.jpg">
+							</div>
+						</div>
+						<div class="empty"></div>
+					</div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="noticeMap">
+						<div class="row">
+							<div class="col">
+								<h4 class="gymContentsText">운동시설 위치</h4>
+							</div>
+							<!-- 카카오 맵 -->
+							<div class="row">
+								<div class="col content" id="map"
+									style="width: 500px; height: 400px;"></div>
+							</div>
+							<!-- 카카오 맵 끝 -->
+						</div>
+						<div class="empty"></div>
+					</div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
 				</div>
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-			</div>
 			</form>
 			<div class="row">
 				<div class="col-12 d-flex justify-content-end">
