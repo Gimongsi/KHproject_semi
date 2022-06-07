@@ -712,7 +712,6 @@
         					let h5 = $('<h5 class="card-title">').html(dtoPromo.gym_name)
         					let a = $('<a>').attr("href", "/detail.gym?gym_seq="+dtoPromo.gym_seq).append(img, h5);
         					
-        					
         					let spanFavorite = $('<span class="material-symbols-outlined">').html('favorite');
         					let button = $('<button type="button" class="btnFavorite">').append(spanFavorite);
         					let div3 = $('<div class="col d-flex justify-content-end favorite">').append(button);
@@ -730,38 +729,12 @@
         					
         					$(".cardListLocation").append(div);
         				
-        				
         				}
         			}
         		}, error: function(e){
         			console.log(e);
         		}
-        		
-        /* <div class="col-6 col-md-4 d-flex justify-content-center">
-    			<div class="card">
-        			<a href="/detail.gym?gym_seq=${dtoPromo.gym_seq}">
-            			<img src="/files/${dtoPromo.gym_src_main}" class="card-img-top">
-            			<h5 class="card-title">${dtoPromo.gym_name}</h5>
-        			</a>
-
-        			<div class="card-body">
-            			<p class="card-text d-flex justify-content-end">${dtoPromo.gym_month}개월 ${dtoPromo.gym_price}원</p>
-            			<div class="col btnImg d-flex">
-                			<span class="buttonImg" style="margin-right:5px;">헬스</span>
-                			<span class="buttonImg" style="margin-right:5px;">P.T</span>
-                			<span class="buttonImg" style="margin-right:5px;">G.X</span>
-                			<span class="buttonImg" style="margin-right:5px;">요가</span>
-                			<div class="col d-flex justify-content-end favorite">
-                    			<button type="button" class="btnFavorite">
-                        			<span class="material-symbols-outlined">favorite</span>
-                    			</button>
-                			</div>
-            			</div>
-        			</div>
-    			</div>
-			</div> */
         	})
-        	
         })
         
     </script>

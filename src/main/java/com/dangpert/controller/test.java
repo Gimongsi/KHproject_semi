@@ -71,39 +71,47 @@ public class GymController extends HttpServlet {
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request, filePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
-				UserDTO userDTO = (UserDTO) request.getSession().getAttribute("loginSession");
-				
+//				UserDTO userDTO = (UserDTO) request.getSession().getAttribute("loginSession");
+//				
+//				String gym_name = multi.getParameter("gym_name");
+//				String gym_phone = multi.getParameter("gym_phone");
+//				String gym_postcode = multi.getParameter("gym_postcode");
+//				String gym_roadAddr = multi.getParameter("gym_roadAddr");
+//				String gym_detailAddr = multi.getParameter("gym_detailAddr");
+//				String gym_extraAddr = multi.getParameter("gym_extraAddr");
+//				String gym_month = multi.getParameter("gym_month");
+//				int gym_price = Integer.parseInt(multi.getParameter("gym_price"));
+//				String gym_time = multi.getParameter("gym_time");
+//				String gym_comment = multi.getParameter("gym_comment");
+//				String gym_src_main = multi.getFilesystemName("gym_src_main");
+
 				int gym_seq = dao.getNewSeq();
-				String gym_name = multi.getParameter("gym_name");
-				String gym_phone = multi.getParameter("gym_phone");
-				String gym_postcode = multi.getParameter("gym_postcode");
-				String gym_roadAddr = multi.getParameter("gym_roadAddr");
-				String gym_detailAddr = multi.getParameter("gym_detailAddr");
-				String gym_extraAddr = multi.getParameter("gym_extraAddr");
-				String gym_month = multi.getParameter("gym_month");
-				int gym_price = Integer.parseInt(multi.getParameter("gym_price"));
-				String gym_time = multi.getParameter("gym_time");
-				String gym_comment = multi.getParameter("gym_comment");
-				String gym_src_main = multi.getFilesystemName("gym_src_main");
-				String gym_program = multi.getParameter("gym_program");
-				String gym_src = multi.getFilesystemName("gym_src");
+
+				ArrayList<GymFolderDTO> list = new ArrayList<>();
+				GymFolderDTO dto2 = new GymFolderDTO();
 				
-				GymInfoDTO gymInfoDTO = new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main);
-				
-				GymProgramDTO gymProgramDTO = new GymProgramDTO(gym_seq, gym_program);
-				
-				GymFolderDTO gymfolderDTO = new GymFolderDTO(gym_seq, gym_src);
-				
-				int rs = dao.addInfo(userDTO, gymInfoDTO);
-				int rs2 = dao.addProgram(gymProgramDTO);
-				int rs3 = dao.addPic(gymfolderDTO);
+				String[] gym_src = multi.getParameterValues("gym_src");
 				
 				System.out.println(gym_src);
-				if(rs > 0 && rs2 > 0) {
-					System.out.println("저장 성공");
-					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
-				}
 				
+//				for
+				
+//				for(GymFolderDTO dto : list) {
+//					list.add(new GymFolderDTO(gym_seq, gym_src));
+//					System.out.println("for안" + list);
+//				}
+//				System.out.println(list.toString());
+				
+				
+//				
+//				GymInfoDTO gymInfoDTO = new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main);
+//				
+//				int rs = dao.addInfo(userDTO, gymInfoDTO);
+//				if(rs > 0) {
+//					System.out.println("저장 성공");
+//					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
+//				}
+//				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -113,16 +121,13 @@ public class GymController extends HttpServlet {
 			int gym_seq = Integer.parseInt(request.getParameter("gym_seq"));
 			
 			try {
+				
+//				ArrayList<GymInfoDTO> list = dao.selectSeqList(gym_seq);
+//				request.setAttribute("list", list);
+				
 				GymInfoDTO dto = dao.selectSeq(gym_seq);
-				ArrayList<GymProgramDTO> programDTO = dao.selectSeqProgram(gym_seq);
-				ArrayList<GymFolderDTO> gymfolderDTO = dao.selectSeqDetailPic(gym_seq);
-				
 				request.setAttribute("dto", dto);
-				request.setAttribute("programDTO", programDTO);
-				request.setAttribute("gymfolderDTO", gymfolderDTO);
 				
-				System.out.println("상세페이지-programDTO: " + programDTO.toString());
-				System.out.println("상세페이지:src" + gymfolderDTO.toString());
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -135,13 +140,7 @@ public class GymController extends HttpServlet {
 
 			try {
 				GymInfoDTO dto = dao.selectSeq(gym_seq);
-				ArrayList<GymProgramDTO> programDTO = dao.selectSeqProgram(gym_seq);
-				ArrayList<GymFolderDTO> gymfolderDTO = dao.selectSeqDetailPic(gym_seq);
-				
-				request.setAttribute("programDTO", programDTO);
-				request.setAttribute("gymfolderDTO", gymfolderDTO);
 				request.setAttribute("dto", dto);
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -160,8 +159,10 @@ public class GymController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request, filePath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 //				UserDTO userDTO = (UserDTO) request.getSession().getAttribute("loginSession");
 				
-				String[] gymProgram = multi.getParameterValues("gym_program");
+				String[] gymProgram = multi.getParameterValues("gymProgram");
 				int gym_seq = Integer.parseInt(multi.getParameter("gym_seq"));
+				
+				GymProgramDTO dto = new GymProgramDTO();
 				
 				ArrayList<GymProgramDTO> program = new ArrayList<>();
 				if(gymProgram == null) {
@@ -172,40 +173,34 @@ public class GymController extends HttpServlet {
 					}
 				}
 				
-				String gym_src = multi.getFilesystemName("gym_src");
-//				ArrayList<GymFolderDTO> folderList = new ArrayList<>();
-//				if(folderList == null) {
-//					System.out.println("선택된 항목 없음");
-//				}else {
-//					for(String list : folderList) {
-//					program.add(new GymProgramDTO(gym_seq, list));
-//					}
+//				int programRs = dao.modifyProgram(program);
+				
+//				System.out.println(program.toString());
+//				int programRs = dao.modifyProgram(new GymProgramDTO());
+				
+//				String gym_name = multi.getParameter("gym_name");
+//				String gym_phone = multi.getParameter("gym_phone");
+//				String gym_postcode = multi.getParameter("gym_postcode");
+//				String gym_roadAddr = multi.getParameter("gym_roadAddr");
+//				String gym_detailAddr = multi.getParameter("gym_detailAddr");
+//				String gym_extraAddr = multi.getParameter("gym_extraAddr");
+//				String gym_month = multi.getParameter("gym_month");
+//				int gym_price = Integer.parseInt(multi.getParameter("gym_price"));
+//				String gym_time = multi.getParameter("gym_time");
+//				String gym_comment = multi.getParameter("gym_comment");
+//				String gym_src_main = multi.getFilesystemName("gym_src_main");
+//				
+//				GymInfoDTO dto = new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main);
+//				
+//				System.out.println(dto.toString());
+//				
+//				int rs = dao.modifyInfo(new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main));
+				
+				
+//				if(programRs > 0) {
+//					System.out.println("수정 성공");
+//					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
 //				}
-				
-				
-				System.out.println(program.toString());
-				
-				String gym_name = multi.getParameter("gym_name");
-				String gym_phone = multi.getParameter("gym_phone");
-				String gym_postcode = multi.getParameter("gym_postcode");
-				String gym_roadAddr = multi.getParameter("gym_roadAddr");
-				String gym_detailAddr = multi.getParameter("gym_detailAddr");
-				String gym_extraAddr = multi.getParameter("gym_extraAddr");
-				String gym_month = multi.getParameter("gym_month");
-				int gym_price = Integer.parseInt(multi.getParameter("gym_price"));
-				String gym_time = multi.getParameter("gym_time");
-				String gym_comment = multi.getParameter("gym_comment");
-				String gym_src_main = multi.getFilesystemName("gym_src_main");
-				
-				
-				int rs = dao.modifyInfo(new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main));
-				int rs2 = dao.modifyProgram(program);
-				int rs3 = dao.modifyPicDTO(new GymFolderDTO(gym_seq, gym_src));
-				
-				if(rs > 0 && rs2 > 0) {
-					System.out.println("수정 성공");
-					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
-				}
 				
 			}catch(Exception e) {
 				e.printStackTrace();

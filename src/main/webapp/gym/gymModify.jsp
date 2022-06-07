@@ -305,7 +305,7 @@ input::placeholder, textarea::placeholder {
 
 #gym_time {
 	width: 70%;
-	height: 3rem;
+	height: 4rem;
 	border: 1px solid #709c91;
 	overflow: hidden;
 	resize: none;
@@ -313,7 +313,17 @@ input::placeholder, textarea::placeholder {
 	text-align: center;
 }
 
-#gym_comment:focus, #gym_time:focus {
+#gym_program{
+	width: 70%;
+	height: 10rem;
+	border: 1px solid #709c91;
+	overflow: hidden;
+	resize: none;
+	font-weight: 600;
+	text-align: center;
+}
+
+#gym_comment:focus, #gym_time:focus, #gym_program:focus {
 	outline: 1px solid #709c91;
 }
 
@@ -583,25 +593,28 @@ input::placeholder, textarea::placeholder {
 		<!-- 헤더 끝 -->
 		<!-- 타이틀 -->
 		<div class="list-item-wrap">
-			<form id="modifyForm" action="/addProc.gym" method="post" enctype="multipart/form-data">
+			<form id="modifyForm" action="/modifyProc.gym" method="post" enctype="multipart/form-data">
 			<div class="row detailHeader">
+			<input class="d-none" type="text" name="gym_seq" value="${dto.gym_seq}">
                 <div class="detailPhoto col-12 col-md-6">
                     <div class="row detailPhotoWrap">
                         <div class="col-12 detailPhoto d-flex justify-content-end">
                         	<c:if test="${empty dto.gym_src_main}">
+                        		<input class="srcVal d-none" type="text" value="0">
 								<img src="" id="gym_src_img">
 							</c:if>
 							<c:if test="${not empty dto.gym_src_main}">
-									<img src="/files/${dto.gym_src_main}" id="gym_src_img">
+								<input class="srcVal d-none" type="text" value="1">
+								<img src="/files/${dto.gym_src_main}" id="gym_src_img">
 							</c:if>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
                         <%-- 사진 등록 --%>
-                        	<label class="btn btnPics" for="gym_src_main" style="width:100%;">사진 등록</label>
+                        	<label class="btn btnPics" for="gym_src_main" style="width:100%;">사진 수정</label>
                             <input class="form-control" type="file" id="gym_src_main" name="gym_src_main" 
-                            style="display: none;">
+                            style="display: none;" value="${dto.gym_src_main}">
                         </div>
                     </div>
                 </div>
@@ -631,7 +644,7 @@ input::placeholder, textarea::placeholder {
                         <div class="row">
                             <div class="col-1 d-flex align-items-center">
                                 <span class="material-symbols-outlined">
-                                    call <!-- android_dialer 갑자기 안먹힘 -->
+                                    call
                                 </span>
                             </div>
                             <div class="col d-flex align-items-center">
@@ -651,14 +664,14 @@ input::placeholder, textarea::placeholder {
                                     <option value="12month">12개월</option>
                                 </select>
                             </div> --%>
-                            <div class="col-3">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력" value="${dto.gym_month}">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력" value="${dto.gym_price}">
+                            <div class="col">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수(숫자만) 입력" value="${dto.gym_month}">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격(숫자만) 입력" value="${dto.gym_price}">
                         	</div>
                         </div>
                         <div class="empty"></div>
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy" type="button">가격 등록</button>
+                            <button class="btn btnBuy d-none" type="button">회원권 추가 등록</button>
                         </div>
                     </div>
                 </div>
@@ -701,15 +714,51 @@ input::placeholder, textarea::placeholder {
 					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
 				<div class="noticeInfo">
 					<div class="row">
-						<div class="col">
-							<h4 class="gymContentsText">운동시설 정보</h4>
+						<div class="col" style="text-align: center;">
+							<h4 class="gymContentsText">운영 프로그램</h4>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col content">내용</div>
+					<div class="row d-flex justify-content-center">
+						<%-- <div class="form-check">
+  							<input class="form-check-input" type="checkbox" name="gym_program" value="헬스" id="flexCheckDefault">
+  							<label class="form-check-label" for="flexCheckDefault">헬스</label>
+						</div>
+						<div class="form-check">
+  							<input class="form-check-input" type="checkbox" name="gym_program" value="P.T" id="flexCheckChecked">
+  							<label class="form-check-label" for="flexCheckChecked">P.T</label>
+						</div>
+						<div class="form-check">
+  							<input class="form-check-input" type="checkbox" name="gym_program" value="G.X" id="flexCheckChecked">
+  							<label class="form-check-label" for="flexCheckChecked">G.X</label>
+						</div>
+						<div class="form-check">
+  							<input class="form-check-input" type="checkbox" name="gym_program" value="요가" id="flexCheckChecked">
+  							<label class="form-check-label" for="flexCheckChecked">요가</label>
+						</div>
+						<div class="form-check">
+  							<input class="form-check-input" type="checkbox" name="gym_program" value="필라테스" id="flexCheckChecked">
+  							<label class="form-check-label" for="flexCheckChecked">필라테스</label>
+						</div>
+						<div class="form-check">
+  							<input class="form-check-input" type="checkbox" name="gym_program" value="격투기" id="flexCheckChecked">
+  							<label class="form-check-label" for="flexCheckChecked">격투기</label>
+						</div> --%>
+						<c:if test="${empty programDTO}">
+                    		<textarea id="gym_program" name="gym_program"
+								placeholder="예)무료
+O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
+                    	</c:if>
+                    	<c:if test="${not empty programDTO}">
+                    		<c:forEach items="${programDTO}" var="programDTO">
+                        		<textarea id="gym_program" name="gym_program"
+								placeholder="예)무료
+O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)">${programDTO.gym_program}</textarea>
+                        	</c:forEach>
+                        </c:if>
+                        
 					</div>
-					<div class="empty"></div>
-				</div>
+				<div class="empty"></div>
+			</div>
 				<hr
 					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
 				<div class="noticePic">
@@ -718,44 +767,27 @@ input::placeholder, textarea::placeholder {
 							<h4 class="gymContentsText">운동시설 사진</h4>
 						</div>
 						<div class="col d-flex justify-content-center">
-							<label class="btn btnPics" for="input-file"
-								style="margin-bottom: 50px;">사진 등록</label>
-							<input type="file" id="input-file" style="display: none;">
+							<div><label class="btn btnDtailPics" for="gym_src">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src" name="gym_src" style="display: none;"></div>
 						</div>
 					</div>
 					<div class="row content_img">
-						<div class="col">
-							<img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/girl-g1a48332a8_1920.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/man-g2cdda0662_1920.jpg">
-						</div>
-					</div>
-					<div class="row content_img">
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-					</div>
-					<div class="row content_img">
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-					</div>
+                    	<c:if test="${empty gymfolderDTO}">
+                    		<div class="col srcImg">
+                        	</div>
+                        	<div class="col srcImg">
+                        	</div>
+                        	<div class="col srcImg">
+                        	</div>
+                    	</c:if>
+                    	<c:if test="${not empty gymfolderDTO}">
+                    		<c:forEach items="${gymfolderDTO}" var="gymfolderDTO">
+                        		<div class="col-4" style="margin-bottom:20px;">
+                            		<img class="rounded" id="gym_src_img" src="/files/${gymfolderDTO.gym_src}">
+                        		</div>
+                        	</c:forEach>
+                        </c:if>
+                    </div>
 					<div class="empty"></div>
 				</div>
 				<hr
@@ -830,9 +862,9 @@ input::placeholder, textarea::placeholder {
 	$(".btnAdd").on("click", function(){
 		let regexPrice = /[0-9]/;
 		
-		if ($("#gym_src_main").val() === "") {
-			alert("사진 등록은 필수입니다.");
-			$("#gym_src").focus();
+		if ($(".srcVal").val() === 0) {
+			alert("메인 사진 등록은 필수입니다.");
+			$("#gym_src_main").focus();
 			return;
 		}
 		if ($("#gym_name").val() === "") {
@@ -851,14 +883,21 @@ input::placeholder, textarea::placeholder {
 			return;
 		}
 		
-		$("#addForm").submit();
+		let answer = confirm("정말 수정하시겠습니까?");
+		if(answer){
+			$("#modifyForm").submit();
+		}
 	})
 		
 	// 이미지 미리보기
 	$("#gym_src_main").change(function(){
-    	setImageFromFile(this, "#gym_src_img");
+    	setImageFromFile(this, "#gym_src_mainImg");
+    	console.log(this.val());
 	});
 
+	$("#gym_src").change(function(){
+    	setImageFromFile(this, "#gym_src_img");
+	});
 	function setImageFromFile(input, expression) {
     	if (input.files && input.files[0]) {
         	var reader = new FileReader();

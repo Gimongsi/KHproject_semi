@@ -115,6 +115,7 @@ public class FoodController extends HttpServlet {
 				request.setAttribute("dto", dto);
 
 				FoodFolderDTO dtoPic = dao.selectPic(food_seq);
+				System.out.println(dtoPic);
 				request.setAttribute("dtoPic", dtoPic);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -141,7 +142,6 @@ public class FoodController extends HttpServlet {
 				String food_name = multi.getParameter("food_name");
 				String food_title = multi.getParameter("food_title");
 				int food_price = Integer.parseInt(multi.getParameter("food_price"));
-				System.out.println(food_seq + food_com + food_name + food_title + food_price);
 				
 				String food_src = multi.getFilesystemName("food_src");
 
@@ -151,7 +151,11 @@ public class FoodController extends HttpServlet {
 				if (rs > 0 || rsFile > 0) {
 					System.out.println("수정 성공");
 					response.sendRedirect("/modify.food?food_seq=" + food_seq);
+				}else if (rs > 0){
+					System.out.println("수정 성공");
+					response.sendRedirect("/modify.food?food_seq=" + food_seq);
 				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -506,7 +506,7 @@
 									<img src="/files/${dtoPic.food_src}" class="card-img-top" id="food_src_img">
 									<%-- 사진 등록 --%>
 									<label class="btn btnPics" for="food_src">사진 수정</label>
-                            		<input type="file" class="form-control inputCls" id="food_src" name="food_src" style="display: none;">
+                            		<input type="file" class="form-control inputCls" id="food_src" name="food_src" value="${dtoPic.food_src}" style="display: none;">
 							</c:if>
                         <div class="card-body">
                         	<div class="input-group">

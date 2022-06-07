@@ -198,7 +198,7 @@
 	font-weight: 600;
 }
 
-.btnAdd, .btnMainPic, .btnPics, .btnBuy, .btnCancle, .btnAddr {
+.btnAdd, .btnMainPic, .btnPics, .btnBuy, .btnCancle, .btnAddr, .btnDtailPics {
 	background-color: #73b1a1;
 	border: 1px solid #F0FFC2;
 	border-radius: 0.25rem;
@@ -211,7 +211,7 @@
 	margin: 5px;
 }
 
-.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover, .btnCancle:hover, .btnAddr:hover {
+.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover, .btnCancle:hover, .btnAddr:hover, btnDtailPics:hover {
 	background-color: #F0FFC2;
 	border: 1px solid #73b1a1;
 	color: #73b1a1;
@@ -285,7 +285,7 @@ input::placeholder, textarea::placeholder {
 
 .content_img {
 	padding-inline: 10%;
-	margin-bottom: 20px; -
+	margin-bottom: 20px;
 	-bs-gutter-x: 1rem;
 }
 
@@ -305,7 +305,7 @@ input::placeholder, textarea::placeholder {
 
 #gym_time {
 	width: 70%;
-	height: 3rem;
+	height: 4rem;
 	border: 1px solid #709c91;
 	overflow: hidden;
 	resize: none;
@@ -313,11 +313,33 @@ input::placeholder, textarea::placeholder {
 	text-align: center;
 }
 
-#gym_comment:focus, #gym_time:focus {
+#gym_program{
+	width: 70%;
+	height: 10rem;
+	border: 1px solid #709c91;
+	overflow: hidden;
+	resize: none;
+	font-weight: 600;
+	text-align: center;
+}
+
+#gym_comment:focus, #gym_time:focus, #gym_program:focus {
 	outline: 1px solid #709c91;
 }
 
-.noticePic img {
+#images_container{
+	width: 100%;
+}
+
+#images_container img{
+	width : 100%;
+}
+
+.detailPic{
+	margin-bottom: 80px;
+}
+
+.detailPic img {
 	width: 100%;
 	height: 100%;
 }
@@ -588,7 +610,7 @@ input::placeholder, textarea::placeholder {
                 <div class="detailPhoto col-12 col-md-6">
                     <div class="row detailPhotoWrap">
                         <div class="col-12 detailPhoto d-flex justify-content-end">
-                        	<img src="" id="gym_src_img">
+                        	<img src="" id="gym_src_mainImg">
                         </div>
                     </div>
                     <div class="row">
@@ -646,26 +668,14 @@ input::placeholder, textarea::placeholder {
                                     <option value="12month">12개월</option>
                                 </select>
                             </div> --%>
-                            <div class="col-3">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
+                            <div class="col">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수(숫자만) 입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격(숫자만) 입력">
                         	</div>
-                        	<%--<div class="col-3">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
-                        	</div>
-                        	<div class="col-3">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
-                        	</div>
-                        	<div class="col-3">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수입력">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격입력">
-                        	</div> --%>
                         </div>
                         <div class="empty"></div>
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy" type="button">가격 등록</button>
+                            <button class="btn btnBuy d-none" type="button">가격 등록</button>
                         </div>
                     </div>
                 </div>
@@ -677,7 +687,7 @@ input::placeholder, textarea::placeholder {
 				<div class="notice">
 					<div class="row">
 						<div class="col">
-							<h4 class="gymContentsText">공지사항</h4>
+							<h4 class="gymContentsText">공지사항 및 소개</h4>
 						</div>
 					</div>
 					<div class="row">
@@ -709,61 +719,85 @@ input::placeholder, textarea::placeholder {
 				<div class="noticeInfo">
 					<div class="row">
 						<div class="col">
-							<h4 class="gymContentsText">운동시설 정보</h4>
+							<h4 class="gymContentsText">운영 프로그램</h4>
+							<div class="row">
+								<div class="col content">
+									<textarea id="gym_program" name="gym_program"
+										placeholder="예)무료
+O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col content">내용</div>
 					</div>
 					<div class="empty"></div>
 				</div>
 				<hr
 					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-				<div class="noticePic">
+				<div class="detailPic">
 					<div class="row">
 						<div class="col-12">
 							<h4 class="gymContentsText">운동시설 사진</h4>
 						</div>
-						<div class="col d-flex justify-content-center">
-							<label class="btn btnPics" for="input-file"
-								style="margin-bottom: 50px;">사진 등록</label>
-							<input type="file" id="input-file" style="display: none;">
+					</div>
+					
+					<%-- 보류 --%>
+					<div class="d-none" id='image_preview'>
+    						<input type='file' id='btnAtt' name="gym_src" multiple='multiple' multiple>
+    						<div id='att_zone'></div>
+  					</div>
+  					<%-- 보류 --%>
+  					
+					<div class="row content_img">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src" name="gym_src" style="display: none;"></div>
+						</div>
+						<%-- <div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img2" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src2">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src2" style="display: none;"></div>
+						</div>
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img3" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src3">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src3" style="display: none;"></div>
 						</div>
 					</div>
 					<div class="row content_img">
-						<div class="col">
-							<img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img4" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src4">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src4" style="display: none;"></div>
 						</div>
-						<div class="col">
-							<img src="/My/imgs/girl-g1a48332a8_1920.jpg">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img5" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src5">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src5" style="display: none;"></div>
 						</div>
-						<div class="col">
-							<img src="/My/imgs/man-g2cdda0662_1920.jpg">
-						</div>
-					</div>
-					<div class="row content_img">
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
-						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img6" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src6">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src6" style="display: none;"></div>
 						</div>
 					</div>
 					<div class="row content_img">
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img7" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src7">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src7" style="display: none;"></div>
 						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img8" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src8">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src8" style="display: none;"></div>
 						</div>
-						<div class="col">
-							<img src="/My/imgs/gym01.jpg">
+						<div class="col-4 justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img9" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src9">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src9" style="display: none;"></div>
 						</div>
-					</div>
-					<div class="empty"></div>
+					</div> --%>
 				</div>
 				<hr
 					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
@@ -837,7 +871,7 @@ input::placeholder, textarea::placeholder {
 	$(".btnAdd").on("click", function(){
 		let regexPrice = /[0-9]/;
 		
-		if ($("#gym_src_main").val() === "") {
+	<%--	if ($("#gym_src_main").val() === "") {
 			alert("사진 등록은 필수입니다.");
 			$("#gym_src").focus();
 			return;
@@ -856,16 +890,20 @@ input::placeholder, textarea::placeholder {
 			alert("가격을 숫자로 입력하세요.");
 			$("#gym_price").focus();
 			return;
-		}
+		} --%>
 		
 		$("#addForm").submit();
 	})
 		
 	// 이미지 미리보기
 	$("#gym_src_main").change(function(){
-    	setImageFromFile(this, "#gym_src_img");
+    	setImageFromFile(this, "#gym_src_mainImg");
+    	console.log(this.val());
 	});
 
+	$("#gym_src").change(function(){
+    	setImageFromFile(this, "#gym_src_img");
+	});
 	function setImageFromFile(input, expression) {
     	if (input.files && input.files[0]) {
         	var reader = new FileReader();
@@ -875,6 +913,80 @@ input::placeholder, textarea::placeholder {
         reader.readAsDataURL(input.files[0]);
     	}
 	}
+	
+	// 이미지 여러개
+	( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
+			  imageView = function imageView(att_zone, btn){
+
+			    var attZone = document.getElementById(att_zone);
+			    var btnAtt = document.getElementById(btn)
+			    var sel_files = [];
+			    
+			    // 이미지와 체크 박스를 감싸고 있는 div 속성
+			    var div_style = 'display:inline-block;position:relative;'
+			                  + 'width:150px;height:120px;margin:5px;border:1px solid #00f;z-index:1';
+			    // 미리보기 이미지 속성
+			    var img_style = 'width:100%;height:100%;z-index:none';
+			    // 이미지안에 표시되는 체크박스의 속성
+			    var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
+			                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.1);color:#f00';
+			  
+			    btnAtt.onchange = function(e){
+			      var files = e.target.files;
+			      var fileArr = Array.prototype.slice.call(files)
+			      for(f of fileArr){
+			        imageLoader(f);
+			      }
+			    }  
+			    
+			    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
+			    imageLoader = function(file){
+			      sel_files.push(file);
+			      var reader = new FileReader();
+			      reader.onload = function(ee){
+			        let img = document.createElement('img')
+			        img.setAttribute('style', img_style)
+			        img.src = ee.target.result;
+			        attZone.appendChild(makeDiv(img, file));
+			      }
+			      reader.readAsDataURL(file);
+			    }
+			    
+			    /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
+			    makeDiv = function(img, file){
+			      var div = document.createElement('div')
+			      div.setAttribute('style', div_style)
+			      
+			      var btn = document.createElement('input')
+			      btn.setAttribute('type', 'button')
+			      btn.setAttribute('value', 'x')
+			      btn.setAttribute('delFile', file.name);
+			      btn.setAttribute('style', chk_style);
+			      btn.onclick = function(ev){
+			        var ele = ev.srcElement;
+			        var delFile = ele.getAttribute('delFile');
+			        for(var i=0 ;i<sel_files.length; i++){
+			          if(delFile== sel_files[i].name){
+			            sel_files.splice(i, 1);      
+			          }
+			        }
+			        
+			        dt = new DataTransfer();
+			        for(f in sel_files) {
+			          var file = sel_files[f];
+			          dt.items.add(file);
+			        }
+			        btnAtt.files = dt.files;
+			        var p = ele.parentNode;
+			        attZone.removeChild(p)
+			      }
+			     div.appendChild(img)
+			     div.appendChild(btn)
+			     return div
+			   }
+			 }
+		)('att_zone', 'btnAtt')
+		
 	
 	/* 다음 주소 */
 	function daumPostcode() {

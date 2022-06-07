@@ -65,8 +65,14 @@ public class FoodDAO {
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
 			
-			pstmt.setString(1, dto.getFood_src());
-			pstmt.setInt(2, dto.getFood_seq());
+			if(dto.getFood_src() == null) {
+				return 0;
+			}else {
+				pstmt.setString(1, dto.getFood_src());
+				pstmt.setInt(2, dto.getFood_seq());
+			}
+			
+			System.out.println("DAO" + dto.toString());
 			
 			return pstmt.executeUpdate();
 		}
