@@ -295,6 +295,9 @@ h2 {
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

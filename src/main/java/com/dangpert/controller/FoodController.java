@@ -160,9 +160,12 @@ public class FoodController extends HttpServlet {
 				int rsFile = dao.modifyPic(new FoodFolderDTO(food_seq, food_src));
 				
 				if (rs > 0 || rsFile > 0) {
-					System.out.println("수정 성공");
-					response.sendRedirect("/modify.food?food_seq=" + food_seq);
-				}
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }else if (rs > 0){
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

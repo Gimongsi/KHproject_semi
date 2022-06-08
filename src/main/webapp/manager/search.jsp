@@ -58,15 +58,6 @@
 }
 
 @font-face {
-	font-family: 'SuncheonB';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	src:
 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
@@ -74,7 +65,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -85,7 +75,6 @@
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -95,6 +84,7 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -122,10 +112,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -135,13 +123,11 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
-
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -184,7 +170,6 @@ translateY
 
 }
 }
-
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -227,7 +212,6 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
@@ -378,6 +362,9 @@ translateY
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -569,42 +556,42 @@ translateY
 				</div>
 			</div>
 		</div>
-		</div>
-		<!-- footer 영역 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3>1588-0000</h3>
-					<br> AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
+	</div>
+	<!-- footer 영역 -->
+	<div class="container footer">
+		<div class="row footerInfo">
+			<div class="col-6">
+				제휴 및 서비스 이용문의<br>
+				<h3>1588-0000</h3>
+				<br> AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
 			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
+			<div class="col-6">
+				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
+				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+				kh.projectmail@gmail.com<br>
 			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
+		<div class="row footerMenu">
+			<div class="col">
+				<a href="">이용약관</a>
+			</div>
+			<div class="col">
+				<a href="">개인정보처리방침</a>
+			</div>
+			<div class="col">
+				<a href="">위치정보이용약관</a>
+			</div>
+			<div class="col">
+				<a href="">센터등록요청하기</a>
+			</div>
+			<div class="col">
+				<a href="">문의하기</a>
+			</div>
+		</div>
+		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+	</div>
 
-		<script>
+	<script>
 			// 수정 버튼 눌렀을때 수정완료 취소 생성
 			$("#modify_btn").on("click", function() {
 				$(".btn-before").css("display", "none");
