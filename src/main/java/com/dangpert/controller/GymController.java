@@ -229,7 +229,7 @@ public class GymController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(uri.equals("/searchProc.gym")) {
+		}else if(uri.equals("/searchProc.gym")) { // 운동시설 찾기
 			GymDAO dao = new GymDAO();
 			String searchLocation = request.getParameter("searchLocation");
 			System.out.println("search" + searchLocation);
