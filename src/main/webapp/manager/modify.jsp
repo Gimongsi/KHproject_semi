@@ -334,12 +334,13 @@ textarea {
 	</div>
 	<form id="modifyForm" action="/modifyProc.info" method="post">
 		<div class="container">
+			<input type="text" class="d-none" name="qna_seq" value="${dto.qna_seq}">
 			<div class="row">
 				<div class="col-2 d-flex justify-content-center align-items-center">
 					<h4>제목</h4>
 				</div>
 				<div class="col-10 p-2">
-					<input type="text" class="form-control" id="title" name="title"
+					<input type="text" class="form-control" id="title" name="qna_title"
 						value="${dto.qna_title}">
 				</div>
 			</div>
@@ -349,7 +350,7 @@ textarea {
 				</div>
 				<div class="col-10 p-2">
 					<textarea id="content" class="form-control" id="content"
-						name="content" value="${dto.qna_content}"></textarea>
+						name="qna_content" value="${dto.qna_content}"></textarea>
 				</div>
 			</div>
 		</div>

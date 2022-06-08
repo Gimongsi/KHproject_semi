@@ -28,18 +28,25 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: '양진체';
+	src:
+		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: 'LeferiPoint-WhiteObliqueA';
 }
 
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -77,7 +84,6 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -89,13 +95,11 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
 	width: 50%;
 	height: 50%;
 }
-
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -116,118 +120,21 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %
 {
 transform
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 translateY
-
-
-
-
-
-
-
-
-
-
-
-
 (
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -20px
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 }
-
 /* 로고 효과 끝 */
-
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -265,11 +172,10 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 20px;
+	height: 50px;
 }
 
 .emptyTop {
