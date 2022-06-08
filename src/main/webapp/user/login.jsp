@@ -469,6 +469,22 @@ input {
 		</form>
 
 		<script>
+			$("#searchIdBtn").on("click", function(){
+				let url = "/searchIdPopup.user";
+				let name = "아이디 찾기";
+				let option = "width=600, height=300, left=500, top=300";
+
+				window.open(url, name, option);
+			});
+			
+			$("#searchPwBtn").on("click", function(){
+				let url = "/searchPwPopup.user";
+				let name = "비밀번호 찾기";
+				let option = "width=600, height=350, left=400, top=400";
+
+				window.open(url, name, option);
+			});
+		
 			$("#loginBtn").on("click", function() {
 
 				if ($("#user_id").val() === "") {

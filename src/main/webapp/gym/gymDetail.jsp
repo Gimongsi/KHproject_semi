@@ -12,9 +12,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet"
+<!-- 카카오 맵 -->
+<script type="text/javascript"
+                            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=40927a14f44e1c75637977bc1c89c8a4&libraries=services"></script>    
+<link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
+<script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <title>운동시설 상세정보</title>
 <style>
@@ -230,7 +233,7 @@
         font-weight: 600;
     }
 
-    .detailPhoto>img {
+    .mainPhoto>img {
         width: 100%;
         height: 100%;
     }
@@ -438,12 +441,12 @@
 		<!-- 타이틀 -->
         <div class="list-item-wrap">
             <div class="row detailHeader">
-                <div class="detailPhoto col-12 col-sm-6">
+                <div class="mainPhoto col-12 col-sm-6">
                 	<c:if test="${empty dto.gym_src_main}">
                     	사진 없음
                     </c:if>
                     <c:if test="${not empty dto.gym_src_main}">
-                    	<img src="/files/${dto.gym_src_main}">
+                    	<img src="/files/${dto.gym_src_main}" name="gym_src_main">
                     </c:if>
                 </div>
                 <div class="row d-sm-none" style="height: 30px;"></div>
@@ -468,8 +471,7 @@
                         <div class="row">
                             <div class="col-1">
                                 <span class="material-symbols-outlined">
-                                    call <!-- android_dialer 갑자기 안먹힘 -->
-                                    </span>
+                                    call</span>
                             </div>
                             <div class="col">
                                 <p>${dto.gym_phone}</p>
@@ -482,9 +484,14 @@
                             </div>
                             <div class="col-12 d-flex justify-content-center">
                                 <select class="form-select" name="option">
-                                    <option value="옵션1" selected>옵션1</option>
-                                    <option value="옵션2">옵션2</option>
-                                    <option value="옵션3">옵션3</option>
+                                	<c:if test="${empty dto.gym_month}">
+                                		<option style="text-align: center;" value="3">준비 중 입니다.</option>
+                                	</c:if>
+                                	<c:if test="${not empty dto.gym_month}">
+                                		<%-- <c:forEach items="${dto}" var="dto"> --%>
+                                   		<option style="text-align: center;" value="1" selected>${dto.gym_month}개월&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${dto.gym_price}원</option>
+                                    	<%-- </c:forEach> --%>
+                                    </c:if>
                                 </select>
                             </div>
                         </div>
@@ -529,12 +536,19 @@
                 <div class="noticeInfo">
                     <div class="row">
                         <div class="col">
-                            <h4 class="gymContentsText">운동시설 정보</h4>
+                            <h4 class="gymContentsText">운영 프로그램</h4>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col content">${dto.gym_month} ${dto.gym_price}
-                        </div>
+                    	<c:if test="${empty programDTO}">
+                    		<div class="col content"> 준비 중 입니다. </div>
+                    	</c:if>
+                    	<c:if test="${not empty programDTO}">
+                    		<c:forEach items="${programDTO}" var="programDTO">
+                        		<div class="col content">${programDTO.gym_program}
+                        		</div>
+                        	</c:forEach>
+                        </c:if>
                     </div>
                     <div class="empty"></div>
                 </div>
@@ -546,37 +560,21 @@
                         </div>
                     </div>
                     <div class="row content_img">
-                        <div class="col">
-                            <img id="gym_src" name="gym_src" src="/My/imgs/gym01.jpg">
-                        </div>
-                        <div class="col">
-                            <img src="/My/imgs/girl-g1a48332a8_1920.jpg">
-                        </div>
-                        <div class="col">
-                            <img src="/My/imgs/man-g2cdda0662_1920.jpg">
-                        </div>
-                    </div>
-                    <div class="row content_img">
-                        <div class="col">
-                            <img src="/My/imgs/gym01.jpg">
-                        </div>
-                        <div class="col">
-                            <img src="/My/imgs/gym01.jpg">
-                        </div>
-                        <div class="col">
-                            <img src="/My/imgs/gym01.jpg">
-                        </div>
-                    </div>
-                    <div class="row content_img">
-                        <div class="col">
-                            <img src="/My/imgs/gym01.jpg">
-                        </div>
-                        <div class="col">
-                            <img src="/My/imgs/gym01.jpg">
-                        </div>
-                        <div class="col">
-                            <img src="/My/imgs/gym01.jpg">
-                        </div>
+                    	<c:if test="${empty gymfolderDTO}"> 준비중입니다.
+                    		<div class="col srcImg">
+                        	</div>
+                        	<div class="col srcImg">
+                        	</div>
+                        	<div class="col srcImg">
+                        	</div>
+                    	</c:if>
+                    	<c:if test="${not empty gymfolderDTO}">
+                    		<c:forEach items="${gymfolderDTO}" var="gymfolderDTO">
+                        		<div class="col-4" style="margin-bottom:20px;">
+                            		<img class="rounded" id="gym_src" src="/files/${gymfolderDTO.gym_src}">
+                        		</div>
+                        	</c:forEach>
+                        </c:if>
                     </div>
                     <div class="empty"></div>
                 </div>
@@ -590,48 +588,6 @@
                         <div class="row">
                             <div class="col content" id="map" style="width:500px;height:400px;"></div>
                         </div>
-                        <script type="text/javascript"
-                            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=40927a14f44e1c75637977bc1c89c8a4&libraries=services"></script>
-                        <script>
-                            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                                mapOption = {
-                                    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-                                    level: 3 // 지도의 확대 레벨
-                                };
-
-                            // 지도를 생성합니다    
-                            var map = new kakao.maps.Map(mapContainer, mapOption);
-
-                            // 주소-좌표 변환 객체를 생성합니다
-                            var geocoder = new kakao.maps.services.Geocoder();
-
-                            // 주소로 좌표를 검색합니다
-                            let gym_extraAddr = $("#mapAddr").val();
-                            console.log(gym_extraAddr);
-                            geocoder.addressSearch(gym_extraAddr, function (result, status) {
-
-                                // 정상적으로 검색이 완료됐으면 
-                                if (status === kakao.maps.services.Status.OK) {
-
-                                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                                    // 결과값으로 받은 위치를 마커로 표시합니다
-                                    var marker = new kakao.maps.Marker({
-                                        map: map,
-                                        position: coords
-                                    });
-
-                                    // 인포윈도우로 장소에 대한 설명을 표시합니다
-                                    var infowindow = new kakao.maps.InfoWindow({
-                                        content: '<div style="width:150px;text-align:center;padding:6px 0;">' +$("#gym_name").html()+ '</div>'
-                                    });
-                                    infowindow.open(map, marker);
-
-                                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                                    map.setCenter(coords);
-                                }
-                            });    
-                        </script>
                         <!-- 카카오 맵 끝 -->
                     </div>
                     <div class="empty"></div>
@@ -675,17 +631,65 @@
         <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
     </div>
     <!-- footer 끝 -->
-    <script>
-        $(".btnDel").on("click", function(){
-        	let answer = confirm("정말 삭제하시겠습니까?");
-    		console.log(answer);
-    		if(answer){
-    			location.href = "/deleteProc.gym?gym_seq=${dto.gym_seq}";
-    		}
-        })
-		$(".btnModify").on("click", function(){
+	<script>
+		$(".btnDel").on("click", function() {
+			let answer = confirm("정말 삭제하시겠습니까?");
+			console.log(answer);
+			if (answer) {
+				location.href = "/deleteProc.gym?gym_seq=${dto.gym_seq}";
+			}
+		})
+		$(".btnModify").on("click", function() {
 			location.href = "/modify.gym?gym_seq=${dto.gym_seq}";
 		})
-    </script>
+
+		/* 카카오 맵 */
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
+
+		// 지도를 생성합니다    
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		let gym_extraAddr = $("#mapAddr").val();
+		console.log(gym_extraAddr);
+		geocoder
+				.addressSearch(
+						gym_extraAddr,
+						function(result, status) {
+
+							// 정상적으로 검색이 완료됐으면 
+							if (status === kakao.maps.services.Status.OK) {
+
+								var coords = new kakao.maps.LatLng(result[0].y,
+										result[0].x);
+
+								// 결과값으로 받은 위치를 마커로 표시합니다
+								var marker = new kakao.maps.Marker({
+									map : map,
+									position : coords
+								});
+
+								// 인포윈도우로 장소에 대한 설명을 표시합니다
+								var infowindow = new kakao.maps.InfoWindow(
+										{
+											content : '<div style="width:150px;text-align:center;padding:6px 0;">'
+													+ $("#gym_name").html()
+													+ '</div>'
+										});
+								infowindow.open(map, marker);
+
+								// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+								map.setCenter(coords);
+							}
+						});
+	</script>
 </body>
 </html>

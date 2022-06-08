@@ -423,11 +423,11 @@ translateY
 				</div>
 				<div class="empty"></div>
 				<div class="row d-flex align-items-center justify-content-center">
-					<div class="col-9 d-flex align-items-center justify-content-center">
+					<div class="col-8 d-flex align-items-center justify-content-center">
 						<input type="text" class="form-control" id="user_id"
 							name="user_id" placeholder="이메일" readonly>
 					</div>
-					<div class="col-3">
+					<div class="col-4">
 						<button type="button" class="btn btnAdd overBtn">중복확인</button>
 					</div>
 				</div>

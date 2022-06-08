@@ -150,22 +150,36 @@ keyframes waviy { 0%, 40%, 100% {
 20
 
 
+
+
 %
 {
 transform
 
 
+
+
 :
 
 
+
+
 translateY
+
+
 (
+
+
 
 
 -20px
 
 
+
+
 )
+
+
 
 
 }
@@ -363,7 +377,8 @@ translateY
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -484,7 +499,7 @@ translateY
 						</c:if>
 					</ul>
 				</nav>
-				<form action="user_update.manager" method="post" id="updateForm">
+				<form action="/user_update.manager" method="post" id="updateForm">
 					<table class="update_table cls_table table" border="1">
 						<thead class="update_table">
 							<tr>
@@ -499,22 +514,24 @@ translateY
 								<td class="insert_col"><input type="text"
 									class="form-control user_id" value="" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control user_id" value="" readonly></td>
+									class="form-control user_id" value=""
+									name="user_id" readonly></td>
 							</tr>
 							<tr>
 								<th class="update_col">이름</th>
 								<td class="insert_col"><input type="text"
 									class="form-control" value="" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control user_name" value="" class="update_input"></td>
+									class="form-control user_name" value=""
+									name="user_name" class="update_input"></td>
 							</tr>
 							<tr>
 								<th class="update_col">휴대폰 번호</th>
 								<td class="insert_col"><input type="text"
 									class="form-control" value="" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control user_phone" value="" class="update_input"
-									placeholder="-제외"></td>
+									class="form-control user_phone" value=""
+									class="update_input" placeholder="-제외"></td>
 							</tr>
 							<tr>
 								<th class="update_col">등급</th>
@@ -522,7 +539,7 @@ translateY
 									class="form-control" value="" readonly></td>
 								<td class="insert_col"><select
 									class="form-select user_auth" name="user_auth">
-										<option value="원래등급" selected>등급 선택</option>
+										<option value="" selected>등급 선택</option>
 										<option value="member">Member</option>
 										<option value="admin">Admin</option>
 										<option value="manager">Manager</option>
@@ -533,7 +550,8 @@ translateY
 								<td class="insert_col"><input type="text"
 									class="form-control" value="" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control update_input user_memo" value=""></td>
+									class="form-control update_input user_memo"
+									id="" value=""></td>
 							</tr>
 						</tbody>
 					</table>
@@ -592,160 +610,156 @@ translateY
 	</div>
 
 	<script>
-			// 수정 버튼 눌렀을때 수정완료 취소 생성
-			$("#modify_btn").on("click", function() {
-				$(".btn-before").css("display", "none");
-				$(".btn-after").removeClass("d-none");
-			})
-			// 취소 누르면 다시 원래대로 돌리기
-			$("#cancel_btn").on("click", function() {
-				$(".btn-after").addClass("d-none");
-				$(".btn-before").css("display", "flex");
-			})
+		// 수정 버튼 눌렀을때 수정완료 취소 생성
+		$("#modify_btn").on("click", function() {
+			$(".btn-before").css("display", "none");
+			$(".btn-after").removeClass("d-none");
+		})
+		// 취소 누르면 다시 원래대로 돌리기
+		$("#cancel_btn").on("click", function() {
+			$(".btn-after").addClass("d-none");
+			$(".btn-before").css("display", "flex");
+		})
 
-			$(".toModify_btn").on("click", function() {
-				$("#updateForm").submit();
-			})
+		$(".toModify_btn").on("click", function() {
+			$("#updateForm").submit();
+		})
 
-			$(".clickBtn").on(
-					"click",
-					function(e) {
-						let user_seq = $(e.target).val();
+		$(".clickBtn").on(
+				"click",
+				function(e) {
+					let user_seq = $(e.target).val();
 
-						$.ajax({
-							url : "/managerUpdate.user?user_seq=" + user_seq,
-							type : "get",
-							dataType : "json",
-							success : function(data) {
-								$("#modify_table").empty();
-								let tr1 = $("<tr>");
-								let th1_1 = $("<th>").addClass("update_col")
-										.html("이메일");
-								let td1_1 = $("<td>").addClass("insert_col");
-								let input1_1 = $("<input>").addClass(
-										"form-control user_id").attr({
-									type : "text",
-									value : data.user_id,
-									readonly : true
-								});
-								td1_1.append(input1_1);
-								let td1_2 = $("<td>").addClass("insert_col");
-								let input1_2 = $("<input>").addClass(
-										"form-control user_id").attr({
-									type : "text",
-									value : data.user_id,
-									name : "user_id",
-									readonly : true
-								});
-								td1_2.append(input1_2);
-								tr1.append(th1_1, td1_1, td1_2);
+					$.ajax({
+						url : "/managerUpdate.user?user_seq=" + user_seq,
+						type : "get",
+						dataType : "json",
+						success : function(data) {
+							$("#modify_table").empty();
+							let tr1 = $("<tr>");
+							let th1_1 = $("<th>").addClass("update_col").html("이메일");
+							let td1_1 = $("<td>").addClass("insert_col");
+							let input1_1 = $("<input>").addClass("form-control user_id").attr({
+								type : "text",
+								value : data.user_id,
+								readonly : true
+							});
+							td1_1.append(input1_1);
+							let td1_2 = $("<td>").addClass("insert_col");
+							let input1_2 = $("<input>").addClass("form-control user_id").attr({
+								type : "text",
+								value : data.user_id,
+								name : "user_id",
+								readonly : true
+							});
+							td1_2.append(input1_2);
+							tr1.append(th1_1, td1_1, td1_2);
 
-								let tr2 = $("<tr>");
-								let th2_1 = $("<th>").addClass("update_col")
-										.html("이름");
-								let td2_1 = $("<td>").addClass("insert_col");
-								let input2_1 = $("<input>").addClass(
-										"form-control user_name").attr({
-									type : "text",
-									value : data.user_name,
-									readonly : true
-								});
-								td2_1.append(input2_1);
-								let td2_2 = $("<td>").addClass("insert_col");
-								let input2_2 = $("<input>").addClass(
-										"form-control user_name").attr({
-									type : "text",
-									name : "user_name"
-								});
-								td2_2.append(input2_2);
-								tr2.append(th2_1, td2_1, td2_2);
+							let tr2 = $("<tr>");
+							let th2_1 = $("<th>").addClass("update_col").html(
+									"이름");
+							let td2_1 = $("<td>").addClass("insert_col");
+							let input2_1 = $("<input>").addClass(
+									"form-control user_name").attr({
+								type : "text",
+								value : data.user_name,
+								readonly : true
+							});
+							td2_1.append(input2_1);
+							let td2_2 = $("<td>").addClass("insert_col");
+							let input2_2 = $("<input>").addClass(
+									"form-control user_name").attr({
+								type : "text",
+								name : "user_name"
+							});
+							td2_2.append(input2_2);
+							tr2.append(th2_1, td2_1, td2_2);
 
-								let tr3 = $("<tr>");
-								let th3_1 = $("<th>").addClass("update_col")
-										.html("휴대폰 번호");
-								let td3_1 = $("<td>").addClass("insert_col");
-								let input3_1 = $("<input>").addClass(
-										"form-control user_phone").attr({
-									type : "text",
-									value : data.user_phone,
-									readonly : true
-								});
-								td3_1.append(input3_1);
-								let td3_2 = $("<td>").addClass("insert_col");
-								let input3_2 = $("<input>").addClass(
-										"form-control user_phone").attr({
-									type : "text",
-									name : "user_phone",
-									placeholder : "-제외"
-								});
-								td3_2.append(input3_2);
-								tr3.append(th3_1, td3_1, td3_2);
+							let tr3 = $("<tr>");
+							let th3_1 = $("<th>").addClass("update_col").html(
+									"휴대폰 번호");
+							let td3_1 = $("<td>").addClass("insert_col");
+							let input3_1 = $("<input>").addClass(
+									"form-control user_phone").attr({
+								type : "text",
+								value : data.user_phone,
+								readonly : true
+							});
+							td3_1.append(input3_1);
+							let td3_2 = $("<td>").addClass("insert_col");
+							let input3_2 = $("<input>").addClass(
+									"form-control user_phone").attr({
+								type : "text",
+								name : "user_phone",
+								placeholder : "-제외"
+							});
+							td3_2.append(input3_2);
+							tr3.append(th3_1, td3_1, td3_2);
 
-								let tr4 = $("<tr>");
-								let th4_1 = $("<th>").addClass("update_col")
-										.html("휴대폰 번호");
-								let td4_1 = $("<td>").addClass("insert_col");
-								let input4_1 = $("<input>").addClass(
-										"form-control user_auth").attr({
-									type : "text",
-									value : data.user_auth,
-									readonly : true
-								});
-								td4_1.append(input4_1);
-								let td4_2 = $("<td>").addClass("insert_col");
-								let select4_1 = $("<select>").addClass(
-										"form-select user_auth").attr({
-									name : "user_auth"
-								})
-								let option4_1 = $("<option>").attr({
-									value : data.user_auth,
-									selected : true
-								}).text("등급 선택");
-								let option4_2 = $("<option>").attr({
-									value : "member"
-								}).text("member");
-								let option4_3 = $("<option>").attr({
-									value : "admin"
-								}).text("admin");
-								let option4_4 = $("<option>").attr({
-									value : "manager"
-								}).text("manager");
-								select4_1.append(option4_1, option4_2,
-										option4_3, option4_4);
-								td4_2.append(select4_1);
-								tr4.append(th4_1, td4_1, td4_2);
+							let tr4 = $("<tr>");
+							let th4_1 = $("<th>").addClass("update_col").html(
+									"휴대폰 번호");
+							let td4_1 = $("<td>").addClass("insert_col");
+							let input4_1 = $("<input>").addClass(
+									"form-control user_auth").attr({
+								type : "text",
+								value : data.user_auth,
+								readonly : true
+							});
+							td4_1.append(input4_1);
+							let td4_2 = $("<td>").addClass("insert_col");
+							let select4_1 = $("<select>").addClass(
+									"form-select user_auth").attr({
+								name : "user_auth"
+							})
+							let option4_1 = $("<option>").attr({
+								value : data.user_auth,
+								selected : true
+							}).text("등급 선택");
+							let option4_2 = $("<option>").attr({
+								value : "member"
+							}).text("member");
+							let option4_3 = $("<option>").attr({
+								value : "admin"
+							}).text("admin");
+							let option4_4 = $("<option>").attr({
+								value : "manager"
+							}).text("manager");
+							select4_1.append(option4_1, option4_2, option4_3,
+									option4_4);
+							td4_2.append(select4_1);
+							tr4.append(th4_1, td4_1, td4_2);
 
-								let tr5 = $("<tr>");
-								let th5_1 = $("<th>").addClass("update_col")
-										.html("메모");
-								let td5_1 = $("<td>").addClass("insert_col");
-								let input5_1 = $("<input>").addClass(
-										"form-control user_memo").attr({
-									type : "text",
-									value : data.user_memo,
-									readonly : true
-								});
-								td5_1.append(input5_1);
-								let td5_2 = $("<td>").addClass("insert_col");
-								let input5_2 = $("<input>").addClass(
-										"form-control user_memo").attr({
-									type : "text",
-									name : "user_memo"
-								});
-								td5_2.append(input5_2);
-								tr5.append(th5_1, td5_1, td5_2);
+							let tr5 = $("<tr>");
+							let th5_1 = $("<th>").addClass("update_col").html(
+									"메모");
+							let td5_1 = $("<td>").addClass("insert_col");
+							let input5_1 = $("<input>").addClass(
+									"form-control user_memo").attr({
+								type : "text",
+								value : data.user_memo,
+								readonly : true
+							});
+							td5_1.append(input5_1);
+							let td5_2 = $("<td>").addClass("insert_col");
+							let input5_2 = $("<input>").addClass(
+									"form-control user_memo").attr({
+								type : "text",
+								name : "user_memo"
+							});
+							td5_2.append(input5_2);
+							tr5.append(th5_1, td5_1, td5_2);
 
-								$("#modify_table").append(tr1, tr2, tr3, tr4,
-										tr5);
+							$("#modify_table").append(tr1, tr2, tr3, tr4, tr5);
 
-							},
-							error : function(e) {
-								console.log(e);
-							}
-						})
-
+						},
+						error : function(e) {
+							console.log(e);
+						}
 					})
-		</script>
+
+				})
+	</script>
 </body>
 
 </html>
