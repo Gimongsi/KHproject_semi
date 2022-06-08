@@ -2,13 +2,13 @@ package com.dangpert.dto;
 
 public class DiaryDTO {
 
-	private int diary_seq, user_seq;
-	private String diary_date, diary_content, diary_part, diary_weight;
+	private int diary_seq, user_seq, diary_weight;
+	private String diary_date, diary_content, diary_part;
 	
 	public DiaryDTO() {}
 
 	public DiaryDTO(int diary_seq, int user_seq, String diary_date, String diary_content, String diary_part,
-			String diary_weight) {
+			int diary_weight) {
 		super();
 		this.diary_seq = diary_seq;
 		this.user_seq = user_seq;
@@ -58,11 +58,11 @@ public class DiaryDTO {
 		this.diary_part = diary_part;
 	}
 
-	public String getDiary_weight() {
+	public int getDiary_weight() {
 		return diary_weight;
 	}
 
-	public void setDiary_weight(String diary_weight) {
+	public void setDiary_weight(int diary_weight) {
 		this.diary_weight = diary_weight;
 	}
 
