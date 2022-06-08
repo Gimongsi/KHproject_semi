@@ -10,10 +10,6 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 7b7187670660b01006bb380637f744ac1a0d1629
 import com.dangpert.dto.GymFolderDTO;
 import com.dangpert.dto.GymInfoDTO;
 import com.dangpert.dto.GymProgramDTO;
@@ -44,7 +40,6 @@ public class GymDAO {
 			return rs.getInt(1);
 		}
 	}
-	
 	
 	/* INFO CRUD */
 	
@@ -285,7 +280,7 @@ public class GymDAO {
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
 			
-			if(dto.getGym_src().equals(null)) {
+			if(dto.getGym_src() == null) {
 				return 0;
 			}else {
 				pstmt.setString(1, dto.getGym_src());

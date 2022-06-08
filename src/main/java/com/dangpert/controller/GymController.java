@@ -36,7 +36,6 @@ public class GymController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		if(uri.equals("/list.gym")) { // 운동시설 리스트로 이동
-			response.sendRedirect("/gym/gymList.jsp");
 			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
 			
@@ -175,6 +174,7 @@ public class GymController extends HttpServlet {
 				}
 				
 				String gym_src = multi.getFilesystemName("gym_src");
+				String gym_src_add = multi.getFilesystemName("gym_src_add");
 //				ArrayList<GymFolderDTO> folderList = new ArrayList<>();
 //				if(folderList == null) {
 //					System.out.println("선택된 항목 없음");
@@ -199,12 +199,14 @@ public class GymController extends HttpServlet {
 				String gym_comment = multi.getParameter("gym_comment");
 				String gym_src_main = multi.getFilesystemName("gym_src_main");
 				
+				GymFolderDTO gymfolderDTO = new GymFolderDTO(gym_seq, gym_src_add);
 				
 				int rs = dao.modifyInfo(new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main));
 				int rs2 = dao.modifyProgram(program);
 				int rs3 = dao.modifyPicDTO(new GymFolderDTO(gym_seq, gym_src));
+				int rs4 = dao.addPic(gymfolderDTO);
 				
-				if(rs > 0 && rs2 > 0) {
+				if(rs > 0 && rs2 > 0 ||rs3 > 0 || rs4 > 0) {
 					System.out.println("수정 성공");
 					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
 				}
