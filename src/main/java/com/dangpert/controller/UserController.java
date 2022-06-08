@@ -152,10 +152,26 @@ public class UserController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		}
+		} /*else if(uri.equals("/findId.user")) { //아이디 찾기 요청
+			String user_name = request.getParameter("user_name");
+			String user_phone = request.getParameter("user_phone");
+			System.out.println(user_name + " : " + user_phone);
+			UserDAO dao = new UserDAO();
+			
+			try {
+				 
+				if()
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}*/
 		
 		
-		
+	
 		
 	}
 

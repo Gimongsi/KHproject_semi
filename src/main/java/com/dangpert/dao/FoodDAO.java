@@ -300,7 +300,7 @@ public class FoodDAO {
 			ArrayList<UserfoodInterestDTO> list = new ArrayList<UserfoodInterestDTO>();
 			
 			while(rs.next()) {
-				int food_seq = rs.getInt("food_seq");
+				int food_seq = rs.getInt(1);
 				
 				list.add(new UserfoodInterestDTO(food_seq, user_seq));
 			}

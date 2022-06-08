@@ -213,5 +213,25 @@ private BasicDataSource bds;
 		}
 	}
 	
+	public String findId(String user_name, String user_phone)throws Exception { //아이디 찾기
+		String sql = "select * from tbl_user where user_name= ? and user_phone=? ";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setString(1, "user_name");
+			pstmt.setString(2, "user_phone");
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {	
+				String user_id = rs.getString("user_id");
+				return user_id;
+			}else {
+				return null;
+			}
+		}
+	}
+	
 	
 }

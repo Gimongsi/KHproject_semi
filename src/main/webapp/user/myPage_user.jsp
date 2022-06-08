@@ -467,7 +467,7 @@
 								</thead>
 								<tbody>
 									<c:choose>
-										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
+										<c:when test="${ugi_dto.size() == 0 && listInterest.size() == 0}">
 											<tr>
 												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
 											</tr>
@@ -483,8 +483,12 @@
 											<th>푸드 프로모션</th>
 											<c:forEach items="${listInterest}" var="dto">
 												<tr>
-													<td>${gym_dto.food_seq}</td>
-													<td><a href="">${ufi_dto.food_name}</a></td>
+													<td>${listInterest.food_seq}</td>
+													<td><a href="">${listPromo.food_name}</a></td>
+												</tr>
+												<tr>
+													<td>${listInterest.food_seq}</td>
+													<td><a href="">${listPromo.food_name}</td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>

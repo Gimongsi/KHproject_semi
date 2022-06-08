@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.dangpert.dao.GymDAO;
 import com.dangpert.dto.GymInfoDTO;
 import com.dangpert.dto.UserDTO;
+import com.dangpert.dto.UsergymInterestDTO;
 import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -32,6 +33,8 @@ public class GymController extends HttpServlet {
 		String uri = request.getRequestURI();
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+	   
 		
 		if(uri.equals("/list.gym")) { // 운동시설 리스트로 이동
 			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
@@ -39,14 +42,12 @@ public class GymController extends HttpServlet {
 			
 			GymDAO dao = new GymDAO(); 
 			
-			try {
-//				ArrayList<UsergymInterestDTO> ugi_dto = dao.interestGym(dto.getUser_seq()); // 세션 유저의 즐겨찾기 목록들 불러오기
+			try {			
 				ArrayList<GymInfoDTO> gym_dto = dao.selectAllGym();// 모든 gym 불러오기
 
 				
 				System.out.println(gym_dto.toString());
 				
-//				request.setAttribute("ugi_dto", ugi_dto);
 				request.setAttribute("gym_dto", gym_dto);
 				
 			
@@ -238,6 +239,29 @@ public class GymController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+		}else if(uri.equals("/listLogin.gym")) { // (로그인 시) 운동시설 리스트로 이동
+			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
+			
+			GymDAO dao = new GymDAO(); 
+			
+			try {
+				ArrayList<UsergymInterestDTO> ugi_dto = dao.interestGym(dto.getUser_seq()); // 세션 유저의 즐겨찾기 목록들 불러오기
+				ArrayList<GymInfoDTO> gym_dto = dao.selectAllGym();// 모든 gym 불러오기
+
+				
+				System.out.println(gym_dto.toString());
+				
+				request.setAttribute("ugi_dto", ugi_dto);
+				request.setAttribute("gym_dto", gym_dto);
+				
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			request.getRequestDispatcher("/gym/gymList.jsp").forward(request, response);
 			
 		}
 	}

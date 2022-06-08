@@ -635,7 +635,7 @@
                                 			<span class="buttonImg" style="margin-right:5px;">G.X</span>
                                 			<span class="buttonImg" style="margin-right:5px;">요가</span>
                                 			<div class="col d-flex justify-content-end favorite">
-                                    			<c:choose>
+                                    <c:choose>
 										<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
 											<c:forEach items="${ugi_dto}" var="ugi_dto">
 												<div class="ImgFavorite">

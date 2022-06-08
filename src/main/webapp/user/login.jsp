@@ -512,7 +512,7 @@
                             <img id="loginLogo" src="/imgs/dpt_Logo.png">
                         </div>
                         <div class="col-9 p-5 d-flex justify-content-start">
-                            <h5>안녕하세요 :) <br> 당신의 퍼스털 트레이너입니다.</h5>
+                            <h5>안녕하세요 :) <br> 당신의 퍼스널 트레이너입니다.</h5>
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -536,8 +536,8 @@
 
                     <div class="row m-2">
                         <div class="col-11 d-flex justify-content-end">
-                            <button type="button" class="btn btn-light" id="searchIdBtn">로그인 이메일 찾기</button>
-                            <button type="button" class="btn btn-light" id="searchPwBtn">비밀번호 찾기</button>
+                            <button type="button" class="btn btn-light">로그인 이메일 찾기</button>
+                            <button type="button" class="btn btn-light">비밀번호 찾기</button>
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -569,7 +569,8 @@
 			$("#signupBtn").on("click", function(){
 				location.href = "/toSignup.user";
 			})
-				
+			
+		
 			
 		</script>
 

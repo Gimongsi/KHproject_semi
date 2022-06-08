@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.tribes.ChannelSender;
-
 import com.dangpert.dao.FoodDAO;
 import com.dangpert.dto.FoodDTO;
 import com.dangpert.dto.FoodFolderDTO;
@@ -39,22 +37,24 @@ public class FoodController extends HttpServlet {
 		String uri = request.getRequestURI();
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 
+		
 		if (uri.equals("/list.food")) { 
 			HttpSession session = request.getSession(); 
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
 			FoodDAO dao = new FoodDAO();
-
+			System.out.println("loginSession : " + dto);
 			try {
+				ArrayList<UserfoodInterestDTO> listInterest = dao.interestFood(dto.getUser_seq());
 				ArrayList<FoodDTO> listPromo = dao.selectPromo();
 				ArrayList<FoodDTO> list = dao.selectHellin();
+					
+				System.out.println("size: "+listInterest.size());
 				
-				ArrayList<UserfoodInterestDTO> listInterest = dao.interestFood(dto.getUser_seq()); 
-				
+				request.setAttribute("listInterest", listInterest);
 				request.setAttribute("listPromo", listPromo);
 				request.setAttribute("list", list);
-				
-				request.setAttribute("listInterest" , listInterest);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -186,6 +186,7 @@ public class FoodController extends HttpServlet {
 		}else if(uri.equals("/interest.food")) {
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			System.out.println(request.getParameter("food_seq"));
 			int food_seq = Integer.parseInt(request.getParameter("food_seq"));
 			FoodDAO dao = new FoodDAO();
 			
@@ -193,7 +194,7 @@ public class FoodController extends HttpServlet {
 				int rs = dao.insertInterestFood(food_seq, dto.getUser_seq());
 				
 				if (rs>0) {
-					request.getRequestDispatcher("/list.food");
+					response.sendRedirect("/list.food");
 					System.out.println("푸드 프로모션 즐겨찾기");
 				}
 			}catch(Exception e) {
@@ -219,12 +220,6 @@ public class FoodController extends HttpServlet {
 			}
 			
 		}
-				
-				
-				
-		
-		
-	
-		
 	}
+
 }

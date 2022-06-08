@@ -17,9 +17,47 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
-</head>
+<title>아이디 찾기 결과</title>
 <style>
+/* 버튼 */
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+.btnAdd {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: small;
+	color: white;
+	margin: 5px;
+}
+
+.btnAdd:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
+.findResultBtn {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: small;
+	color: white;
+	margin: 5px;
+}
+
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
@@ -29,12 +67,30 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'SuncheonB';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
@@ -49,6 +105,7 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
 }
 
 .cls_header a {
@@ -89,11 +146,13 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
+
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
 	width: 100%;
 	height: 100%;
 }
+
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -127,6 +186,7 @@ translateY(
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -168,53 +228,37 @@ translateY(
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 80px;
+	height: 20px;
 }
 
-/* 바디 */
-.inner-container-left {
-	margin: auto;
-	border: 1px solid black;
-	box-sizing: border-box;
-	height: 100%;
+.empty2 {
+	background-color: white;
+	height: 40px;
 }
 
-.inner-container-left>div>a {
-	color: black;
-}
-
-.inner-container-left * {
-	margin: 20px;
-}
-
-.inner-container-right {
-	height: 100%;
-}
-
-.inner-container-right div {
-	margin: 20px;
-	margin-top: 50px;
-}
-
-.inner-container-right h5 {
-	border-bottom: 2px solid grey;
-	width: 400px;
-	text-align: center;
-}
-
-.inner-container-right button {
-	margin-right: 40px;
-}
-
-.bookmark {
-	border: 1px solid black;
+/*로그인*/
+.findIdResultBox {
+	width: 600px;
 	height: 600px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
 }
 
-/* 푸터 */
+#loginLogo {
+	width: 100px;
+	height: 100px;
+	margin-top: 20px;
+}
+
+.findIdResultContainer {
+	border: 1px solid #d5fcf3;
+	width: 700px;
+	height: 220px;
+}
+
+/*footer*/
 .footer {
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
+	/* font-family: 'SuncheonB';
+        font-weight: normal; */
 	font-size: small;
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
@@ -240,10 +284,10 @@ translateY(
 }
 </style>
 
+</head>
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-
 		<c:choose>
 			<c:when
 				test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
@@ -293,9 +337,12 @@ translateY(
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
+											href="/gymList.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a>내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -373,9 +420,14 @@ translateY(
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
+											href="/gymList.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/foodList.food">특가 식품</a></li>
+
+										<li class="nav-item"><a href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -446,9 +498,10 @@ translateY(
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
+											href="/gymList.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
+											href="/foodList.food">특가 식품</a></li>
+
 										<li class="nav-item dropdown"><a
 											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 											role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -475,109 +528,121 @@ translateY(
 				<div class="empty"></div>
 			</c:otherwise>
 		</c:choose>
+
 		<!-- 헤더 끝 -->
 		<div class="empty"></div>
-		<!-- 바디 -->
-		<div class="cls_body">
-			<div class="row justify-content-evenly">
-				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
-					<div class="inner-container-left">
-						<div>
-							<a href="#">정보수정</a>
-						</div>
-						<div>
-							<a href="#">일기</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="inner-container-right">
-						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 kg 남았습니다.</h5>
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 접속일</button>
-							2022년 00월 00일
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 기록일</button>
-							2022년 00월 00일
-						</div>
-						<div>즐겨찾기</div>
-						<div class="bookmark">
-						<table>
-								<thead>
-									<th>프로모션</th>
-								</thead>
-								<tbody>
-									<c:choose>
-										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
-											<tr>
-												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<th>헬스장 프로모션</th>
-											<c:forEach items="${ugi_dto}" var="dto"> 
-												<tr>
-													<td>${gym_dto.gym_seq}</td>
-													<td><a href="">${ugi_dto.gym_name}</a></td>
-												</tr>
-											</c:forEach>
-											<th>푸드 프로모션</th>
-											<c:forEach items="${listInterest}" var="dto">
-												<tr>
-													<td>${gym_dto.food_seq}</td>
-													<td><a href="">${ufi_dto.food_name}</a></td>
-												</tr>
-											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tbody>
-							</table>
+		<div class="container">
+			<form action="" method="post" id="findIdResultForm">
+				<div class="row">
+					<div class="col-12 d-flex justify-content-center">
+						<div class="findIdResultBox">
+							<div class="row">
+								<div class="col-3 p-1 d-flex justify-content-end">
+									<img id="loginLogo" src="/imgs/dpt_Logo.png">
+								</div>
+								<div class="col-9 p-5 d-flex justify-content-start">
+									<h5>
+										안녕하세요 :) <br> 당신의 퍼스널 트레이너입니다.
+									</h5>
+								</div>
+							</div>
+							<div class="empty"></div>
+							<div class="findIdResultContainer">
+								<c:choose>
+									<c:when test=""> 
+										<div class="row">
+											<div class="col-12 p-3 d-flex justify-content-center">
+												<h5>조회되는 아이디가 없습니다.</h5>
+											</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="row">
+									<div class="col-12 p-3 d-flex justify-content-center">
+										<h5>회원님의 아이디는</h5>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 d-flex justify-content-center">
+										<h3>${loginSession.user_id}</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 d-flex justify-content-center">
+										<h5>입니다</h5>
+									</div>
+								</div>
+									</c:otherwise>
+								</c:choose>
+
+								<!-- 버튼 -->
+								<div class="row">
+									<div class="col-12 p-3 d-flex justify-content-center">
+										<button type="button" class="findResultBtn" id="fidnLoginBtn"
+											name="findLoginBtn">로그인</button>
+										<button type="button" class="findResultBtn" id="findPwBtn"
+											name="findPwBtn">비밀번호 찾기</button>
+									</div>
+								</div>
+							</div>
+
 						</div>
 					</div>
 				</div>
+
+			</form>
+
+
+
+			<div class="empty"></div>
+			<!-- footer -->
+			<div class="container footer">
+				<div class="row footerInfo">
+					<div class="col-6">
+						제휴 및 서비스 이용문의<br>
+						<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+						AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+					</div>
+					<div class="col-6">
+						(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+						사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+						kh.projectmail@gmail.com<br>
+					</div>
+				</div>
+				<div class="row footerMenu">
+					<div class="col">
+						<a href="">이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">개인정보처리방침</a>
+					</div>
+					<div class="col">
+						<a href="">위치정보이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">센터등록요청하기</a>
+					</div>
+					<div class="col">
+						<a href="">문의하기</a>
+					</div>
+				</div>
+				<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 			</div>
 		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
+		<!-- footer 끝 -->
 	</div>
+
+
+	<script>
+		$("#fidnLoginBtn").on("click", function(e) {
+			location.href = "/user/login.jsp"; //로그인 버튼 누를 시 로그인 페이지로 되돌아가기
+		});
+
+		$("#findPwBtn").on("click", function(e) {
+			location.href = "/"; //비밀번호 찾기 페이지 만들어지면 추후에 추가
+		});
+	</script>
+
+
 </body>
 </html>
