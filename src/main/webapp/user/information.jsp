@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +19,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>FAQ</title>
+<title>FAQ 수정</title>
 </head>
 <style>
 /* 폰트 */
@@ -43,6 +42,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -80,6 +80,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -125,6 +126,7 @@ translateY
 )
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -166,6 +168,7 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
@@ -173,13 +176,49 @@ translateY
 }
 /* 게시글 스타일 영역 */
 .title {
-	padding: 10px;
-	text-align: center;
+	border-bottom: 2px solid grey;
+	width: 250px;
 }
 
 #content {
 	height: 500px;
 }
+/* 게시글 스타일 영역 끝 */
+/* 버튼 영역 */
+.boxBtn {
+	height: 10%;
+}
+
+.container {
+	width: 80%;
+	height: 100%;
+	padding: 10px;
+}
+
+form, table {
+	height: 100%;
+	text-align: center;
+}
+
+tr:first-child {
+	height: 10%;
+}
+
+input {
+	width: 100%;
+	height: 100%;
+}
+
+textarea {
+	width: 100%;
+	height: 100%;
+	resize: none;
+}
+
+.boxBtn {
+	text-align: center;
+}
+/* 버튼 영역 끝 */
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -322,9 +361,13 @@ translateY
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
 		<!-- FAQ 리스트 -->
-		<div class="title">
-        	<h3>FAQ</h3>
-    	</div>
+		<div class="cls_body">
+		<div class="d-flex justify-content-center">
+			<div class="title d-flex justify-content-center">
+				<h3>FAQ</h3>
+			</div>
+		</div>
+	</div>
 		<div class="container">
 			<c:if test="${loginSession.user_auth eq 'manager'}">
 				<div class="row boxBtn-top">

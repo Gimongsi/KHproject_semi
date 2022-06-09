@@ -114,13 +114,54 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
+
+
+
+
 %
 {
 transform
+
+
+
+
+
+
 :
-translateY(
+
+
+
+
+
+
+translateY
+
+
+
+
+(
+
+
+
+
+
+
 -20px
+
+
+
+
+
+
 )
+
+
+
+
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -328,123 +369,149 @@ translateY(
 				<c:if test="${loginSession.user_auth eq 'manager'}">
 					<div class="row boxBtn-top">
 						<div class="col d-flex justify-content-end">
-							<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
+							<button class="btn btn-warning" id="btnWrite" type="button">칼럼	등록</button>
 						</div>
 					</div>
 				</c:if>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th class="col-md-1">글번호</th>
+							<th class="col-md-5">제목</th>
+						</tr>
+					</thead>
+					<tbody class="body-board">
+						<c:choose>
+							<c:when test="${list.size() == 0}">
+								<tr>
+									<td colspan=5>등록된 게시글이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="dto">
+									<tr>
+										<td>${dto.calumn_seq}</td>
+										<td><a href="view.column?qna_seq=${dto.calumn_seq}">${dto.calumn_title}</a></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
 			</div>
-			
-			<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-				<div class="col">
-					<div class="card w-75 h-100">
-						<img src="/imgs/560.jpg" class="card-img-top h-100">
-						<div class="card-body">
-							<h5 class="card-title text-center">거북목 교정 운동법</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card w-75 h-100">
-						<img src="/imgs/alora-griffiths-WX7FSaiYxK8-unsplash.jpg"
-							class="card-img-top h-100">
-						<div class="card-body">
-							<h5 class="card-title text-center">부상 위험을 줄이는 운동 전 스트레칭</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card w-75 h-100">
-						<img src="/imgs/back-pain-g7ebabea1c_640.jpg"
-							class="card-img-top h-100">
-						<div class="card-body">
-							<h5 class="card-title text-center">허리디스크가 의심되세요?</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card w-75 h-100">
-						<img src="/imgs/fitsum-admasu-oGv9xIl7DkY-unsplash.jpg"
-							class="card-img-top h-100">
-						<div class="card-body">
-							<h5 class="card-title text-center">규칙적인 운동의 영향</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card w-75 h-100">
-						<img src="/imgs/hermes-rivera-Ww8eQWjMJWk-unsplash (1).jpg"
-							class="card-img-top h-100">
-						<div class="card-body">
-							<h5 class="card-title text-center">간헐적 단식! 누가, 어떻게 해야 효과적인가?</h5>
-						</div>
-					</div>
-				</div>
-				<div class="col">
-					<div class="card w-75 h-100">
-						<img src="/imgs/근육통.jpg" class="card-img-top h-100">
-						<div class="card-body">
-							<h5 class="card-title text-center">근육통 있을 때 운동해도 될까?</h5>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div>
-				<nav aria-label="Page navigation example">
-					<ul class="pagination d-flex justify-content-center">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<script>
+			<!--
+			<nav>
+				<ul class="pagination justify-content-center">
+					<c:if test="${naviMap.needPrev eq true}">
+						<li class="page-item"><a class="page-link"
+							href="/board.bo?curPage=${naviMap.startNavi-1}">Prev</a></li>
+						<%-- 현재 6페이지에 있는 상태에서 이전 버튼을 클릭했음 ->  5페이지로 이동 --%>
+					</c:if>
+
+					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+						end="${naviMap.endNavi}" step="1">
+						<li class="page-item"><a class="page-link"
+							href="/board.bo?curPage=${pageNum}">${pageNum}</a></li>
+					</c:forEach>
+
+					<c:if test="${naviMap.needNext eq true}">
+						<li class="page-item"><a class="page-link"
+							href="/board.bo?curPage=${naviMap.endNavi+1}">Next</a></li>
+					</c:if>
+				</ul>
+			</nav>
+			-->
+			<script>
+			<!-- 버튼 -->
 			$("#btnWrite").on("click", function() {
 				location.href = "/write.column";
 			})
-		</script>
-		<!-- Column 끝 -->
+			
+			
+		
+			<%--
+			$("#searchBtn").on("click", function(){ // 검색 버튼 클릭 시
+	    		// 검색어키워드 값을 가져오기
+	    		let searchKeyword = $("#searchKeyword").val();
+	    		console.log(searchKeyword);
+	    		// 
+	    		$.ajax({
+	    			url: "/searchProc.bo?searchKeyword="+searchKeyword //변경
+	    			, type: "get"
+	    			, dataType: "json"
+	    			, success: function(data){
+	    				$(".body-board").empty(); // 기존 게시글 목록 모두 삭제 //변경
+	    				if(data.length == 0){ // 검색된 결과가 없다면
+	    					let tr = $("<tr>");
+	    					let td = $("<td colspan=5>").html("검색된 게시글이 없습니다.");
+	    					tr.append(td);
+	    					$(".body-board").append(tr); //변경
+	    				}else{ // 검색된 결과가 있다면
+	    					for(let dto of data){ // 배열을 for문을 돌리면서 객체 하나씩 꺼내서 dto에 담기 
+	    						let tr = $("<tr>");
+	    						let td1 = $("<td>").html(dto.calumn_seq);
+	    						let anchor = $("<a>").attr("href", "/view.column?calumn_seq="+calumn_seq).html(dto.calumn_title);
+	    						let td2 = $("<td>").append(anchor);
+	    						let td3 = $("<td>").html(dto.writer_nickname);
+	    						let td4 = $("<td>").html(dto.written_date);
+	    						tr.append(td1, td2, td3, td4);
+	    						$(".body-board").append(tr); //변경
+	    					}   					
+	    				}	
+	    			}, error: function(e){
+	    				console.log(e);
+	    			}
+	    		});
+	    		$.ajax({
+	    			url: "/searchProc.bo?searchKeyword="+searchKeyword //변경
+	    			, type: "post"
+	    			, dataType: "json"
+	    			, success: function(data){
+	    				console.log()
+	    			}, error: function(e){
+	    				console.log(e);
+	    			}
+	    		});
+	    		
+	    	})
 		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+		--%>
+		</script>
+			<!-- Column 끝 -->
+
+			<!-- 푸터 -->
+			<div class="container footer">
+				<div class="row footerInfo">
+					<div class="col-6">
+						제휴 및 서비스 이용문의<br>
+						<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+						AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+					</div>
+					<div class="col-6">
+						(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+						사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+						kh.projectmail@gmail.com<br>
+					</div>
 				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
+				<div class="row footerMenu">
+					<div class="col">
+						<a href="">이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">개인정보처리방침</a>
+					</div>
+					<div class="col">
+						<a href="">위치정보이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">센터등록요청하기</a>
+					</div>
+					<div class="col">
+						<a href="">문의하기</a>
+					</div>
 				</div>
+				<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-	</div>
 </body>
 </html>
