@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <title>로그인 페이지</title>
 <style>
+<<<<<<< HEAD
 	 /* 폰트 */
         @font-face {
             font-family: 'LeferiPoint-WhiteObliqueA';
@@ -268,6 +269,242 @@
             color: #709c91;
             text-decoration: none;
         }
+=======
+/* 폰트 */
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: '양진체';
+	src:
+		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* 폰트 끝 */
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+.container {
+	margin: auto;
+}
+/* 헤더 */
+.cls_header {
+	height: 150px;
+	width: 100%;
+	margin: 0%;
+	background-color: #BFFFF0;
+	color: #97C4B8;
+	align-items: center;
+	font-family: '양진체';
+	text-align: center;
+}
+.cls_header a {
+	color: #97C4B8;
+}
+.cls_header a:hover {
+	color: #c9d4a9;
+}
+.dropdownBtn {
+	background-color: #F0FFC2 !important;
+	color: #97C4B8;
+	border: 1px solid white;
+}
+.dropdownBtn:hover {
+	color: #9be5d2;
+}
+.headDropdown {
+	background-color: #F0FFC2 !important;
+}
+.headMenu {
+	justify-content: end;
+}
+/* 로고 */
+.logoImg {
+	padding: 0%;
+	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
+		brightness(86%) contrast(86%);
+}
+.logoImg:hover {
+	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
+		brightness(99%) contrast(80%);
+}
+/* 로고 이미지 사이즈 */
+.logoImg #logoImg {
+	width: 50%;
+	height: 50%;
+}
+/* 로고 효과 */
+@import
+	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
+	;
+.logoImg {
+	position: relative;
+	display: inline-block;
+	color: #fff;
+	text-transform: uppercase;
+	animation: waviy 1s infinite;
+	animation-delay: calc(.1s * var(- -i));
+}
+@
+keyframes waviy { 0%, 40%, 100% {
+	transform: translateY(0)
+}
+20
+%
+{
+transform
+:
+translateY
+(
+-20px
+)
+}
+}
+/* 로고 효과 끝 */
+/* 네비바 */
+.navbar {
+	background-color: #F0FFC2 !important;
+	font-family: '양진체';
+}
+.container-fluid a {
+	color: #97C4B8 !important;
+}
+.container-fluid a:hover {
+	color: #9be5d2 !important;
+}
+.container-fluid button {
+	background-color: #F0FFC2 !important;
+	color: #97C4B8 !important;
+}
+.navDropdown {
+	border: 1px solid white;
+	background-color: #d5fcf3 !important;
+}
+.container-fluid button:hover {
+	background-color: #97C4B8 !important;
+	color: #F0FFC2 !important;
+}
+.container-fluid span {
+	filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg)
+		brightness(103%) contrast(66%);
+}
+.navSearchInput {
+	border: 1px solid white;
+}
+.navSearchInput::placeholder {
+	color: #FFE4C0;
+}
+/* 공백 */
+.empty {
+	background-color: white;
+	height: 50px;
+}
+.emptyTop {
+	background-color: white;
+	height: 50px;
+}
+/*로그인*/
+.LoginBox {
+	width: 600px;
+	height: 600px;
+}
+#loginLogo {
+	width: 100px;
+	height: 100px;
+	margin-top: 20px;
+}
+input {
+	width: 400px;
+}
+/*버튼*/
+#loginBtn {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: medium;
+	color: white;
+	margin: 5px;
+	width: 410px;
+}
+#searchIdBtn {
+	margin-right: 15px;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: medium;
+	margin: 5px;
+}
+#searchPwBtn {
+	margin-right: 15px;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: medium;
+	margin: 5px;
+}
+#signupBtn {
+	margin-right: 15px;
+	background-color: white;
+	border: 1px solid #73b1a1;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: medium;
+	color: gray;
+	margin: 0;
+	margin-right: 10px;
+	width: 200px;
+	height: 49.17px;
+	width: 200px;
+}
+#kakaoImg {
+	margin-right: 15px;
+	margin: 5px;
+	height: 33px;
+}
+/*footer*/
+.footer {
+	/* font-family: 'SuncheonB';
+        font-weight: normal; */
+	font-size: small;
+	color: #709c91;
+	border-top: 1px solid #c9d4a9;
+}
+.footer .row {
+	border-bottom: 1px solid #c9d4a9;
+}
+.footer .footerInfo {
+	padding-block: 3%;
+	text-align: center;
+}
+.footerMenu {
+	padding-block: 2%;
+	text-align: center;
+}
+.footerMenu a {
+	color: #709c91;
+	text-decoration: none;
+}
+>>>>>>> 24b8eb43811c9604a21e05747ad0af658dc5a2ee
 </style>
 </head>
 <body>

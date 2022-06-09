@@ -225,7 +225,6 @@ translateY(
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-		<!-- 헤더 -->
 	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
