@@ -59,7 +59,6 @@ public class FoodDAO {
 		}
 	}
 	
-
 	public int modifyPic(FoodFolderDTO dto) throws Exception{
 		String sql = "update tbl_food_folder set food_src=? where food_seq=?";
 		
@@ -295,6 +294,7 @@ public class FoodDAO {
 		}
 		
 	}
+	
 	public ArrayList<UserfoodInterestDTO> interestFood(int user_seq) throws Exception{
 		String sql = "select * from user_food_interest where user_seq=?";
 		
@@ -315,7 +315,7 @@ public class FoodDAO {
 	}
 	
 	public int delInterestFood(int food_seq, int user_seq) throws Exception {
-		String sql = "delete from user_food_interest values(? , ?)";
+		String sql = "delete from user_food_interest where food_seq=? and user_seq=?";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){

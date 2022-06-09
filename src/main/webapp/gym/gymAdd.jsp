@@ -12,6 +12,8 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<!-- text area auto size -->        
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> 
 <!-- 구글 아이콘 -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -293,17 +295,7 @@ input::placeholder, textarea::placeholder {
 	width: 100%;
 }
 
-#gym_comment {
-	width: 70%;
-	height: 30rem;
-	border: 1px solid #709c91;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-}
-
-#gym_time {
+	.gym_textarea {
 	width: 70%;
 	height: 4rem;
 	border: 1px solid #709c91;
@@ -311,21 +303,11 @@ input::placeholder, textarea::placeholder {
 	resize: none;
 	font-weight: 600;
 	text-align: center;
-}
+	}
 
-#gym_program{
-	width: 70%;
-	height: 10rem;
-	border: 1px solid #709c91;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-}
-
-#gym_comment:focus, #gym_time:focus, #gym_program:focus {
+	.gym_textarea:focus {
 	outline: 1px solid #709c91;
-}
+	}
 
 #images_container{
 	width: 100%;
@@ -692,7 +674,7 @@ input::placeholder, textarea::placeholder {
 					</div>
 					<div class="row">
 						<div class="col content">
-							<textarea id="gym_comment" name="gym_comment"
+							<textarea class="gym_textarea" name="gym_comment"
 								placeholder="공백 포함 500글자 이내로 입력하세요."></textarea>
 						</div>
 					</div>
@@ -708,7 +690,7 @@ input::placeholder, textarea::placeholder {
 					</div>
 					<div class="row">
 						<div class="col content">
-							<textarea id="gym_time" name="gym_time"
+							<textarea class="gym_textarea" name="gym_time"
 								placeholder="예)AM 08:00 ~ PM 22:00 연중무휴"></textarea>
 						</div>
 					</div>
@@ -722,7 +704,7 @@ input::placeholder, textarea::placeholder {
 							<h4 class="gymContentsText">운영 프로그램</h4>
 							<div class="row">
 								<div class="col content">
-									<textarea id="gym_program" name="gym_program"
+									<textarea class="gym_textarea" name="gym_program"
 										placeholder="예)무료
 O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
 								</div>
@@ -823,6 +805,8 @@ O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
 	$(".btnCancle").on("click", function(){
     	location.href = "/list.gym";
 	})
+	
+	autosize($("textArea"));
 	
 	$(".btnAdd").on("click", function(){
 		let regexPrice = /[0-9]/;

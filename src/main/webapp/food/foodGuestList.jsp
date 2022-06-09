@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -15,52 +16,19 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>전체 메일 보내기</title>
+<title>식품 프로모션</title>
 </head>
 <style>
-/* 버튼 */
-.btnSpace {
-	margin-bottom: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
-}
-
-.btnAdd {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: small;
-	color: white;
-	margin: 5px;
-}
-
-.btnAdd:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
 	src:
 		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'SuncheonB';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
@@ -74,7 +42,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -85,7 +52,6 @@
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -95,6 +61,7 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -122,10 +89,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -135,56 +100,31 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
-
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-
-
-}
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -227,46 +167,100 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 40px;
+	height: 20px;
 }
-
-/* 바디 타이틀 */
-.cls_title {
-	height: 100px;
-}
-
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 300px;
-	height: 45px;
-	text-align: center;
+/* 목록 */
+.title {
+	color: #97C4B8;
+	border-bottom: 1px solid #97C4B8; -
+	-bs-gutter-x: 0px;
+	margin-bottom: 20px;
+	margin-top: 10px;
 	font-family: '양진체';
 }
 
-/* 메일 타이틀 */
-.mail-title>input {
-	width: 50%;
+.card {
+	width: 35rem;
+	border: 1px solid #c9d4a9;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	margin-bottom: 20px;
 }
 
-/* 메일 내용 */
-.mail-content>textarea {
-	resize: none;
-	width: 70%;
-	height: 500px;
+.card img {
+	width: 100%;
+	height: 20rem;
 }
 
-/* 보내기 버튼 */
-#sendMailBtn, #backBtn {
-	width: 100px;
+.card-title {
+	margin-bottom: 0px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+.card a {
+	text-decoration: none;
+	color: black;
+}
+
+.card h5 {
+	padding: 20px;
+}
+
+.foodPromo {
+	margin-bottom: 80px;
+}
+
+.btnAdd {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 5px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	color: white;
+}
+
+.btnAdd:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
+/* 즐겨찾기 버튼 */
+.btnFavorite {
+	border: none;
+	background-color: white;
+}
+/* 즐겨찾기 하트 */
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48
+}
+
+.ImgFavorite {
+	width: 20px;
+	height: 20px;
+}
+
+#redHeart {
+	width: 20px;
+	height: 20px;
+}
+
+#emptyHeart {
+	width: 20px;
+	height: 20px;
+}
+
+.heartBtn {
+	border: none;
+	background-color: white;
 }
 
 /* footer */
@@ -300,8 +294,7 @@ translateY
 
 <body>
 	<div class="container">
-		<!-- 헤더 -->
-	<div class="row cls_header">
+		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -361,10 +354,6 @@ translateY
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
-					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item"
-							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
-					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -385,21 +374,10 @@ translateY
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<c:choose>
-									<c:when
-										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
-										<li class="nav-item"><a class="nav-link"
-											href="/listLogin.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/listLogin.food">특가 식품</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-									</c:otherwise>
-								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/list.gym">내
+										주변 운동시설</a></li>
+								<li class="nav-item"><a class="nav-link" href="/list.food">특가
+										식품</a></li>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -423,43 +401,130 @@ translateY
 			</div>
 		</div>
 		<!-- 네비 끝 -->
+		<!-- 식품 프로모션 목록 -->
 		<div class="empty"></div>
-
-		<!-- 메인 영역 -->
-		<div class="row cls_body">
-			<div class="row">
-				<div class="col-12 d-flex justify-content-center title_div">
-					<h2>공지 메일 보내기</h2>
+		<div class="row title">
+			<div class="col d-flex justify-content-center">
+				<h1>이달의 프로모션!</h1>
+			</div>
+			<img src="/imgs/banner.jpg">
+		</div>
+		<div class="foodPromo">
+			<div class="row cardList">
+				<div class="empty"></div>
+				<%-- 홈관리자만 버튼 노출 --%>
+				<c:if test="${loginSession.user_auth eq 'manager'}">
+					<div class="col">
+						<button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
+					</div>
+				<div class="empty"></div>
+				</c:if>
+				<%-- 홈관리자만 버튼 노출 끝 --%>
+				<c:choose>
+					<c:when test="${listPromo.size() == 0}">
+						<div>등록된 프로모션이 없습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${listPromo}" var="dtoPromo" end="3">
+							<div class="col-6 d-flex justify-content-center">
+								<div class="card" onclick="guestMsg()" style="cursor:pointer;">
+									<a href="${dtoPromo.food_com}"> <img
+										src="/files/${dtoPromo.food_src}" class="card-img-top">
+										<h5 class="card-title">${dtoPromo.food_name}</h5> <input
+										type="text" class="d-none" value="${dtoPromo.food_seq}">
+									</a>
+									<div class="card-body">
+										<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
+										<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
+										<div class="col favorite d-flex justify-content-end">
+											<%--<c:choose>
+												<c:when test="${listInterest.food_seq eq list.food_seq}">
+													<c:forEach items="${listInterest}" var="listInterest">
+														<div class="ImgFavorite">
+															<button type="button" class="heartBtn" id="redHeartBtn"
+																value="${list.food_seq}">
+																<img id="redHeart" src="../imgs/red heart.png">
+															</button>
+														</div>
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<div class="ImgFavorite">
+														<button type="button" class="heartBtn" id="emptyHeartBtn"
+															value="${list.food_seq}">
+															<img id="emptyHeart" src="../imgs/empty heart.png">
+														</button>
+													</div>
+												</c:otherwise>
+											</c:choose> --%>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				<div class="empty"></div>
+				<div class="empty"></div>
+			</div>
+			<!-- 식품 프로모션 목록 끝 -->
+			<!-- 헬린이 프로모션 목록 -->
+			<div class="row title">
+				<div class="col d-flex justify-content-center">
+					<h1>헬린이 안성맞춤 세트</h1>
 				</div>
 			</div>
-			<div class="empty"></div>
-			<form action="/sendMail.manager" method="post" id="mailForm">
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-title">
-						<input type="text" class="form-control" id="mail-title"
-							name="mail-title" placeholder="제목 입력">
-					</div>
+			<div class="foodPromo">
+				<div class="row cardList">
+					<c:choose>
+						<c:when test="${list.size() == 0}">
+							<div>등록된 프로모션이 없습니다.</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto" end="3">
+								<div class="col-6 d-flex justify-content-center">
+									<div class="card" onclick="guestMsg()" style="cursor:pointer;">
+										 <a href="${dtoPromo.food_com}"> <img
+											src="/files/${dto.food_src}" class="card-img-top">
+											<h5 class="card-title">${dto.food_name}</h5> <input
+											type="text" class="d-none" value="${dto.food_seq}">
+										</a>
+										<div class="card-body">
+											<p id="food_title" class="card-text">${dto.food_title}</p>
+											<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
+											<div class="col favorite d-flex justify-content-end">
+												<%-- <c:choose>
+													<c:when test="${listInterest.food_seq eq dto.food_seq}">
+														<c:forEach items="${listInterest}" var="listInterest">
+															<div class="ImgFavorite">
+																<button type="button" class="heartBtn" id="redHeartBtn"
+																	value="${dto.food_seq}">
+																	<img id="redHeart" src="../imgs/red heart.png">
+																</button>
+															</div>
+														</c:forEach>
+													</c:when>
+													<c:otherwise>
+														<div class="ImgFavorite">
+															<button type="button" class="heartBtn" id="emptyHeartBtn"
+																value="${dto.food_seq}">
+																<img id="emptyHeart" src="../imgs/empty heart.png">
+															</button>
+														</div>
+													</c:otherwise>
+												</c:choose>--%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-content">
-						<textarea class="form-control" id="mail-content"
-							name="mail-content"></textarea>
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col btnSpace d-flex justify-content-center">
-						<button type="submit" id="sendMailBtn" class="btn btnAdd">보내기</button>
-						<button type="button" id="backBtn" class="btn btnAdd">취소</button>
-					</div>
-
-				</div>
-			</form>
-			<div class="empty"></div>
+			</div>
 		</div>
-
-
+		<!-- 헬린이 프로모션 목록 끝 -->
+		<div class="empty"></div>
 		<!-- footer -->
 		<div class="container footer">
 			<div class="row footerInfo">
@@ -495,6 +560,43 @@ translateY
 		</div>
 		<!-- footer 끝 -->
 	</div>
-</body>
+	<script>
+	$(".btnAdd").on("click", function(){
+    	location.href = "/modifyList.food?curPage=1";
+    })
+	
+    $("#emptyHeartBtn").on("click", function(e) {
+		let yn = confirm("즐겨찾기에 추가하시겠습니까?");
 
+		if (yn) {
+			location.href = "/interest.food";
+		}else {
+			return false;
+		}
+
+	})
+	
+	$("#redHeartBtn").on("click", function(e){
+		alert("즐겨찾기에서 삭제하시겠습니까?");
+		location.href="/delInterest.food";
+	})
+        
+	function guestMsg(){
+		let answer = confirm("회원 전용 메뉴입니다. 로그인하시겠습니까?");
+		if(answer){
+			$("a").attr("href", "/user/login.jsp");
+		}else
+			$("a").attr("href", "#");
+			return;
+	}
+         
+        /* let num =  $(".food_price").html();
+        function numbeComma(num){
+        	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        console.log(numbeComma(15315)); */
+        
+        
+    </script>
+</body>
 </html>

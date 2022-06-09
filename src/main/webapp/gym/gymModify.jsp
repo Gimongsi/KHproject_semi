@@ -12,6 +12,8 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<!-- text area auto size -->        
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <!-- 구글 아이콘 -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -117,34 +119,29 @@
 }
 
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
 
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
+    @keyframes waviy {
 
-20
-%
-{
-transform
-:
-translateY(
--20px
-)
-}
-}
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -275,6 +272,10 @@ translateY(
 input::placeholder, textarea::placeholder {
 	color: #adcabf;
 }
+.priceInput label{
+	text-align:center;
+	color: #97C4B8;
+}
 
 /* 디테일 바디 */
 .detailBody {
@@ -302,17 +303,7 @@ input::placeholder, textarea::placeholder {
 	width: 100%;
 }
 
-#gym_comment {
-	width: 70%;
-	height: 30rem;
-	border: 1px solid #709c91;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-}
-
-#gym_time {
+.gym_textarea {
 	width: 70%;
 	height: 4rem;
 	border: 1px solid #709c91;
@@ -322,17 +313,7 @@ input::placeholder, textarea::placeholder {
 	text-align: center;
 }
 
-#gym_program{
-	width: 70%;
-	height: 10rem;
-	border: 1px solid #709c91;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-}
-
-#gym_comment:focus, #gym_time:focus, #gym_program:focus {
+.gym_textarea:focus {
 	outline: 1px solid #709c91;
 }
 
@@ -541,16 +522,32 @@ input::placeholder, textarea::placeholder {
                             </div>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
-                        <div class="row">
+                        <div class="row priceInput">
+                            <label style="margin-top:20px;">회원권 가격 수정</label>
+                            <div class="col-6 d-flex align-items-center"><label>개월수 수정 : </label></div>
                             <div class="col">
-                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수(숫자만) 입력" value="${dto.gym_month}">
-                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격(숫자만) 입력" value="${dto.gym_price}">
+                             	<input class="gym_input" type="text" id="gym_month" name="gym_month1" placeholder="개월수(숫자만) 입력" value="${dto.gym_month}">
+                             </div>
+                             <div class="col-6 d-flex align-items-center"><label>가격 수정 : </label></div>
+                            <div class="col">
+                             	<input class="gym_input" type="text" id="gym_price" name="gym_price1" placeholder="가격(숫자만) 입력" value="${dto.gym_price}">
                         	</div>
+                            
+                            <%--<div class="col">
+                            <label>옵션2</label>
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month2" style="text-align: center;" placeholder="개월수(숫자만) 입력" value="${dto.gym_month}">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price2" style="text-align: center;" placeholder="가격(숫자만) 입력" value="${dto.gym_price}">
+                        	</div>
+                            <div class="col">
+                            <label>옵션3</label>
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month3" style="text-align: center;" placeholder="개월수(숫자만) 입력" value="${dto.gym_month}">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price3" style="text-align: center;" placeholder="가격(숫자만) 입력" value="${dto.gym_price}">
+                        	</div> --%>
                         </div>
-                        <div class="empty"></div>
+                       <%-- <div class="empty"></div>
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy d-none" type="button">회원권 추가 등록</button>
-                        </div>
+                            <button class="btn btnBuy" type="button">회원권 옵션 추가 등록</button>
+                        </div> --%>
                     </div>
                 </div>
             </div>
@@ -564,9 +561,14 @@ input::placeholder, textarea::placeholder {
 							<h4 class="gymContentsText">공지사항</h4>
 						</div>
 					</div>
-				</div>
-				<hr
-					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+				<div class="row">
+                        <div class="col content">
+                            <textarea class="gym_textarea" name="gym_comment" placeholder="공백 포함 500글자 이내로 입력하세요.">${dto.gym_comment}</textarea>
+                        </div>
+                    </div>
+                    <div class="empty"></div>
+                </div>
+				<hr style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
 				<div class="noticeTime">
 					<div class="row">
 						<div class="col">
@@ -575,7 +577,7 @@ input::placeholder, textarea::placeholder {
 					</div>
 					<div class="row">
 						<div class="col content">
-							<textarea id="gym_time" name="gym_time"
+							<textarea class="gym_textarea" name="gym_time"
 								placeholder="예)AM 08:00 ~ PM 22:00 연중무휴">${dto.gym_time}</textarea>
 						</div>
 					</div>
@@ -590,7 +592,9 @@ input::placeholder, textarea::placeholder {
 						</div>
 					</div>
 					<div class="row d-flex justify-content-center">
-						<%-- <div class="form-check">
+					
+					
+						<%--<div class="form-check">
   							<input class="form-check-input" type="checkbox" name="gym_program" value="헬스" id="flexCheckDefault">
   							<label class="form-check-label" for="flexCheckDefault">헬스</label>
 						</div>
@@ -614,14 +618,16 @@ input::placeholder, textarea::placeholder {
   							<input class="form-check-input" type="checkbox" name="gym_program" value="격투기" id="flexCheckChecked">
   							<label class="form-check-label" for="flexCheckChecked">격투기</label>
 						</div> --%>
+						
+						
 						<c:if test="${empty programDTO}">
-                    		<textarea id="gym_program" name="gym_program"
+                    		<textarea class="gym_textarea" name="gym_program"
 								placeholder="예)무료
 O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
                     	</c:if>
                     	<c:if test="${not empty programDTO}">
                     		<c:forEach items="${programDTO}" var="programDTO">
-                        		<textarea id="gym_program" name="gym_program"
+                        		<textarea class="gym_textarea" name="gym_program"
 								placeholder="예)무료
 O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)">${programDTO.gym_program}</textarea>
                         	</c:forEach>
@@ -729,6 +735,8 @@ O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)">${programDTO
 	$(".btnCancle").on("click", function(){
     	location.href = "/list.gym";
 	})
+	
+	autosize($("textArea"));
 	
 	$(".btnAdd").on("click", function(){
 		let regexPrice = /[0-9]/;
