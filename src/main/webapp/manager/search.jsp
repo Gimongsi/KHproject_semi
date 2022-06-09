@@ -162,13 +162,26 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
 %
 {
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
+
+
 )
+
+
 }
 }
 
@@ -305,15 +318,14 @@ translateY(
 
 <body>
 	<div class="container">
-		<!-- 헤더 -->
-		
-<c:choose>
-			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
+		<div class="row cls_header">
+			<div class="col-3 logoImg">
+				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
+				</a>
+			</div>
+			<c:choose>
+				<c:when
+					test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>${loginSession.user_name} 님 환영합니다!</span>
@@ -326,147 +338,28 @@ translateY(
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:when test="${loginSession.user_auth eq 'manager'}">
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
+				</c:when>
+				<c:when test="${loginSession.user_auth eq 'manager'}">
 					<div class="d-none d-md-block col-2"></div>
 					<div class="col-3 p-0 headMenu d-flex justify-content-center">
 						<span>관리자님 환영합니다!</span>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="#" style="text-decoration: none;"> <span>메일보내기</span>
+						<a href="/toSendmail.manager" style="text-decoration: none;">
+							<span>메일보내기</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
+						<a href="/userSerch.manager?curPage=1"
+							style="text-decoration: none;"> <span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/logout.user" style="text-decoration: none;"> <span>로그아웃</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form action="search.gym" method="post" class="d-flex searchForm">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="button">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:when>
-			<c:otherwise>
-				<!-- 헤더 -->
-				<div class="row cls_header">
-					<div class="col-3 logoImg">
-						<a href="/home"> <img id="logoImg" src="imgs/dpt_Logo.png">
-						</a>
-					</div>
+				</c:when>
+				<c:otherwise>
 					<div class="d-none d-md-block col-5"></div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
 						<a href="/login.user" style="text-decoration: none;"> <span>로그인</span>
@@ -476,333 +369,396 @@ translateY(
 						<a href="/toSignup.user" style="text-decoration: none;"> <span>회원가입</span>
 						</a>
 					</div>
-					<div class="col p-0 headMenu d-flex justify-content-center">
-						<button type="button" class="btn dropdownBtn dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
-						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="#">자주 묻는 질문</a></li>
-							<li><a class="dropdown-item" href="#">이벤트</a></li>
-						</ul>
-					</div>
-				</div>
-				<!-- 헤더 끝 -->
-				<!-- 네비 -->
-				<div class="row cls_nav">
-					<div class="col">
-						<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-							<div class="container-fluid">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse"
-									data-bs-target="#navbarSupportedContent"
-									aria-controls="navbarSupportedContent" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-								<div class="collapse navbar-collapse"
-									id="navbarSupportedContent">
-									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-										<li class="nav-item"><a class="nav-link active"
-											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-										<li class="nav-item dropdown"><a
-											class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false">
-												근육별 운동법 </a>
-											<ul class="dropdown-menu navDropdown"
-												aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">상체</a></li>
-												<li><a class="dropdown-item" href="#">하체</a></li>
-												<li><a class="dropdown-item" href="#">몸통</a></li>
-												<li><a class="dropdown-item" href="#">전체보기</a></li>
-											</ul></li>
-									</ul>
-									<form class="d-flex">
-										<input class="form-control navSearchInput me-2" type="search"
-											placeholder="운동시설 검색" aria-label="Search">
-										<button class="btn btn-outline-light" type="submit">Search!</button>
-									</form>
-								</div>
-							</div>
-						</nav>
-					</div>
-				</div>
-				<!-- 네비 끝 -->
-				<div class="empty"></div>
-			</c:otherwise>
-		</c:choose>
-	<!-- 헤더 끝 -->
-	<div class="empty"></div>
-	<div class="row cls_body">
-		<div class="row cls_title">
-			<div
-				class="col-12 d-flex align-items-center justify-content-center title_div">
-				<h2>전체 회원 목록</h2>
-			</div>
-		</div>
-		<div class="row cls_search">
-			<div class="col-10 d-flex justify-content-end search_input">
-				<input type="text" class="form-control" id="search_input"
-					name="search_input">
-			</div>
-			<div class="col-2 search_btn">
-				<button type="button" class="btn btn-primary">찾기</button>
-			</div>
-		</div>
-		<div class="empty"></div>
-
-		<!-- body영역 -->
-		<div class="row cls_table">
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">이메일</th>
-						<th scope="col">이름</th>
-						<th scope="col">휴대폰번호</th>
-						<th scope="col">마지막 접속 날짜</th>
-						<th scope="col">등급</th>
-						<th scope="col">수정 하기</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:choose>
-						<c:when test="${list.size() == 0}">
-							<tr>
-								<td colspan="6">등록된 회원이 없습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${list}" var="dto">
-								<tr>
-									<td>${dto.user_id}</td>
-									<td>${dto.user_name}</td>
-									<td>${dto.user_phone}</td>
-									<td>${dto.signup_date}</td>
-									<td>${dto.user_auth}</td>
-									<td><button type="button" class="clickBtn btn btnAdd" value="${dto.user_seq}">수정</button></td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
-			<nav>
-				<ul class="pagination justify-content-center">
-					<c:if test="${naviMap.needPrev eq true}">
-						<li class="page-item"><a class="page-link" href="">←</a></li>
-					</c:if>
-
-					<c:forEach var="pageNum" begin="${naviMap.startNavi}"
-						end="${naviMap.endNavi}" step="1">
-						<li class="page-item"><a class="page-link"
-							href="/search.user?curPage=${pageNum}">${pageNum}</a></li>
-					</c:forEach>
-
-					<c:if test="${naviMap.needNext eq true}">
-						<li class="page-item"><a class="page-link" href="">→</a></li>
-					</c:if>
+				</c:otherwise>
+			</c:choose>
+			<div class="col p-0 headMenu d-flex justify-content-center">
+				<button type="button" class="btn dropdownBtn dropdown-toggle"
+					data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
+				<ul class="dropdown-menu headDropdown">
+					<li><a class="dropdown-item" href="/toInformation.info">자주
+							묻는 질문</a></li>
+					<li><a class="dropdown-item" href="#">이벤트</a></li>
 				</ul>
-			</nav>
-			<form action="user_update.manager" method="post" id="updateForm">
-				<table class="update_table cls_table table" border="1">
-					<thead class="update_table">
+			</div>
+		</div>
+		<!-- 헤더 끝 -->
+		<!-- 네비 -->
+		<div class="row cls_nav">
+			<div class="col">
+				<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+					<div class="container-fluid">
+						<button class="navbar-toggler" type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#navbarSupportedContent"
+							aria-controls="navbarSupportedContent" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<li class="nav-item"><a class="nav-link active"
+									aria-current="page" href="#">칼럼</a></li>
+								<li class="nav-item"><a class="nav-link" href="/list.gym">내
+										주변 운동시설</a></li>
+								<li class="nav-item"><a class="nav-link" href="/list.food">특가
+										식품</a></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+									role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										근육별 운동법 </a>
+									<ul class="dropdown-menu navDropdown"
+										aria-labelledby="navbarDropdown">
+										<li><a class="dropdown-item" href="#">상체</a></li>
+										<li><a class="dropdown-item" href="#">하체</a></li>
+										<li><a class="dropdown-item" href="#">몸통</a></li>
+										<li><a class="dropdown-item" href="#">전체보기</a></li>
+									</ul></li>
+							</ul>
+							<form action="search.gym" method="post" class="d-flex searchForm">
+								<input class="form-control navSearchInput me-2" type="search"
+									placeholder="운동시설 검색" aria-label="Search">
+								<button class="btn btn-outline-light" type="button">Search!</button>
+							</form>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<!-- 네비 끝 -->
+		<div class="empty"></div>
+		<div class="row cls_body">
+			<div class="row cls_title">
+				<div
+					class="col-12 d-flex align-items-center justify-content-center title_div">
+					<h2>전체 회원 목록</h2>
+				</div>
+			</div>
+			<div class="row cls_search">
+				<div class="col-10 d-flex justify-content-end search_input">
+					<input type="text" class="form-control" id="search_input"
+						name="search_input">
+				</div>
+				<div class="col-2 search_btn">
+					<button type="button" class="btn btn-primary">찾기</button>
+				</div>
+			</div>
+			<div class="empty"></div>
+
+			<!-- body영역 -->
+			<div class="row cls_table">
+				<table class="table">
+					<thead>
 						<tr>
-							<th class="update_col"></th>
-							<th class="insert_col">수정 전</th>
-							<th class="insert_col">수정 내용</th>
+							<th scope="col">이메일</th>
+							<th scope="col">이름</th>
+							<th scope="col">휴대폰번호</th>
+							<th scope="col">마지막 접속 날짜</th>
+							<th scope="col">등급</th>
+							<th scope="col">수정 하기</th>
 						</tr>
 					</thead>
-					<tbody class="update_table" id="modify_table">
-						<tr>
-							<th class="update_col">이메일</th>
-							<td class="insert_col"><input type="text"
-								class="form-control user_id" value="" readonly></td>
-							<td class="insert_col"><input type="text"
-								class="form-control user_id" value="" readonly></td>
-						</tr>
-						<tr>
-							<th class="update_col">이름</th>
-							<td class="insert_col"><input type="text"
-								class="form-control" value="" readonly></td>
-							<td class="insert_col"><input type="text"
-								class="form-control user_name" value="" class="update_input"></td>
-						</tr>
-						<tr>
-							<th class="update_col">휴대폰 번호</th>
-							<td class="insert_col"><input type="text"
-								class="form-control" value="" readonly></td>
-							<td class="insert_col"><input type="text"
-								class="form-control user_phone" value="" class="update_input"
-								placeholder="-제외"></td>
-						</tr>
-						<tr>
-							<th class="update_col">등급</th>
-							<td class="insert_col"><input type="text"
-								class="form-control" value="" readonly></td>
-							<td class="insert_col"><select class="form-select user_auth" name="user_auth">
-									<option value="원래등급" selected>등급 선택</option>
-									<option value="member">Member</option>
-									<option value="admin">Admin</option>
-									<option value="manager">Manager</option>
-							</select></td>
-						</tr>
-						<tr>
-							<th class="update_col">메모</th>
-							<td class="insert_col"><input type="text"
-								class="form-control" value="" readonly></td>
-							<td class="insert_col"><input type="text"
-								class="form-control update_input user_memo" value=""></td>
-						</tr>
+					<tbody>
+						<c:choose>
+							<c:when test="${list.size() == 0}">
+								<tr>
+									<td colspan="6">등록된 회원이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="dto">
+									<tr>
+										<td>${dto.user_id}</td>
+										<td>${dto.user_name}</td>
+										<td>${dto.user_phone}</td>
+										<td>${dto.signup_date}</td>
+										<td>${dto.user_auth}</td>
+										<td><button type="button" class="clickBtn btn btnAdd"
+												value="${dto.user_seq}">수정</button></td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
+				<nav>
+					<ul class="pagination justify-content-center">
+						<c:if test="${naviMap.needPrev eq true}">
+							<li class="page-item"><a class="page-link" href="">←</a></li>
+						</c:if>
 
-				<div class="empty"></div>
-				<div class="row btn-before">
-					<div class="col-10 d-flex justify-content-end"></div>
+						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+							end="${naviMap.endNavi}" step="1">
+							<li class="page-item"><a class="page-link"
+								href="/search.user?curPage=${pageNum}">${pageNum}</a></li>
+						</c:forEach>
+
+						<c:if test="${naviMap.needNext eq true}">
+							<li class="page-item"><a class="page-link" href="">→</a></li>
+						</c:if>
+					</ul>
+				</nav>
+				<form action="user_update.manager" method="post" id="updateForm">
+					<table class="update_table cls_table table" border="1">
+						<thead class="update_table">
+							<tr>
+								<th class="update_col"></th>
+								<th class="insert_col">수정 전</th>
+								<th class="insert_col">수정 내용</th>
+							</tr>
+						</thead>
+						<tbody class="update_table" id="modify_table">
+							<tr>
+								<th class="update_col">이메일</th>
+								<td class="insert_col"><input type="text"
+									class="form-control user_id" value="" readonly></td>
+								<td class="insert_col"><input type="text"
+									class="form-control user_id" value="" readonly></td>
+							</tr>
+							<tr>
+								<th class="update_col">이름</th>
+								<td class="insert_col"><input type="text"
+									class="form-control" value="" readonly></td>
+								<td class="insert_col"><input type="text"
+									class="form-control user_name" value="" class="update_input"></td>
+							</tr>
+							<tr>
+								<th class="update_col">휴대폰 번호</th>
+								<td class="insert_col"><input type="text"
+									class="form-control" value="" readonly></td>
+								<td class="insert_col"><input type="text"
+									class="form-control user_phone" value="" class="update_input"
+									placeholder="-제외"></td>
+							</tr>
+							<tr>
+								<th class="update_col">등급</th>
+								<td class="insert_col"><input type="text"
+									class="form-control" value="" readonly></td>
+								<td class="insert_col"><select
+									class="form-select user_auth" name="user_auth">
+										<option value="원래등급" selected>등급 선택</option>
+										<option value="member">Member</option>
+										<option value="admin">Admin</option>
+										<option value="manager">Manager</option>
+								</select></td>
+							</tr>
+							<tr>
+								<th class="update_col">메모</th>
+								<td class="insert_col"><input type="text"
+									class="form-control" value="" readonly></td>
+								<td class="insert_col"><input type="text"
+									class="form-control update_input user_memo" value=""></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="empty"></div>
+					<div class="row btn-before">
+						<div class="col-10 d-flex justify-content-end"></div>
+						<div class="col-2">
+							<button type="button" class="btn btnAdd" id="modify_btn">수정</button>
+						</div>
+					</div>
+				</form>
+				<div class="row btn-after d-none">
+					<div class="col-10 d-flex justify-content-end">
+						<button type="button" class="btn btnAdd toModify_btn">수정완료</button>
+					</div>
 					<div class="col-2">
-						<button type="button" class="btn btnAdd" id="modify_btn">수정</button>
+						<button type="button" class="btn btnAdd" id="cancel_btn">취소</button>
 					</div>
 				</div>
-			</form>
-			<div class="row btn-after d-none">
-				<div class="col-10 d-flex justify-content-end">
-					<button type="button" class="btn btnAdd toModify_btn">수정완료</button>
+			</div>
+		</div>
+		</div>
+		<!-- footer 영역 -->
+		<div class="container footer">
+			<div class="row footerInfo">
+				<div class="col-6">
+					제휴 및 서비스 이용문의<br>
+					<h3>1588-0000</h3>
+					<br> AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
 				</div>
-				<div class="col-2">
-					<button type="button" class="btn btnAdd" id="cancel_btn">취소</button>
+				<div class="col-6">
+					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+					kh.projectmail@gmail.com<br>
 				</div>
 			</div>
+			<div class="row footerMenu">
+				<div class="col">
+					<a href="">이용약관</a>
+				</div>
+				<div class="col">
+					<a href="">개인정보처리방침</a>
+				</div>
+				<div class="col">
+					<a href="">위치정보이용약관</a>
+				</div>
+				<div class="col">
+					<a href="">센터등록요청하기</a>
+				</div>
+				<div class="col">
+					<a href="">문의하기</a>
+				</div>
+			</div>
+			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-	</div>
 
-	<!-- footer 영역 -->
-	<div class="container footer">
-		<div class="row footerInfo">
-			<div class="col-6">
-				제휴 및 서비스 이용문의<br>
-				<h3>1588-0000</h3>
-				<br> AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-			</div>
-			<div class="col-6">
-				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
-				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-				kh.projectmail@gmail.com<br>
-			</div>
-		</div>
-		<div class="row footerMenu">
-			<div class="col">
-				<a href="">이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">개인정보처리방침</a>
-			</div>
-			<div class="col">
-				<a href="">위치정보이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">센터등록요청하기</a>
-			</div>
-			<div class="col">
-				<a href="">문의하기</a>
-			</div>
-		</div>
-		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-	</div>
+		<script>
+			// 수정 버튼 눌렀을때 수정완료 취소 생성
+			$("#modify_btn").on("click", function() {
+				$(".btn-before").css("display", "none");
+				$(".btn-after").removeClass("d-none");
+			})
+			// 취소 누르면 다시 원래대로 돌리기
+			$("#cancel_btn").on("click", function() {
+				$(".btn-after").addClass("d-none");
+				$(".btn-before").css("display", "flex");
+			})
 
-	<script>
+			$(".toModify_btn").on("click", function() {
+				$("#updateForm").submit();
+			})
 
-                // 수정 버튼 눌렀을때 수정완료 취소 생성
-                $("#modify_btn").on("click", function () {
-                    $(".btn-before").css("display", "none");
-                    $(".btn-after").removeClass("d-none");
-                })
-                // 취소 누르면 다시 원래대로 돌리기
-                $("#cancel_btn").on("click", function () {
-                    $(".btn-after").addClass("d-none");
-                    $(".btn-before").css("display", "flex");
-                })
+			$(".clickBtn").on(
+					"click",
+					function(e) {
+						let user_seq = $(e.target).val();
 
-                $(".toModify_btn").on("click", function(){
-                    $("#updateForm").submit();
-                })
+						$.ajax({
+							url : "/managerUpdate.user?user_seq=" + user_seq,
+							type : "get",
+							dataType : "json",
+							success : function(data) {
+								$("#modify_table").empty();
+								let tr1 = $("<tr>");
+								let th1_1 = $("<th>").addClass("update_col")
+										.html("이메일");
+								let td1_1 = $("<td>").addClass("insert_col");
+								let input1_1 = $("<input>").addClass(
+										"form-control user_id").attr({
+									type : "text",
+									value : data.user_id,
+									readonly : true
+								});
+								td1_1.append(input1_1);
+								let td1_2 = $("<td>").addClass("insert_col");
+								let input1_2 = $("<input>").addClass(
+										"form-control user_id").attr({
+									type : "text",
+									value : data.user_id,
+									name : "user_id",
+									readonly : true
+								});
+								td1_2.append(input1_2);
+								tr1.append(th1_1, td1_1, td1_2);
 
-                $(".clickBtn").on("click", function(e){
-                    let user_seq = $(e.target).val();
+								let tr2 = $("<tr>");
+								let th2_1 = $("<th>").addClass("update_col")
+										.html("이름");
+								let td2_1 = $("<td>").addClass("insert_col");
+								let input2_1 = $("<input>").addClass(
+										"form-control user_name").attr({
+									type : "text",
+									value : data.user_name,
+									readonly : true
+								});
+								td2_1.append(input2_1);
+								let td2_2 = $("<td>").addClass("insert_col");
+								let input2_2 = $("<input>").addClass(
+										"form-control user_name").attr({
+									type : "text",
+									name : "user_name"
+								});
+								td2_2.append(input2_2);
+								tr2.append(th2_1, td2_1, td2_2);
 
-                    $.ajax({
-                        url: "/managerUpdate.user?user_seq="+user_seq
-                        , type: "get"
-                        , dataType: "json"
-                        , success: function(data){
-                        	$("#modify_table").empty();
-                        	let tr1 = $("<tr>");
-                        	let th1_1 = $("<th>").addClass("update_col").html("이메일");
-                        	let td1_1 = $("<td>").addClass("insert_col");
-                        	let input1_1 = $("<input>").addClass("form-control user_id").attr({type: "text", value: data.user_id, readonly: true});
-                        	td1_1.append(input1_1);
-                        	let td1_2 = $("<td>").addClass("insert_col");
-                        	let input1_2 = $("<input>").addClass("form-control user_id").attr({type: "text", value: data.user_id, name: "user_id", readonly: true});
-                        	td1_2.append(input1_2);
-                        	tr1.append(th1_1, td1_1, td1_2);
-                        	
-                        	let tr2 = $("<tr>");
-                        	let th2_1 = $("<th>").addClass("update_col").html("이름");
-                        	let td2_1 = $("<td>").addClass("insert_col");
-                        	let input2_1 = $("<input>").addClass("form-control user_name").attr({type: "text", value: data.user_name, readonly: true});
-                        	td2_1.append(input2_1);
-                        	let td2_2 = $("<td>").addClass("insert_col");
-                        	let input2_2 = $("<input>").addClass("form-control user_name").attr({type: "text", name: "user_name"});
-                        	td2_2.append(input2_2);
-                        	tr2.append(th2_1, td2_1, td2_2);
-                        	
-                        	let tr3 = $("<tr>");
-                        	let th3_1 = $("<th>").addClass("update_col").html("휴대폰 번호");
-                        	let td3_1 = $("<td>").addClass("insert_col");
-                        	let input3_1 = $("<input>").addClass("form-control user_phone").attr({type: "text", value: data.user_phone, readonly: true});
-                        	td3_1.append(input3_1);
-                        	let td3_2 = $("<td>").addClass("insert_col");
-                        	let input3_2 = $("<input>").addClass("form-control user_phone").attr({type: "text", name: "user_phone", placeholder: "-제외"});
-                        	td3_2.append(input3_2);
-                        	tr3.append(th3_1, td3_1, td3_2);
-                        	
-                        	let tr4 = $("<tr>");
-                        	let th4_1 = $("<th>").addClass("update_col").html("휴대폰 번호");
-                        	let td4_1 = $("<td>").addClass("insert_col");
-                        	let input4_1 = $("<input>").addClass("form-control user_auth").attr({type: "text", value: data.user_auth, readonly: true});
-                        	td4_1.append(input4_1);
-                        	let td4_2 = $("<td>").addClass("insert_col");
-                        	let select4_1 = $("<select>").addClass("form-select user_auth").attr({name: "user_auth"})
-                        	let option4_1 = $("<option>").attr({value: data.user_auth, selected: true}).text("등급 선택");
-                        	let option4_2 = $("<option>").attr({value: "member"}).text("member");
-                        	let option4_3 = $("<option>").attr({value: "admin"}).text("admin");
-                        	let option4_4 = $("<option>").attr({value: "manager"}).text("manager");
-                        	select4_1.append(option4_1, option4_2, option4_3, option4_4);
-                        	td4_2.append(select4_1);
-                        	tr4.append(th4_1, td4_1, td4_2);
-                        	
-                        	let tr5 = $("<tr>");
-                        	let th5_1 = $("<th>").addClass("update_col").html("메모");
-                        	let td5_1 = $("<td>").addClass("insert_col");
-                        	let input5_1 = $("<input>").addClass("form-control user_memo").attr({type: "text", value: data.user_memo, readonly: true});
-                        	td5_1.append(input5_1);
-                        	let td5_2 = $("<td>").addClass("insert_col");
-                        	let input5_2 = $("<input>").addClass("form-control user_memo").attr({type: "text", name: "user_memo"});
-                        	td5_2.append(input5_2);
-                        	tr5.append(th5_1, td5_1, td5_2);
-                        	
-                        	$("#modify_table").append(tr1, tr2, tr3, tr4, tr5);
-                        	
-                        }
-                    	, error: function(e){
-                    		console.log(e);
-                    	}
-                    })
+								let tr3 = $("<tr>");
+								let th3_1 = $("<th>").addClass("update_col")
+										.html("휴대폰 번호");
+								let td3_1 = $("<td>").addClass("insert_col");
+								let input3_1 = $("<input>").addClass(
+										"form-control user_phone").attr({
+									type : "text",
+									value : data.user_phone,
+									readonly : true
+								});
+								td3_1.append(input3_1);
+								let td3_2 = $("<td>").addClass("insert_col");
+								let input3_2 = $("<input>").addClass(
+										"form-control user_phone").attr({
+									type : "text",
+									name : "user_phone",
+									placeholder : "-제외"
+								});
+								td3_2.append(input3_2);
+								tr3.append(th3_1, td3_1, td3_2);
 
-                })
+								let tr4 = $("<tr>");
+								let th4_1 = $("<th>").addClass("update_col")
+										.html("휴대폰 번호");
+								let td4_1 = $("<td>").addClass("insert_col");
+								let input4_1 = $("<input>").addClass(
+										"form-control user_auth").attr({
+									type : "text",
+									value : data.user_auth,
+									readonly : true
+								});
+								td4_1.append(input4_1);
+								let td4_2 = $("<td>").addClass("insert_col");
+								let select4_1 = $("<select>").addClass(
+										"form-select user_auth").attr({
+									name : "user_auth"
+								})
+								let option4_1 = $("<option>").attr({
+									value : data.user_auth,
+									selected : true
+								}).text("등급 선택");
+								let option4_2 = $("<option>").attr({
+									value : "member"
+								}).text("member");
+								let option4_3 = $("<option>").attr({
+									value : "admin"
+								}).text("admin");
+								let option4_4 = $("<option>").attr({
+									value : "manager"
+								}).text("manager");
+								select4_1.append(option4_1, option4_2,
+										option4_3, option4_4);
+								td4_2.append(select4_1);
+								tr4.append(th4_1, td4_1, td4_2);
 
-            </script>
+								let tr5 = $("<tr>");
+								let th5_1 = $("<th>").addClass("update_col")
+										.html("메모");
+								let td5_1 = $("<td>").addClass("insert_col");
+								let input5_1 = $("<input>").addClass(
+										"form-control user_memo").attr({
+									type : "text",
+									value : data.user_memo,
+									readonly : true
+								});
+								td5_1.append(input5_1);
+								let td5_2 = $("<td>").addClass("insert_col");
+								let input5_2 = $("<input>").addClass(
+										"form-control user_memo").attr({
+									type : "text",
+									name : "user_memo"
+								});
+								td5_2.append(input5_2);
+								tr5.append(th5_1, td5_1, td5_2);
+
+								$("#modify_table").append(tr1, tr2, tr3, tr4,
+										tr5);
+
+							},
+							error : function(e) {
+								console.log(e);
+							}
+						})
+
+					})
+		</script>
 </body>
 
 </html>

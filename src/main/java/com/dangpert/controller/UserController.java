@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.dangpert.dao.UserDAO;
 import com.dangpert.dto.UserDTO;
+import com.dangpert.dto.UserDataDTO;
+import com.dangpert.mail.SendMail;
 import com.dangpert.utils.EncryptionUtils;
 import com.google.gson.Gson;
 
@@ -53,16 +55,20 @@ public class UserController extends HttpServlet {
 			}
 			
 			
-		} else if (uri.equals("/idCheckPopup.user")) {
+		} else if (uri.equals("/idCheckPopup.user")) { // 팝업 띄우기
 			response.sendRedirect("/user/popup.jsp");
-		} else if (uri.equals("/idCheck.user")) {
+			
+		} else if (uri.equals("/idCheck.user")) { // 아이디 체크
 			String user_id = request.getParameter("user_id");
 			System.out.println(user_id);
+			SendMail sm = new SendMail();
 			UserDAO dao = new UserDAO();
 			try {
 				boolean rs = dao.idCheck(user_id);
 				if (rs) {
 					request.setAttribute("rs","ok");
+					int RanNum = sm.compare(user_id);
+					request.setAttribute("compareNum", RanNum);
 				} else {
 					request.setAttribute("rs", "no");
 				}
@@ -74,6 +80,14 @@ public class UserController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(uri.equals("/compare.user")){ // 유저 인증
+			String user_id = request.getParameter("compareUser");
+			
+			request.setAttribute("user_id", user_id);
+			request.getRequestDispatcher("/user/popup.jsp").forward(request, response);
+			
+			
+			
 		} else if (uri.equals("/login.user")) { // 로그인 페이지 요청
 			response.sendRedirect("/user/login.jsp");
 		} else if (uri.equals("/loginOk.user")) { // 로그인 확인
@@ -82,6 +96,7 @@ public class UserController extends HttpServlet {
 			
 			UserDAO dao = new UserDAO();
 			try {
+				System.out.println(user_pw);
 				user_pw = EncryptionUtils.getSHA512(user_pw);
 				
 				UserDTO dto = dao.loginOk(user_id, user_pw);
@@ -91,8 +106,10 @@ public class UserController extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("loginSession", dto);
 					
+					
 				} else {
 					System.out.println("로그인 실패!");
+					System.out.println(user_pw);
 					request.setAttribute("rs", false);
 				}
 				request.getRequestDispatcher("/main.jsp").forward(request, response);
@@ -102,16 +119,50 @@ public class UserController extends HttpServlet {
 		} else if (uri.equals("/toSignup.user")) { // 회원가입 페이지 요청
 			response.sendRedirect("/user/signup.jsp");
 
-		} else if (uri.equals("/userModify.user")) {	// 유저 정보 수정
+		} else if (uri.equals("/userModify.user")) {	// 수정페이지 유저 정보 뿌려주기
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
-	
-			request.setAttribute("dto", dto);
+			UserDAO dao = new UserDAO();
+			try {
+				UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+				
+				request.setAttribute("dto", dto);
+				request.setAttribute("data_dto", data_dto);
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 			request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);	
 				
+		} else if (uri.equals("/userDataModify.user")) {	// 유저 정보 변경
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			
+			String user_pw = request.getParameter("user_pw");
+			int weight = Integer.parseInt(request.getParameter("weight"));
+			int final_weight = Integer.parseInt(request.getParameter("final_weight"));
+			UserDAO dao = new UserDAO();
+			
+			try {
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				int rs = dao.update(user_pw, dto.getUser_seq());
+				int rs2 = dao.DataUpdate(weight, final_weight, dto.getUser_seq());
+				if (rs > 0 && rs2 > 0) {
+					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+					request.setAttribute("dto", dto);
+					request.setAttribute("data_dto", data_dto);
+					request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
 		} else if (uri.equals("/userDiary.user")) {		// 유저 일기장 페이지 요청
-			response.sendRedirect("/user/myPage_diary.jsp");
-
+			response.sendRedirect("/toDiarypage.diary");
+			
 		} else if (uri.equals("/logout.user")) { // 로그아웃 요청
 			HttpSession session = request.getSession();
 			session.getAttribute("loginSession");
@@ -120,6 +171,10 @@ public class UserController extends HttpServlet {
 			
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
 			response.sendRedirect("/user/myPage_user.jsp");
+			
+		} else if (uri.equals("/userDiaryWrite.user")) {	// 일기쓰기 페이지 요청
+			response.sendRedirect("/user/myPage_diary_write.jsp");
+			
 		} else if (uri.equals("/search.user")) { // manager 유저 검색
 			UserDAO dao = new UserDAO();
 			int curPage = Integer.parseInt(request.getParameter("curPage"));
@@ -152,27 +207,54 @@ public class UserController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} /*else if(uri.equals("/findId.user")) { //아이디 찾기 요청
-			String user_name = request.getParameter("user_name");
-			String user_phone = request.getParameter("user_phone");
-			System.out.println(user_name + " : " + user_phone);
+
+		} else if(uri.equals("/pwOk.user")) { // 수정페이지 비밀번호 확인
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			String user_pw = request.getParameter("beforPw");
 			UserDAO dao = new UserDAO();
 			
 			try {
-				 
-				if()
+				request.setAttribute("user_pw", user_pw);
+				user_pw = EncryptionUtils.getSHA512(user_pw);
+				System.out.println(user_pw);
 				
+				if(user_pw.equals(dto.getUser_pw())) {
+					request.setAttribute("rs", "ok");
+					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+					request.setAttribute("data_dto", data_dto);
+					request.setAttribute("dto", dto);
+				} else {
+					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+					request.setAttribute("rs", "no");
+					request.setAttribute("data_dto", data_dto);
+					request.setAttribute("dto", dto);
+				}
 				
-			}catch(Exception e) {
+				request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);
+		
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	
+
+		} else if(uri.equals("/userDelete.user")) {		// 회원 탈퇴
+			HttpSession session = request.getSession();
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			UserDAO dao = new UserDAO();
+			
+			try {
+				int rs = dao.delete(dto.getUser_seq());
+				if(rs > 0) {
+					session.removeAttribute("loginSession");
+					response.sendRedirect("/home");
+				}
+				
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-			
-		}*/
-		
-		
-	
-		
-	}
+		}
 
+	}
 }

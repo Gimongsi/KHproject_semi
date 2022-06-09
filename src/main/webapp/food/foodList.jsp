@@ -127,162 +127,22 @@ keyframes waviy { 0%, 40%, 100% {
 20
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 %
 {
 transform
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 translateY
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 (
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 -20px
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
@@ -557,7 +417,7 @@ translateY
 						<div>등록된 프로모션이 없습니다.</div>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${listPromo}" var="dtoPromo" end="3">
+						<c:forEach items="${listPromo}" var="dtoPromo"  varStatus="listStatus" end="3">
 							<div class="col-6 d-flex justify-content-center">
 								<div class="card">
 									<a href="${dtoPromo.food_com}"> <img
@@ -569,40 +429,36 @@ translateY
 										<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
 										<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
 										<div class="col favorite d-flex justify-content-end">
-											<c:set var="loop_flag" value="false" />
-											<c:forEach items="${listInterest}" var="listInterest">
-												<c:if test="${not loop_flag}">
-													<c:if test="${listInterest.food_seq eq dtoPromo.food_seq}">
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn redHeartBtn" id="redHeartBtn">
-																<input type="text" class="d-none" value="${dtoPromo.food_seq}"> 
-																<img id="redHeart" src="../imgs/red heart.png">
-															</button>
-														</div>
-														<c:set var="loop_flag" value="true" />
-													</c:if>
-												</c:if>
-												<c:if test="${not loop_flag}">
-													<c:if test="${listInterest.food_seq ne dtoPromo.food_seq}">
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
-																<input type="text" class="d-none" value="${dtoPromo.food_seq}"> 
-																<img id="emptyHeart" src="../imgs/empty heart.png">
-															</button>
-														</div>
-														<c:set var="loop_flag" value="true" />
-													</c:if>
-												</c:if>
+										
+											<!-- checkInterest : 해당 상품을 찜한건지 아닌거지 여부를 담아줄 변수 -->
+											<c:set var="checkInterest" value="false"/>
+											<!-- 찜 리스트를 반복문 돌리며 해당 상품이 찜한건지 아닌지 여부만 checkInterest변수에 저장 -->
+											<c:forEach items="${listInterest}" var="interest">	
+													<!-- 만약 찜한 상품이라면 checkInterest에 true 값을 담아 줌.-->
+													<c:if test="${interest.food_seq eq dtoPromo.food_seq}">
+														<c:set var="checkInterest" value="true"/>
+													</c:if>																								
 											</c:forEach>
-											<c:if test="${empty listInterest}">
-												<div class="ImgFavorite">
-													<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
-														<input type="text" class="d-none" value="${dtoPromo.food_seq}"> 
-														<img id="emptyHeart" src="../imgs/empty heart.png">
-													</button>
-												</div>
-												<c:set var="loop_flag" value="true" />
-											</c:if>
+											
+											<div class="ImgFavorite">
+												<c:if test = "${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+													<!-- 만약 checkInterest가 트루라면 찜한 상품이니 빨간하트 띄워주고 -->
+													<c:if test="${checkInterest}">
+														<button type="button" class="heartBtn redHeartBtn" id="redHeartBtn">
+															<input type="text" class="d-none" value="${dtoPromo.food_seq}"> 
+															<img id="redHeart" src="../imgs/red heart.png">
+														</button>
+													</c:if>
+													<!-- 만약 checkInterest가 펄스라면 찜한 상품이 아니니 검은하트 띄워주고 -->
+													<c:if test="${not checkInterest}">
+														<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
+															<input type="text" class="d-none" value="${dtoPromo.food_seq}"> 
+															<img id="emptyHeart" src="../imgs/empty heart.png">
+														</button>
+													</c:if>	
+												</c:if>
+											</div>
+									
 										</div>
 									</div>
 								</div>
@@ -630,33 +486,38 @@ translateY
 							<c:forEach items="${list}" var="dto" end="3">
 								<div class="col-6 d-flex justify-content-center">
 									<div class="card">
-										<a href="${dto.food_com}"> <img
-											src="/files/${dto.food_src}" class="card-img-top">
-											<h5 class="card-title">${dto.food_name}</h5> <input
-											type="text" class="d-none" value="${dto.food_seq}">
+										<a href="${dto.food_com}"> <img src="/files/${dto.food_src}" class="card-img-top">
+											<h5 class="card-title">${dto.food_name}</h5> 
+											<input type="text" class="d-none" value="${dto.food_seq}">
 										</a>
 										<div class="card-body">
 											<p id="food_title" class="card-text">${dto.food_title}</p>
 											<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
 											<div class="col favorite d-flex justify-content-end">
-												<c:forEach items="${listInterest}" var="listInterest">
-													<c:if test="${listInterest.food_seq eq dto.food_seq}">
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="redHeartBtn">
-																<input type="text" class="d-none" value="${dto.food_seq}"> 
-																	<img id="redHeart"src="../imgs/red heart.png">
-															</button>
-														</div>
-													</c:if>
-													<c:if test="${listInterest.food_seq ne dto.food_seq}">
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn" class="emptyHeartBtn">
-																<input type="text" class="d-none" value="${dto.food_seq}"> 
-																<img id="emptyHeart"src="../imgs/empty heart.png">
-															</button>
-														</div>
+												
+												<c:set var="checkInterestH" value="false" />
+												<c:forEach items="${listInterest}" var="interest">
+													<c:if test="${interest.food_seq eq dto.food_seq}">
+														<c:set var="checkInterestH" value="true"/>
 													</c:if>
 												</c:forEach>
+												
+												<div class="ImgFavorite">
+													<c:if test = "${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+														<c:if test="${checkInterestH}">
+															<button type="button" class="heartBtn redHeartBtn" id="redHeartBtn">
+																<input type="text" class="d-none" value="${dto.food_seq}"> 
+																<img id="redHeart" src="../imgs/red heart.png">
+															</button>
+														</c:if>
+														<c:if test="${not checkInterestH}">
+															<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
+																<input type="text" class="d-none" value="${dto.food_seq}"> 
+																<img id="emptyHeart" src="../imgs/empty heart.png">
+															</button>
+														</c:if>
+													</c:if>
+												</div>	
 											</div>
 										</div>
 									</div>

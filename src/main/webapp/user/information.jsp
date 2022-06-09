@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -17,36 +20,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-
-<title>회원가입</title>
+<title>FAQ</title>
 </head>
 <style>
-/* 버튼 */
-.btnSpace {
-	margin-bottom: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
-}
-
-.btnAdd {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: small;
-	color: white;
-	margin: 5px;
-}
-
-.btnAdd:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
@@ -56,36 +32,17 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
-@font-face {
-	font-family: 'SuncheonB';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -95,6 +52,7 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -122,10 +80,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -135,13 +91,11 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
-
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -160,50 +114,21 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
-
-
 %
 {
 transform
-
-
-
-
 :
-
-
-
-
 translateY
-
-
 (
-
-
-
-
 -20px
-
-
-
-
 )
-
-
-
-
 }
 }
-
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
-	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -241,73 +166,20 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
 	height: 20px;
 }
-
-.empty2 {
-	background-color: white;
-	height: 40px;
-}
-
-/* 바디 타이틀 */
-.cls_body {
-	width: 40%;
-	margin: auto;
-}
-
-.cls_title {
-	height: 100px;
-}
-
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 250px;
-	height: 45px;
+/* 게시글 스타일 영역 */
+.title {
+	padding: 10px;
 	text-align: center;
-	font-family: '양진체';
 }
 
-/* 바디 input 영역 */
-#user_id {
-	width: 80%;
+#content {
+	height: 500px;
 }
-
-.overBtn {
-	width: 70%;
-	height: 40px;
-}
-
-.textInput {
-	width: 85%;
-}
-
-.checkBox {
-	background-color: #d4d4d450;
-	width: 80%;
-	border-radius: 10px;
-}
-
-.checkBox_inner>span {
-	margin: 10px;
-}
-
-.check1 {
-	width: 1.25em;
-}
-
-.submitBtn {
-	height: 40px;
-}
-
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -335,11 +207,12 @@ translateY
 	color: #709c91;
 	text-decoration: none;
 }
-
 /* footer 끝 */
 </style>
+
 <body>
 	<div class="container">
+		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -448,91 +321,51 @@ translateY
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-
-		<!-- 헤더 끝 -->
-		<div class="empty"></div>
-		<form action="/signup.user" id="joinForm">
-			<div
-				class="row cls_body d-flex align-items-center justify-content-center">
-				<div class="row cls_title">
-					<div
-						class="col-12 d-flex align-items-center justify-content-center title_div">
-						<h2>회원 가입</h2>
+		<!-- FAQ 리스트 -->
+		<div class="title">
+        	<h3>FAQ</h3>
+    	</div>
+		<div class="container">
+			<c:if test="${loginSession.user_auth eq 'manager'}">
+				<div class="row boxBtn-top">
+					<div class="col d-flex justify-content-end">
+						<button class="btn btn-warning" id="btnWrite" type="button">글쓰기</button>
 					</div>
 				</div>
-				<div class="empty"></div>
-				<div class="row d-flex align-items-center justify-content-center">
-					<div class="col-9 d-flex align-items-center justify-content-center">
-						<input type="text" class="form-control" id="user_id"
-							name="user_id" placeholder="이메일" readonly>
-					</div>
-					<div class="col-3">
-						<button type="button" class="btn btnAdd overBtn">중복확인</button>
-					</div>
-				</div>
-				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
-						<input type="text" class="form-control textInput" id="user_name"
-							name="user_name" placeholder="이름">
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
-						<input type="password" class="form-control textInput" id="user_pw"
-							name="user_pw" placeholder="비밀번호 (6~20자 특수문자(~!@#$%^&*))">
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
-						<input type="password" class="form-control textInput"
-							id="user_pwOk" placeholder="비밀번호 확인">
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
-						<input type="text" class="form-control textInput" id="user_phone"
-							name="user_phone" placeholder="핸드폰 번호 (-제외)">
-					</div>
-				</div>
-				<div class="empty2"></div>
-				<div class="row checkBox">
-					<div class="row">
-						<div
-							class="col-12 form-checkd-flex d-flex align-items-center justify-content-center checkBox_inner">
-							<input class="form-check-input check1" type="checkbox" value=""
-								id="flexCheckChecked"> <span>서비스 이용 약관 및 개인정보
-								취급방침에 동의합니다.</span>
-						</div>
-					</div>
-					<div class="row">
-						<div
-							class="col-12 form-checkd-flex d-flex align-items-center justify-content-center checkBox_inner">
-							<input class="form-check-input check2" type="checkbox" value=""
-								id="flexCheckChecked"> <span>위치기반 서비스 이용약관에
-								동의합니다.</span>
-						</div>
-					</div>
-				</div>
-				<div class="empty2"></div>
-
-				<div class="row">
-					<div
-						class="col-12 d-flex align-items-center justify-content-center">
-						<button type="button" class="btn btnAdd submitBtn">가입 완료</button>
-					</div>
-				</div>
-			</div>
-		</form>
-
-
-		<div class="empty"></div>
+			</c:if>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="col-md-1">글번호</th>
+						<th class="col-md-5">제목</th>
+					</tr>
+				</thead>
+				<tbody class="body-board">
+					<c:choose>
+						<c:when test="${list.size() == 0}">
+							<tr>
+								<td colspan=5>등록된 게시글이 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto">
+								<tr>
+									<td>${dto.qna_seq}</td>
+									<td><a href="view.info?qna_seq=${dto.qna_seq}">${dto.qna_title}</a></td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+		</div>
+		<script>
+			$("#btnWrite").on("click", function() {
+				location.href = "/write.info";
+			})
+		</script>
+		<!-- FAQ 리스트 끝-->
+		
 		<!-- footer -->
 		<div class="container footer">
 			<div class="row footerInfo">
@@ -566,42 +399,6 @@ translateY
 			</div>
 			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-	</div>
-	<!-- footer 끝 -->
-
-
-	<script>
-		$(".overBtn").on("click", function() { // 아이디 팝업창 띄우기
-			let url = "/idCheckPopup.user";
-			let name = "아이디 중복검사";
-			let option = "width=600, height=300, left=500, top=300";
-
-			window.open(url, name, option);
-		})
-
-		$(".submitBtn").on("click", function() { // 
-			let regexPw = /[a-zA-Z0-9~!@#$%^&*]{6,20}/;
-			let regexPhone = /[0-9]{11}/;
-			// select 박스에서 선택된 값을 가져오는 방법
-			console.log($("#user_phone").val());
-			// 유효성 검사
-			if ($("#user_id").val() === "") {
-				alert("아이디를 입력해 주세요.");
-				return;
-			} else if (!regexPw.test($('#user_pw').val())) {
-				alert("형식에 맞지 않는 비밀번호입니다.");
-				return;
-			} else if ($("#user_pwOk").val() !== $("#user_pw").val()) {
-				alert("비밀번호와 비밀번호 확인값이 일치하지 않습니다.");
-				return;
-			} else if (!regexPhone.test($("#user_phone").val())) {
-				alert("형식에 맞지 않는 휴대폰번호입니다.");
-				return;
-			}
-
-			$("#joinForm").submit();
-		})
-	</script>
-
+		<!-- footer 끝 -->
 </body>
 </html>

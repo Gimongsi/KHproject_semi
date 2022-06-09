@@ -46,13 +46,9 @@ public class FoodController extends HttpServlet {
 			FoodDAO dao = new FoodDAO();
 			System.out.println("loginSession : " + dto);
 			try {
-				ArrayList<UserfoodInterestDTO> listInterest = dao.interestFood(dto.getUser_seq());
 				ArrayList<FoodDTO> listPromo = dao.selectPromo();
 				ArrayList<FoodDTO> list = dao.selectHellin();
 					
-				System.out.println("size: "+listInterest.size());
-				
-				request.setAttribute("listInterest", listInterest);
 				request.setAttribute("listPromo", listPromo);
 				request.setAttribute("list", list);
 				
@@ -192,9 +188,10 @@ public class FoodController extends HttpServlet {
 			
 			try {
 				int rs = dao.insertInterestFood(food_seq, dto.getUser_seq());
+			
 				
 				if (rs>0) {
-					response.sendRedirect("/list.food");
+					response.sendRedirect("/listLogin.food");
 					System.out.println("푸드 프로모션 즐겨찾기");
 				}
 			}catch(Exception e) {
@@ -213,12 +210,33 @@ public class FoodController extends HttpServlet {
 						
 				if (rs > 0) {
 					System.out.println("푸드 프로모션 즐겨찾기 삭제 성공");
-					response.sendRedirect("/food/foodList.jsp");
+					response.sendRedirect("/listLogin.food");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 			
+		
+		}else if(uri.equals("/listLogin.food")) { //로그인 시 푸드 리스트
+			HttpSession session = request.getSession(); 
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			FoodDAO dao = new FoodDAO();
+			System.out.println("loginSession : " + dto);
+			try {
+				ArrayList<UserfoodInterestDTO> listInterest = dao.interestFood(dto.getUser_seq());
+				ArrayList<FoodDTO> listPromo = dao.selectPromo();
+				ArrayList<FoodDTO> list = dao.selectHellin();
+					
+				System.out.println("size: "+listInterest.size());
+				
+				request.setAttribute("listInterest", listInterest);
+				request.setAttribute("listPromo", listPromo);
+				request.setAttribute("list", list);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/food/foodList.jsp").forward(request, response);
 		}
 	}
 
