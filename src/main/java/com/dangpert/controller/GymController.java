@@ -43,14 +43,10 @@ public class GymController extends HttpServlet {
 			GymDAO dao = new GymDAO(); 
 			
 			try {
-//				ArrayList<UsergymInterestDTO> ugi_dto = dao.interestGym(dto.getUser_seq()); // 세션 유저의 즐겨찾기 목록들 불러오기
 				ArrayList<GymInfoDTO> gym_dto = dao.selectAllGym();// 모든 gym 불러오기
 
-				
-//				request.setAttribute("ugi_dto", ugi_dto);
 				request.setAttribute("gym_dto", gym_dto);
 				
-			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -111,6 +107,9 @@ public class GymController extends HttpServlet {
 			
 		}else if(uri.equals("/detail.gym")) { // 운동시설 상세페이지로 이동
 			GymDAO dao = new GymDAO();
+			HttpSession session = request.getSession(); 
+			UserDTO userDTO = (UserDTO)session.getAttribute("loginSession");
+			
 			int gym_seq = Integer.parseInt(request.getParameter("gym_seq"));
 			
 			try {
@@ -259,7 +258,8 @@ public class GymController extends HttpServlet {
 				int rs = dao.insertInterestGym(gym_seq, dto.getUser_seq());
 				
 				if (rs > 0) {
-					request.getRequestDispatcher("/gym/gymList.jsp");
+					response.sendRedirect("/listLogin.gym");
+					System.out.println("즐겨찾기 추가");
 				}
 				
 				
@@ -268,7 +268,7 @@ public class GymController extends HttpServlet {
 			}
 			
 				
-		}else if (uri.equals("delInterest.gym")) {
+		}else if (uri.equals("/delInterest.gym")) { // 운동시설 즐겨찾기 삭제
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO) session.getAttribute("loginSession");
 			int gym_seq = Integer.parseInt(request.getParameter("gym_seq"));
@@ -279,13 +279,34 @@ public class GymController extends HttpServlet {
 
 				if (rs > 0) {
 					System.out.println("헬스장 프로모션 즐겨찾기 삭제 성공");
-					response.sendRedirect("/gym/gymList.jsp");
+					response.sendRedirect("/listLogin.gym");
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
+		}else if(uri.equals("/listLogin.gym")) { //로그인 했을 때 운동시설 리스트
+			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
+			
+			GymDAO dao = new GymDAO(); 
+			
+			try {
+				ArrayList<UsergymInterestDTO> ugi_dto = dao.interestGym(dto.getUser_seq()); // 세션 유저의 즐겨찾기 목록들 불러오기
+				ArrayList<GymInfoDTO> gym_dto = dao.selectAllGym();// 모든 gym 불러오기
+
+				System.out.println("size: "+ugi_dto.size());
+				
+				request.setAttribute("ugi_dto", ugi_dto);
+				request.setAttribute("gym_dto", gym_dto);			
+				
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			request.getRequestDispatcher("/gym/gymList.jsp").forward(request, response);
 		}
 	}
 }

@@ -14,7 +14,7 @@ import com.dangpert.dto.GymFolderDTO;
 import com.dangpert.dto.GymInfoDTO;
 import com.dangpert.dto.GymProgramDTO;
 import com.dangpert.dto.UserDTO;
-//import com.dangpert.dto.UsergymInterestDTO;
+import com.dangpert.dto.UsergymInterestDTO;
 
 public class GymDAO {
 	private BasicDataSource bds;
@@ -368,7 +368,8 @@ public class GymDAO {
 	
 	/* 즐겨찾기 */
 	
-	public int insertInterestGym(int gym_seq, int user_seq) throws Exception {
+
+	public int insertInterestGym(int gym_seq, int user_seq) throws Exception { //즐겨찾기 추가
 		String sql = "insert into user_gym_interest values(?, ?)";
 		
 		try(Connection con = bds.getConnection();
@@ -382,24 +383,24 @@ public class GymDAO {
 		}
 	}
 	
-//	public ArrayList<UsergymInterestDTO> interestGym(int user_seq) throws Exception{
-//		String sql = "select * from user_gym_interest where user_seq=? ";
-//		
-//		try(Connection con = bds.getConnection();
-//				PreparedStatement pstmt = con.prepareStatement(sql)){
-//			
-//			pstmt.setInt(1, user_seq);
-//			ResultSet rs = pstmt.executeQuery();
-//			ArrayList<UsergymInterestDTO> list = new ArrayList<UsergymInterestDTO>();
-//			
-//			while(rs.next()){
-//				int gym_seq = rs.getInt("gym_seq");
-//				
-//				list.add(new UsergymInterestDTO(gym_seq, user_seq));
-//			}
-//			return list;
-//		}
-//	}
+	public ArrayList<UsergymInterestDTO> interestGym(int user_seq) throws Exception{ //즐겨찾기 리스트 
+		String sql = "select * from user_gym_interest where user_seq=? ";
+		
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<UsergymInterestDTO> list = new ArrayList<UsergymInterestDTO>();
+			
+			while(rs.next()){
+				int gym_seq = rs.getInt("gym_seq");
+				
+				list.add(new UsergymInterestDTO(gym_seq, user_seq));
+			}
+			return list;
+		}
+	}
 	
 	public ArrayList<GymInfoDTO> selectAllGym() throws Exception {
 		String sql = "select * from tbl_gym_info g join tbl_gym_price p on g.gym_seq = p.gym_seq";
@@ -429,8 +430,8 @@ public class GymDAO {
 		}
 	}
 	
-	public int delInterestGym(int gym_seq, int user_seq) throws Exception {
-		String sql = "delete from user_gym_interest values(? , ?)";
+	public int delInterestGym(int gym_seq, int user_seq) throws Exception { //즐겨찾기 삭제
+		String sql = "delete from user_gym_interest where gym_seq=? and user_seq=?";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){

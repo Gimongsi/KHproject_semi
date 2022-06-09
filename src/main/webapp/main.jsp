@@ -33,7 +33,6 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
 @font-face {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	src:
@@ -48,11 +47,9 @@
 	margin: 0;
 	box-sizing: border-box;
 }
-
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -64,40 +61,32 @@
 	font-family: '양진체';
 	text-align: center;
 }
-
 .cls_header a {
 	color: #97C4B8;
 }
-
 .cls_header a:hover {
 	color: #c9d4a9;
 }
-
 .dropdownBtn {
 	background-color: #F0FFC2 !important;
 	color: #97C4B8;
 	border: 1px solid white;
 }
-
 .dropdownBtn:hover {
 	color: #9be5d2;
 }
-
 .headDropdown {
 	background-color: #F0FFC2 !important;
 }
-
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
 }
-
 .logoImg:hover {
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
@@ -133,55 +122,44 @@
 	background-color: #F0FFC2 !important;
 	font-family: '양진체';
 }
-
 .container-fluid a {
 	color: #97C4B8 !important;
 }
-
 .container-fluid a:hover {
 	color: #9be5d2 !important;
 }
-
 .container-fluid button {
 	background-color: #F0FFC2 !important;
 	color: #97C4B8 !important;
 }
-
 .navDropdown {
 	border: 1px solid white;
 	background-color: #d5fcf3 !important;
 }
-
 .container-fluid button:hover {
 	background-color: #97C4B8 !important;
 	color: #F0FFC2 !important;
 }
-
 .container-fluid span {
 	filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg)
 		brightness(103%) contrast(66%);
 }
-
 .navSearchInput {
 	border: 1px solid white;
 }
-
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
 	height: 50px;
 }
-
 /* 칼럼 */
 .cls_column img {
 	width: 100%;
 	height: 600px;
 }
-
 /* 목록 타이틀 */
 .title {
 	height: 100px;
@@ -201,16 +179,13 @@
 	padding: 15px;
 	font-family: '양진체';
 }
-
 /* 근육별 운동 텍스트 효과 */
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
-
     .waviy {
         position: relative;
         -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(142, 168, 159, 0.377));
         font-size: 40px;
     }
-
     .waviy span {
         position: relative;
         display: inline-block;
@@ -219,7 +194,6 @@
         animation: waviy 1s infinite;
         animation-delay: calc(.1s * var(--i));
     }
-
     @keyframes waviy {
         0%,
         40%,
@@ -231,7 +205,6 @@
         }
     }
 /* 근육별 운동 텍스트 효과 끝 */
-
 /*그림자 효과*/
 .title_promo .title-part, smTitle_promo .title-part {
         font-family: "양진체";
@@ -258,7 +231,6 @@
         text-shadow: #8202fe 1px 1px, #8405fc 2px 2px, #8507fb 3px 3px, #8609fa 4px 4px, #870cf9 5px 5px, #890ef7 6px 6px, #8a10f6 7px 7px, #8b13f5 8px 8px, #8c15f4 9px 9px, #8e17f2 10px 10px, #8f1af1 11px 11px, #901cf0 12px 12px, #911eee 13px 13px, #9321ed 14px 14px, #9423ec 15px 15px, #9525eb 16px 16px, #9628e9 17px 17px, #982ae8 18px 18px, #992ce7 19px 19px, #9a2fe6 20px 20px, #9b31e4 21px 21px, #9d33e3 22px 22px, #9e36e2 23px 23px, #9f38e1 24px 24px, #a13bdf 25px 25px, #a23dde 26px 26px, #a33fdd 27px 27px, #a442db 28px 28px, #a644da 29px 29px, #a746d9 30px 30px, #a849d8 31px 31px, #a94bd6 32px 32px, #ab4dd5 33px 33px, #ac50d4 34px 34px, #ad52d3 35px 35px, #ae54d1 36px 36px, #b057d0 37px 37px, #b159cf 38px 38px, #b25bcd 39px 39px, #b35ecc 40px 40px, #b560cb 41px 41px, #b662ca 42px 42px, #b765c8 43px 43px, #b867c7 44px 44px, #ba69c6 45px 45px, #bb6cc5 46px 46px, #bc6ec3 47px 47px, #bd70c2 48px 48px, #bf73c1 49px 49px, #c075c0 50px 50px, #c177be 51px 51px, #c37abd 52px 52px, #c47cbc 53px 53px, #c57eba 54px 54px, #c681b9 55px 55px, #c883b8 56px 56px, #c985b7 57px 57px, #ca88b5 58px 58px, #cb8ab4 59px 59px, #cd8cb3 60px 60px, #ce8fb2 61px 61px, #cf91b0 62px 62px, #d093af 63px 63px, #d296ae 64px 64px, #d398ac 65px 65px, #d49aab 66px 66px, #d59daa 67px 67px, #d79fa9 68px 68px, #d8a1a7 69px 69px, #d9a4a6 70px 70px, #daa6a5 71px 71px, #dca8a4 72px 72px, #ddaba2 73px 73px, #deada1 74px 74px, #e0b0a0 75px 75px, #e1b29e 76px 76px, #e2b49d 77px 77px, #e3b79c 78px 78px, #e5b99b 79px 79px, #e6bb99 80px 80px, #e7be98 81px 81px, #e8c097 82px 82px, #eac296 83px 83px, #ebc594 84px 84px, #ecc793 85px 85px, #edc992 86px 86px, #efcc91 87px 87px, #f0ce8f 88px 88px, #f1d08e 89px 89px, #f2d38d 90px 90px, #f4d58b 91px 91px, #f5d78a 92px 92px, #f6da89 93px 93px, #f7dc88 94px 94px, #f9de86 95px 95px, #fae185 96px 96px, #fbe384 97px 97px, #fce583 98px 98px, #fee881 99px 99px, #ffea80 100px 100px, #8100ff 0px 0px;
     } */
 /* 그림자 효과 */
-
 /* 프로모션 타이틀 */
 .title_promo {
 	height: 100px;
@@ -269,7 +241,6 @@
 	padding: 15px;
 	font-family: '양진체';
 }
-
 .title_promo_gym {
 	height: 100px;
 	background-color: #ffea80;
@@ -304,7 +275,6 @@
 	text-shadow: -1px 0px #ffea80, 0px 1px #ffea80, 1px 0px #ffea80, 0px
 		-1px #ffea80;
 }
-
 /* 헬스장 목록 */
 .promo_gym {
 	overflow: hidden; -
@@ -314,18 +284,15 @@
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
 }
-
 .promo_gym .card-body {
 	padding: 0px;
 	padding-left: 10px;
 	padding-top: 10px;
 }
-
 .card_gym {
 	border: 1px solid #97C4B8;
 	margin-bottom: 10px;
 }
-
 .list-group-item {
 	border: none;
 	padding: 2px;
@@ -352,7 +319,6 @@
 	padding: 15px;
 	font-family: '양진체';
 }
-
 .promo_food {
 	margin-top: 20px;
 	margin-bottom: 100px;
@@ -371,7 +337,6 @@
 }
 /* 음식 프로모션 텍스트 효과 */
 @import url("https://fonts.googleapis.com/css?family=Baloo+Thambi");
-
     .title_promo_food > span {
         text-transform: uppercase;
         animation: glow 2s ease-in-out infinite;
@@ -380,7 +345,6 @@
         text-transform: uppercase;
         animation: glow 2s ease-in-out infinite;
     }
-
     @keyframes glow {
         0%,
         100% {
@@ -406,21 +370,17 @@
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
 }
-
 .footer .row {
 	border-bottom: 1px solid #c9d4a9;
 }
-
 .footer .footerInfo {
 	padding-block: 3%;
 	text-align: center;
 }
-
 .footerMenu {
 	padding-block: 2%;
 	text-align: center;
 }
-
 .footerMenu a {
 	color: #709c91;
 	text-decoration: none;
