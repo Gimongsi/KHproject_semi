@@ -370,7 +370,7 @@ translateY
 							</div>
 							<div>
 								<input type="text" disabled placeholder="현재 비밀번호"> <input
-									type="password" id="beforePw" name="beforPw" value="${user_pw}">
+									type="text" id="beforePw" name="beforPw" value="${user_pw}">
 								<button type="button" id="pwOk">비밀번호 확인</button>
 							</div>
 							</form>
@@ -405,10 +405,10 @@ translateY
 								<input type="text" disabled placeholder="목표 몸무게 수정">
 								<c:choose>
 									<c:when test="${data_dto eq null}">
-										<input type="text" name="final_weight">
+										<input type="text" id="final_weight" name="final_weight">
 									</c:when>
 									<c:otherwise>
-										<input type="text" name="final_weight"
+										<input type="text" id="final_weight" name="final_weight"
 											value="${data_dto.final_weight}">
 									</c:otherwise>
 								</c:choose>
@@ -419,8 +419,16 @@ translateY
 										type="button">회원 탈퇴</button>
 									<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
 									<button class="btn btn-secondary col-2" id="cancleBtn" type="button">취소</button>
-									<button class="btn btn-primary col-2" id="submitBtn"
+									<c:choose>
+										<c:when test="${rs eq 'ok'}">
+											<button class="btn btn-primary col-2" id="submitBtn"
 										type="button">수정 완료</button>
+										</c:when>
+										<c:otherwise>
+											<button class="btn btn-primary col-2" id="submitBtn"
+										type="button" disabled>수정 완료</button>
+										</c:otherwise>
+									</c:choose>
 
 								</div>
 							</div>
@@ -466,6 +474,8 @@ translateY
 		</div>
 	</div>
 	<script>
+		
+	
 	    document.getElementById("modifyBtn").onclick = function(){
 			location.href = "/userModify.user";
 		}
@@ -487,17 +497,29 @@ translateY
 				alert("변경후 비밀번호가 맞지않습니다.");
 				return;
 			}
+			if($("#afterPw").val() === ""){
+				$("#afterPw").val("empty");
+			}
+			if($("#weight").val() === ""){
+				alert("몸무계를 입력해주세요.");
+				return;
+			} else if ($("#final_weight").val() === ""){
+				alert("목표 몸무계를 입력해주세요.");
+				return;
+			}
+		
 			$("#modifyForm").submit();	
 		})
 		
 		$("#deleteBtn").on("click", function(e){
 			if(confirm("정말 회원탈퇴 하시겠습니까?")){
-				alert("회원탈퇴 되었습니다.");
-				location.href = "/userDelete.user";
+				if(confirm("탈퇴시 모든 정보가 삭제됩니다.")){
+					location.href = "/userDelete.user";
+				}
+				return;
 			} else {
 				return;
 			}
-			
 		})
 		
     </script>

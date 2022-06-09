@@ -337,7 +337,7 @@ textarea {
 	</div>
 	<form id="modifyForm" action="/modifyProc.info" method="post">
 		<div class="container">
-			<input type="text" class="d-none" name="qna_seq" value="${dto.qna_seq}">
+			<input type="text" class="d-none" id="qna_seq" name="qna_seq" value="${dto.qna_seq}">
 			<div class="row">
 				<div class="col-2 d-flex justify-content-center align-items-center">
 					<h4>제목</h4>
@@ -353,7 +353,7 @@ textarea {
 				</div>
 				<div class="col-10 p-2">
 					<textarea id="content" class="form-control" id="content"
-						name="qna_content" value="${dto.qna_content}"></textarea>
+						name="qna_content">${dto.qna_content}</textarea>
 				</div>
 			</div>
 		</div>
@@ -379,9 +379,11 @@ textarea {
 	
 	const btnBack = document.getElementById("btnBack");
     
-            btnBack.addEventListener("click", function(e){
-            	location.href="/view.info?qna_seq="+qna_seq;
-            });
+    btnBack.addEventListener("click", function(e){
+    	let qna_seq = $("#qna_seq").val();
+    	
+       location.href="/view.info?qna_seq="+qna_seq;
+    });
     </script>
 	<!-- footer -->
 	<div class="container footer">
