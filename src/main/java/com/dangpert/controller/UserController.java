@@ -11,10 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import com.dangpert.dao.FoodDAO;
+import com.dangpert.dao.GymDAO;
 import com.dangpert.dao.UserDAO;
+import com.dangpert.dto.FoodDTO;
+import com.dangpert.dto.GymInfoDTO;
 import com.dangpert.dto.UserDTO;
 import com.dangpert.dto.UserDataDTO;
+import com.dangpert.dto.UserfoodInterestDTO;
+import com.dangpert.dto.UsergymInterestDTO;
 import com.dangpert.mail.SendMail;
 import com.dangpert.utils.EncryptionUtils;
 import com.google.gson.Gson;
@@ -170,8 +175,32 @@ public class UserController extends HttpServlet {
 			response.sendRedirect("/main.jsp");
 			
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
-			response.sendRedirect("/user/myPage_user.jsp");
-			
+	         HttpSession session = request.getSession();
+	         UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+	         UserDAO dao = new UserDAO();
+	         FoodDAO dao2 = new FoodDAO();
+	         GymDAO dao3 = new GymDAO(); 
+	         
+	         try {
+	            
+	            ArrayList<UserfoodInterestDTO> listInterest = dao2.interestFood(dto.getUser_seq());
+	            ArrayList<FoodDTO> listPromo = dao2.selectPromo();
+	            ArrayList<FoodDTO> list = dao2.selectHellin();
+	            ArrayList<UsergymInterestDTO> ugi_dto = dao3.interestGym(dto.getUser_seq());
+	            ArrayList<GymInfoDTO> gym_dto = dao3.selectAllGym();
+	            
+	            request.setAttribute("listInterest", listInterest);
+	            request.setAttribute("listPromo", listPromo);
+	            request.setAttribute("list", list);
+	            request.setAttribute("ugi_dto", ugi_dto);
+	            request.setAttribute("gym_dto", gym_dto);
+	   
+	            
+	         }catch(Exception e) {
+	            e.printStackTrace();
+	         }
+	            
+	         request.getRequestDispatcher("/user/myPage_user.jsp").forward(request, response);
 		} else if (uri.equals("/userDiaryWrite.user")) {	// 일기쓰기 페이지 요청
 			response.sendRedirect("/user/myPage_diary_write.jsp");
 			

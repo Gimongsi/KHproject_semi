@@ -39,8 +39,21 @@ private BasicDataSource bds;
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
+	}
+	
+	public int update(String diary_content, String diary_part, int diary_weight, int diary_seq) throws Exception {	// 다이어리 수정
+		String sql = "update tbl_diary set diary_content=?, diary_part=?, diary_weight=? where diary_seq=?";
 		
-		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setString(1, diary_content);
+			pstmt.setString(2, diary_part);
+			pstmt.setInt(3, diary_weight);
+			pstmt.setInt(4, diary_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
 	}
 	
 	public ArrayList<DiaryDTO> select(int user_seqc) throws Exception {	// 목록에 띄울 다이어리 정보 가져오기
@@ -66,4 +79,41 @@ private BasicDataSource bds;
 			return list;
 		}
 	}
+	
+	public DiaryDTO selectBySeq(int diary_seq) throws Exception {	// 다이어리 시퀀스를 이용해 해당 다이어리 내용 불러오기
+		String sql = "select * from tbl_diary where diary_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, diary_seq);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int user_seq = rs.getInt("user_seq");
+				String diary_date = rs.getString("diary_date");
+				String diary_content = rs.getString("diary_content");
+				String diary_part = rs.getString("diary_part");
+				int diary_weight = rs.getInt("diary_weight");
+				
+				DiaryDTO dto = new DiaryDTO(diary_seq, user_seq, diary_date, diary_content, diary_part, diary_weight);
+				return dto;
+			}
+			return null;
+		}
+	}
+	
+	public int delete(int diary_seq) throws Exception {		// 다이어리 삭제
+		String sql = "delete from tbl_diary where diary_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			pstmt.setInt(1, diary_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+	
+	
 }

@@ -791,7 +791,7 @@ none
 										<li><a class="dropdown-item" href="#">상체</a></li>
 										<li><a class="dropdown-item" href="#">하체</a></li>
 										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
+										<li><a class="dropdown-item" href="/toPartAllPage.part">전체보기</a></li>
 									</ul></li>
 							</ul>
 							<form action="search.gym" method="post" class="d-flex searchForm">

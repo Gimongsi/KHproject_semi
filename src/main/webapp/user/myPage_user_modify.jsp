@@ -479,12 +479,12 @@ translateY(
 					<div class="inner-container-right">
 							<form action="/pwOk.user" method="post" id="pwOkForm">
 							<div class="mb-5">
-								<input type="text" disabled placeholder="이메일 / 수정불가"> <input
-									type="text" value="${dto.getUser_id()}" name="user_id" disabled>
+								<input type="text" disabled placeholder="이메일 / 수정불가">
+								<input type="text" value="${dto.getUser_id()}" name="user_id" disabled>
 							</div>
 							<div>
-								<input type="text" disabled placeholder="현재 비밀번호"> <input
-									type="password" id="beforePw" name="beforPw" value="${user_pw}">
+								<input type="text" disabled placeholder="현재 비밀번호">
+								<input type="password" id="beforePw" name="beforPw" value="${user_pw}">
 								<button type="button" id="pwOk">비밀번호 확인</button>
 							</div>
 							</form>
@@ -503,17 +503,16 @@ translateY(
 						<form action="/userDataModify.user" method="post" id="modifyForm">
 							<input type="text" class="d-none" value="${dto.user_id}" name="user_id">
 							<div>
-								<input type="text" disabled placeholder="변경 후 비밀번호"> <input
-									type="text" id="afterPw" name="user_pw">
+								<input type="text" disabled placeholder="변경 후 비밀번호">
+								<input type="password" id="afterPw" name="user_pw">
 							</div>
 							<div class="mb-5">
 								<input type="text" disabled placeholder="변경 후 비밀번호 확인">
-								<input type="text" id="afterPwCheck" name="user_pw_check">
+								<input type="password" id="afterPwCheck" name="user_pw_check">
 							</div>
 							<div>
-								<input type="text" disabled placeholder="몸무게 수정"> <input
-									type="text" id="weight" value="${data_dto.weight}"
-									name="weight">
+								<input type="text" disabled placeholder="몸무게 수정">
+								<input type="text" id="weight" value="${data_dto.weight}" name="weight">
 							</div>
 							<div>
 								<input type="text" disabled placeholder="목표 몸무게 수정">
@@ -595,7 +594,7 @@ translateY(
 		})
 		
 		
-		$("#submitBtn").on("click", function(e){ //
+		$("#submitBtn").on("click", function(){ //
 		
 			if($("#afterPw").val() !== $("#afterPwCheck").val()){
 				alert("변경후 비밀번호가 맞지않습니다.");
@@ -604,7 +603,7 @@ translateY(
 			$("#modifyForm").submit();	
 		})
 		
-		$("#deleteBtn").on("click", function(e){
+		$("#deleteBtn").on("click", function(){
 			if(confirm("정말 회원탈퇴 하시겠습니까?")){
 				alert("회원탈퇴 되었습니다.");
 				location.href = "/userDelete.user";

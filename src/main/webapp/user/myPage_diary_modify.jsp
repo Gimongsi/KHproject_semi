@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -78,7 +79,6 @@
 
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -90,8 +90,8 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
 @import
@@ -113,13 +113,26 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
 %
 {
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
+
+
 )
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -171,39 +184,37 @@ translateY(
 }
 
 /* 바디 */
+.title {
+	border-bottom: 2px solid grey;
+	width: 250px;
+}
+
 .inner-container-left {
 	margin: auto;
 	border: 1px solid black;
-	box-sizing: border-box;
-	height: 100%;
+	height: 800px;
 }
 
 .inner-container-left * {
 	margin: 20px;
 }
 
-.inner-container-right {
-	height: 100%;
-}
-
-.inner-container-right div {
-	margin: 20px;
-	margin-top: 50px;
-}
-
-.inner-container-right h5 {
-	border-bottom: 2px solid grey;
-	width: 400px;
-	text-align: center;
-}
-
-.inner-container-right button {
-	margin-right: 40px;
-}
-
-.bookmark {
+.contentsBox {
 	border: 1px solid black;
-	height: 600px;
+	width: 650px;
+	height: 610px;
+}
+
+.contentsBox>.dropdown {
+	margin-top: 24px;
+	margin-left: 24px;
+	margin-bottom: 24px;
+}
+
+.textBox {
+	width: 600px;
+	height: 500px;
+	margin-left: 24px;
 }
 
 /* 푸터 */
@@ -344,152 +355,113 @@ translateY(
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-		<!-- 바디 -->
-		<div class="cls_body">
-			<div class="row justify-content-evenly">
-				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
-					<div class="inner-container-left">
-						<div>
-							<button type="button" id="modifyBtn"
-								style="border: none; background: none;">정보수정</button>
-						</div>
-						<div>
-							<button type="button" id="diaryBtn"
-								style="border: none; background: none;">일기</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="inner-container-right">
-						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 ${data_dto.final_weight - data_dto.weight}kg 남았습니다.</h5>
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 접속일</button>
-							2022년 00월 00일
-						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 기록일</button>
-							2022년 00월 00일
-						</div>
-						<!-- 즐겨찾기 목록 시작 -->
-						<div class="interestHead">즐겨찾기 List</div>
-						<div class="bookmark">
-							<div class="interestBox">
-								<c:choose>
-									<c:when test="${listInterest.size() == 0}">
-										<div>등록된 푸드 프로모션이 없습니다.</div>
-									</c:when>
-									<c:otherwise>
-										<c:forEach items="${listPromo}" var="listPromo">
-											<c:set var="checkInterestP" value="false" />
-											<c:forEach items="${listInterest}" var="listInterest">
-												<c:if test="${listPromo.food_seq eq listInterest.food_seq}">
-													<c:set var="checkInterestP" value="true" />
-												</c:if>
-											</c:forEach>
-											<c:if test="${checkInterestP}">
-												<span>${listPromo.food_name}<br></span>
-											</c:if>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</div>
+        <div class="empty"> </div>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="title d-flex justify-content-center mb-4">
+                            <h5>오늘의 기록!</h5>
+                        </div>
+                    </div>
+                    <div class="row inner-container-right">
+                        <div>
+                            <div class="contentsBox">
+	                            <form action="/diaryUpdate.diary" method="post" id="modifyForm">
+	                            	<input type="text" id="diary_seq" class="d-none" value="${dto.diary_seq}" name="diary_seq">
+	                            	<label class="label" style="width: 60px; margin: 24px 24px;">운동부위</label>
+	                            	<select name="diary_part" style="margin-right: 20px;">
+	                            		<option value="arm">팔</option>
+	                            		<option value="shoulder">어깨</option>
+	                            		<option value="chest">가슴</option>
+	                            		<option value="back">등</option>
+	                            		<option value="belly">복근</option>
+	                            		<option value="lowerBody">하체</option>
+	                            		<option value="etc">기타</option>
+	                            	</select>
+	                            	무게<input type="text" id="weight" name="diary_weight" style="width: 60px; margin-left: 30px;" value="${dto.diary_weight}">                        
+	                                
+	                                <textarea class="textBox" style="resize: none;" name="diary_content">${dto.diary_content}</textarea>	                                
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn btn-primary" id="updateBtn" type="button">수정하기</button>
+                        <button class="btn btn-primary" id="deleteBtn" type="button">삭제하기</button>
+                        <button class="btn btn-secondary" id="backBtn" type="button">뒤로 가기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 바디 끝 -->
+        <div class="empty"> </div>
+        <!-- 푸터 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="#">이용약관</a></div>
+                <div class="col"><a href="#">개인정보처리방침</a></div>
+                <div class="col"><a href="#">위치정보이용약관</a></div>
+                <div class="col"><a href="#">센터등록요청하기</a></div>
+                <div class="col"><a href="#">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+	    document.getElementById("modifyBtn").onclick = function(){
+			location.href = "/userModify.user";
+		};
+		document.getElementById("diaryBtn").onclick = function() {
+			location.href = "/userDiary.user";
+		};
 
-							<div class="interestBox">
-								<c:choose>
-									<c:when test="${listInterest.size() == 0}">
-										<div>등록된 푸드 프로모션이 없습니다.</div>
-									</c:when>
-									<c:otherwise>
-										<c:forEach items="${list}" var="list">
-											<c:set var="checkInterestL" value="false" />
-											<c:forEach items="${listInterest}" var="interest">
-												<c:if test="${interest.food_seq eq list.food_seq}">
-													<c:set var="checkInterestL" value="true" />
-												</c:if>
-											</c:forEach>
-											<c:if test="${checkInterestL}">
-												<span>${list.food_name}<br></span>
-											</c:if>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</div>
+		$("#updateBtn").on("click", function(){
+			$("#modifyForm").submit();
+		});
+		
+		$("#deleteBtn").on("click", function(){
+			let diary_seq = $("#diary_seq").val();
+			let answer = confirm("삭제하시면 복구가 불가능합니다. 삭제하시겠습니까?");
+			if(answer) {
+				location.href = "/diaryDelete.diary?diary_seq="+diary_seq;
+			}
+		});
+		
+		$("#backBtn").on("click", function(){
+			location.href = "/toDiarypage.diary";
+		});
+		
+		
 
-							<div class="interestBox">
-								<c:choose>
-									<c:when test="${ugi_dto.size() == 0}">
-										<div>등록된 헬스장 프로모션이 없습니다.</div>
-									</c:when>
-									<c:otherwise>
-										<c:forEach items="${gym_dto}" var="gym_dto">
-											<c:set var="checkInterest" value="false" />
-											<c:forEach items="${ugi_dto}" var="interestG">
-												<c:if test="${interestG.gym_seq eq gym_dto.gym_seq}">
-													<c:set var="checkInterest" value="true" />
-												</c:if>
-											</c:forEach>
-											<c:if test="${checkInterest}">
-												<span>${gym_dto.gym_name}<br></span>
-											</c:if>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</div>
-						</div>
-						<!-- 즐겨찾기 끝 -->
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-	</div>
-	<script>
-    	document.getElementById("modifyBtn").onclick = function(){
-    		location.href = "/userModify.user";
-    	}
-    	document.getElementById("diaryBtn").onclick = function(){
-    		location.href = "/userDiary.user";
-    	}
-    </script>
+	</script>
 </body>
 </html>

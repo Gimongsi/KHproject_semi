@@ -365,11 +365,11 @@ translateY(
                     <div class="row inner-container-right">
                         <div class="col-7">
                             <div class="inner-contents-left">
-                            
                                 <div>
                                     <c:forEach items="${list}" var="dto">
-                                    	<div>${dto.diary_seq}. ${dto.getDiary_part()}</div>
-                                    	<div>${dto.getDiary_content()}</div>
+                                    	<div style="margin-bottom: 10px;">
+	                                    	<a href="/diaryModify.diary?diary_seq=${dto.diary_seq}" style="text-decoration: none; color: black;">${dto.diary_seq}.${dto.diary_part}<br>${dto.diary_content}</a>	                                    	
+                                    	</div>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -387,8 +387,6 @@ translateY(
                     </div>
                     <div class="d-flex justify-content-end mt-4 gap-3">
                         <button class="btn btn-primary" id="btnWrite" type="button">일기 쓰기</button>
-                        <button class="btn btn-primary" type="button">일기 수정</button>
-                        <button class="btn btn-secondary" type="button">일기 삭제</button>
                     </div>
                 </div>
             </div>
@@ -427,13 +425,14 @@ translateY(
 	<script>
     document.getElementById("modifyBtn").onclick = function(){
 		location.href = "/userModify.user";
-	}
+	};
 	document.getElementById("diaryBtn").onclick = function(){
 		location.href = "/userDiary.user";
-	}
+	};
 	document.getElementById("btnWrite").onclick = function(){
 		location.href = "/userDiaryWrite.user";
-	}
+	};
+	
     </script>
 </body>
 </html>

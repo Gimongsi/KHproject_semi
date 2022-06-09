@@ -358,58 +358,70 @@ h2 {
 		<div class="pertList">
 			<div class="row">
 				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">팔</p>
+					<a href="/toPartPage.part?part=arm" style="text-decoration: none; color: black;">
+						<div class="card" style="width: 18rem;">
+							<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
+							<div class="card-body">
+								<p class="card-text d-flex justify-content-center">팔</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/어깨근육.jpg" class="card-img-top" id="sholder"
-							alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">어깨</p>
+					<a href="/toPartPage.part?part=shoulder" style="text-decoration: none; color: black;">
+						<div class="card" style="width: 18rem;">
+							<img src="/imgs/어깨근육.jpg" class="card-img-top" id="shoulder"
+								alt="...">
+							<div class="card-body">
+								<p class="card-text d-flex justify-content-center">어깨</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">가슴</p>
+					<a href="/toPartPage.part?part=chest" style="text-decoration: none; color: black;">
+						<div class="card" style="width: 18rem;">
+							<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
+							<div class="card-body">
+								<p class="card-text d-flex justify-content-center">가슴</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 			<div class="empty"></div>
 			<div class="row">
 				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh"
-							alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">허벅지</p>
+					<a href="/toPartPage.part?part=thigh" style="text-decoration: none; color: black;">
+						<div class="card" style="width: 18rem;">
+							<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh"
+								alt="...">
+							<div class="card-body">
+								<p class="card-text d-flex justify-content-center">허벅지</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt"
-							alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">엉덩이</p>
+					<a href="/toPartPage.part?part=butt" style="text-decoration: none; color: black;">
+						<div class="card" style="width: 18rem;">
+							<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt"
+								alt="...">
+							<div class="card-body">
+								<p class="card-text d-flex justify-content-center">엉덩이</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<div class="card" style="width: 18rem;">
-						<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
-						<div class="card-body">
-							<p class="card-text d-flex justify-content-center">복근</p>
+					<a href="/toPartPage.part?part=abs" style="text-decoration: none; color: black;">
+						<div class="card" style="width: 18rem;">
+							<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
+							<div class="card-body">
+								<p class="card-text d-flex justify-content-center">복근</p>
+							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -456,7 +468,7 @@ h2 {
 		$("#arm").on("click",function(){ //팔운동 페이지 요청
 			location.href="/";
 		})
-		$("#sholder").on("click", function(){ //어깨운동 페이지 요청
+		$("#shoulder").on("click", function(){ //어깨운동 페이지 요청
 			location.href="/";
 		})
 		$("#chest").on("click", function(){ //가슴 운동 페이지 요청
