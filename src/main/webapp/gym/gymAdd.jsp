@@ -640,6 +640,74 @@ input::placeholder, textarea::placeholder {
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
                         <div class="row">
                             <%-- <div class="col-12">
+=======
+			<form id="addForm" action="/addProc.gym" method="post"
+				enctype="multipart/form-data">
+				<div class="row detailHeader">
+					<div class="detailPhoto col-12 col-md-6">
+						<div class="row detailPhotoWrap">
+							<div class="col-12 detailPhoto d-flex justify-content-end">
+								<img src="" id="gym_src_mainImg">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 d-flex justify-content-center">
+								<%-- 사진 등록 --%>
+								<label class="btn btnPics" for="gym_src_main"
+									style="width: 100%;">사진 등록</label> <input class="form-control"
+									type="file" id="gym_src_main" name="gym_src_main"
+									style="display: none;">
+							</div>
+						</div>
+					</div>
+					<div class="row d-md-none" style="margin-top: 50px;"></div>
+					<div class="col-1"></div>
+					<div class="col-12 col-md-5">
+						<div class="row">
+							<div class="col-8 gymTitle align-items-center">
+								<input class="gym_input" type="text" id="gym_name"
+									name="gym_name" style="font-size: large;" placeholder="상호명 입력">
+							</div>
+							<div class="col d-flex justify-content-end">
+								<span class="material-symbols-outlined"
+									style="padding-right: 5px;">mood</span> <span
+									class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
+							</div>
+							<hr
+								style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+							<div class="row">
+								<div class="col d-flex justify-content-end">
+									<input class="gym_input" type="text" id="gym_postcode"
+										name="gym_postcode" style="width: 100px;" placeholder="우편번호"
+										readonly>
+									<button class="btn btnAddr" type="button"
+										onclick="daumPostcode()">주소찾기</button>
+								</div>
+								<div class="col-12">
+									<input class="gym_input" type="text" id="gym_roadAddr"
+										name="gym_roadAddr" placeholder="도로명주소" readonly> <input
+										class="gym_input" type="text" id="gym_detailAddr"
+										name="gym_detailAddr" placeholder="상세주소 입력"> <input
+										class="gym_input" type="text" id="gym_extraAddr"
+										name="gym_extraAddr" placeholder="표시될 주소" readonly>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-1 d-flex align-items-center">
+									<span class="material-symbols-outlined"> call <!-- android_dialer 갑자기 안먹힘 -->
+									</span>
+								</div>
+								<div class="col d-flex align-items-center">
+									<input class="gym_input" type="text" id="gym_phone"
+										name="gym_phone" placeholder="전화번호 입력">
+									<p></p>
+								</div>
+							</div>
+							<hr
+								style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+							<div class="row">
+								<%-- <div class="col-12">
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
@@ -650,6 +718,7 @@ input::placeholder, textarea::placeholder {
                                     <option value="12month">12개월</option>
                                 </select>
                             </div> --%>
+<<<<<<< HEAD
                             <div class="col">
                              <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수(숫자만) 입력">
                              <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격(숫자만) 입력">
@@ -670,6 +739,20 @@ input::placeholder, textarea::placeholder {
 					<div class="row">
 						<div class="col">
 							<h4 class="gymContentsText">공지사항 및 소개</h4>
+=======
+								<div class="col">
+									<input class="gym_input" type="text" id="gym_month"
+										name="gym_month" style="text-align: center;"
+										placeholder="개월수(숫자만) 입력"> <input class="gym_input"
+										type="text" id="gym_price" name="gym_price"
+										style="text-align: center;" placeholder="가격(숫자만) 입력">
+								</div>
+							</div>
+							<div class="empty"></div>
+							<div class="col d-flex justify-content-center">
+								<button class="btn btnBuy d-none" type="button">가격 등록</button>
+							</div>
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 						</div>
 					</div>
 					<div class="row">
@@ -680,12 +763,24 @@ input::placeholder, textarea::placeholder {
 					</div>
 					<div class="empty"></div>
 				</div>
+<<<<<<< HEAD
 				<hr
 					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
 				<div class="noticeTime">
 					<div class="row">
 						<div class="col">
 							<h4 class="gymContentsText">운영시간</h4>
+=======
+				<!-- 상세페이지 헤더 끝-->
+				<div class="row detailBody">
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+					<div class="notice">
+						<div class="row">
+							<div class="col">
+								<h4 class="gymContentsText">공지사항 및 소개</h4>
+							</div>
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 						</div>
 					</div>
 					<div class="row">
@@ -694,6 +789,7 @@ input::placeholder, textarea::placeholder {
 								placeholder="예)AM 08:00 ~ PM 22:00 연중무휴"></textarea>
 						</div>
 					</div>
+<<<<<<< HEAD
 					<div class="empty"></div>
 				</div>
 				<hr
@@ -702,6 +798,64 @@ input::placeholder, textarea::placeholder {
 					<div class="row">
 						<div class="col">
 							<h4 class="gymContentsText">운영 프로그램</h4>
+=======
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="noticeInfo">
+						<div class="row">
+							<div class="col">
+								<h4 class="gymContentsText">운영 프로그램</h4>
+								<div class="row">
+									<div class="col content">
+										<textarea id="gym_program" name="gym_program"
+											placeholder="예)무료
+O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="empty"></div>
+					</div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="detailPic">
+						<div class="row">
+							<div class="col-12">
+								<h4 class="gymContentsText">운동시설 사진</h4>
+							</div>
+						</div>
+
+						<%-- 보류 --%>
+						<div class="d-none" id='image_preview'>
+							<input type='file' id='btnAtt' name="gym_src" multiple='multiple'
+								multiple>
+							<div id='att_zone'></div>
+						</div>
+						<%-- 보류 --%>
+
+						<div class="row content_img">
+							<div class="col justify-content-center"
+								style="text-align: center;">
+								<div>
+									<img id="gym_src_img" src="">
+								</div>
+								<div>
+									<label class="btn btnDtailPics" for="gym_src">상세사진 등록</label> <input
+										class="form-control" type="file" id="gym_src" name="gym_src"
+										style="display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr
+						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="noticeMap">
+						<div class="row">
+							<div class="col">
+								<h4 class="gymContentsText">운동시설 위치</h4>
+							</div>
+							<!-- 카카오 맵 -->
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 							<div class="row">
 								<div class="col content">
 									<textarea class="gym_textarea" name="gym_program"

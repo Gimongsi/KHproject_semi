@@ -8,12 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.activation.DataContentHandler;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.eclipse.jdt.internal.compiler.ast.NullAnnotationMatching;
 
 import com.dangpert.dto.UserDTO;
 import com.dangpert.dto.UserDataDTO;
@@ -32,7 +30,6 @@ private BasicDataSource bds;
 		}
 		
 	}
-	
 	
 	public int insert(UserDTO dto) throws Exception { // 회원가입
 		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default, null)";

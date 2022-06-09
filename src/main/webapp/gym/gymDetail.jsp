@@ -476,6 +476,7 @@
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">당퍼트 프로모션 가격</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
+<<<<<<< HEAD
                             	${dto.gym_month}개월&nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; &nbsp; &nbsp; &nbsp;${dto.gym_price}원
                                <%-- <select class="form-select" name="option">
                                 	<c:if test="${empty gymPriceDTO}">
@@ -488,6 +489,18 @@
                                     	</c:forEach>
                                     </c:if>
                                 </select> --%>
+=======
+                                <select class="form-select" name="option">
+                                	<c:if test="${empty dto.gym_month}">
+                                		<option style="text-align: center;" value="3">준비 중 입니다.</option>
+                                	</c:if>
+                                	<c:if test="${not empty dto.gym_month}">
+                                		<%-- <c:forEach items="${dto}" var="dto"> --%>
+                                   		<option style="text-align: center;" value="1" selected>${dto.gym_month}개월&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;${dto.gym_price}원</option>
+                                    	<%-- </c:forEach> --%>
+                                    </c:if>
+                                </select>
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
                             </div>
                         </div>
                         <div class="empty"></div>
@@ -643,6 +656,7 @@
 		$(".btnModify").on("click", function() {
 			location.href = "/modify.gym?gym_seq=${dto.gym_seq}";
 		})
+<<<<<<< HEAD
 		
 		autosize($("textArea"));
 		
@@ -668,6 +682,9 @@
 			})
 		})
 		
+=======
+
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 		/* 카카오 맵 */
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -715,7 +732,10 @@
 								map.setCenter(coords);
 							}
 						});
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 	</script>
 </body>
 </html>

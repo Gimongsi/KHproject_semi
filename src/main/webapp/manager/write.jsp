@@ -116,6 +116,7 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
+
 20
 %
 {
