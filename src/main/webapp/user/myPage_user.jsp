@@ -409,7 +409,7 @@ translateY
 				<div class="col-6">
 					<div class="inner-container-right">
 						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 kg 남았습니다.</h5>
+							<h5>목표 몸무게까지 ${data_dto.final_weight - data_dto.weight}kg 남았습니다.</h5>
 						</div>
 						<div>
 							<button type="button" class="btn btn-sm btn-outline-secondary"
@@ -421,7 +421,6 @@ translateY
 								disabled>마지막 기록일</button>
 							2022년 00월 00일
 						</div>
-
 						<!-- 즐겨찾기 목록 시작 -->
 						<div class="interestHead">즐겨찾기 List</div>
 						<div class="bookmark">
@@ -445,7 +444,6 @@ translateY
 									</c:otherwise>
 								</c:choose>
 							</div>
-
 							<div class="interestBox">
 								<c:choose>
 									<c:when test="${listInterest.size() == 0}">

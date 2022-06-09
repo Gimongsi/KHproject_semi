@@ -179,35 +179,33 @@ public class UserController extends HttpServlet {
 			response.sendRedirect("/main.jsp");
 
 		} else if (uri.equals("/toMypage.user")) { // 마이 페이지 요청
-			HttpSession session = request.getSession();
-			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
-			UserDAO dao = new UserDAO();
-			FoodDAO dao2 = new FoodDAO();
-			GymDAO dao3 = new GymDAO(); 
-			
-			try {
-				
-				ArrayList<UserfoodInterestDTO> listInterest = dao2.interestFood(dto.getUser_seq());
-				ArrayList<FoodDTO> listPromo = dao2.selectPromo();
-				ArrayList<FoodDTO> list = dao2.selectHellin();
-				ArrayList<UsergymInterestDTO> ugi_dto = dao3.interestGym(dto.getUser_seq());
-				ArrayList<GymInfoDTO> gym_dto = dao3.selectAllGym();
-				
-				request.setAttribute("listInterest", listInterest);
-				request.setAttribute("listPromo", listPromo);
-				request.setAttribute("list", list);
-				request.setAttribute("ugi_dto", ugi_dto);
-				request.setAttribute("gym_dto", gym_dto);
-	
-				
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-				
-			request.getRequestDispatcher("/user/myPage_user.jsp").forward(request, response);
-			
-
-		} else if (uri.equals("/userDiaryWrite.user")) { // 일기쓰기 페이지 요청
+	         HttpSession session = request.getSession();
+	         UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+	         UserDAO dao = new UserDAO();
+	         FoodDAO dao2 = new FoodDAO();
+	         GymDAO dao3 = new GymDAO(); 
+	         
+	         try {
+	            
+	            ArrayList<UserfoodInterestDTO> listInterest = dao2.interestFood(dto.getUser_seq());
+	            ArrayList<FoodDTO> listPromo = dao2.selectPromo();
+	            ArrayList<FoodDTO> list = dao2.selectHellin();
+	            ArrayList<UsergymInterestDTO> ugi_dto = dao3.interestGym(dto.getUser_seq());
+	            ArrayList<GymInfoDTO> gym_dto = dao3.selectAllGym();
+	            
+	            request.setAttribute("listInterest", listInterest);
+	            request.setAttribute("listPromo", listPromo);
+	            request.setAttribute("list", list);
+	            request.setAttribute("ugi_dto", ugi_dto);
+	            request.setAttribute("gym_dto", gym_dto);
+	   
+	            
+	         }catch(Exception e) {
+	            e.printStackTrace();
+	         }
+	            
+	         request.getRequestDispatcher("/user/myPage_user.jsp").forward(request, response);
+		} else if (uri.equals("/userDiaryWrite.user")) {	// 일기쓰기 페이지 요청
 			response.sendRedirect("/user/myPage_diary_write.jsp");
 
 		} else if (uri.equals("/search.user")) { // manager 유저 검색

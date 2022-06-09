@@ -405,17 +405,18 @@ table {
 		<div class="empty"></div>
 		<div class="row">
 			<div class="col-2 d-flex justify-content-center">
-				<button type="button" class="btnSubmit" id="btnSubmit">등록</button>
+				<c:if test="${loginSession.user_auth eq 'manager'}">
+					<button type="button" class="btnSubmit" id="btnSubmit">등록</button>
+				</c:if>
 			</div>
 			<div class="col-10 d-flex justify-content-end">
 				<div class="dropdown">
+				
 					<button class="btn btn-secondary dropdown-toggle" type="button"
 						id="dropdownMenuButton1" data-bs-toggle="dropdown"
 						aria-expanded="false">근육별 목록 선택</button>
-
-
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="#">팔</a></li>
+						<li><a class="dropdown-item" value="arm" href="#">팔</a></li>
 						<li><a class="dropdown-item" href="#">어깨</a></li>
 						<li><a class="dropdown-item" href="#">승모근</a></li>
 						<li><a class="dropdown-item" href="#">가슴</a></li>
@@ -426,6 +427,20 @@ table {
 						<li><a class="dropdown-item" href="#">유산소</a></li>
 						<li><a class="dropdown-item" href="#">전체</a></li>
 					</ul>
+					<select name="part" style="margin-right: 20px;">
+						<option value="list" selected>근육별 목록 선택</option>
+	                	<option value="arm">팔</option>
+	                	<option value="shoulder">어깨</option>
+	                	<option value="trap">승모근</option>
+	                	<option value="chest">가슴</option>
+	                	<option value="abs">배</option>
+						<option value="back">등</option>
+	                  	<option value="butt">엉덩이</option>
+	                    <option value="thigh">허벅지</option>
+	                    <option value="calves">종아리</option>
+	                    <option value="cardio">유산소</option>
+	                    <option value="all">전체</option>
+	                </select>
 				</div>
 
 			</div>
@@ -506,5 +521,13 @@ table {
 		<!-- footer 끝 -->
 
 	</div>
+	<script>
+		$("#btnSubmit").on("click", function(){
+			location.href="/writePart.part";
+		})
+	
+	
+	
+	</script>
 </body>
 </html>
