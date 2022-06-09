@@ -12,6 +12,8 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<!-- text area auto size -->        
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> 
 <!-- 구글 아이콘 -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -117,47 +119,25 @@
 }
 
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-
-
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -220,8 +200,7 @@ translateY
 	font-weight: 600;
 }
 
-.btnAdd, .btnMainPic, .btnPics, .btnBuy, .btnCancle, .btnAddr,
-	.btnDtailPics {
+.btnAdd, .btnMainPic, .btnPics, .btnBuy, .btnCancle, .btnAddr, .btnDtailPics {
 	background-color: #73b1a1;
 	border: 1px solid #F0FFC2;
 	border-radius: 0.25rem;
@@ -234,8 +213,7 @@ translateY
 	margin: 5px;
 }
 
-.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover,
-	.btnCancle:hover, .btnAddr:hover, .btnDtailPics:hover {
+.btnAdd:hover, .btnMainPic:hover, .btnPics:hover, .btnBuy:hover, .btnCancle:hover, .btnAddr:hover, .btnDtailPics:hover {
 	background-color: #F0FFC2;
 	border: 1px solid #73b1a1;
 	color: #73b1a1;
@@ -317,17 +295,7 @@ input::placeholder, textarea::placeholder {
 	width: 100%;
 }
 
-#gym_comment {
-	width: 70%;
-	height: 30rem;
-	border: 1px solid #709c91;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-}
-
-#gym_time {
+	.gym_textarea {
 	width: 70%;
 	height: 4rem;
 	border: 1px solid #709c91;
@@ -335,31 +303,21 @@ input::placeholder, textarea::placeholder {
 	resize: none;
 	font-weight: 600;
 	text-align: center;
-}
+	}
 
-#gym_program {
-	width: 70%;
-	height: 10rem;
-	border: 1px solid #709c91;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-}
-
-#gym_comment:focus, #gym_time:focus, #gym_program:focus {
+	.gym_textarea:focus {
 	outline: 1px solid #709c91;
-}
+	}
 
-#images_container {
+#images_container{
 	width: 100%;
 }
 
-#images_container img {
-	width: 100%;
+#images_container img{
+	width : 100%;
 }
 
-.detailPic {
+.detailPic{
 	margin-bottom: 80px;
 }
 
@@ -401,8 +359,7 @@ input::placeholder, textarea::placeholder {
 	<div class="container">
 		<!-- 헤더 -->
 		<c:choose>
-			<c:when
-				test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
+			<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin'}">
 				<div class="row cls_header">
 					<div class="col-3 logoImg">
 						<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -424,13 +381,8 @@ input::placeholder, textarea::placeholder {
 						<button type="button" class="btn dropdownBtn dropdown-toggle"
 							data-bs-toggle="dropdown" aria-expanded="false">고객센터</button>
 						<ul class="dropdown-menu headDropdown">
-							<li><a class="dropdown-item" href="/toInformation.info">자주
-									묻는 질문</a></li>
+							<li><a class="dropdown-item" href="/toInformation.info">자주 묻는 질문</a></li>
 							<li><a class="dropdown-item" href="#">이벤트</a></li>
-							<c:if test="${loginSession.user_auth eq 'manager'}">
-								<li><a class="dropdown-item"
-									href="/modifyList.food?curPage=1">음식 프로로션</a></li>
-							</c:if>
 						</ul>
 					</div>
 				</div>
@@ -452,8 +404,8 @@ input::placeholder, textarea::placeholder {
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
 										<li class="nav-item dropdown"><a
@@ -468,8 +420,7 @@ input::placeholder, textarea::placeholder {
 												<li><a class="dropdown-item" href="#">전체보기</a></li>
 											</ul></li>
 									</ul>
-									<form action="search.gym" method="post"
-										class="d-flex searchForm">
+									<form action="search.gym" method="post" class="d-flex searchForm">
 										<input class="form-control navSearchInput me-2" type="search"
 											placeholder="운동시설 검색" aria-label="Search">
 										<button class="btn btn-outline-light" type="button">Search!</button>
@@ -497,8 +448,7 @@ input::placeholder, textarea::placeholder {
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
-						<a href="/search.user?curPage=1" style="text-decoration: none;">
-							<span>회원 검색</span>
+						<a href="/search.user?curPage=1" style="text-decoration: none;"> <span>회원 검색</span>
 						</a>
 					</div>
 					<div class="col p-0 headMenu d-flex justify-content-center">
@@ -532,8 +482,8 @@ input::placeholder, textarea::placeholder {
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
 										<li class="nav-item dropdown"><a
@@ -548,8 +498,7 @@ input::placeholder, textarea::placeholder {
 												<li><a class="dropdown-item" href="#">전체보기</a></li>
 											</ul></li>
 									</ul>
-									<form action="search.gym" method="post"
-										class="d-flex searchForm">
+									<form action="search.gym" method="post" class="d-flex searchForm">
 										<input class="form-control navSearchInput me-2" type="search"
 											placeholder="운동시설 검색" aria-label="Search">
 										<button class="btn btn-outline-light" type="button">Search!</button>
@@ -605,8 +554,8 @@ input::placeholder, textarea::placeholder {
 									<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 										<li class="nav-item"><a class="nav-link active"
 											aria-current="page" href="#">칼럼</a></li>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.gym">내 주변 운동시설</a></li>
 										<li class="nav-item"><a class="nav-link"
 											href="/list.food">특가 식품</a></li>
 										<li class="nav-item dropdown"><a
@@ -638,72 +587,59 @@ input::placeholder, textarea::placeholder {
 		<!-- 헤더 끝 -->
 		<!-- 타이틀 -->
 		<div class="list-item-wrap">
-			<form id="addForm" action="/addProc.gym" method="post"
-				enctype="multipart/form-data">
-				<div class="row detailHeader">
-					<div class="detailPhoto col-12 col-md-6">
-						<div class="row detailPhotoWrap">
-							<div class="col-12 detailPhoto d-flex justify-content-end">
-								<img src="" id="gym_src_mainImg">
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12 d-flex justify-content-center">
-								<%-- 사진 등록 --%>
-								<label class="btn btnPics" for="gym_src_main"
-									style="width: 100%;">사진 등록</label> <input class="form-control"
-									type="file" id="gym_src_main" name="gym_src_main"
-									style="display: none;">
-							</div>
-						</div>
-					</div>
-					<div class="row d-md-none" style="margin-top: 50px;"></div>
-					<div class="col-1"></div>
-					<div class="col-12 col-md-5">
-						<div class="row">
-							<div class="col-8 gymTitle align-items-center">
-								<input class="gym_input" type="text" id="gym_name"
-									name="gym_name" style="font-size: large;" placeholder="상호명 입력">
-							</div>
-							<div class="col d-flex justify-content-end">
-								<span class="material-symbols-outlined"
-									style="padding-right: 5px;">mood</span> <span
-									class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
-							</div>
-							<hr
-								style="height: 2px; width: 100%; border: none; background-color: #37b192;">
-							<div class="row">
-								<div class="col d-flex justify-content-end">
-									<input class="gym_input" type="text" id="gym_postcode"
-										name="gym_postcode" style="width: 100px;" placeholder="우편번호"
-										readonly>
-									<button class="btn btnAddr" type="button"
-										onclick="daumPostcode()">주소찾기</button>
-								</div>
-								<div class="col-12">
-									<input class="gym_input" type="text" id="gym_roadAddr"
-										name="gym_roadAddr" placeholder="도로명주소" readonly> <input
-										class="gym_input" type="text" id="gym_detailAddr"
-										name="gym_detailAddr" placeholder="상세주소 입력"> <input
-										class="gym_input" type="text" id="gym_extraAddr"
-										name="gym_extraAddr" placeholder="표시될 주소" readonly>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-1 d-flex align-items-center">
-									<span class="material-symbols-outlined"> call <!-- android_dialer 갑자기 안먹힘 -->
-									</span>
-								</div>
-								<div class="col d-flex align-items-center">
-									<input class="gym_input" type="text" id="gym_phone"
-										name="gym_phone" placeholder="전화번호 입력">
-									<p></p>
-								</div>
-							</div>
-							<hr
-								style="height: 2px; width: 100%; border: none; background-color: #37b192;">
-							<div class="row">
-								<%-- <div class="col-12">
+			<form id="addForm" action="/addProc.gym" method="post" enctype="multipart/form-data">
+			<div class="row detailHeader">
+                <div class="detailPhoto col-12 col-md-6">
+                    <div class="row detailPhotoWrap">
+                        <div class="col-12 detailPhoto d-flex justify-content-end">
+                        	<img src="" id="gym_src_mainImg">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                        <%-- 사진 등록 --%>
+                        	<label class="btn btnPics" for="gym_src_main" style="width:100%;">사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src_main" name="gym_src_main" 
+                            style="display: none;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-md-none" style="margin-top: 50px;"></div>
+                <div class="col-1"></div>
+                <div class="col-12 col-md-5">
+                    <div class="row">
+                        <div class="col-8 gymTitle align-items-center">
+                            <input class="gym_input" type="text" id="gym_name" name="gym_name" style="font-size: large;" placeholder="상호명 입력">
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <span class="material-symbols-outlined" style="padding-right: 5px;">mood</span>
+                            <span class="material-symbols-outlined" style="padding-right: 5px;">wifi</span>
+                        </div>
+                        <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
+                        <div class="row">
+                            <div class="col d-flex justify-content-end">
+                                <input class="gym_input" type="text" id="gym_postcode" name="gym_postcode" style="width: 100px;" placeholder="우편번호" readonly>
+                                <button class="btn btnAddr" type="button" onclick="daumPostcode()">주소찾기</button>
+                            </div>
+                            <div class="col-12">
+                                <input class="gym_input" type="text" id="gym_roadAddr" name="gym_roadAddr" placeholder="도로명주소" readonly>
+                                <input class="gym_input" type="text" id="gym_detailAddr" name="gym_detailAddr" placeholder="상세주소 입력">
+                                <input class="gym_input" type="text" id="gym_extraAddr" name="gym_extraAddr" placeholder="표시될 주소" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1 d-flex align-items-center">
+                                <span class="material-symbols-outlined">
+                                    call <!-- android_dialer 갑자기 안먹힘 -->
+                                </span>
+                            </div>
+                            <div class="col d-flex align-items-center">
+                                <input class="gym_input" type="text" id="gym_phone" name="gym_phone" placeholder="전화번호 입력"><p></p>
+                            </div>
+                        </div>
+                        <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
+                        <div class="row">
+                            <%-- <div class="col-12">
                                 <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
@@ -714,122 +650,112 @@ input::placeholder, textarea::placeholder {
                                     <option value="12month">12개월</option>
                                 </select>
                             </div> --%>
-								<div class="col">
-									<input class="gym_input" type="text" id="gym_month"
-										name="gym_month" style="text-align: center;"
-										placeholder="개월수(숫자만) 입력"> <input class="gym_input"
-										type="text" id="gym_price" name="gym_price"
-										style="text-align: center;" placeholder="가격(숫자만) 입력">
-								</div>
-							</div>
-							<div class="empty"></div>
-							<div class="col d-flex justify-content-center">
-								<button class="btn btnBuy d-none" type="button">가격 등록</button>
-							</div>
+                            <div class="col">
+                             <input class="gym_input" type="text" id="gym_month" name="gym_month" style="text-align: center;" placeholder="개월수(숫자만) 입력">
+                             <input class="gym_input" type="text" id="gym_price" name="gym_price" style="text-align: center;" placeholder="가격(숫자만) 입력">
+                        	</div>
+                        </div>
+                        <div class="empty"></div>
+                        <div class="col d-flex justify-content-center">
+                            <button class="btn btnBuy d-none" type="button">가격 등록</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<!-- 상세페이지 헤더 끝-->
+			<div class="row detailBody">
+				<hr
+					style="height: 2px; width: 100%; border: none; background-color: #37b192;">
+				<div class="notice">
+					<div class="row">
+						<div class="col">
+							<h4 class="gymContentsText">공지사항 및 소개</h4>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col content">
+							<textarea class="gym_textarea" name="gym_comment"
+								placeholder="공백 포함 500글자 이내로 입력하세요."></textarea>
+						</div>
+					</div>
+					<div class="empty"></div>
 				</div>
-				<!-- 상세페이지 헤더 끝-->
-				<div class="row detailBody">
-					<hr
-						style="height: 2px; width: 100%; border: none; background-color: #37b192;">
-					<div class="notice">
-						<div class="row">
-							<div class="col">
-								<h4 class="gymContentsText">공지사항 및 소개</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col content">
-								<textarea id="gym_comment" name="gym_comment"
-									placeholder="공백 포함 500글자 이내로 입력하세요."></textarea>
-							</div>
-						</div>
-						<div class="empty"></div>
-					</div>
-					<hr
-						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-					<div class="noticeTime">
-						<div class="row">
-							<div class="col">
-								<h4 class="gymContentsText">운영시간</h4>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col content">
-								<textarea id="gym_time" name="gym_time"
-									placeholder="예)AM 08:00 ~ PM 22:00 연중무휴"></textarea>
-							</div>
-						</div>
-						<div class="empty"></div>
-					</div>
-					<hr
-						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-					<div class="noticeInfo">
-						<div class="row">
-							<div class="col">
-								<h4 class="gymContentsText">운영 프로그램</h4>
-								<div class="row">
-									<div class="col content">
-										<textarea id="gym_program" name="gym_program"
-											placeholder="예)무료
-O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="empty"></div>
-					</div>
-					<hr
-						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-					<div class="detailPic">
-						<div class="row">
-							<div class="col-12">
-								<h4 class="gymContentsText">운동시설 사진</h4>
-							</div>
-						</div>
-
-						<%-- 보류 --%>
-						<div class="d-none" id='image_preview'>
-							<input type='file' id='btnAtt' name="gym_src" multiple='multiple'
-								multiple>
-							<div id='att_zone'></div>
-						</div>
-						<%-- 보류 --%>
-
-						<div class="row content_img">
-							<div class="col justify-content-center"
-								style="text-align: center;">
-								<div>
-									<img id="gym_src_img" src="">
-								</div>
-								<div>
-									<label class="btn btnDtailPics" for="gym_src">상세사진 등록</label> <input
-										class="form-control" type="file" id="gym_src" name="gym_src"
-										style="display: none;">
-								</div>
-							</div>
+				<hr
+					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+				<div class="noticeTime">
+					<div class="row">
+						<div class="col">
+							<h4 class="gymContentsText">운영시간</h4>
 						</div>
 					</div>
-					<hr
-						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
-					<div class="noticeMap">
-						<div class="row">
-							<div class="col">
-								<h4 class="gymContentsText">운동시설 위치</h4>
-							</div>
-							<!-- 카카오 맵 -->
+					<div class="row">
+						<div class="col content">
+							<textarea class="gym_textarea" name="gym_time"
+								placeholder="예)AM 08:00 ~ PM 22:00 연중무휴"></textarea>
+						</div>
+					</div>
+					<div class="empty"></div>
+				</div>
+				<hr
+					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+				<div class="noticeInfo">
+					<div class="row">
+						<div class="col">
+							<h4 class="gymContentsText">운영 프로그램</h4>
 							<div class="row">
-								<div class="col content" id="map"
-									style="width: 500px; height: 400px;"></div>
+								<div class="col content">
+									<textarea class="gym_textarea" name="gym_program"
+										placeholder="예)무료
+O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
+								</div>
 							</div>
-							<!-- 카카오 맵 끝 -->
 						</div>
-						<div class="empty"></div>
 					</div>
-					<hr
-						style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+					<div class="empty"></div>
 				</div>
+				<hr
+					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+				<div class="detailPic">
+					<div class="row">
+						<div class="col-12">
+							<h4 class="gymContentsText">운동시설 사진</h4>
+						</div>
+					</div>
+					
+					<%-- 보류 --%>
+					<div class="d-none" id='image_preview'>
+    						<input type='file' id='btnAtt' name="gym_src" multiple='multiple' multiple>
+    						<div id='att_zone'></div>
+  					</div>
+  					<%-- 보류 --%>
+  					
+					<div class="row content_img">
+						<div class="col justify-content-center" style="text-align:center;">
+							<div><img id="gym_src_img" src=""></div>
+							<div><label class="btn btnDtailPics" for="gym_src">상세사진 등록</label>
+                            <input class="form-control" type="file" id="gym_src" name="gym_src" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+				<hr
+					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+				<div class="noticeMap">
+					<div class="row">
+						<div class="col">
+							<h4 class="gymContentsText">운동시설 위치</h4>
+						</div>
+						<!-- 카카오 맵 -->
+						<div class="row">
+							<div class="col content" id="map"
+								style="width: 500px; height: 400px;"></div>
+						</div>
+						<!-- 카카오 맵 끝 -->
+					</div>
+					<div class="empty"></div>
+				</div>
+				<hr
+					style="height: 2px; width: 100%; border: none; background-color: #37b192; text-align: center; margin: auto;">
+			</div>
 			</form>
 			<div class="row">
 				<div class="col-12 d-flex justify-content-end">
@@ -879,6 +805,8 @@ O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)"></textarea>
 	$(".btnCancle").on("click", function(){
     	location.href = "/list.gym";
 	})
+	
+	autosize($("textArea"));
 	
 	$(".btnAdd").on("click", function(){
 		let regexPrice = /[0-9]/;

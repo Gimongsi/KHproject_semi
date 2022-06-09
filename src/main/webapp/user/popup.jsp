@@ -48,35 +48,21 @@
 			<form action="/compare.user" method="post" id="compareForm">
 				<div class="row m-2">
 					<div>
-						<input type="text" class="d-none" name="compareUser"
-							value="${user_id}">
+						<input type="text" class="d-none" name="compareUser" value="${user_id}">
 					</div>
 					<div class="col-4">
 						<span>인증 번호 입력 : </span>
 					</div>
-					<div class="col-6" id="compareInput">
+					<div class="col-6">
 						<input type="text" class="form-control" id="compare"
 							name="compare">
 					</div>
-					<c:choose>
-						<c:when test="${compareNum eq null}">
-							<div class="col-6" id="compareBtnbox">
-								<button type="button" id="sendcompareBtn"
-									class="btn btn-primary">인증번호 받기</button>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="col-2" id="compareBtnbox">
-								<button type="button" id="compareBtn"
-									class="btn btn-primary">확인</button>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					<div class="col-2">
+						<button type="button" id="compareBtn" class="btn btn-primary">확인</button>
+					</div>
 				</div>
 				<div class="row m-2 d-none" id="okMessage">
-					<div class="col-12">
-						<span>인증이 완료되었습니다.</span>
-					</div>
+					<div class="col-12"><span>인증이 완료되었습니다.</span></div>
 				</div>
 			</form>
 
@@ -93,11 +79,6 @@
 
 
 	<script>
-	
-		$("#sendcompareBtn").on("click", function(e){
-			$("#compareForm").submit();
-		});
-	
 	
 		let useBtn = document.getElementById("useBtn");
 		$("#compareBtn").on("click",function(){

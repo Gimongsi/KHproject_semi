@@ -58,6 +58,15 @@
 }
 
 @font-face {
+	font-family: 'SuncheonB';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	src:
 		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
@@ -65,6 +74,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -75,6 +85,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -84,7 +95,6 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
-	text-align: center;
 }
 
 .cls_header a {
@@ -112,8 +122,10 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
+	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -123,11 +135,13 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
+
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 50%;
-	height: 50%;
+	width: 100%;
+	height: 100%;
 }
+
 /* 로고 효과 */
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
@@ -148,16 +162,43 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
+
+
 %
 {
 transform
+
+
+
+
 :
+
+
+
+
 translateY
+
+
 (
+
+
+
+
 -20px
+
+
+
+
 )
+
+
+
+
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -200,10 +241,11 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 50px;
+	height: 20px;
 }
 
 .empty2 {
@@ -298,7 +340,8 @@ translateY
 </style>
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -359,7 +402,8 @@ translateY
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -381,10 +425,21 @@ translateY
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -409,9 +464,6 @@ translateY
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-
-		<!-- 헤더 끝 -->
-		<div class="empty"></div>
 		<form action="/signup.user" id="joinForm">
 			<div
 				class="row cls_body d-flex align-items-center justify-content-center">
@@ -423,11 +475,11 @@ translateY
 				</div>
 				<div class="empty"></div>
 				<div class="row d-flex align-items-center justify-content-center">
-					<div class="col-8 d-flex align-items-center justify-content-center">
+					<div class="col-9 d-flex align-items-center justify-content-center">
 						<input type="text" class="form-control" id="user_id"
 							name="user_id" placeholder="이메일" readonly>
 					</div>
-					<div class="col-4">
+					<div class="col-3">
 						<button type="button" class="btn btnAdd overBtn">중복확인</button>
 					</div>
 				</div>

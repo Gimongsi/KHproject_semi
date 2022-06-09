@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,8 +121,7 @@ keyframes waviy { 0%, 40%, 100% {
 {
 transform
 :
-translateY
-(
+translateY(
 -20px
 )
 }
@@ -176,8 +176,8 @@ translateY
 }
 /* 게시글 스타일 영역 */
 .title {
-	border-bottom: 2px solid grey;
-	width: 250px;
+	padding: 10px;
+	text-align: center;
 }
 
 #content {
@@ -251,7 +251,8 @@ textarea {
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -311,6 +312,10 @@ textarea {
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -331,10 +336,21 @@ textarea {
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -359,41 +375,33 @@ textarea {
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-	</div>
 
-	<!-- FAQ 보기 -->
-	<div class="cls_body">
-		<div class="d-flex justify-content-center">
-			<div class="title d-flex justify-content-center">
-				<h3>FAQ</h3>
-			</div>
+		<!-- FAQ 보기 -->
+		<div class="title">
+			<h3>FAQ</h3>
 		</div>
-	</div>
-	<form id="formModify" action="/modify.info" method="post">
-		<div class="container">
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>제목</h4>
+		<form id="formModify" action="/modify.info" method="post">
+			<div class="container">
+				<div class="row">
+					<div class="col-2 d-flex justify-content-center align-items-center">
+						<h4>제목</h4>
+					</div>
+					<div class="col-10 p-2">
+						<input type="text" id="qna_seq" class="form-control d-none" name="qna_seq" value="${dto.getQna_seq()}">
+						<input type="text" id="qna_title" class="form-control" name="qna_title" value="${dto.getQna_title()}" readonly>
+					</div>
 				</div>
-				<div class="col-10 p-2">
-					<input type="text" id="qna_seq" class="form-control d-none"
-						name="qna_seq" value="${dto.getQna_seq()}"> <input
-						type="text" id="qna_title" class="form-control" name="qna_title"
-						value="${dto.getQna_title()}" readonly>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>내용</h4>
-				</div>
-				<div class="col-10 p-2">
-					<textarea id="content" class="form-control" id="content"
-						name="qna_content" readonly>${dto.getQna_content()}</textarea>
+				<div class="row">
+					<div class="col-2 d-flex justify-content-center align-items-center">
+						<h4>내용</h4>
+					</div>
+					<div class="col-10 p-2">
+						<textarea id="content" class="form-control" id="content"
+							name="qna_content" readonly>${dto.getQna_content()}</textarea>
+					</div>
 				</div>
 			</div>
-		</div>
-	</form>
-	</div>
+		</form>
 
 	<!-- FAQ 보기 끝-->
 	<div class="boxBtn">
@@ -460,7 +468,7 @@ textarea {
 		</div>
 		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 	</div>
-	</div>
 	<!-- footer 끝 -->
+	</div>
 </body>
 </html>
