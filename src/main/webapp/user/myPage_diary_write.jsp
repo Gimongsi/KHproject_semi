@@ -439,11 +439,18 @@ translateY
     </div>
     <script>
 	    document.getElementById("modifyBtn").onclick = function(){
-
 			location.href = "/userModify.user";
 		}
 		document.getElementById("diaryBtn").onclick = function() {
 			location.href = "/userDiary.user";
+		}
+
+		$("#writeBtn").on("click", function(){
+			$("#partForm").submit();
+		})
+		
+		document.getElementById("backBtn").onclick = function(){
+			location.href = "/toDiarypage.diary";
 		}
 
 	</script>

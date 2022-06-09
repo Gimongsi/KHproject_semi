@@ -429,12 +429,14 @@ textarea{
 			<div class="col-6 d-flex justify-content-center">
 				<button type="button" class="btnList" id="btnList">전체 목록</button>
 			</div>
-			<div class="col-3 d-flex justify-content-end">
-				<button type="button" class="btn btn-warning" id="btnModify">수정</button>
-			</div>
-			<div class="col-3 d-flex justify-content-start">
-				<button type="button" class="btn btn-danger" id="btnDelete">삭제</button>
-			</div>
+			<c:if test="${loginSession.user_auth eq 'manager'}">
+				<div class="col-3 d-flex justify-content-end">
+					<button type="button" class="btn btn-warning" id="btnModify">수정</button>
+				</div>
+				<div class="col-3 d-flex justify-content-start">
+					<button type="button" class="btn btn-danger" id="btnDelete">삭제</button>
+				</div>
+			</c:if>
 		</div>
 		<div class="empty"></div>
 
@@ -468,6 +470,12 @@ textarea{
     <!-- footer 끝 -->
 
 	</div>
+	<script>
+	$("#btnList").on("click", function(){
+		location.href="/part/partListSign.jsp";
+	})
+	
+	</script>
 
 </body>
 </html>

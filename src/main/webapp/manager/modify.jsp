@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,9 +38,11 @@
 	box-sizing: border-box;
 	font-family: '양진체';
 }
+
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -53,32 +54,40 @@
 	font-family: '양진체';
 	text-align: center;
 }
+
 .cls_header a {
 	color: #97C4B8;
 }
+
 .cls_header a:hover {
 	color: #c9d4a9;
 }
+
 .dropdownBtn {
 	background-color: #F0FFC2 !important;
 	color: #97C4B8;
 	border: 1px solid white;
 }
+
 .dropdownBtn:hover {
 	color: #9be5d2;
 }
+
 .headDropdown {
 	background-color: #F0FFC2 !important;
 }
+
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
 }
+
 .logoImg:hover {
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
@@ -92,6 +101,7 @@
 @import
 	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
 	;
+
 .logoImg {
 	position: relative;
 	display: inline-block;
@@ -100,6 +110,7 @@
 	animation: waviy 1s infinite;
 	animation-delay: calc(.1s * var(- -i));
 }
+
 @
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
@@ -115,39 +126,49 @@ translateY
 )
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
 }
+
 .container-fluid a {
 	color: #97C4B8 !important;
 }
+
 .container-fluid a:hover {
 	color: #9be5d2 !important;
 }
+
 .container-fluid button {
 	background-color: #F0FFC2 !important;
 	color: #97C4B8 !important;
 }
+
 .navDropdown {
 	border: 1px solid white;
 	background-color: #d5fcf3 !important;
 }
+
 .container-fluid button:hover {
 	background-color: #97C4B8 !important;
 	color: #F0FFC2 !important;
 }
+
 .container-fluid span {
 	filter: invert(40%) sepia(4%) saturate(3907%) hue-rotate(113deg)
 		brightness(103%) contrast(66%);
 }
+
 .navSearchInput {
 	border: 1px solid white;
 }
+
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
@@ -155,9 +176,10 @@ translateY
 }
 /* 게시글 스타일 영역 */
 .title {
-	padding: 10px;
-	text-align: center;
+	border-bottom: 2px solid grey;
+	width: 250px;
 }
+
 #content {
 	height: 500px;
 }
@@ -166,27 +188,33 @@ translateY
 .boxBtn {
 	height: 10%;
 }
+
 .container {
 	width: 80%;
 	height: 100%;
 	padding: 10px;
 }
+
 form, table {
 	height: 100%;
 	text-align: center;
 }
+
 tr:first-child {
 	height: 10%;
 }
+
 input {
 	width: 100%;
 	height: 100%;
 }
+
 textarea {
 	width: 100%;
 	height: 100%;
 	resize: none;
 }
+
 .boxBtn {
 	text-align: center;
 }
@@ -199,17 +227,21 @@ textarea {
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
 }
+
 .footer .row {
 	border-bottom: 1px solid #c9d4a9;
 }
+
 .footer .footerInfo {
 	padding-block: 3%;
 	text-align: center;
 }
+
 .footerMenu {
 	padding-block: 2%;
 	text-align: center;
 }
+
 .footerMenu a {
 	color: #709c91;
 	text-decoration: none;
@@ -279,9 +311,6 @@ textarea {
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
-					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
-					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -332,12 +361,21 @@ textarea {
 		<div class="empty"></div>
 	</div>
 	<!-- FAQ 수정 -->
-	<div class="title">
-		<h3>FAQ 수정</h3>
+	<div class="cls_body">
+		<div class="d-flex justify-content-center">
+			<div class="title d-flex justify-content-center">
+				<h3>FAQ 수정</h3>
+			</div>
+		</div>
 	</div>
 	<form id="modifyForm" action="/modifyProc.info" method="post">
+		<input class="d-none" value="${dto.qna_seq}" name="qna_seq"
+			id="qna_seq">
 		<div class="container">
+<<<<<<< HEAD
 			<input type="text" class="d-none" id="qna_seq" name="qna_seq" value="${dto.qna_seq}">
+=======
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 			<div class="row">
 				<div class="col-2 d-flex justify-content-center align-items-center">
 					<h4>제목</h4>
@@ -360,10 +398,11 @@ textarea {
 	</form>
 	<div class="boxBtn">
 		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnComplete">수정</button>
+		<button type="button" class="btn btn-primary" id="btnModify">수정</button>
 	</div>
 
 	<script>
+<<<<<<< HEAD
     $("#btnComplete").on("click", function(){
 		if($("#title").val() === ""){
 			$("#title").val("제목없음");
@@ -385,6 +424,30 @@ textarea {
        location.href="/view.info?qna_seq="+qna_seq;
     });
     </script>
+=======
+		$("#btnModify").on("click", function() {
+			if ($("#title").val() === "") {
+				$("#title").val("제목없음");
+			}
+
+			if ($("#content").val() === "") {
+				alert("내용을 입력하세요.");
+				$("#content").focus();
+				return;
+			}
+			$("#modifyForm").submit();
+		})
+
+		let btnBack = document.getElementById("btnBack");
+
+		btnBack.addEventListener("click", function(e) {
+			let qna_seq = $("#qna_seq").val();
+
+			location.href = "/view.info?qna_seq=" + qna_seq;
+		})
+	</script>
+
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 	<!-- footer -->
 	<div class="container footer">
 		<div class="row footerInfo">
@@ -419,5 +482,6 @@ textarea {
 		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 	</div>
 	<!-- footer 끝 -->
+
 </body>
 </html>

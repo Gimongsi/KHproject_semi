@@ -120,14 +120,40 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
+
+
 %
 {
 transform
+
+
+
+
 :
+
+
+
+
 translateY
+
+
 (
+
+
+
+
 -20px
+
+
+
+
 )
+
+
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -177,7 +203,6 @@ translateY
 	background-color: white;
 	height: 80px;
 }
-
 /* 바디 */
 .inner-container-left {
 	margin: auto;
@@ -209,9 +234,17 @@ translateY
 	margin-right: 40px;
 }
 
+ /*즐겨찾기*/
 .bookmark {
 	border: 1px solid black;
 	height: 600px;
+}
+
+.interestBox { 
+	border-radius : 10px;
+	border: 1px solid black;
+	height: 140px;
+	padding:10px;
 }
 
 /* 푸터 */
@@ -306,7 +339,8 @@ translateY
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -375,7 +409,7 @@ translateY
 				<div class="col-6">
 					<div class="inner-container-right">
 						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 kg 남았습니다.</h5>
+							<h5>목표 몸무게까지 ${data_dto.final_weight - data_dto.weight}kg 남았습니다.</h5>
 						</div>
 						<div>
 							<button type="button" class="btn btn-sm btn-outline-secondary"
@@ -387,86 +421,118 @@ translateY
 								disabled>마지막 기록일</button>
 							2022년 00월 00일
 						</div>
-						<div>즐겨찾기</div>
+						<!-- 즐겨찾기 목록 시작 -->
+						<div class="interestHead">즐겨찾기 List</div>
 						<div class="bookmark">
-							<table>
-								<thead>
-									<th>프로모션</th>
-								</thead>
-								<tbody>
-									<c:choose>
-										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
-											<tr>
-												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<th>헬스장 프로모션</th>
-											<c:forEach items="${ugi_dto}" var="dto">
-												<tr>
-													<td>${gym_dto.gym_seq}</td>
-													<td><a href="">${ugi_dto.gym_name}</a></td>
-												</tr>
+							<div class="interestBox">
+								<c:choose>
+									<c:when test="${listInterest.size() == 0}">
+										<div>등록된 푸드 프로모션이 없습니다.</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${listPromo}" var="listPromo">
+											<c:set var="checkInterestP" value="false" />
+											<c:forEach items="${listInterest}" var="listInterest">
+												<c:if test="${listPromo.food_seq eq listInterest.food_seq}">
+													<c:set var="checkInterestP" value="true" />
+												</c:if>
 											</c:forEach>
-											<th>푸드 프로모션</th>
-											<c:forEach items="${listInterest}" var="dto">
-												<tr>
-													<td>${gym_dto.food_seq}</td>
-													<td><a href="">${ufi_dto.food_name}</a></td>
-												</tr>
+											<c:if test="${checkInterestP}">
+												<span>${listPromo.food_name}<br></span>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="interestBox">
+								<c:choose>
+									<c:when test="${listInterest.size() == 0}">
+										<div>등록된 푸드 프로모션이 없습니다.</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${list}" var="list">
+											<c:set var="checkInterestL" value="false" />
+											<c:forEach items="${listInterest}" var="interest">
+												<c:if test="${interest.food_seq eq list.food_seq}">
+													<c:set var="checkInterestL" value="true" />
+												</c:if>
 											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tbody>
-							</table>
+											<c:if test="${checkInterestL}">
+												<span>${list.food_name}<br></span>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
+
+							<div class="interestBox">
+								<c:choose>
+									<c:when test="${ugi_dto.size() == 0}">
+										<div>등록된 헬스장 프로모션이 없습니다.</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${gym_dto}" var="gym_dto">
+											<c:set var="checkInterest" value="false" />
+											<c:forEach items="${ugi_dto}" var="interestG">
+												<c:if test="${interestG.gym_seq eq gym_dto.gym_seq}">
+													<c:set var="checkInterest" value="true" />
+												</c:if>
+											</c:forEach>
+											<c:if test="${checkInterest}">
+												<span>${gym_dto.gym_name}<br></span>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</div>
+						<!-- 즐겨찾기 끝 -->
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+			<!-- 바디 끝 -->
+			<div class="empty"></div>
+			<!-- 푸터 -->
+			<div class="container footer">
+				<div class="row footerInfo">
+					<div class="col-6">
+						제휴 및 서비스 이용문의<br>
+						<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+						AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+					</div>
+					<div class="col-6">
+						(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+						사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+						kh.projectmail@gmail.com<br>
+					</div>
 				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
+				<div class="row footerMenu">
+					<div class="col">
+						<a href="">이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">개인정보처리방침</a>
+					</div>
+					<div class="col">
+						<a href="">위치정보이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">센터등록요청하기</a>
+					</div>
+					<div class="col">
+						<a href="">문의하기</a>
+					</div>
 				</div>
+				<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-	</div>
-	<script>
-    	document.getElementById("modifyBtn").onclick = function(){
-    		location.href = "/userModify.user";
-    	}
-    	document.getElementById("diaryBtn").onclick = function(){
-    		location.href = "/userDiary.user";
-    	}
-    </script>
+		<script>
+			document.getElementById("modifyBtn").onclick = function() {
+				location.href = "/userModify.user";
+			}
+			document.getElementById("diaryBtn").onclick = function() {
+				location.href = "/userDiary.user";
+			}
+		</script>
 </body>
 </html>

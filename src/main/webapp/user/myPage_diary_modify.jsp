@@ -10,15 +10,15 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
-<title>근육별 운동목록</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<title>Insert title here</title>
+</head>
 <style>
 /* 폰트 */
 @font-face {
@@ -29,25 +29,18 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
-@font-face {
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -56,8 +49,6 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
-	font-family: '양진체';
-	text-align: center;
 }
 
 .cls_header a {
@@ -85,6 +76,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -121,20 +113,32 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
 %
 {
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
+
+
 )
+
+
 }
 }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
-	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -172,37 +176,51 @@ translateY(
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 20px;
+	height: 80px;
 }
 
-.emptyTop {
-	background-color: white;
-	height: 50px;
+/* 바디 */
+.title {
+	border-bottom: 2px solid grey;
+	width: 250px;
 }
 
-h2 {
-	color: #73b1a1;
-	font-family: '양진체';
-}
-
-.pertList {
+.inner-container-left {
+	margin: auto;
+	border: 1px solid black;
 	height: 800px;
-	background-color: white;
-	padding: 20px;
+}
+
+.inner-container-left * {
 	margin: 20px;
 }
 
-.card-img-top {
-	height: 250px;
+.contentsBox {
+	border: 1px solid black;
+	width: 650px;
+	height: 610px;
 }
 
-/*footer*/
+.contentsBox>.dropdown {
+	margin-top: 24px;
+	margin-left: 24px;
+	margin-bottom: 24px;
+}
+
+.textBox {
+	width: 600px;
+	height: 500px;
+	margin-left: 24px;
+}
+
+/* 푸터 */
 .footer {
-	/* font-family: 'SuncheonB';
-        font-weight: normal; */
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
 	font-size: small;
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
@@ -228,13 +246,8 @@ h2 {
 }
 </style>
 
-</head>
 <body>
-	<div class="empty"></div>
-	<div class="empty"></div>
-
 	<div class="container">
-
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -295,9 +308,6 @@ h2 {
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
-					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
-					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -345,150 +355,113 @@ h2 {
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="emptyTop"></div>
+        <div class="empty"> </div>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="title d-flex justify-content-center mb-4">
+                            <h5>오늘의 기록!</h5>
+                        </div>
+                    </div>
+                    <div class="row inner-container-right">
+                        <div>
+                            <div class="contentsBox">
+	                            <form action="/diaryUpdate.diary" method="post" id="modifyForm">
+	                            	<input type="text" id="diary_seq" class="d-none" value="${dto.diary_seq}" name="diary_seq">
+	                            	<label class="label" style="width: 60px; margin: 24px 24px;">운동부위</label>
+	                            	<select name="diary_part" style="margin-right: 20px;">
+	                            		<option value="arm">팔</option>
+	                            		<option value="shoulder">어깨</option>
+	                            		<option value="chest">가슴</option>
+	                            		<option value="back">등</option>
+	                            		<option value="belly">복근</option>
+	                            		<option value="lowerBody">하체</option>
+	                            		<option value="etc">기타</option>
+	                            	</select>
+	                            	무게<input type="text" id="weight" name="diary_weight" style="width: 60px; margin-left: 30px;" value="${dto.diary_weight}">                        
+	                                
+	                                <textarea class="textBox" style="resize: none;" name="diary_content">${dto.diary_content}</textarea>	                                
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn btn-primary" id="updateBtn" type="button">수정하기</button>
+                        <button class="btn btn-primary" id="deleteBtn" type="button">삭제하기</button>
+                        <button class="btn btn-secondary" id="backBtn" type="button">뒤로 가기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 바디 끝 -->
+        <div class="empty"> </div>
+        <!-- 푸터 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="#">이용약관</a></div>
+                <div class="col"><a href="#">개인정보처리방침</a></div>
+                <div class="col"><a href="#">위치정보이용약관</a></div>
+                <div class="col"><a href="#">센터등록요청하기</a></div>
+                <div class="col"><a href="#">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+    </div>
+    <script>
+	    document.getElementById("modifyBtn").onclick = function(){
+			location.href = "/userModify.user";
+		};
+		document.getElementById("diaryBtn").onclick = function() {
+			location.href = "/userDiary.user";
+		};
 
-		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
-				<h2>근육별 운동목록</h2>
-			</div>
-		</div>
+		$("#updateBtn").on("click", function(){
+			$("#modifyForm").submit();
+		});
+		
+		$("#deleteBtn").on("click", function(){
+			let diary_seq = $("#diary_seq").val();
+			let answer = confirm("삭제하시면 복구가 불가능합니다. 삭제하시겠습니까?");
+			if(answer) {
+				location.href = "/diaryDelete.diary?diary_seq="+diary_seq;
+			}
+		});
+		
+		$("#backBtn").on("click", function(){
+			location.href = "/toDiarypage.diary";
+		});
+		
+		
 
-		<hr
-			style="height: 2px; width: 30%; border: none; background-color: gray; text-align: center; margin: auto;">
-		<div class="empty"></div>
-
-		<!-- 근육 목록 시작 -->
-		<div class="pertList">
-			<div class="row">
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=arm" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">팔</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=shoulder" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/어깨근육.jpg" class="card-img-top" id="shoulder"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">어깨</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=chest" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">가슴</p>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="empty"></div>
-			<div class="row">
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=thigh" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">허벅지</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=butt" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">엉덩이</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=abs" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">복근</p>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-		<!-- 근육 목록 끝 -->
-
-		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-		<!-- footer 끝 -->
-
-	</div>
-
-	<script>
-		$("#arm").on("click",function(){ //팔운동 페이지 요청
-			location.href="/";
-		})
-		$("#shoulder").on("click", function(){ //어깨운동 페이지 요청
-			location.href="/";
-		})
-		$("#chest").on("click", function(){ //가슴 운동 페이지 요청
-			location.href="/";
-		})
-		$("#thigh").on("click", function(){ //허벅지 운동 페이지 요청
-			location.href="/";
-		})
-		$("#butt").on("click", function(){ //엉덩이 운동 페이지 요청
-			location.href="/";
-		})
-		$("#abs").on("click", function(){ //복근 운동 페이지 요청
-			location.href="/";
-		})
-	
 	</script>
-
-
 </body>
 </html>
