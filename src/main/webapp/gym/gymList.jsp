@@ -440,6 +440,9 @@ translateY
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -530,8 +533,9 @@ translateY
 											<span class="buttonImg" style="margin-right: 5px;">P.T</span>
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
+											
+											<!-- 버튼 시작 -->
 											<div class="col d-flex justify-content-end favorite">
-												
 												<c:set var="checkInterestG" value="false" />
 													<c:forEach items="${ugi_dto}" var="interestG">
 														<c:if test="${interestG.gym_seq eq dtoPromo.gym_seq}">
@@ -555,6 +559,7 @@ translateY
 													</c:if>
 												</div>
 											</div>
+											<!-- 버튼 끝 -->
 										</div>
 									</div>
 								</div>
@@ -594,6 +599,7 @@ translateY
 											<span class="buttonImg" style="margin-right: 5px;">P.T</span>
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
+											<!-- 버튼 시작 -->
 											<div class="col d-flex justify-content-end favorite">
 												<c:set var="checkInterestGP" value="false" />
 												<c:forEach items="${ugi_dto}" var="interestG">
@@ -618,6 +624,7 @@ translateY
 											</c:if>
 											</div>	
 											</div>
+											<!-- 버튼 끝 -->
 										</div>
 									</div>
 								</div>

@@ -47,7 +47,6 @@ public class GymController extends HttpServlet {
 
 				request.setAttribute("gym_dto", gym_dto);
 				
-			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -259,7 +258,7 @@ public class GymController extends HttpServlet {
 				int rs = dao.insertInterestGym(gym_seq, dto.getUser_seq());
 				
 				if (rs > 0) {
-					request.getRequestDispatcher("/listLogin.gym");
+					response.sendRedirect("/listLogin.gym");
 					System.out.println("즐겨찾기 추가");
 				}
 				
@@ -287,7 +286,7 @@ public class GymController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(uri.equals("/listLogin.gym")) {
+		}else if(uri.equals("/listLogin.gym")) { //로그인 했을 때 운동시설 리스트
 			HttpSession session = request.getSession(); // 지금 가지고있는 세션 가져오기
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession"); // 세션에 담겨있는 dto값 받기
 			

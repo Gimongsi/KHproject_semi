@@ -114,15 +114,30 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
+
 20
+
+
 %
 {
 transform
+
+
 :
+
+
 translateY
+
+
 (
+
+
 -20px
+
+
 )
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -273,6 +288,9 @@ translateY
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -323,8 +341,8 @@ translateY
 		<div class="empty"></div>
 		<!-- FAQ 리스트 -->
 		<div class="title">
-        	<h3>FAQ</h3>
-    	</div>
+			<h3>FAQ</h3>
+		</div>
 		<div class="container">
 			<c:if test="${loginSession.user_auth eq 'manager'}">
 				<div class="row boxBtn-top">
@@ -359,46 +377,47 @@ translateY
 				</tbody>
 			</table>
 		</div>
-		<script>
+	</div>
+	<script>
 			$("#btnWrite").on("click", function() {
 				location.href = "/write.info";
 			})
 		</script>
-		<!-- FAQ 리스트 끝-->
-		
-		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
+	<!-- FAQ 리스트 끝-->
+
+	<!-- footer -->
+	<div class="container footer">
+		<div class="row footerInfo">
+			<div class="col-6">
+				제휴 및 서비스 이용문의<br>
+				<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+				AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
 			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
+			<div class="col-6">
+				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
+				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+				kh.projectmail@gmail.com<br>
 			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-		<!-- footer 끝 -->
+		<div class="row footerMenu">
+			<div class="col">
+				<a href="">이용약관</a>
+			</div>
+			<div class="col">
+				<a href="">개인정보처리방침</a>
+			</div>
+			<div class="col">
+				<a href="">위치정보이용약관</a>
+			</div>
+			<div class="col">
+				<a href="">센터등록요청하기</a>
+			</div>
+			<div class="col">
+				<a href="">문의하기</a>
+			</div>
+		</div>
+		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+	</div>
+	<!-- footer 끝 -->
 </body>
 </html>

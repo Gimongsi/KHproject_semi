@@ -368,6 +368,7 @@ public class GymDAO {
 	
 	/* 즐겨찾기 */
 	
+
 	public int insertInterestGym(int gym_seq, int user_seq) throws Exception { //즐겨찾기 추가
 		String sql = "insert into user_gym_interest values(?, ?)";
 		

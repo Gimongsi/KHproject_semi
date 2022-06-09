@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.ChannelSender;
+
 import com.dangpert.dao.FoodDAO;
 import com.dangpert.dto.FoodDTO;
 import com.dangpert.dto.FoodFolderDTO;
@@ -39,8 +41,9 @@ public class FoodController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		
-		if (uri.equals("/list.food")) { 
+
+		if (uri.equals("/list.food")) { // food 리스트 출력
+
 			HttpSession session = request.getSession(); 
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
 			FoodDAO dao = new FoodDAO();
@@ -156,9 +159,12 @@ public class FoodController extends HttpServlet {
 				int rsFile = dao.modifyPic(new FoodFolderDTO(food_seq, food_src));
 				
 				if (rs > 0 || rsFile > 0) {
-					System.out.println("수정 성공");
-					response.sendRedirect("/modify.food?food_seq=" + food_seq);
-				}
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }else if (rs > 0){
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -238,6 +244,7 @@ public class FoodController extends HttpServlet {
 			}
 			request.getRequestDispatcher("/food/foodList.jsp").forward(request, response);
 		}
-	}
 
+		
+	}
 }
