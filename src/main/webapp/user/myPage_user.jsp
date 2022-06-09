@@ -28,18 +28,25 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -48,6 +55,8 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -75,10 +84,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -90,8 +97,8 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
 @import
@@ -113,19 +120,47 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
+
+
 %
 {
 transform
+
+
+
+
 :
-translateY(
+
+
+
+
+translateY
+
+
+(
+
+
+
+
 -20px
+
+
+
+
 )
+
+
+
+
 }
 }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -163,13 +198,11 @@ translateY(
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
 	height: 80px;
 }
-
 /* 바디 */
 .inner-container-left {
 	margin: auto;
@@ -201,9 +234,17 @@ translateY(
 	margin-right: 40px;
 }
 
+ /*즐겨찾기*/
 .bookmark {
 	border: 1px solid black;
 	height: 600px;
+}
+
+.interestBox { 
+	border-radius : 10px;
+	border: 1px solid black;
+	height: 140px;
+	padding:10px;
 }
 
 /* 푸터 */
@@ -297,6 +338,10 @@ translateY(
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -399,7 +444,6 @@ translateY(
 									</c:otherwise>
 								</c:choose>
 							</div>
-
 							<div class="interestBox">
 								<c:choose>
 									<c:when test="${listInterest.size() == 0}">
@@ -446,50 +490,49 @@ translateY(
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+			<!-- 바디 끝 -->
+			<div class="empty"></div>
+			<!-- 푸터 -->
+			<div class="container footer">
+				<div class="row footerInfo">
+					<div class="col-6">
+						제휴 및 서비스 이용문의<br>
+						<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+						AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+					</div>
+					<div class="col-6">
+						(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+						사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+						kh.projectmail@gmail.com<br>
+					</div>
 				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
+				<div class="row footerMenu">
+					<div class="col">
+						<a href="">이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">개인정보처리방침</a>
+					</div>
+					<div class="col">
+						<a href="">위치정보이용약관</a>
+					</div>
+					<div class="col">
+						<a href="">센터등록요청하기</a>
+					</div>
+					<div class="col">
+						<a href="">문의하기</a>
+					</div>
 				</div>
+				<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
-	</div>
-	<script>
-    	document.getElementById("modifyBtn").onclick = function(){
-    		location.href = "/userModify.user";
-    	}
-    	document.getElementById("diaryBtn").onclick = function(){
-    		location.href = "/userDiary.user";
-    	}
-    </script>
+		<script>
+			document.getElementById("modifyBtn").onclick = function() {
+				location.href = "/userModify.user";
+			}
+			document.getElementById("diaryBtn").onclick = function() {
+				location.href = "/userDiary.user";
+			}
+		</script>
 </body>
 </html>

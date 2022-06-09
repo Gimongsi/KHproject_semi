@@ -2,23 +2,26 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
-<title>근육별 운동목록</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+<title>Column 등록</title>
+</head>
 <style>
 /* 폰트 */
 @font-face {
@@ -29,25 +32,18 @@
 	font-weight: normal;
 	font-style: normal;
 }
-
-@font-face {
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -85,6 +81,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -119,22 +116,22 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
 %
 {
 transform
 :
-translateY(
+translateY
+(
 -20px
 )
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
-	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -172,37 +169,63 @@ translateY(
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
 	height: 20px;
 }
 
-.emptyTop {
-	background-color: white;
-	height: 50px;
+/* 게시글 스타일 영역 */
+.title {
+	border-bottom: 2px solid grey;
+	width: 250px;
 }
 
-h2 {
-	color: #73b1a1;
-	font-family: '양진체';
+#content {
+	height: 500px;
+}
+/* 게시글 스타일 영역 끝 */
+/* 버튼 영역 */
+.boxBtn {
+	height: 10%;
 }
 
-.pertList {
-	height: 800px;
-	background-color: white;
-	padding: 20px;
-	margin: 20px;
+.container {
+	width: 80%;
+	height: 100%;
+	padding: 10px;
 }
 
-.card-img-top {
-	height: 250px;
+form, table {
+	height: 100%;
+	text-align: center;
 }
 
-/*footer*/
+tr:first-child {
+	height: 10%;
+}
+
+input {
+	width: 100%;
+	height: 100%;
+}
+
+textarea {
+	width: 100%;
+	height: 100%;
+	resize: none;
+}
+
+.boxBtn {
+	text-align: center;
+}
+/* 버튼 영역 끝 */
+
+/* footer */
 .footer {
-	/* font-family: 'SuncheonB';
-        font-weight: normal; */
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
 	font-size: small;
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
@@ -226,15 +249,11 @@ h2 {
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
-</head>
 <body>
-	<div class="empty"></div>
-	<div class="empty"></div>
-
 	<div class="container">
-
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -295,9 +314,6 @@ h2 {
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
-					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
-					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -345,90 +361,79 @@ h2 {
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="emptyTop"></div>
-
-		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
-				<h2>근육별 운동목록</h2>
-			</div>
-		</div>
-
-		<hr
-			style="height: 2px; width: 30%; border: none; background-color: gray; text-align: center; margin: auto;">
 		<div class="empty"></div>
 
-		<!-- 근육 목록 시작 -->
-		<div class="pertList">
-			<div class="row">
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=arm" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">팔</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=shoulder" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/어깨근육.jpg" class="card-img-top" id="shoulder"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">어깨</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=chest" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">가슴</p>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="empty"></div>
-			<div class="row">
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=thigh" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">허벅지</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=butt" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">엉덩이</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=abs" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">복근</p>
-							</div>
-						</div>
-					</a>
+		<!-- Column 등록 -->
+		<!-- 식품 프로모션 목록 -->
+		<div class="empty"></div>
+		<div class="cls_body">
+			<div class="d-flex justify-content-center">
+				<div class="title d-flex justify-content-center">
+					<h3>Column 등록</h3>
 				</div>
 			</div>
 		</div>
-		<!-- 근육 목록 끝 -->
+		<div class="column_register">
+			<form id="registerForm" action="/register.column" method="post">
+				<div class="card-body">
+					<div class="row">
+						<div
+							class="col-2 d-flex justify-content-center align-items-center">
+							<h4>제목</h4>
+						</div>
+						<div class="col-10 p-2">
+							<input type="text" class="form-control" id="title"
+								name="calumn_title">
+						</div>
+					</div>
+					<div class="row">
+						<div
+							class="col-2 d-flex justify-content-center align-items-center">
+							<h4>내용</h4>
+						</div>
+						<div class="col-10 p-2">
+							<textarea id="content" class="form-control" id="content"
+								name="calumn_content"></textarea>
+						</div>
+					</div>
+				<%--	<div class="row">
+						<div
+							class="col-2 d-flex justify-content-center align-items-center">
+							<h4>링크주소</h4>
+						</div>
+						<div class="col-10 p-2">
+							<textarea id="link" class="form-control" id="content"
+								name="qna_content"></textarea>
+						</div>
+					</div> --%>
+				</div>
+			</form>
+		</div>
+		<div class="boxBtn">
+			<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
+			<button type="button" class="btn btn-primary" id="btnSave">등록</button>
+		</div>
+		<script>
+			$("#btnSave").on("click", function() {
+				if ($("#title").val() === "") {
+					$("#title").val("제목없음");
+				}
+
+				if ($("#content").val() === "") {
+					alert("내용을 입력하세요.");
+					$("#content").focus();
+					return;
+				}
+				$("#registerForm").submit();
+			})
+
+			const btnBack = document.getElementById("btnBack");
+
+			btnBack.addEventListener("click", function(e) {
+				location.href = "/toColumnPage.column";
+			});
+		</script>
+		<!-- Column 등록 끝 -->
 
 		<!-- footer -->
 		<div class="container footer">
@@ -464,31 +469,5 @@ h2 {
 			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
 		<!-- footer 끝 -->
-
-	</div>
-
-	<script>
-		$("#arm").on("click",function(){ //팔운동 페이지 요청
-			location.href="/";
-		})
-		$("#shoulder").on("click", function(){ //어깨운동 페이지 요청
-			location.href="/";
-		})
-		$("#chest").on("click", function(){ //가슴 운동 페이지 요청
-			location.href="/";
-		})
-		$("#thigh").on("click", function(){ //허벅지 운동 페이지 요청
-			location.href="/";
-		})
-		$("#butt").on("click", function(){ //엉덩이 운동 페이지 요청
-			location.href="/";
-		})
-		$("#abs").on("click", function(){ //복근 운동 페이지 요청
-			location.href="/";
-		})
-	
-	</script>
-
-
 </body>
 </html>

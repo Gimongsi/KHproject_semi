@@ -128,13 +128,40 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
+
+
 %
 {
 transform
+
+
+
+
 :
-translateY(
+
+
+
+
+translateY
+
+
+(
+
+
+
+
 -20px
+
+
+
+
 )
+
+
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -310,7 +337,6 @@ translateY(
 	border: none;
 	background-color: white;
 }
-
 /* 종류 표시 버튼 */
 .buttonImg {
 	background-color: #73b1a1;
@@ -414,6 +440,9 @@ translateY(
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -479,8 +508,7 @@ translateY(
 				</div>
 				<div class="row d-flex justify-content-end align-items-end">
 					<div class="col">
-						<button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규
-							등록</button>
+						<button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
 					</div>
 				</div>
 			</div>
@@ -505,28 +533,33 @@ translateY(
 											<span class="buttonImg" style="margin-right: 5px;">P.T</span>
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
+											
+											<!-- 버튼 시작 -->
 											<div class="col d-flex justify-content-end favorite">
-												<c:choose>
-													<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
-														<c:forEach items="${ugi_dto}" var="ugi_dto">
-															<div class="ImgFavorite">
-																<button type="button" class="heartBtn" id="redHeartBtn"
-																	value="${gym_dto.gym_seq}">
-																	<img id="redHeart" src="../imgs/red heart.png">
-																</button>
-															</div>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn"
-																value="${gym_dto.gym_seq}">
+												<c:set var="checkInterestG" value="false" />
+													<c:forEach items="${ugi_dto}" var="interestG">
+														<c:if test="${interestG.gym_seq eq dtoPromo.gym_seq}">
+															<c:set var="checkInterestG" value="true"/>
+														</c:if>
+													</c:forEach>
+												<div class="ImgFavorite">
+													<c:if test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+														<c:if test="${checkInterestG}">
+															<button type="button" class="heartBtn redHeartBtn" id="redHeartBtn">
+																<input type="text" class="d-none" value="${dtoPromo.gym_seq}"> 
+																<img id="redHeart" src="../imgs/red heart.png">
+															</button>
+														</c:if>
+														<c:if test="${not checkInterestG}">
+															<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
+																<input type="text" class="d-none" value="${dtoPromo.gym_seq}">
 																<img id="emptyHeart" src="../imgs/empty heart.png">
 															</button>
-														</div>
-													</c:otherwise>
-												</c:choose>
+														</c:if>
+													</c:if>
+												</div>
 											</div>
+											<!-- 버튼 끝 -->
 										</div>
 									</div>
 								</div>
@@ -566,28 +599,32 @@ translateY(
 											<span class="buttonImg" style="margin-right: 5px;">P.T</span>
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
+											<!-- 버튼 시작 -->
 											<div class="col d-flex justify-content-end favorite">
-												<c:choose>
-													<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
-														<c:forEach items="${ugi_dto}" var="ugi_dto">
-															<div class="ImgFavorite">
-																<button type="button" class="heartBtn" id="redHeartBtn"
-																	value="${gym_dto.gym_seq}">
-																	<img id="redHeart" src="../imgs/red heart.png">
-																</button>
-															</div>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn"
-																value="${gym_dto.gym_seq}">
-																<img id="emptyHeart" src="../imgs/empty heart.png">
-															</button>
-														</div>
-													</c:otherwise>
-												</c:choose>
+												<c:set var="checkInterestGP" value="false" />
+												<c:forEach items="${ugi_dto}" var="interestG">
+													<c:if test="${interestG.gym_seq eq dtoPromo.gym_seq}">
+														<c:set var="checkInterestG" value="true" />
+													</c:if>
+												</c:forEach>
+											<div class="ImgFavorite">
+											<c:if test = "${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+												<c:if test="${checkInterestG}">
+													<button type="button" class="heartBtn redHeartBtn" id="redHeartBtn">
+														<input type="text" class="d-none" value="${dtoPromo.gym_seq}"> 
+														<img id="redHeart" src="../imgs/red heart.png">
+													</button>
+												</c:if>
+												<c:if test="${not checkInterestG}">
+													<button type="button" class="heartBtn emptyHeartBtn" id="emptyHeartBtn">
+														<input type="text" class="d-none" value="${dtoPromo.gym_seq}"> 
+														<img id="emptyHeart" src="../imgs/empty heart.png">
+													</button>
+												</c:if>
+											</c:if>
+											</div>	
 											</div>
+											<!-- 버튼 끝 -->
 										</div>
 									</div>
 								</div>
@@ -714,17 +751,14 @@ translateY(
         /*즐겨찾기 버튼 효과*/
         $("#emptyHeartBtn").on("click", function(e) {
 			let yn = confirm("즐겨찾기에 추가하시겠습니까?");
-
 			if (yn) {
-				location.href = "/interest.gym";
-			}else {
-				return false;
+				location.href = "/interest.gym?gym_seq="+ $(e.target).prev().val();
+				console.log()
 			}
-
 		})
 		$("#redHeartBtn").on("click", function(e){
 			alert("즐겨찾기에서 삭제하시겠습니까?");
-			location.href="/delInterest.gym";
+			location.href="/delInterest.gym?gym_seq="+ $(e.target).prev().val();
 		})
         
         

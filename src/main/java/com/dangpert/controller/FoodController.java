@@ -39,22 +39,21 @@ public class FoodController extends HttpServlet {
 		String uri = request.getRequestURI();
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 
-		if (uri.equals("/list.food")) { 
+
+		if (uri.equals("/list.food")) { // food 리스트 출력
+
 			HttpSession session = request.getSession(); 
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
 			FoodDAO dao = new FoodDAO();
-
+			System.out.println("loginSession : " + dto);
 			try {
 				ArrayList<FoodDTO> listPromo = dao.selectPromo();
 				ArrayList<FoodDTO> list = dao.selectHellin();
-				
-				ArrayList<UserfoodInterestDTO> listInterest = dao.interestFood(dto.getUser_seq()); 
-				
+					
 				request.setAttribute("listPromo", listPromo);
 				request.setAttribute("list", list);
-				
-				request.setAttribute("listInterest" , listInterest);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
@@ -160,9 +159,12 @@ public class FoodController extends HttpServlet {
 				int rsFile = dao.modifyPic(new FoodFolderDTO(food_seq, food_src));
 				
 				if (rs > 0 || rsFile > 0) {
-					System.out.println("수정 성공");
-					response.sendRedirect("/modify.food?food_seq=" + food_seq);
-				}
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }else if (rs > 0){
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -186,14 +188,16 @@ public class FoodController extends HttpServlet {
 		}else if(uri.equals("/interest.food")) {
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			System.out.println(request.getParameter("food_seq"));
 			int food_seq = Integer.parseInt(request.getParameter("food_seq"));
 			FoodDAO dao = new FoodDAO();
 			
 			try {
 				int rs = dao.insertInterestFood(food_seq, dto.getUser_seq());
+			
 				
 				if (rs>0) {
-					request.getRequestDispatcher("/list.food");
+					response.sendRedirect("/listLogin.food");
 					System.out.println("푸드 프로모션 즐겨찾기");
 				}
 			}catch(Exception e) {
@@ -212,19 +216,35 @@ public class FoodController extends HttpServlet {
 						
 				if (rs > 0) {
 					System.out.println("푸드 프로모션 즐겨찾기 삭제 성공");
-					response.sendRedirect("/food/foodList.jsp");
+					response.sendRedirect("/listLogin.food");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 			
+		
+		}else if(uri.equals("/listLogin.food")) { //로그인 시 푸드 리스트
+			HttpSession session = request.getSession(); 
+			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+			FoodDAO dao = new FoodDAO();
+			System.out.println("loginSession : " + dto);
+			try {
+				ArrayList<UserfoodInterestDTO> listInterest = dao.interestFood(dto.getUser_seq());
+				ArrayList<FoodDTO> listPromo = dao.selectPromo();
+				ArrayList<FoodDTO> list = dao.selectHellin();
+					
+				System.out.println("size: "+listInterest.size());
+				
+				request.setAttribute("listInterest", listInterest);
+				request.setAttribute("listPromo", listPromo);
+				request.setAttribute("list", list);
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/food/foodList.jsp").forward(request, response);
 		}
-				
-				
-				
-		
-		
-	
+
 		
 	}
 }

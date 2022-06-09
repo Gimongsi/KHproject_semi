@@ -61,17 +61,23 @@ public class FoodDAO {
 	
 
 	public int modifyPic(FoodFolderDTO dto) throws Exception{
-		String sql = "update tbl_food_folder set food_src=? where food_seq=?";
-		
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql);){
-			
-			pstmt.setString(1, dto.getFood_src());
-			pstmt.setInt(2, dto.getFood_seq());
-			
-			return pstmt.executeUpdate();
-		}
-	}
+	      String sql = "update tbl_food_folder set food_src=? where food_seq=?";
+	      
+	      try(Connection con = bds.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement(sql);){
+	         
+	         if(dto.getFood_src() == null) {
+	            return 0;
+	         }else {
+	            pstmt.setString(1, dto.getFood_src());
+	            pstmt.setInt(2, dto.getFood_seq());
+	         }
+	         
+	         System.out.println("DAO" + dto.toString());
+	         
+	         return pstmt.executeUpdate();
+	      }
+	   }
 	
 	public int delete(int food_seq) throws Exception{
 		String sql = "delete from tbl_food where food_seq=?";
@@ -275,7 +281,7 @@ public class FoodDAO {
 		}
 	}
 	
-	public int insertInterestFood(int food_seq , int user_seq) throws Exception{
+	public int insertInterestFood(int food_seq , int user_seq) throws Exception{ //즐겨찾기 추가
 		String sql = "insert into user_food_interest values (? , ? )";
 		
 		try(Connection con = bds.getConnection();
@@ -289,7 +295,7 @@ public class FoodDAO {
 		}
 		
 	}
-	public ArrayList<UserfoodInterestDTO> interestFood(int user_seq) throws Exception{
+	public ArrayList<UserfoodInterestDTO> interestFood(int user_seq) throws Exception{ //즐겨찾기 목록
 		String sql = "select * from user_food_interest where user_seq=?";
 		
 		try(Connection con = bds.getConnection();
@@ -300,7 +306,7 @@ public class FoodDAO {
 			ArrayList<UserfoodInterestDTO> list = new ArrayList<UserfoodInterestDTO>();
 			
 			while(rs.next()) {
-				int food_seq = rs.getInt("food_seq");
+				int food_seq = rs.getInt(1);
 				
 				list.add(new UserfoodInterestDTO(food_seq, user_seq));
 			}
@@ -308,8 +314,8 @@ public class FoodDAO {
 		}
 	}
 	
-	public int delInterestFood(int food_seq, int user_seq) throws Exception {
-		String sql = "delete from user_food_interest values(? , ?)";
+	public int delInterestFood(int food_seq, int user_seq) throws Exception { //즐겨찾기 삭제
+		String sql = "delete from user_food_interest where food_seq=? and user_seq=?";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
