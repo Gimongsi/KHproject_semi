@@ -29,18 +29,25 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -49,6 +56,8 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -76,10 +85,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -91,8 +98,8 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
 @import
@@ -114,32 +121,21 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
-
-
 %
 {
 transform
-
-
 :
-
-
 translateY
 (
-
-
 -20px
-
-
 )
-
-
 }
 }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -177,7 +173,6 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
@@ -237,6 +232,7 @@ translateY
 
 <body>
 	<div class="container">
+		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -297,6 +293,9 @@ translateY
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -364,40 +363,68 @@ translateY
 				<div class="col-6">
 					<h3 class="text-center mb-3">회원 정보 수정</h3>
 					<div class="inner-container-right">
-						<div class="mb-5">
-							<input type="text" disabled placeholder="이메일 / 수정불가"> <input
-								type="text" value="${dto.getUser_id()}" disabled>
-						</div>
-						<div>
-							<input type="text" disabled placeholder="현재 비밀번호"> <input
-								type="text">
-						</div>
-						<div>
-							<input type="text" disabled placeholder="변경 후 비밀번호"> <input
-								type="text">
-						</div>
-						<div class="mb-5">
-							<input type="text" disabled placeholder="변경 후 비밀번호 확인"> <input
-								type="text">
-						</div>
-						<div>
-							<input type="text" disabled placeholder="몸무게 수정"> <input
-								type="text">
-						</div>
-						<div>
-							<input type="text" disabled placeholder="목표 몸무게 수정"> <input
-								type="text" name="final_weight">
-						</div>
-						<div>
-							<div class="d-flex justify-content-between">
-								<button class="btn btn-secondary col-2" type="button">회원
-									탈퇴</button>
-								<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
-								<button class="btn btn-secondary col-2" type="button">취소</button>
-								<button class="btn btn-primary col-2" type="button">수정
-									완료</button>
+							<form action="/pwOk.user" method="post" id="pwOkForm">
+							<div class="mb-5">
+								<input type="text" disabled placeholder="이메일 / 수정불가"> <input
+									type="text" value="${dto.getUser_id()}" name="user_id" disabled>
 							</div>
-						</div>
+							<div>
+								<input type="text" disabled placeholder="현재 비밀번호"> <input
+									type="password" id="beforePw" name="beforPw" value="${user_pw}">
+								<button type="button" id="pwOk">비밀번호 확인</button>
+							</div>
+							</form>
+							<c:choose>
+								<c:when test="${rs eq 'no'}">
+									<div>
+										<span>비밀번호가 일치하지 않습니다</span>
+									</div>
+								</c:when>
+								<c:when test="${rs eq 'ok'}">
+									<div>
+										<span>비밀번호가 일치합니다.</span>
+									</div>
+								</c:when>
+							</c:choose>
+						<form action="/userDataModify.user" method="post" id="modifyForm">
+							<input type="text" class="d-none" value="${dto.user_id}" name="user_id">
+							<div>
+								<input type="text" disabled placeholder="변경 후 비밀번호"> <input
+									type="text" id="afterPw" name="user_pw">
+							</div>
+							<div class="mb-5">
+								<input type="text" disabled placeholder="변경 후 비밀번호 확인">
+								<input type="text" id="afterPwCheck" name="user_pw_check">
+							</div>
+							<div>
+								<input type="text" disabled placeholder="몸무게 수정"> <input
+									type="text" id="weight" value="${data_dto.weight}"
+									name="weight">
+							</div>
+							<div>
+								<input type="text" disabled placeholder="목표 몸무게 수정">
+								<c:choose>
+									<c:when test="${data_dto eq null}">
+										<input type="text" name="final_weight">
+									</c:when>
+									<c:otherwise>
+										<input type="text" name="final_weight"
+											value="${data_dto.final_weight}">
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div>
+								<div class="d-flex justify-content-between">
+									<button class="btn btn-secondary col-2" id="deleteBtn"
+										type="button">회원 탈퇴</button>
+									<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
+									<button class="btn btn-secondary col-2" id="cancleBtn" type="button">취소</button>
+									<button class="btn btn-primary col-2" id="submitBtn"
+										type="button">수정 완료</button>
+
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -439,12 +466,40 @@ translateY
 		</div>
 	</div>
 	<script>
-		document.getElementById("modifyBtn").onclick = function() {
+	    document.getElementById("modifyBtn").onclick = function(){
 			location.href = "/userModify.user";
 		}
-		document.getElementById("diaryBtn").onclick = function() {
+		document.getElementById("diaryBtn").onclick = function(){
 			location.href = "/userDiary.user";
 		}
-	</script>
+		document.getElementById("cancleBtn").onclick = function(){
+			location.href = "/toMypage.user"
+		}
+		
+		$("#pwOk").on("click", function(){
+			$("#pwOkForm").submit();
+		})
+		
+		
+		$("#submitBtn").on("click", function(e){ //
+		
+			if($("#afterPw").val() !== $("#afterPwCheck").val()){
+				alert("변경후 비밀번호가 맞지않습니다.");
+				return;
+			}
+			$("#modifyForm").submit();	
+		})
+		
+		$("#deleteBtn").on("click", function(e){
+			if(confirm("정말 회원탈퇴 하시겠습니까?")){
+				alert("회원탈퇴 되었습니다.");
+				location.href = "/userDelete.user";
+			} else {
+				return;
+			}
+			
+		})
+		
+    </script>
 </body>
 </html>

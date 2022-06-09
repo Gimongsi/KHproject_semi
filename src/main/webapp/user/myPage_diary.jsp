@@ -294,6 +294,9 @@ translateY(
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -342,96 +345,97 @@ translateY(
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-		<!-- 바디 -->
-		<div class="cls_body">
-			<div class="row justify-content-evenly">
-				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
-					<div class="inner-container-left">
-						<div>
-							<button type="button" id="modifyBtn"
-								style="border: none; background: none;">정보수정</button>
-						</div>
-						<div>
-							<button type="button" id="diaryBtn"
-								style="border: none; background: none;">일기</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-6">
-					<div class="d-flex justify-content-center">
-						<div class="title d-flex justify-content-center mb-4">
-							<h5>오늘의 기록!</h5>
-						</div>
-					</div>
-					<div class="row inner-container-right">
-						<div class="col-7">
-							<div class="inner-contents-left">
-								<div>내용1</div>
-								<div>내용2 줄이 바뀔 정도로 길게 쓰여진 내용이 들어갔을 때 날짜는 내용2의 첫줄에 맞춰야 함</div>
-								<div>내용3 내용과 날짜가 서로 매칭시키기</div>
-								<div>내용4</div>
-							</div>
-						</div>
-						<div class="col-5">
-							<div class="inner-contents-right">
-								<div>날짜1</div>
-								<div>날짜2</div>
-								<div>날짜3</div>
-								<div>날짜4</div>
-							</div>
-						</div>
-					</div>
-					<div class="d-flex justify-content-end mt-4 gap-3">
-						<button class="btn btn-primary" type="button">일기 쓰기</button>
-						<button class="btn btn-primary" type="button">일기 수정</button>
-						<button class="btn btn-secondary" type="button">일기 삭제</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-	</div>
+        <!-- 바디 -->
+        <div class="cls_body">
+            <div class="row justify-content-evenly">
+                <div class="col-3">
+                    <h3 class="text-center mb-3">My Page</h3>
+                    <div class="inner-container-left">
+                        <div>
+                        	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
+                        </div>
+                        <div>
+                        	<button type="button" id="diaryBtn" style="border:none; background:none;">일기</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="title d-flex justify-content-center mb-4">
+                            <h5>오늘의 기록!</h5>
+                        </div>
+                    </div>
+                    <div class="row inner-container-right">
+                        <div class="col-7">
+                            <div class="inner-contents-left">
+                            
+                                <div>
+                                    <c:forEach items="${list}" var="dto">
+                                    	<div>${dto.diary_seq}. ${dto.getDiary_part()}</div>
+                                    	<div>${dto.getDiary_content()}</div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="inner-contents-right">
+                                <div>
+                                    <c:forEach items="${list}" var="dto">
+                                    	<div>${dto.diary_date}</div> 
+                                    	<div></div>                                   	
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn btn-primary" id="btnWrite" type="button">일기 쓰기</button>
+                        <button class="btn btn-primary" type="button">일기 수정</button>
+                        <button class="btn btn-secondary" type="button">일기 삭제</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 바디 끝 -->
+        <div class="empty"> </div>
+        <!-- 푸터 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="">이용약관</a></div>
+                <div class="col"><a href="">개인정보처리방침</a></div>
+                <div class="col"><a href="">위치정보이용약관</a></div>
+                <div class="col"><a href="">센터등록요청하기</a></div>
+                <div class="col"><a href="">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+    </div>
+
 	<script>
     document.getElementById("modifyBtn").onclick = function(){
 		location.href = "/userModify.user";
 	}
 	document.getElementById("diaryBtn").onclick = function(){
 		location.href = "/userDiary.user";
+	}
+	document.getElementById("btnWrite").onclick = function(){
+		location.href = "/userDiaryWrite.user";
 	}
     </script>
 </body>

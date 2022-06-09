@@ -40,7 +40,7 @@ public class FoodController extends HttpServlet {
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
 
-		if (uri.equals("/list.food")) { 
+		if (uri.equals("/list.food")) { // food 리스트 출력
 			HttpSession session = request.getSession(); 
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
 			FoodDAO dao = new FoodDAO();
@@ -160,9 +160,12 @@ public class FoodController extends HttpServlet {
 				int rsFile = dao.modifyPic(new FoodFolderDTO(food_seq, food_src));
 				
 				if (rs > 0 || rsFile > 0) {
-					System.out.println("수정 성공");
-					response.sendRedirect("/modify.food?food_seq=" + food_seq);
-				}
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }else if (rs > 0){
+		               System.out.println("수정 성공");
+		               response.sendRedirect("/modifyList.food?curPage=1");
+		            }
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

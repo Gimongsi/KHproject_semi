@@ -23,28 +23,29 @@ public class MainController extends HttpServlet {
 		doAction(request, response);
 	}
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String uri = request.getRequestURI(); 
-		System.out.println("요청 uri : " + uri);
-		
-		if (uri.equals("/home.main")) { // 식품 프로모션 페이지 요청
-			FoodDAO foodDAO = new FoodDAO();
-			GymDAO gymDAO = new GymDAO();
+		  request.setCharacterEncoding("utf-8");
+	      String uri = request.getRequestURI(); 
+	      System.out.println("요청 uri : " + uri);
+	      
+	         FoodDAO foodDAO = new FoodDAO();
+	         GymDAO gymDAO = new GymDAO();
 
-			try {
-				ArrayList<GymInfoDTO> gymList = gymDAO.selectAllGym();
-				ArrayList<FoodDTO> foodList = foodDAO.selectPromo();
-					
-				request.setAttribute("gymList", gymList);
-				request.setAttribute("foodList", foodList);
-					
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			request.getRequestDispatcher("/main.jsp").forward(request, response);
-			
+	         try {
+	            ArrayList<GymInfoDTO> gymList = gymDAO.selectAllGym();
+	            ArrayList<FoodDTO> foodList = foodDAO.selectPromo();
+	               
+	            request.setAttribute("gymList", gymList);
+	            request.setAttribute("foodList", foodList);
+	            
+	            System.out.println("??"+gymList.toString());
+	            System.out.println("??"+foodList.toString());
+	               
+	         }catch(Exception e) {
+	            e.printStackTrace();
+	         }
+	         request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 		
 	}
 
-}
+

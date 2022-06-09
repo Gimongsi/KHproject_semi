@@ -116,56 +116,15 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
-
-
-
-
 %
 {
 transform
-
-
-
-
-
-
 :
-
-
-
-
-
-
 translateY
-
-
-
-
 (
-
-
-
-
-
-
 -20px
-
-
-
-
-
-
 )
-
-
-
-
-
-
 }
 }
 
@@ -411,16 +370,16 @@ textarea {
 			</div>
 		</div>
 	</div>
-	<form id="formModify" action="/modify.info" method="post">
+	<form id="formModify" action="/modify.column" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-2 d-flex justify-content-center align-items-center">
 					<h4>제목</h4>
 				</div>
 				<div class="col-10 p-2">
-					<input type="text" id="qna_seq" class="form-control d-none"
-						name="qna_seq" value="${dto.getCalumn_seq()}"> <input
-						type="text" id="qna_title" class="form-control" name="qna_title"
+					<input type="text" id="calumn_seq" class="form-control d-none"
+						name="calumn_seq" value="${dto.getCalumn_seq()}"> <input
+						type="text" id="calumn_title" class="form-control" name="calumn_title"
 						value="${dto.getCalumn_title()}" readonly>
 				</div>
 			</div>
@@ -430,7 +389,7 @@ textarea {
 				</div>
 				<div class="col-10 p-2">
 					<textarea id="content" class="form-control" id="content"
-						name="qna_content" readonly>${dto.getCalumn_content()}</textarea>
+						name="calumn_content" readonly>${dto.getCalumn_content()}</textarea>
 				</div>
 			</div>
 			<%--	<div class="row">

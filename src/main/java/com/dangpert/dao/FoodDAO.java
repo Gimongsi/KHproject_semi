@@ -61,17 +61,23 @@ public class FoodDAO {
 	
 
 	public int modifyPic(FoodFolderDTO dto) throws Exception{
-		String sql = "update tbl_food_folder set food_src=? where food_seq=?";
-		
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql);){
-			
-			pstmt.setString(1, dto.getFood_src());
-			pstmt.setInt(2, dto.getFood_seq());
-			
-			return pstmt.executeUpdate();
-		}
-	}
+	      String sql = "update tbl_food_folder set food_src=? where food_seq=?";
+	      
+	      try(Connection con = bds.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement(sql);){
+	         
+	         if(dto.getFood_src() == null) {
+	            return 0;
+	         }else {
+	            pstmt.setString(1, dto.getFood_src());
+	            pstmt.setInt(2, dto.getFood_seq());
+	         }
+	         
+	         System.out.println("DAO" + dto.toString());
+	         
+	         return pstmt.executeUpdate();
+	      }
+	   }
 	
 	public int delete(int food_seq) throws Exception{
 		String sql = "delete from tbl_food where food_seq=?";

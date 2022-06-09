@@ -414,6 +414,9 @@ translateY(
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -506,26 +509,7 @@ translateY(
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
 											<div class="col d-flex justify-content-end favorite">
-												<c:choose>
-													<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
-														<c:forEach items="${ugi_dto}" var="ugi_dto">
-															<div class="ImgFavorite">
-																<button type="button" class="heartBtn" id="redHeartBtn"
-																	value="${gym_dto.gym_seq}">
-																	<img id="redHeart" src="../imgs/red heart.png">
-																</button>
-															</div>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn"
-																value="${gym_dto.gym_seq}">
-																<img id="emptyHeart" src="../imgs/empty heart.png">
-															</button>
-														</div>
-													</c:otherwise>
-												</c:choose>
+											<!-- 이부분에 버튼 하트 들어갈곳 -->
 											</div>
 										</div>
 									</div>
@@ -567,26 +551,7 @@ translateY(
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
 											<div class="col d-flex justify-content-end favorite">
-												<c:choose>
-													<c:when test="${ugi_dto.gym_seq eq gym_dto.gym_seq}">
-														<c:forEach items="${ugi_dto}" var="ugi_dto">
-															<div class="ImgFavorite">
-																<button type="button" class="heartBtn" id="redHeartBtn"
-																	value="${gym_dto.gym_seq}">
-																	<img id="redHeart" src="../imgs/red heart.png">
-																</button>
-															</div>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn"
-																value="${gym_dto.gym_seq}">
-																<img id="emptyHeart" src="../imgs/empty heart.png">
-															</button>
-														</div>
-													</c:otherwise>
-												</c:choose>
+												<!-- 이부분에 버튼 하트 들어갈곳 -->
 											</div>
 										</div>
 									</div>

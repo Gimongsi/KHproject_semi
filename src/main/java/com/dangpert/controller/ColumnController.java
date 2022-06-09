@@ -48,7 +48,7 @@ public class ColumnController extends HttpServlet {
 			}
 			request.getRequestDispatcher("/column/columnPage.jsp").forward(request, response);
 		} else if (uri.equals("/write.column")) { // column 글쓰기페이지 요청
-			response.sendRedirect("/column/write.jsp");
+			response.sendRedirect("/column/columnWrite.jsp");
 		} else if (uri.equals("/register.column")) { // column 글쓰기 요청
 			UserDTO dto = (UserDTO) request.getSession().getAttribute("loginSession");
 			String calumn_title = request.getParameter("calumn_title");
@@ -81,7 +81,7 @@ public class ColumnController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("/column/view.jsp").forward(request, response);
+			request.getRequestDispatcher("/column/columnView.jsp").forward(request, response);
 
 		} else if (uri.equals("/modify.column")) {// column 수정 페이지 요청
 			int calumn_seq = Integer.parseInt(request.getParameter("calumn_seq"));
@@ -96,7 +96,7 @@ public class ColumnController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("/column/view.jsp").forward(request, response);
+			request.getRequestDispatcher("/column/columnView.jsp").forward(request, response);
 
 		} else if (uri.equals("/modifyProc.column")) { // column 수정 요청
 			int calumn_seq = Integer.parseInt(request.getParameter("calumn_seq"));

@@ -20,7 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>FAQ 수정</title>
+<title>Column 등록</title>
 </head>
 <style>
 /* 폰트 */
@@ -43,6 +43,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -80,6 +81,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -114,60 +116,18 @@
 keyframes waviy { 0%, 40%, 100% {
 	transform: translateY(0)
 }
-
 20
-
-
-
-
-
-
 %
 {
 transform
-
-
-
-
-
-
 :
-
-
-
-
-
-
 translateY
-
-
-
-
-
-
 (
-
-
-
-
-
-
 -20px
-
-
-
-
-
-
 )
-
-
-
-
-
-
 }
 }
+
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -209,15 +169,17 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
 	height: 20px;
 }
+
 /* 게시글 스타일 영역 */
 .title {
-	padding: 10px;
-	text-align: center;
+	border-bottom: 2px solid grey;
+	width: 250px;
 }
 
 #content {
@@ -259,6 +221,7 @@ textarea {
 	text-align: center;
 }
 /* 버튼 영역 끝 */
+
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -399,39 +362,40 @@ textarea {
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-	</div>
 
-	<!-- Column 수정 -->
-	<div class="empty"></div>
-	<div class="cls_body">
-		<div class="d-flex justify-content-center">
-			<div class="title d-flex justify-content-center">
-				<h3>Column 수정</h3>
+		<!-- Column 등록 -->
+		<!-- 식품 프로모션 목록 -->
+		<div class="empty"></div>
+		<div class="cls_body">
+			<div class="d-flex justify-content-center">
+				<div class="title d-flex justify-content-center">
+					<h3>Column 등록</h3>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="column_modify">
-		<form id="registerForm" action="/register.column" method="post"
-			enctype="multipart/form-data">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-2 d-flex justify-content-center align-items-center">
-						<h4>제목</h4>
+		<div class="column_register">
+			<form id="registerForm" action="/register.column" method="post">
+				<div class="card-body">
+					<div class="row">
+						<div
+							class="col-2 d-flex justify-content-center align-items-center">
+							<h4>제목</h4>
+						</div>
+						<div class="col-10 p-2">
+							<input type="text" class="form-control" id="title"
+								name="calumn_title">
+						</div>
 					</div>
-					<div class="col-10 p-2">
-						<input type="text" class="form-control" id="title"
-							name="qna_title">
+					<div class="row">
+						<div
+							class="col-2 d-flex justify-content-center align-items-center">
+							<h4>내용</h4>
+						</div>
+						<div class="col-10 p-2">
+							<textarea id="content" class="form-control" id="content"
+								name="calumn_content"></textarea>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-2 d-flex justify-content-center align-items-center">
-						<h4>내용</h4>
-					</div>
-					<div class="col-10 p-2">
-						<textarea id="content" class="form-control" id="content"
-							name="qna_content"></textarea>
-					</div>
-				</div>
 				<%--	<div class="row">
 						<div
 							class="col-2 d-flex justify-content-center align-items-center">
@@ -442,71 +406,68 @@ textarea {
 								name="qna_content"></textarea>
 						</div>
 					</div> --%>
-			</div>
-		</form>
-	</div>
-	<div class="boxBtn">
-		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnModify">수정</button>
-	</div>
-
-	<script>
-		$("#btnModify").on("click", function() {
-			if ($("#title").val() === "") {
-				$("#title").val("제목없음");
-			}
-
-			if ($("#content").val() === "") {
-				alert("내용을 입력하세요.");
-				$("#content").focus();
-				return;
-			}
-			$("#modifyForm").submit();
-		})
-
-		let btnBack = document.getElementById("btnBack");
-
-		btnBack.addEventListener("click", function(e) {
-			let qna_seq = $("#qna_seq").val();
-
-			location.href = "/view.column?qna_seq=" + qna_seq;
-		})
-	</script>
-	<!-- Column 수정 끝 -->
-
-	<!-- footer -->
-	<div class="container footer">
-		<div class="row footerInfo">
-			<div class="col-6">
-				제휴 및 서비스 이용문의<br>
-				<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-				AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-			</div>
-			<div class="col-6">
-				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
-				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-				kh.projectmail@gmail.com<br>
-			</div>
+				</div>
+			</form>
 		</div>
-		<div class="row footerMenu">
-			<div class="col">
-				<a href="">이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">개인정보처리방침</a>
-			</div>
-			<div class="col">
-				<a href="">위치정보이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">센터등록요청하기</a>
-			</div>
-			<div class="col">
-				<a href="">문의하기</a>
-			</div>
+		<div class="boxBtn">
+			<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
+			<button type="button" class="btn btn-primary" id="btnSave">등록</button>
 		</div>
-		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-	</div>
-	<!-- footer 끝 -->
+		<script>
+			$("#btnSave").on("click", function() {
+				if ($("#title").val() === "") {
+					$("#title").val("제목없음");
+				}
+
+				if ($("#content").val() === "") {
+					alert("내용을 입력하세요.");
+					$("#content").focus();
+					return;
+				}
+				$("#registerForm").submit();
+			})
+
+			const btnBack = document.getElementById("btnBack");
+
+			btnBack.addEventListener("click", function(e) {
+				location.href = "/toColumnPage.column";
+			});
+		</script>
+		<!-- Column 등록 끝 -->
+
+		<!-- footer -->
+		<div class="container footer">
+			<div class="row footerInfo">
+				<div class="col-6">
+					제휴 및 서비스 이용문의<br>
+					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
+				</div>
+				<div class="col-6">
+					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
+					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
+					kh.projectmail@gmail.com<br>
+				</div>
+			</div>
+			<div class="row footerMenu">
+				<div class="col">
+					<a href="">이용약관</a>
+				</div>
+				<div class="col">
+					<a href="">개인정보처리방침</a>
+				</div>
+				<div class="col">
+					<a href="">위치정보이용약관</a>
+				</div>
+				<div class="col">
+					<a href="">센터등록요청하기</a>
+				</div>
+				<div class="col">
+					<a href="">문의하기</a>
+				</div>
+			</div>
+			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+		</div>
+		<!-- footer 끝 -->
 </body>
 </html>

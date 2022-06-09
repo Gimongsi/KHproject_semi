@@ -12,7 +12,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.eclipse.jdt.internal.compiler.ast.NullAnnotationMatching;
 
 import com.dangpert.dto.UserDTO;
 import com.dangpert.dto.UserDataDTO;
@@ -31,7 +30,6 @@ private BasicDataSource bds;
 		}
 		
 	}
-	
 	
 	public int insert(UserDTO dto) throws Exception { // 회원가입
 		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default, null)";
@@ -69,6 +67,47 @@ private BasicDataSource bds;
 			}
 			
 		}
+	}
+	
+	public String searchUserId(String user_name, String user_phone) throws Exception {
+		String sql = "select * from tbl_user where user_name=? and user_phone=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_phone);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String user_id = rs.getString("user_id");
+				return user_id;
+			}
+			return null;
+		}
+	}
+	
+	public UserDTO searchUserPw(String user_id,String user_name, String user_phone) throws Exception {
+		String sql = "select * from tbl_user where user_id=? and user_name=? and user_phone=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_name);
+			pstmt.setString(3, user_phone);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int user_seq = rs.getInt("user_seq");
+				String user_auth = rs.getString("user_auth");
+				
+				return new UserDTO(user_seq, user_id, null, user_name, user_phone, null, user_auth, null);
+			}
+			return null;
+		}
+		
+		
+		
+		
 	}
 	
 	public UserDTO loginOk(String user_id, String user_pw) throws Exception { // 아이디 비밀번호 확인
@@ -145,6 +184,21 @@ private BasicDataSource bds;
 		}
 	}
 	
+	public int randomPwUpdate(String user_id, String randomPw) throws Exception {
+		String sql = "update tbl_user set user_pw=? where user_id=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			
+			pstmt.setString(1, randomPw);
+			pstmt.setString(2, user_id);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+	
 	
 	public UserDTO selectBySeq(int user_seq) throws Exception {
 		String sql = "select * from tbl_user where user_seq=?";
@@ -168,7 +222,85 @@ private BasicDataSource bds;
 	}
 	
 	
+	public UserDataDTO DataSelect(int user_seq) throws Exception {
+		String sql = "select * from user_data where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int age = rs.getInt("user_age");
+				int height = rs.getInt("height");
+				int weight = rs.getInt("weight");
+				int final_weight = rs.getInt("final_weight");
+				
+				return new UserDataDTO(user_seq, age, height, weight, final_weight);
+			}
+			return null;
+		}
+	}
 	
+	public int update(String user_pw, int user_seq) throws Exception {	// 회원 DTO 값 수정
+		String sql = "update tbl_user set user_pw=? where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+
+			pstmt.setString(1, user_pw);
+			pstmt.setInt(2, user_seq);
+			int rs = pstmt.executeUpdate();
+			
+			return rs;
+		}
+	}
+	
+	public int manager_userUpdate(UserDTO dto) throws Exception {
+		String sql = "update tbl_user set user_name=?, user_phone=?, user_auth=? where user_id=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, dto.getUser_name());
+			pstmt.setString(2, dto.getUser_phone());
+			pstmt.setString(3, dto.getUser_auth());
+			pstmt.setString(4, dto.getUser_id());
+			
+			return pstmt.executeUpdate();
+			
+		}
+	}
+	
+	public int DataUpdate(int weight, int final_weight, int user_seq) throws Exception {	// 회원 DataDTO 값 수정
+		String sql = "update user_data set weight=?, final_weight=? where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, weight);
+			pstmt.setInt(2, final_weight);
+			pstmt.setInt(3, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+			
+		}
+	}
+	
+	public int delete(int user_seq) throws Exception {
+		String sql = "delete from tbl_user where user_seq=?";
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+
+
 	public String getStringDate(Date date) {
 		// 1900년 02월 02일 00시 00분 00초
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
@@ -233,6 +365,8 @@ private BasicDataSource bds;
 			return map;
 		}
 	}
+	
+	
 	
 	
 }

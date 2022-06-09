@@ -343,6 +343,9 @@ translateY(
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -417,26 +420,7 @@ translateY(
 										<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
 										<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
 										<div class="col favorite d-flex justify-content-end">
-											<c:choose>
-												<c:when test="${listInterest.food_seq eq list.food_seq}">
-													<c:forEach items="${listInterest}" var="listInterest">
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="redHeartBtn"
-																value="${list.food_seq}">
-																<img id="redHeart" src="../imgs/red heart.png">
-															</button>
-														</div>
-													</c:forEach>
-												</c:when>
-												<c:otherwise>
-													<div class="ImgFavorite">
-														<button type="button" class="heartBtn" id="emptyHeartBtn"
-															value="${list.food_seq}">
-															<img id="emptyHeart" src="../imgs/empty heart.png">
-														</button>
-													</div>
-												</c:otherwise>
-											</c:choose>
+											<!-- 여기는 버튼 들어갈 자리 -->
 										</div>
 									</div>
 								</div>
@@ -473,26 +457,7 @@ translateY(
 											<p id="food_title" class="card-text">${dto.food_title}</p>
 											<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
 											<div class="col favorite d-flex justify-content-end">
-												<c:choose>
-													<c:when test="${listInterest.food_seq eq dto.food_seq}">
-														<c:forEach items="${listInterest}" var="listInterest">
-															<div class="ImgFavorite">
-																<button type="button" class="heartBtn" id="redHeartBtn"
-																	value="${dto.food_seq}">
-																	<img id="redHeart" src="../imgs/red heart.png">
-																</button>
-															</div>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn"
-																value="${dto.food_seq}">
-																<img id="emptyHeart" src="../imgs/empty heart.png">
-															</button>
-														</div>
-													</c:otherwise>
-												</c:choose>
+												<!-- 여기는 버튼 들어갈 자리 -->
 											</div>
 										</div>
 									</div>
