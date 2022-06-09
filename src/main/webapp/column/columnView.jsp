@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -176,8 +177,8 @@ translateY
 }
 /* 게시글 스타일 영역 */
 .title {
-	border-bottom: 2px solid grey;
-	width: 250px;
+	padding: 10px;
+	text-align: center;
 }
 
 #content {
@@ -360,25 +361,26 @@ textarea {
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
 	</div>
-	<!-- FAQ 수정 -->
+
+	<!-- Column 보기 -->
 	<div class="cls_body">
 		<div class="d-flex justify-content-center">
 			<div class="title d-flex justify-content-center">
-				<h3>FAQ 수정</h3>
+				<h3>Column</h3>
 			</div>
 		</div>
 	</div>
-	<form id="modifyForm" action="/modifyProc.info" method="post">
-		<input class="d-none" value="${dto.qna_seq}" name="qna_seq"
-			id="qna_seq">
+	<form id="formModify" action="/modify.column" method="post">
 		<div class="container">
 			<div class="row">
 				<div class="col-2 d-flex justify-content-center align-items-center">
 					<h4>제목</h4>
 				</div>
 				<div class="col-10 p-2">
-					<input type="text" class="form-control" id="title" name="qna_title"
-						value="${dto.qna_title}">
+					<input type="text" id="calumn_seq" class="form-control d-none"
+						name="calumn_seq" value="${dto.getCalumn_seq()}"> <input
+						type="text" id="calumn_title" class="form-control" name="calumn_title"
+						value="${dto.getCalumn_title()}" readonly>
 				</div>
 			</div>
 			<div class="row">
@@ -387,38 +389,58 @@ textarea {
 				</div>
 				<div class="col-10 p-2">
 					<textarea id="content" class="form-control" id="content"
-						name="qna_content">${dto.qna_content}</textarea>
+						name="calumn_content" readonly>${dto.getCalumn_content()}</textarea>
 				</div>
 			</div>
+			<%--	<div class="row">
+						<div
+							class="col-2 d-flex justify-content-center align-items-center">
+							<h4>링크주소</h4>
+						</div>
+						<div class="col-10 p-2">
+							<textarea id="link" class="form-control" id="content"
+								name="qna_content"></textarea>
+						</div>
+					</div> --%>
 		</div>
 	</form>
+	</div>
+
+	<!-- FAQ 보기 끝-->
 	<div class="boxBtn">
 		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnModify">수정</button>
+		<c:if test="${loginSession.user_auth eq 'manager'}">
+			<button type="button" class="btn btn-primary" id="modifyBtn">수정하기</button>
+			<button type="button" class="btn btn-primary" id="btnDelete">삭제</button>
+		</c:if>
 	</div>
 
 	<script>
-		$("#btnModify").on("click", function() {
-			if ($("#title").val() === "") {
-				$("#title").val("제목없음");
-			}
-
-			if ($("#content").val() === "") {
-				alert("내용을 입력하세요.");
-				$("#content").focus();
-				return;
-			}
-			$("#modifyForm").submit();
-		})
-
-		let btnBack = document.getElementById("btnBack");
+		const btnBack = document.getElementById("btnBack");
 
 		btnBack.addEventListener("click", function(e) {
-			let qna_seq = $("#qna_seq").val();
+			location.href = "/toColumnPage.column";
+		});
 
-			location.href = "/view.info?qna_seq=" + qna_seq;
-		})
+		$("#modifyBtn").on("click", function(e) {
+			$("#formModify").submit();
+		});
+
+		let btnDelete = document.getElementById("btnDelete");
+
+		btnDelete
+				.addEventListener(
+						"click",
+						function(e) {
+							let Calumn_seq = $("#Calumn_seq").val();
+							let answer = confirm("지금 삭제하시면 복구가 불가합니다. 정말 삭제하겠습니까?");
+							console.log(answer);
+							if (answer) {
+								location.href = "/deleteProc.column?Calumn_seq=${dto.Calumn_seq}";
+							}
+						})
 	</script>
+	<!-- Column 보기 끝-->
 
 	<!-- footer -->
 	<div class="container footer">
@@ -453,7 +475,7 @@ textarea {
 		</div>
 		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 	</div>
+	</div>
 	<!-- footer 끝 -->
-
 </body>
 </html>
