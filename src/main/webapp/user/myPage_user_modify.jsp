@@ -373,18 +373,8 @@ translateY(
 									type="text" value="${dto.getUser_id()}" name="user_id" disabled>
 							</div>
 							<div>
-<<<<<<< HEAD
 								<input type="text" disabled placeholder="현재 비밀번호"> <input
 									type="password" id="beforePw" name="beforPw" value="${user_pw}">
-=======
-<<<<<<< HEAD
-								<input type="text" disabled placeholder="현재 비밀번호"> <input
-									type="text" id="beforePw" name="beforPw" value="${user_pw}">
-=======
-								<input type="text" disabled placeholder="현재 비밀번호">
-								<input type="password" id="beforePw" name="beforPw" value="${user_pw}">
->>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
->>>>>>> 7310e966159c61f4ec04bf4f9edbf30042b68c76
 								<button type="button" id="pwOk">비밀번호 확인</button>
 							</div>
 							</form>
