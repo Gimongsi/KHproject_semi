@@ -128,40 +128,13 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
-
-
-
-
 %
 {
 transform
-
-
-
-
 :
-
-
-
-
-translateY
-
-
-(
-
-
-
-
+translateY(
 -20px
-
-
-
-
 )
-
-
-
-
 }
 }
 /* 로고 효과 끝 */
@@ -337,6 +310,7 @@ translateY
 	border: none;
 	background-color: white;
 }
+
 /* 종류 표시 버튼 */
 .buttonImg {
 	background-color: #73b1a1;
@@ -380,7 +354,8 @@ translateY
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -441,7 +416,8 @@ translateY
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -463,10 +439,21 @@ translateY
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -507,9 +494,11 @@ translateY
 						id="location" style="cursor: pointer;">add_circle</span>
 				</div>
 				<div class="row d-flex justify-content-end align-items-end">
+				<c:if test="${loginSession.user_auth eq 'manager' || loginSession.user_auth eq 'admin'}">
 					<div class="col">
 						<button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
 					</div>
+				</c:if>
 				</div>
 			</div>
 			<div class="row cardListLocation">
@@ -533,8 +522,7 @@ translateY
 											<span class="buttonImg" style="margin-right: 5px;">P.T</span>
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
-											
-											<!-- 버튼 시작 -->
+											<!-- 즐겨찾기 버튼 시작 -->
 											<div class="col d-flex justify-content-end favorite">
 												<c:set var="checkInterestG" value="false" />
 													<c:forEach items="${ugi_dto}" var="interestG">
@@ -559,7 +547,7 @@ translateY
 													</c:if>
 												</div>
 											</div>
-											<!-- 버튼 끝 -->
+											<!-- 즐겨찾기 버튼 끝 -->
 										</div>
 									</div>
 								</div>
@@ -599,14 +587,15 @@ translateY
 											<span class="buttonImg" style="margin-right: 5px;">P.T</span>
 											<span class="buttonImg" style="margin-right: 5px;">G.X</span>
 											<span class="buttonImg" style="margin-right: 5px;">요가</span>
-											<!-- 버튼 시작 -->
+											<!-- 즐겨찾기 -->
 											<div class="col d-flex justify-content-end favorite">
-												<c:set var="checkInterestGP" value="false" />
+												<c:set var="checkInterestG" value="false"/>
 												<c:forEach items="${ugi_dto}" var="interestG">
 													<c:if test="${interestG.gym_seq eq dtoPromo.gym_seq}">
-														<c:set var="checkInterestG" value="true" />
+														<c:set var="checkInterestG" value="true"/>
 													</c:if>
 												</c:forEach>
+												
 											<div class="ImgFavorite">
 											<c:if test = "${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
 												<c:if test="${checkInterestG}">
@@ -624,7 +613,7 @@ translateY
 											</c:if>
 											</div>	
 											</div>
-											<!-- 버튼 끝 -->
+											<!-- 즐겨찾기 끝 -->
 										</div>
 									</div>
 								</div>
@@ -675,6 +664,8 @@ translateY
         $(".btnAdd").on("click", function(){
         	location.href = "/add.gym";
         })
+        
+        
         $("#location").on("click", function(){
         	let location = $("#searchLocation").val();
         	console.log(location);
@@ -697,10 +688,9 @@ translateY
         					let h5 = $('<h5 class="card-title">').html(dtoPromo.gym_name)
         					let a = $('<a>').attr("href", "/detail.gym?gym_seq="+dtoPromo.gym_seq).append(img, h5);
         					
-        					
-        					let spanFavorite = $('<span class="material-symbols-outlined">').html('favorite');
-        					let button = $('<button type="button" class="btnFavorite">').append(spanFavorite);
-        					let div3 = $('<div class="col d-flex justify-content-end favorite">').append(button);
+        					//let spanFavorite = $('<span class="material-symbols-outlined">').html('favorite');
+        					//let button = $('<button type="button" class="btnFavorite">').append(spanFavorite);
+        					let div3 = $('<div class="col d-flex justify-content-end favorite">').append();
         					let span1 = $('<span class="buttonImg" style="margin-right:5px;">').html('헬스');
         					let span2 = $('<span class="buttonImg" style="margin-right:5px;">').html('P.T');
         					let span3 = $('<span class="buttonImg" style="margin-right:5px;">').html('G.X');
@@ -714,54 +704,27 @@ translateY
         					let div = $('<div class="col-6 col-md-4 d-flex justify-content-center">').append(div2);
         					
         					$(".cardListLocation").append(div);
-        				
-        				
         				}
         			}
         		}, error: function(e){
         			console.log(e);
         		}
-        		
-        /* <div class="col-6 col-md-4 d-flex justify-content-center">
-    			<div class="card">
-        			<a href="/detail.gym?gym_seq=${dtoPromo.gym_seq}">
-            			<img src="/files/${dtoPromo.gym_src_main}" class="card-img-top">
-            			<h5 class="card-title">${dtoPromo.gym_name}</h5>
-        			</a>
-        			<div class="card-body">
-            			<p class="card-text d-flex justify-content-end">${dtoPromo.gym_month}개월 ${dtoPromo.gym_price}원</p>
-            			<div class="col btnImg d-flex">
-                			<span class="buttonImg" style="margin-right:5px;">헬스</span>
-                			<span class="buttonImg" style="margin-right:5px;">P.T</span>
-                			<span class="buttonImg" style="margin-right:5px;">G.X</span>
-                			<span class="buttonImg" style="margin-right:5px;">요가</span>
-                			<div class="col d-flex justify-content-end favorite">
-                    			<button type="button" class="btnFavorite">
-                        			<span class="material-symbols-outlined">favorite</span>
-                    			</button>
-                			</div>
-            			</div>
-        			</div>
-    			</div>
-			</div> */
         	})
-        	
         })
         
-        /*즐겨찾기 버튼 효과*/
-        $("#emptyHeartBtn").on("click", function(e) {
+        
+		/*즐겨찾기 버튼 효과*/
+        $(".emptyHeartBtn").on("click", function(e) {
 			let yn = confirm("즐겨찾기에 추가하시겠습니까?");
 			if (yn) {
 				location.href = "/interest.gym?gym_seq="+ $(e.target).prev().val();
-				console.log()
 			}
 		})
-		$("#redHeartBtn").on("click", function(e){
+		$(".redHeartBtn").on("click", function(e){
 			alert("즐겨찾기에서 삭제하시겠습니까?");
 			location.href="/delInterest.gym?gym_seq="+ $(e.target).prev().val();
 		})
-        
-        
+		
     </script>
 </body>
 </html>

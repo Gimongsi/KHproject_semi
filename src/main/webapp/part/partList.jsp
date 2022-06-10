@@ -234,8 +234,8 @@ h2 {
 	<div class="empty"></div>
 
 	<div class="container">
-
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -296,7 +296,8 @@ h2 {
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -318,10 +319,21 @@ h2 {
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -361,70 +373,58 @@ h2 {
 		<div class="pertList">
 			<div class="row">
 				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=arm" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">팔</p>
-							</div>
+					<div class="card" style="width: 18rem;">
+						<img src="/imgs/팔근육.jpg" class="card-img-top" id="arm" alt="...">
+						<div class="card-body">
+							<p class="card-text d-flex justify-content-center">팔</p>
 						</div>
-					</a>
+					</div>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=shoulder" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/어깨근육.jpg" class="card-img-top" id="shoulder"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">어깨</p>
-							</div>
+					<div class="card" style="width: 18rem;">
+						<img src="/imgs/어깨근육.jpg" class="card-img-top" id="sholder"
+							alt="...">
+						<div class="card-body">
+							<p class="card-text d-flex justify-content-center">어깨</p>
 						</div>
-					</a>
+					</div>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=chest" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">가슴</p>
-							</div>
+					<div class="card" style="width: 18rem;">
+						<img src="/imgs/가슴.jpg" class="card-img-top" id="chest" alt="...">
+						<div class="card-body">
+							<p class="card-text d-flex justify-content-center">가슴</p>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 			<div class="empty"></div>
 			<div class="row">
 				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=thigh" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">허벅지</p>
-							</div>
+					<div class="card" style="width: 18rem;">
+						<img src="/imgs/허벅지 근육.jpg" class="card-img-top" id="thigh"
+							alt="...">
+						<div class="card-body">
+							<p class="card-text d-flex justify-content-center">허벅지</p>
 						</div>
-					</a>
+					</div>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=butt" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt"
-								alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">엉덩이</p>
-							</div>
+					<div class="card" style="width: 18rem;">
+						<img src="/imgs/엉덩이 근육.jpg" class="card-img-top" id="butt"
+							alt="...">
+						<div class="card-body">
+							<p class="card-text d-flex justify-content-center">엉덩이</p>
 						</div>
-					</a>
+					</div>
 				</div>
 				<div class="col-4 d-flex justify-content-center">
-					<a href="/toPartPage.part?part=abs" style="text-decoration: none; color: black;">
-						<div class="card" style="width: 18rem;">
-							<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
-							<div class="card-body">
-								<p class="card-text d-flex justify-content-center">복근</p>
-							</div>
+					<div class="card" style="width: 18rem;">
+						<img src="/imgs/복근.jpg" class="card-img-top" id="abs" alt="...">
+						<div class="card-body">
+							<p class="card-text d-flex justify-content-center">복근</p>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -471,7 +471,7 @@ h2 {
 		$("#arm").on("click",function(){ //팔운동 페이지 요청
 			location.href="/";
 		})
-		$("#shoulder").on("click", function(){ //어깨운동 페이지 요청
+		$("#sholder").on("click", function(){ //어깨운동 페이지 요청
 			location.href="/";
 		})
 		$("#chest").on("click", function(){ //가슴 운동 페이지 요청

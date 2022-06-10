@@ -234,7 +234,8 @@ translateY(
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -295,7 +296,8 @@ translateY(
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -317,10 +319,21 @@ translateY(
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -368,11 +381,11 @@ translateY(
                     <div class="row inner-container-right">
                         <div class="col-7">
                             <div class="inner-contents-left">
+                            
                                 <div>
                                     <c:forEach items="${list}" var="dto">
-                                    	<div style="margin-bottom: 10px;">
-	                                    	<a href="/diaryModify.diary?diary_seq=${dto.diary_seq}" style="text-decoration: none; color: black;">${dto.diary_seq}.${dto.diary_part}<br>${dto.diary_content}</a>	                                    	
-                                    	</div>
+                                    	<div>${dto.diary_seq}. ${dto.getDiary_part()}</div>
+                                    	<div>${dto.getDiary_content()}</div>
                                     </c:forEach>
                                 </div>
                             </div>
@@ -390,6 +403,8 @@ translateY(
                     </div>
                     <div class="d-flex justify-content-end mt-4 gap-3">
                         <button class="btn btn-primary" id="btnWrite" type="button">일기 쓰기</button>
+                        <button class="btn btn-primary" type="button">일기 수정</button>
+                        <button class="btn btn-secondary" type="button">일기 삭제</button>
                     </div>
                 </div>
             </div>
@@ -428,14 +443,13 @@ translateY(
 	<script>
     document.getElementById("modifyBtn").onclick = function(){
 		location.href = "/userModify.user";
-	};
+	}
 	document.getElementById("diaryBtn").onclick = function(){
 		location.href = "/userDiary.user";
-	};
+	}
 	document.getElementById("btnWrite").onclick = function(){
 		location.href = "/userDiaryWrite.user";
-	};
-	
+	}
     </script>
 </body>
 </html>

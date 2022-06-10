@@ -39,27 +39,30 @@ public class FoodController extends HttpServlet {
 		String uri = request.getRequestURI();
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
 
 
 		if (uri.equals("/list.food")) { // food 리스트 출력
 
+<<<<<<< HEAD
+		if (uri.equals("/list.food")) { // 식품 비회원 리스트 요청
+=======
 			HttpSession session = request.getSession(); 
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 			FoodDAO dao = new FoodDAO();
-			System.out.println("loginSession : " + dto);
+
 			try {
 				ArrayList<FoodDTO> listPromo = dao.selectPromo();
 				ArrayList<FoodDTO> list = dao.selectHellin();
-					
+				
 				request.setAttribute("listPromo", listPromo);
 				request.setAttribute("list", list);
 				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			request.getRequestDispatcher("/food/foodList.jsp").forward(request, response);
-		
+			request.getRequestDispatcher("/food/foodGuestList.jsp").forward(request, response);
+			
 		}else if (uri.equals("/modifyList.food")) { // 식품 프로모션 관리자페이지 요청
 			FoodDAO dao = new FoodDAO();
 
@@ -97,7 +100,6 @@ public class FoodController extends HttpServlet {
 				String food_name = multi.getParameter("food_name");
 				String food_title = multi.getParameter("food_title");
 				int food_price = Integer.parseInt(multi.getParameter("food_price"));
-//			System.out.println(food_com + food_name + food_title + food_price);
 
 				String food_src = multi.getFilesystemName("food_src");
 
@@ -117,7 +119,6 @@ public class FoodController extends HttpServlet {
 		} else if (uri.equals("/modify.food")) { // 식품 프로모션 수정페이지 요청
 			FoodDAO dao = new FoodDAO();
 			int food_seq = Integer.parseInt(request.getParameter("food_seq"));
-//			System.out.println("seq" + food_seq);
 
 			try {
 				FoodDTO dto = dao.selectSeq(food_seq);
@@ -125,6 +126,7 @@ public class FoodController extends HttpServlet {
 				request.setAttribute("dto", dto);
 
 				FoodFolderDTO dtoPic = dao.selectPic(food_seq);
+				System.out.println(dtoPic);
 				request.setAttribute("dtoPic", dtoPic);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -151,7 +153,6 @@ public class FoodController extends HttpServlet {
 				String food_name = multi.getParameter("food_name");
 				String food_title = multi.getParameter("food_title");
 				int food_price = Integer.parseInt(multi.getParameter("food_price"));
-				System.out.println(food_seq + food_com + food_name + food_title + food_price);
 				
 				String food_src = multi.getFilesystemName("food_src");
 
@@ -159,12 +160,13 @@ public class FoodController extends HttpServlet {
 				int rsFile = dao.modifyPic(new FoodFolderDTO(food_seq, food_src));
 				
 				if (rs > 0 || rsFile > 0) {
-		               System.out.println("수정 성공");
-		               response.sendRedirect("/modifyList.food?curPage=1");
-		            }else if (rs > 0){
-		               System.out.println("수정 성공");
-		               response.sendRedirect("/modifyList.food?curPage=1");
-		            }
+					System.out.println("수정 성공");
+					response.sendRedirect("/modifyList.food?curPage=1");
+				}else if (rs > 0){
+					System.out.println("수정 성공");
+					response.sendRedirect("/modifyList.food?curPage=1");
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -185,6 +187,7 @@ public class FoodController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			
 		}else if(uri.equals("/interest.food")) {
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
@@ -204,7 +207,6 @@ public class FoodController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			
 		}else if(uri.equals("/delInterest.food")){
 			HttpSession session = request.getSession();
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
@@ -222,7 +224,6 @@ public class FoodController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		
 		}else if(uri.equals("/listLogin.food")) { //로그인 시 푸드 리스트
 			HttpSession session = request.getSession(); 
 			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
@@ -244,7 +245,5 @@ public class FoodController extends HttpServlet {
 			}
 			request.getRequestDispatcher("/food/foodList.jsp").forward(request, response);
 		}
-
-		
 	}
 }
