@@ -282,8 +282,7 @@ table {
 </head>
 <body>
 	<div class="container">
-		<!-- 헤더 -->
-	<div class="row cls_header">
+		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -344,8 +343,7 @@ table {
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item"
-							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -367,21 +365,10 @@ table {
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<c:choose>
-									<c:when
-										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
-										<li class="nav-item"><a class="nav-link"
-											href="/listLogin.gym">내 주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/listLogin.food">특가 식품</a></li>
-									</c:when>
-									<c:otherwise>
-										<li class="nav-item"><a class="nav-link" href="/list.gym">내
-												주변 운동시설</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/list.food">특가 식품</a></li>
-									</c:otherwise>
-								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/list.gym">내
+										주변 운동시설</a></li>
+								<li class="nav-item"><a class="nav-link" href="/list.food">특가
+										식품</a></li>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -418,17 +405,18 @@ table {
 		<div class="empty"></div>
 		<div class="row">
 			<div class="col-2 d-flex justify-content-center">
-				<button type="button" class="btnSubmit" id="btnSubmit">등록</button>
+				<c:if test="${loginSession.user_auth eq 'manager'}">
+					<button type="button" class="btnSubmit" id="btnSubmit">등록</button>
+				</c:if>
 			</div>
 			<div class="col-10 d-flex justify-content-end">
 				<div class="dropdown">
+				
 					<button class="btn btn-secondary dropdown-toggle" type="button"
 						id="dropdownMenuButton1" data-bs-toggle="dropdown"
 						aria-expanded="false">근육별 목록 선택</button>
-
-
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="#">팔</a></li>
+						<li><a class="dropdown-item" value="arm" href="#">팔</a></li>
 						<li><a class="dropdown-item" href="#">어깨</a></li>
 						<li><a class="dropdown-item" href="#">승모근</a></li>
 						<li><a class="dropdown-item" href="#">가슴</a></li>
@@ -439,6 +427,20 @@ table {
 						<li><a class="dropdown-item" href="#">유산소</a></li>
 						<li><a class="dropdown-item" href="#">전체</a></li>
 					</ul>
+					<select name="part" style="margin-right: 20px;">
+						<option value="list" selected>근육별 목록 선택</option>
+	                	<option value="arm">팔</option>
+	                	<option value="shoulder">어깨</option>
+	                	<option value="trap">승모근</option>
+	                	<option value="chest">가슴</option>
+	                	<option value="abs">배</option>
+						<option value="back">등</option>
+	                  	<option value="butt">엉덩이</option>
+	                    <option value="thigh">허벅지</option>
+	                    <option value="calves">종아리</option>
+	                    <option value="cardio">유산소</option>
+	                    <option value="all">전체</option>
+	                </select>
 				</div>
 
 			</div>
@@ -519,5 +521,13 @@ table {
 		<!-- footer 끝 -->
 
 	</div>
+	<script>
+		$("#btnSubmit").on("click", function(){
+			location.href="/writePart.part";
+		})
+	
+	
+	
+	</script>
 </body>
 </html>

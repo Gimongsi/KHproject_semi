@@ -113,13 +113,26 @@ keyframes waviy { 0%, 40%, 100% {
 }
 
 20
+
+
 %
 {
 transform
+
+
 :
-translateY(
+
+
+translateY
+(
+
+
 -20px
+
+
 )
+
+
 }
 }
 /* 로고 효과 끝 */
@@ -238,7 +251,7 @@ translateY(
 <body>
 	<div class="container">
 		<!-- 헤더 -->
-	<div class="row cls_header">
+		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -396,7 +409,9 @@ translateY(
 						<div class="bookmark">
 							<table>
 								<thead>
-									<th>프로모션</th>
+									<tr>
+										<th>프로모션</th>
+									</tr>
 								</thead>
 								<tbody>
 									<c:choose>
@@ -466,12 +481,12 @@ translateY(
 		</div>
 	</div>
 	<script>
-    	document.getElementById("modifyBtn").onclick = function(){
-    		location.href = "/userModify.user";
-    	}
-    	document.getElementById("diaryBtn").onclick = function(){
-    		location.href = "/userDiary.user";
-    	}
-    </script>
+		document.getElementById("modifyBtn").onclick = function() {
+			location.href = "/userModify.user";
+		}
+		document.getElementById("diaryBtn").onclick = function() {
+			location.href = "/userDiary.user";
+		}
+	</script>
 </body>
 </html>

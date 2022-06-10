@@ -11,7 +11,8 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.dangpert.dto.CalumnDTO;
+import com.dangpert.dto.ColumnDTO;
+
 
 public class ColumnDAO {
 	private BasicDataSource bds;
@@ -27,99 +28,98 @@ public class ColumnDAO {
 	}
 	
 	public int getNewSeq() throws Exception{
-		String sql = "select calumn_seq.nextval from dual";
+		String sql = "select column_seq.nextval from dual";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			int calumn_seq = rs.getInt(1);
-			return calumn_seq;			
+			int column_seq = rs.getInt(1);
+			return column_seq;			
 		}
 	}
 
-	public ArrayList<CalumnDTO> searchByTitle(String searchKeyword) throws Exception{
-		String sql = "select * from tbl_calumn where title like '%'||?||'%' order by 1 desc";
+	public ArrayList<ColumnDTO> searchByTitle(String searchKeyword) throws Exception{
+		String sql = "select * from tbl_column where title like '%'||?||'%' order by 1 desc";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
 			pstmt.setString(1, searchKeyword);
 			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<CalumnDTO> list = new ArrayList<>();
+			ArrayList<ColumnDTO> list = new ArrayList<>();
 			while(rs.next()) {
-				int calumn_seq = rs.getInt("calumn_seq");
-				String calumn_title = rs.getString("calumn_title");
-				String calumn_content = rs.getString("calumn_content");
-				String calumn_date = rs.getString("calumn_date");
-				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
+				int column_seq = rs.getInt("column_seq");
+				String column_title = rs.getString("column_title");
+				String column_content = rs.getString("column_content");
+				String column_date = rs.getString("column_date");
+				list.add(new ColumnDTO(column_seq,column_title,column_content,column_date));
 			}
 			return list;
 		}
 	}
 
-	public ArrayList<CalumnDTO> selectAll() throws Exception{
-		String sql = "select * from tbl_calumn";
+	public ArrayList<ColumnDTO> selectAll() throws Exception{
+		String sql = "select * from tbl_column";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<CalumnDTO> list = new ArrayList<>();
+			ArrayList<ColumnDTO> list = new ArrayList<>();
 			while(rs.next()) {
-				int calumn_seq = rs.getInt("calumn_seq");
-				String calumn_title = rs.getString("calumn_title");
-				String calumn_content = rs.getString("calumn_content");
-				String calumn_date = rs.getString("calumn_date");
-				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
+				int column_seq = rs.getInt("column_seq");
+				String column_title = rs.getString("column_title");
+				String column_content = rs.getString("column_content");
+				String column_date = rs.getString("column_date");
+				list.add(new ColumnDTO(column_seq,column_title,column_content,column_date));
 			}
 			return list;
 		}
 	}
 
-	public int delete(int calumn_seq) throws Exception{
-		String sql = "delete from tbl_calumn where calumn_seq = ?";
+	public int delete(int column_seq) throws Exception{
+		String sql = "delete from tbl_column where column_seq = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
-			pstmt.setInt(1, calumn_seq);
+			pstmt.setInt(1, column_seq);
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public int modify(CalumnDTO dto) throws Exception{
-		String sql = "update tbl_calumn set calumn_title=?, calumn_content=? where calumn_seq=?";
+	public int modify(ColumnDTO dto) throws Exception{
+		String sql = "update tbl_column set column_title=?, column_content=? where column_seq=?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
-			pstmt.setInt(3, dto.getCalumn_seq());
-			pstmt.setString(1, dto.getCalumn_title());
-			pstmt.setString(2, dto.getCalumn_content());
+			pstmt.setInt(3, dto.getColumn_seq());
+			pstmt.setString(1, dto.getColumn_title());
+			pstmt.setString(2, dto.getColumn_content());
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public int write(CalumnDTO dto) throws Exception{
-		String sql = "insert into tbl_calumn values(infomation_seq.nextval,?,?,?)";
+	public int write(ColumnDTO dto) throws Exception{
+		String sql = "insert into tbl_column values(column_seq.nextval,?,?,sysdate)";
 
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, dto.getCalumn_title());
-			pstmt.setString(2, dto.getCalumn_content());
-			pstmt.setString(3, dto.getCalumn_date());
+			pstmt.setString(1, dto.getColumn_title());
+			pstmt.setString(2, dto.getColumn_content());
 
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public CalumnDTO selectBySeq(int qna_seq) throws Exception{
-		String sql = "select * from tbl_calumn where qna_seq = ?";
+	public ColumnDTO selectBySeq(int qna_seq) throws Exception{
+		String sql = "select * from tbl_column where qna_seq = ?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
@@ -128,11 +128,11 @@ public class ColumnDAO {
 			ResultSet rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				int calumn_seq = rs.getInt("calumn_seq");
-				String calumn_title = rs.getString("calumn_title");
-				String calumn_content = rs.getString("calumn_content");
-				String calumn_date = rs.getString("calumn_date");
-				CalumnDTO dto = new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date);
+				int column_seq = rs.getInt("column_seq");
+				String column_title = rs.getString("column_title");
+				String column_content = rs.getString("column_content");
+				String column_date = rs.getString("column_date");
+				ColumnDTO dto = new ColumnDTO(column_seq,column_title,column_content,column_date);
 				return dto;
 			}
 			return null;
@@ -140,7 +140,7 @@ public class ColumnDAO {
 	}
 
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception{
-		String sql = "select count(*) as totalCnt from tbl_calumn";
+		String sql = "select count(*) as totalCnt from tbl_column";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			

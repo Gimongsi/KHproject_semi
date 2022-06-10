@@ -29,18 +29,25 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
-
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -49,6 +56,8 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -76,10 +85,8 @@
 .headMenu {
 	justify-content: end;
 }
-
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -91,8 +98,8 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
 @import
@@ -118,7 +125,8 @@ keyframes waviy { 0%, 40%, 100% {
 {
 transform
 :
-translateY(
+translateY
+(
 -20px
 )
 }
@@ -127,6 +135,7 @@ translateY(
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -164,7 +173,6 @@ translateY(
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
@@ -369,12 +377,12 @@ translateY(
 					<div class="inner-container-right">
 							<form action="/pwOk.user" method="post" id="pwOkForm">
 							<div class="mb-5">
-								<input type="text" disabled placeholder="이메일 / 수정불가"> <input
-									type="text" value="${dto.getUser_id()}" name="user_id" disabled>
+								<input type="text" disabled placeholder="이메일 / 수정불가">
+								<input type="text" value="${dto.getUser_id()}" name="user_id" disabled>
 							</div>
 							<div>
-								<input type="text" disabled placeholder="현재 비밀번호"> <input
-									type="password" id="beforePw" name="beforPw" value="${user_pw}">
+								<input type="text" disabled placeholder="현재 비밀번호">
+								<input type="password" id="beforePw" name="beforPw" value="${user_pw}">
 								<button type="button" id="pwOk">비밀번호 확인</button>
 							</div>
 							</form>
@@ -393,17 +401,16 @@ translateY(
 						<form action="/userDataModify.user" method="post" id="modifyForm">
 							<input type="text" class="d-none" value="${dto.user_id}" name="user_id">
 							<div>
-								<input type="text" disabled placeholder="변경 후 비밀번호"> <input
-									type="text" id="afterPw" name="user_pw">
+								<input type="text" disabled placeholder="변경 후 비밀번호">
+								<input type="password" id="afterPw" name="user_pw">
 							</div>
 							<div class="mb-5">
 								<input type="text" disabled placeholder="변경 후 비밀번호 확인">
-								<input type="text" id="afterPwCheck" name="user_pw_check">
+								<input type="password" id="afterPwCheck" name="user_pw_check">
 							</div>
 							<div>
-								<input type="text" disabled placeholder="몸무게 수정"> <input
-									type="text" id="weight" value="${data_dto.weight}"
-									name="weight">
+								<input type="text" disabled placeholder="몸무게 수정">
+								<input type="text" id="weight" value="${data_dto.weight}" name="weight">
 							</div>
 							<div>
 								<input type="text" disabled placeholder="목표 몸무게 수정">
