@@ -12,6 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<!-- text area auto size -->        
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>    
 <!-- 카카오 맵 -->
 <script type="text/javascript"
                             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=40927a14f44e1c75637977bc1c89c8a4&libraries=services"></script>    
@@ -256,38 +258,31 @@
         margin-bottom: 20px;
         --bs-gutter-x: 1rem;
     }
-    #gym_comment{
-        width: 70%;
-        height: 30rem;
-        border: none;
-        overflow: hidden;
-        resize: none;
-        font-weight: 600;
-        text-align: center;
-    }
-    #gym_time{
-        width: 70%;
-        height: 3rem;
-        border: none;
-        overflow: hidden;
-        resize: none;
-        font-weight: 600;
-        text-align: center;
-    }
-    #gym_comment:focus, #gym_time:focus{
-        outline: none;
-    }
+    
+    .gym_textarea {
+	width: 70%;
+	height: 4rem;
+	overflow: hidden;
+	border: none;
+	resize: none;
+	font-weight: 600;
+	text-align: center;
+	}
+	
+	.gym_textarea:focus {
+	outline: none;
+	}
+	
     .noticePic img{
         width: 100%;
         height: 100%;
     }
-    /* 즐겨찾기 버튼 */
-    .btnFavorite {
-        border: none;
-        background-color: white;
+    
+    .noticePic img:hover{
+        transform: scale(2);
     }
-
-    /* 즐겨찾기 하트 */
+    
+    /* 구글 아이콘 */
     .material-symbols-outlined {
         font-variation-settings:
             'FILL' 0,
@@ -388,9 +383,6 @@
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
-					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
-					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -478,11 +470,26 @@
                             </div>
                         </div>
                         <hr style="height:2px; width:100%; border:none; background-color:#37b192;">
+                        <form id="formCoupon" name="formCoupon">
                         <div class="row-12">
                             <div class="col-12">
-                                <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">옵션 선택</h5>
+                                <h5 style="padding-left: 10px; font-weight: 600; color:#709c91">당퍼트 프로모션 가격</h5>
                             </div>
                             <div class="col-12 d-flex justify-content-center">
+<<<<<<< HEAD
+                            	${dto.gym_month}개월&nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; &nbsp; &nbsp; &nbsp;${dto.gym_price}원
+                               <%-- <select class="form-select" name="option">
+                                	<c:if test="${empty gymPriceDTO}">
+                                		<option style="text-align: center;" value="3">준비 중 입니다.</option>
+                                	</c:if>
+                                	<c:if test="${not empty gymPriceDTO}">
+                                		<c:forEach items="${gymPriceDTO}" var="gymPriceDTO">
+                                   		<option style="text-align: center;" value="${gymPriceDTO.gym_price_seq}">${dto.gym_month}개월&nbsp; &nbsp; &nbsp; &nbsp; : &nbsp; &nbsp; &nbsp; &nbsp;${dto.gym_price}원</option>
+                                		<input style="display:none;" name="gym_price_seq" value="${gymPriceDTO.gym_price_seq}">
+                                    	</c:forEach>
+                                    </c:if>
+                                </select> --%>
+=======
                                 <select class="form-select" name="option">
                                 	<c:if test="${empty dto.gym_month}">
                                 		<option style="text-align: center;" value="3">준비 중 입니다.</option>
@@ -493,12 +500,17 @@
                                     	<%-- </c:forEach> --%>
                                     </c:if>
                                 </select>
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
                             </div>
                         </div>
                         <div class="empty"></div>
+                        <c:if test=""></c:if>
                         <div class="col d-flex justify-content-center">
-                            <button class="btn btnBuy" type="button">회원권 구매</button>
+                            <button class="btn btnBuy" type="button">쿠폰 발급</button>
+                            <input type="text" style="display:none;" name="user_seq" value="${loginSession.user_seq}">
+                            <input type="text" style="display:none;" name="gym_seq" value="${dto.gym_seq}">
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -513,7 +525,7 @@
                     </div>
                     <div class="row">
                         <div class="col content">
-                            <textarea id="gym_comment" name="gym_comment" readonly>${dto.gym_comment}</textarea>
+                            <textarea class="gym_textarea" name="gym_comment" readonly>${dto.gym_comment}</textarea>
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -527,7 +539,7 @@
                     </div>
                     <div class="row">
                         <div class="col content">
-                            <textarea id="gym_time" name="gym_time" readonly>${dto.gym_time}</textarea>
+                            <textarea class="gym_textarea" name="gym_time" readonly>${dto.gym_time}</textarea>
                         </div>
                     </div>
                     <div class="empty"></div>
@@ -596,8 +608,10 @@
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-end">
+                <c:if test="${loginSession.user_seq eq user_seq || loginSession.user_auth eq 'manager'}">
                     <button type="button" class="btn btnModify"> 수정 </button>
                     <button type="button" class="btn btnDel"> 삭제 </button>
+                </c:if> 
                 </div>
             </div>
         </div>
@@ -642,7 +656,35 @@
 		$(".btnModify").on("click", function() {
 			location.href = "/modify.gym?gym_seq=${dto.gym_seq}";
 		})
+<<<<<<< HEAD
+		
+		autosize($("textArea"));
+		
+		/* 쿠폰번호 발급 */
+		$("#formCoupon").on("click", ".btnBuy", function(){
+			
+			$(".btnBuy").attr("disabled", "disabled");
+			
+			$.ajax({
+				url: "/getCoupon.gym"
+				, type: "post"
+				, data: {gym_price: "${dto.gym_price}", user_seq: "${loginSession.user_seq}", gym_seq: "${dto.gym_seq}"}
+				,success: function(data){
+					if(!data == ""){
+						alert("쿠폰이 발급되었습니다.\n쿠폰번호: " + data);
+					}else if(data == 0){
+						alert("쿠폰 발급 실패.");
+					}
+				}, error: function(){
+					alert("회원 전용 메뉴입니다.");
+					console.log(e);
+				}
+			})
+		})
+		
+=======
 
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 		/* 카카오 맵 */
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -690,6 +732,10 @@
 								map.setCenter(coords);
 							}
 						});
+<<<<<<< HEAD
+		
+=======
+>>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
 	</script>
 </body>
 </html>

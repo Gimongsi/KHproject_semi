@@ -207,7 +207,8 @@ translateY(
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -268,7 +269,8 @@ translateY(
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -290,10 +292,21 @@ translateY(
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">

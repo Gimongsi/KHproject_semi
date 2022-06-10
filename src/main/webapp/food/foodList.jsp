@@ -106,47 +106,25 @@
 	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-
-
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -235,6 +213,26 @@ translateY
 .foodPromo {
 	margin-bottom: 80px;
 }
+
+.btnAdd {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 5px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	color: white;
+}
+
+.btnAdd:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
 /* 즐겨찾기 버튼 */
 .btnFavorite {
 	border: none;
@@ -264,6 +262,7 @@ translateY
 	border: none;
 	background-color: white;
 }
+
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -295,6 +294,7 @@ translateY
 
 <body>
 	<div class="container">
+		<!-- 헤더 -->
 		<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
@@ -356,7 +356,8 @@ translateY
 							묻는 질문</a></li>
 					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -378,10 +379,21 @@ translateY
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
 									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 									role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -415,6 +427,15 @@ translateY
 		</div>
 		<div class="foodPromo">
 			<div class="row cardList">
+				<div class="empty"></div>
+				<%-- 홈관리자만 버튼 노출 --%>
+				<c:if test="${loginSession.user_auth eq 'manager'}">
+					<div class="col">
+						<button class="btn btnAdd" type="button" id="btnAdd" name="btnAdd">신규 등록</button>
+					</div>
+				<div class="empty"></div>
+				</c:if>
+				<%-- 홈관리자만 버튼 노출 끝 --%>
 				<c:choose>
 					<c:when test="${listPromo.size() == 0}">
 						<div>등록된 프로모션이 없습니다.</div>
@@ -442,7 +463,6 @@ translateY
 														<c:set var="checkInterest" value="true"/>
 													</c:if>																								
 											</c:forEach>
-											
 											<div class="ImgFavorite">
 												<c:if test = "${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
 													<!-- 만약 checkInterest가 트루라면 찜한 상품이니 빨간하트 띄워주고 -->
@@ -461,7 +481,6 @@ translateY
 													</c:if>	
 												</c:if>
 											</div>
-									
 										</div>
 									</div>
 								</div>
@@ -569,26 +588,39 @@ translateY
 		<!-- footer 끝 -->
 	</div>
 	<script>
-	$(".emptyHeartBtn").on("click",function(e) {
+	$(".btnAdd").on("click", function(){
+    	location.href = "/modifyList.food?curPage=1";
+    })
+	
+    $(".emptyHeartBtn").on("click",function(e) {
 		let yn = confirm("즐겨찾기에 추가하시겠습니까?");
 		console.log($(e.target).prev().val());
 			if (yn) {
 				console.log();
 				location.href = "/interest.food?food_seq="+ $(e.target).prev().val();
 				}
-
 	})
+	
 	$("#redHeartBtn").on("click",function(e) {
 		alert("즐겨찾기에서 삭제하시겠습니까?");
 		location.href = "/delInterest.food?food_seq="+ $(e.target).prev().val();
 	})
-	
-	
-		/* let num =  $(".food_price").html();
-		function numbeComma(num){
-			return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-		console.log(numbeComma(15315)); */
-	</script>
+        
+	function guestMsg(){
+		let answer = confirm("회원 전용 메뉴입니다. 로그인하시겠습니까?");
+		if(answer){
+			$("a").attr("href", "/user/login.jsp");
+		}else
+			$("a").attr("href", "#");
+			return;
+	}
+         
+        /* let num =  $(".food_price").html();
+        function numbeComma(num){
+        	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        console.log(numbeComma(15315)); */
+        
+    </script>
 </body>
 </html>

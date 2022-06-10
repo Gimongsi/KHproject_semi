@@ -28,7 +28,7 @@ public class GymFolderDTO {
 	public void setGym_src(String gym_src) {
 		this.gym_src = gym_src;
 	}
-
+	
 	@Override
 	public String toString() {
 		return gym_seq + " : " + gym_src;

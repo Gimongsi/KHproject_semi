@@ -1,7 +1,5 @@
 package com.dangpert.mail;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
@@ -265,9 +263,7 @@ public class SendMail {
 		}
 		return resultNum;
 	}
-	
-	
-	
+
 	public int ranNum() {
         return ThreadLocalRandom.current().nextInt(100000, 1000000);
     }

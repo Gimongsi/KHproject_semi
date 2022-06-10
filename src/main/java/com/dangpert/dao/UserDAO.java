@@ -1,6 +1,5 @@
 package com.dangpert.dao;
 
-import java.nio.channels.SelectableChannel;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -231,7 +230,6 @@ private BasicDataSource bds;
 			return null;
 		}
 	}
-	
 	public ArrayList<UserDTO> selectByName(String user_name) throws Exception { // 이름으로 유저찾기
 		String sql = "select * from tbl_user where user_name=?";
 		
@@ -311,22 +309,6 @@ private BasicDataSource bds;
 			int rs = pstmt.executeUpdate();
 			
 			return rs;
-		}
-	}
-	
-	public int manager_userUpdate(UserDTO dto) throws Exception {
-		String sql = "update tbl_user set user_name=?, user_phone=?, user_auth=? where user_id=?";
-		
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql)) {
-			
-			pstmt.setString(1, dto.getUser_name());
-			pstmt.setString(2, dto.getUser_phone());
-			pstmt.setString(3, dto.getUser_auth());
-			pstmt.setString(4, dto.getUser_id());
-			
-			return pstmt.executeUpdate();
-			
 		}
 	}
 	
@@ -421,26 +403,6 @@ private BasicDataSource bds;
 			map.put("needNext", needNext);
 			
 			return map;
-		}
-	}
-	
-	public String findId(String user_name, String user_phone)throws Exception { //아이디 찾기
-		String sql = "select * from tbl_user where user_name= ? and user_phone=? ";
-		
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql)){
-			
-			pstmt.setString(1, "user_name");
-			pstmt.setString(2, "user_phone");
-			
-			ResultSet rs = pstmt.executeQuery();
-			
-			if(rs.next()) {	
-				String user_id = rs.getString("user_id");
-				return user_id;
-			}else {
-				return null;
-			}
 		}
 	}
 	

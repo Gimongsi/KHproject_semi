@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.dangpert.dao.InformationDAO;
 import com.dangpert.dto.InformationDTO;
 import com.dangpert.dto.UserDTO;
-	
+
 @WebServlet("*.info")
 public class InformationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

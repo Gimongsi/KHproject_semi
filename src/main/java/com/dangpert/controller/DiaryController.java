@@ -54,20 +54,6 @@ public class DiaryController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(uri.equals("/diaryModify.diary")) {		// 다이어리 수정하기 전 내용 확인
-			int diary_seq = Integer.parseInt(request.getParameter("diary_seq"));
-			System.out.println("diary_seq : " + diary_seq);
-			
-			DiaryDAO dao = new DiaryDAO();
-			
-			try {
-				DiaryDTO dto = dao.selectBySeq(diary_seq);
-				request.setAttribute("dto", dto);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			request.getRequestDispatcher("/user/myPage_diary_modify.jsp").forward(request, response);
-			
 		} else if(uri.equals("/toDiarypage.diary")) {		// 다이어리 목록 띄우기
 			HttpSession session = request.getSession();
 			UserDTO user_dto = (UserDTO)session.getAttribute("loginSession");
@@ -82,41 +68,6 @@ public class DiaryController extends HttpServlet {
 			}
 			
 			request.getRequestDispatcher("/user/myPage_diary.jsp").forward(request, response);
-		}
-		
-		else if(uri.equals("/diaryUpdate.diary")) {		// 다이어리 수정
-			System.out.println("다이어리 수정");
-			int diary_seq = Integer.parseInt(request.getParameter("diary_seq"));
-			String diary_content = request.getParameter("diary_content");
-			String diary_part = request.getParameter("diary_part");
-			int diary_weight = Integer.parseInt(request.getParameter("diary_weight"));
-			
-			DiaryDAO dao = new DiaryDAO();
-			
-			try {
-				int rs = dao.update(diary_content, diary_part, diary_weight, diary_seq);
-				if(rs > 0) {
-					response.sendRedirect("/userDiary.user");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		else if(uri.equals("/diaryDelete.diary")) {	// 다이어리 삭제
-			int diary_seq = Integer.parseInt(request.getParameter("diary_seq"));
-			System.out.println("diary_seq : " + diary_seq);
-			
-			DiaryDAO dao = new DiaryDAO();
-			try {
-				int rs = dao.delete(diary_seq);
-				if(rs > 0) {
-					response.sendRedirect("/toDiarypage.diary");
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	

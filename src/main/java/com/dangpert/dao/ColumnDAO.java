@@ -12,7 +12,6 @@ import javax.naming.InitialContext;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import com.dangpert.dto.CalumnDTO;
-import com.dangpert.dto.InformationDTO;
 
 public class ColumnDAO {
 	private BasicDataSource bds;
@@ -58,7 +57,7 @@ public class ColumnDAO {
 			return list;
 		}
 	}
-	
+
 	public ArrayList<CalumnDTO> selectAll() throws Exception{
 		String sql = "select * from tbl_calumn";
 
@@ -72,31 +71,11 @@ public class ColumnDAO {
 				String calumn_title = rs.getString("calumn_title");
 				String calumn_content = rs.getString("calumn_content");
 				String calumn_date = rs.getString("calumn_date");
-				list.add(new CalumnDTO(calumn_seq, calumn_title, calumn_content, calumn_date));
+				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
 			}
 			return list;
 		}
 	}
-	
-//	public ArrayList<CalumnDTO> selectAll(int start, int end) throws Exception{
-//		String sql = "select * from (select tbl_calumn.*, row_number() over(order by seq_board desc) as num from tbl_calumn)"
-//				+ " where num between ? and ?";
-//
-//		try(Connection con = bds.getConnection();
-//			PreparedStatement pstmt = con.prepareStatement(sql)){
-//			
-//			ResultSet rs = pstmt.executeQuery();
-//			ArrayList<CalumnDTO> list = new ArrayList<>();
-//			while(rs.next()) {
-//				int calumn_seq = rs.getInt("calumn_seq");
-//				String calumn_title = rs.getString("calumn_title");
-//				String calumn_content = rs.getString("calumn_content");
-//				String calumn_date = rs.getString("calumn_date");
-//				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
-//			}
-//			return list;
-//		}
-//	}
 
 	public int delete(int calumn_seq) throws Exception{
 		String sql = "delete from tbl_calumn where calumn_seq = ?";
@@ -124,7 +103,7 @@ public class ColumnDAO {
 	}
 
 	public int write(CalumnDTO dto) throws Exception{
-		String sql = "insert into tbl_calumn values(calumn_seq.nextval,?,?,sysdate)";
+		String sql = "insert into tbl_calumn values(infomation_seq.nextval,?,?,?)";
 
 
 		try(Connection con = bds.getConnection();
@@ -132,6 +111,7 @@ public class ColumnDAO {
 			
 			pstmt.setString(1, dto.getCalumn_title());
 			pstmt.setString(2, dto.getCalumn_content());
+			pstmt.setString(3, dto.getCalumn_date());
 
 			int rs = pstmt.executeUpdate();
 			return rs;

@@ -92,26 +92,7 @@ public class ManagerController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		} else if (uri.equals("/user_update.manager")) {
-			String user_id = request.getParameter("user_id");
-			String user_name = request.getParameter("user_name");
-			String user_phone = request.getParameter("user_phone");
-			String user_auth = request.getParameter("user_auth");
-			
-			
-			System.out.println(user_id + " : " + user_name + " : " + user_phone + " : "+ user_auth);
-			UserDAO dao = new UserDAO();
-			try {
-				int rs = dao.manager_userUpdate(new UserDTO(0, user_id, null, user_name, user_phone, null, user_auth, null));
-				if (rs > 0) {
-					System.out.println("업데이트 성공");
-					response.sendRedirect("/userSerch.manager?curPage=1");
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+		} else if (uri.equals("")) {
 			
 		}
 	
