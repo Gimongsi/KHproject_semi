@@ -50,6 +50,19 @@ private BasicDataSource bds;
 		}
 	}
 	
+	public int userDataInsert(UserDTO dto) throws Exception { // 회원가입시 유저 데이터 임의생성
+		String sql = "insert into user_data values(?, 0, 0, 0, 0)";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, dto.getUser_seq());
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
+	
 	public boolean idCheck(String user_id) throws Exception { // 중복 아이디 확인
 		String sql = "select count(*) from tbl_user where user_id=?";
 		
@@ -69,6 +82,43 @@ private BasicDataSource bds;
 				return false;
 			}
 			
+		}
+	}
+	
+	public String searchUserId(String user_name, String user_phone) throws Exception {
+		String sql = "select * from tbl_user where user_name=? and user_phone=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_phone);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String user_id = rs.getString("user_id");
+				return user_id;
+			}
+			return null;
+		}
+	}
+	
+	public UserDTO searchUserPw(String user_id,String user_name, String user_phone) throws Exception {
+		String sql = "select * from tbl_user where user_id=? and user_name=? and user_phone=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_name);
+			pstmt.setString(3, user_phone);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int user_seq = rs.getInt("user_seq");
+				String user_auth = rs.getString("user_auth");
+				
+				return new UserDTO(user_seq, user_id, null, user_name, user_phone, null, user_auth, null);
+			}
+			return null;
 		}
 	}
 	
@@ -146,8 +196,70 @@ private BasicDataSource bds;
 		}
 	}
 	
+	public int randomPwUpdate(String user_id, String randomPw) throws Exception {
+		String sql = "update tbl_user set user_pw=? where user_id=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			
+			pstmt.setString(1, randomPw);
+			pstmt.setString(2, user_id);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+	}
 	
-	public UserDTO selectBySeq(int user_seq) throws Exception {
+	public UserDTO selectByUserId(String user_id) throws Exception { // 아이디로 유저 찾기
+		String sql = "select * from tbl_user where user_id=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_id);
+			
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int user_seq = rs.getInt("user_seq");
+				String user_name = rs.getString("user_name");
+				String user_phone = rs.getString("user_phone");
+				String signup_date = this.getStringDate(rs.getDate("signup_date"));
+				String user_auth = rs.getString("user_auth");
+				String user_memo = rs.getString("user_memo");
+				
+				return new UserDTO(user_seq, user_id, null, user_name, user_phone, signup_date, user_auth, user_memo);
+			}
+			return null;
+		}
+	}
+	public ArrayList<UserDTO> selectByName(String user_name) throws Exception { // 이름으로 유저찾기
+		String sql = "select * from tbl_user where user_name=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, user_name);
+			
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<UserDTO> list = new ArrayList<UserDTO>();
+			while(rs.next()) {
+				int user_seq = rs.getInt("user_seq");
+				String user_id = rs.getString("user_id");
+				String user_phone = rs.getString("user_phone");
+				String signup_date = this.getStringDate(rs.getDate("signup_date"));
+				String user_auth = rs.getString("user_auth");
+				String user_memo = rs.getString("user_memo");
+				
+				list.add(new UserDTO(user_seq, user_id, null, user_name, user_phone, signup_date, user_auth, user_memo));
+			}
+			return list;
+		}
+		
+		
+	}
+	
+	public UserDTO selectBySeq(int user_seq) throws Exception { // 시퀀스로 유저찾기
 		String sql = "select * from tbl_user where user_seq=?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)) {
@@ -169,7 +281,7 @@ private BasicDataSource bds;
 	}
 	
 	
-	public UserDataDTO DataSelect(int user_seq) throws Exception {
+	public UserDataDTO DataSelect(int user_seq) throws Exception { // 시퀀스로 유저 Data 찾기
 		String sql = "select * from user_data where user_seq=?";
 		
 		try(Connection con = bds.getConnection();

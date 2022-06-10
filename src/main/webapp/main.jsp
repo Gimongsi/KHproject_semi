@@ -558,21 +558,21 @@
                         <div class="carousel-item active">
                             <a href="#"><img id="calumn_src" name="calumn_src" src="/imgs/man-g2cdda0662_1920.jpg" class="d-block w-100"></a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 id="calumn_title" name="calumn_title">함께 하는 운동</h5>
+                                <h5 id="calumn_title">함께 하는 운동</h5>
                                 <p>Some representative placeholder content for the first slide.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <a href="#"><img id="calumn_src" name="calumn_src" src="/imgs/crossfit-gee1621d57_1920.jpg" class="d-block w-100"></a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 id="calumn_title" name="calumn_title">근력 운동의 모든 것</h5>
+                                <h5 id="calumn_title">근력 운동의 모든 것</h5>
                                 <p>Some representative placeholder content for the second slide.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <a href="#"><img id="calumn_src" name="calumn_src" src="/imgs/sports-g92109f57b_1920.jpg" class="d-block w-100"></a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 id="calumn_title" name="calumn_title">개구리</h5>
+                                <h5 id="calumn_title">개구리</h5>
                                 <p>Some representative placeholder content for the third slide.</p>
                             </div>
                         </div>

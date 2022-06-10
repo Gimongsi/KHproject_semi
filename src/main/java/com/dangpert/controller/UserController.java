@@ -18,6 +18,7 @@ import com.dangpert.dto.UserDataDTO;
 import com.dangpert.mail.SendMail;
 import com.dangpert.utils.EncryptionUtils;
 import com.google.gson.Gson;
+import com.google.gson.annotations.Until;
 
 @WebServlet("*.user")
 public class UserController extends HttpServlet {
@@ -47,7 +48,11 @@ public class UserController extends HttpServlet {
 				int rs = dao.insert(new UserDTO(0, user_id, user_pw, user_name, user_phone, null, null, null));
 				
 				if (rs > 0) {
-					response.sendRedirect("/user/login.jsp");
+					UserDTO dto = dao.selectByUserId(user_id);
+					int rs2 = dao.userDataInsert(dto);
+					if(rs2 > 0) {
+						response.sendRedirect("/user/login.jsp");
+					}
 				}
 				
 			} catch (Exception e) {
@@ -143,17 +148,30 @@ public class UserController extends HttpServlet {
 			int weight = Integer.parseInt(request.getParameter("weight"));
 			int final_weight = Integer.parseInt(request.getParameter("final_weight"));
 			UserDAO dao = new UserDAO();
+			System.out.println("user_pw : "+user_pw);
 			
 			try {
-				user_pw = EncryptionUtils.getSHA512(user_pw);
-				int rs = dao.update(user_pw, dto.getUser_seq());
-				int rs2 = dao.DataUpdate(weight, final_weight, dto.getUser_seq());
-				if (rs > 0 && rs2 > 0) {
-					UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
-					request.setAttribute("dto", dto);
-					request.setAttribute("data_dto", data_dto);
-					request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);
+				if (!user_pw.equals("empty")) { // 변경 비밀번호가 있을때
+					user_pw = EncryptionUtils.getSHA512(user_pw);
+					int rs = dao.update(user_pw, dto.getUser_seq());
+					System.out.println("rs : " + rs);
+					int rs2 = dao.DataUpdate(weight, final_weight, dto.getUser_seq());
+					System.out.println("rs2 : " + rs2);
+					if (rs > 0 && rs2 > 0) {
+						UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+						request.setAttribute("dto", dto);
+						request.setAttribute("data_dto", data_dto);
+					}
+				} else { // 변경 비밀번호가 없을때
+					int rs2 = dao.DataUpdate(weight, final_weight, dto.getUser_seq());
+					if(rs2 > 0) {
+						UserDataDTO data_dto = dao.DataSelect(dto.getUser_seq());
+						request.setAttribute("dto", dto);
+						request.setAttribute("data_dto", data_dto);
+					}
 				}
+				request.getRequestDispatcher("/user/myPage_user_modify.jsp").forward(request, response);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -215,6 +233,7 @@ public class UserController extends HttpServlet {
 			
 			try {
 				request.setAttribute("user_pw", user_pw);
+				System.out.println(user_pw);
 				user_pw = EncryptionUtils.getSHA512(user_pw);
 				System.out.println(user_pw);
 				
@@ -249,6 +268,49 @@ public class UserController extends HttpServlet {
 					response.sendRedirect("/home");
 				}
 				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if (uri.equals("/searchPwPopup.user")) { // 유저 비밀번호 찾기 팝업
+			response.sendRedirect("/user/searchPw.jsp");
+		} else if (uri.equals("/searchUserPw.user")) { // 유저 비밀번호 찾기 / 변경
+			String user_id = request.getParameter("user_id");
+			String user_name = request.getParameter("user_name");
+			String user_phone = request.getParameter("user_phone");
+			
+			UserDAO dao = new UserDAO();
+			SendMail sm = new SendMail();
+			
+			try {
+				UserDTO dto = dao.searchUserPw(user_id, user_name, user_phone);
+				if(dto == null) {
+					request.setAttribute("rs", "no");
+				} else {
+					String randomPw = sm.randomPw(user_id);
+					System.out.println(randomPw);
+					randomPw = EncryptionUtils.getSHA512(randomPw);
+					int rs = dao.randomPwUpdate(user_id, randomPw);
+					System.out.println(rs);
+					if (rs > 0) {
+						request.setAttribute("rs", "ok");
+					}
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			request.getRequestDispatcher("/user/searchPw.jsp").forward(request, response);
+		} else if(uri.equals("/managerSearch.user")) {
+			String user_name = request.getParameter("user_name");
+			UserDAO dao = new UserDAO();
+			ArrayList<UserDTO> list = new ArrayList<UserDTO>();
+			try {
+				list = dao.selectByName(user_name);
+				Gson gson = new Gson();
+				String rs = gson.toJson(list);
+				
+				response.getWriter().append(rs);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

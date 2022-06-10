@@ -345,17 +345,24 @@ textarea {
 		<div class="empty"></div>
 	</div>
 	<!-- FAQ 수정 -->
-	<div class="title">
-		<h3>FAQ 수정</h3>
+	<div class="cls_body">
+		<div class="d-flex justify-content-center">
+			<div class="title d-flex justify-content-center">
+				<h3>FAQ 수정</h3>
+			</div>
+		</div>
 	</div>
 	<form id="modifyForm" action="/modifyProc.info" method="post">
+		<input class="d-none" value="${dto.qna_seq}" name="qna_seq"
+			id="qna_seq">
 		<div class="container">
+			<input type="text" class="d-none" id="qna_seq" name="qna_seq" value="${dto.qna_seq}">
 			<div class="row">
 				<div class="col-2 d-flex justify-content-center align-items-center">
 					<h4>제목</h4>
 				</div>
 				<div class="col-10 p-2">
-					<input type="text" class="form-control" id="title" name="title"
+					<input type="text" class="form-control" id="title" name="qna_title"
 						value="${dto.qna_title}">
 				</div>
 			</div>
@@ -365,14 +372,14 @@ textarea {
 				</div>
 				<div class="col-10 p-2">
 					<textarea id="content" class="form-control" id="content"
-						name="content" value="${dto.qna_content}"></textarea>
+						name="qna_content">${dto.qna_content}</textarea>
 				</div>
 			</div>
 		</div>
 	</form>
 	<div class="boxBtn">
 		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnComplete">수정</button>
+		<button type="button" class="btn btn-primary" id="btnModify">수정</button>
 	</div>
 
 	<script>
@@ -391,9 +398,11 @@ textarea {
 	
 	const btnBack = document.getElementById("btnBack");
     
-            btnBack.addEventListener("click", function(e){
-            	location.href="/view.info?qna_seq="+qna_seq;
-            });
+    btnBack.addEventListener("click", function(e){
+    	let qna_seq = $("#qna_seq").val();
+    	
+       location.href="/view.info?qna_seq="+qna_seq;
+    });
     </script>
 	<!-- footer -->
 	<div class="container footer">
