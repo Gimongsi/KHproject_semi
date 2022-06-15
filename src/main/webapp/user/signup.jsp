@@ -21,46 +21,11 @@
 <title>회원가입</title>
 </head>
 <style>
-/* 버튼 */
-.btnSpace {
-	margin-bottom: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
-}
-
-.btnAdd {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: small;
-	color: white;
-	margin: 5px;
-}
-
-.btnAdd:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
 	src:
 		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'SuncheonB';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
@@ -75,6 +40,12 @@
 	font-style: normal;
 }
 
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -95,6 +66,7 @@
 	color: #97C4B8;
 	align-items: center;
 	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -125,7 +97,6 @@
 
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -135,70 +106,31 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
-
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-
-
-%
-{
-transform
-
-
-
-
-:
-
-
-
-
-translateY
-
-
-(
-
-
-
-
--20px
-
-
-
-
-)
-
-
-
-
-}
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -253,37 +185,59 @@ translateY
 	height: 40px;
 }
 
+/* 버튼 */
+.overBtn, .submitBtn {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: white;
+	font-family: 'LeferiPoint-WhiteA';
+}
+
+.overBtn:hover, .submitBtn:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
 /* 바디 타이틀 */
-.cls_body {
-	width: 40%;
-	margin: auto;
-}
-
-.cls_title {
-	height: 100px;
-}
-
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 250px;
-	height: 45px;
-	text-align: center;
+.title {
+	color: #97C4B8;
+	border-bottom: 1px solid #97C4B8;
+	-bs-gutter-x: 0px;
+	margin-bottom: 50px;
+	margin-top: 50px;
 	font-family: '양진체';
+}
+.cls_body {
+	width: 40em;
+	margin: auto;
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
 }
 
 /* 바디 input 영역 */
-#user_id {
-	width: 80%;
+.inputDiv{
+	margin-bottom: 10px;
 }
 
-.overBtn {
-	width: 70%;
-	height: 40px;
+input {
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600 !important;
+	vertical-align: middle;
+	padding-top: 10px !important;
+}
+
+input::placeholder {
+	color: #adcabf !important;
+}
+
+#user_id{
+	width: 80%;
 }
 
 .textInput {
@@ -294,14 +248,11 @@ translateY
 	background-color: #d4d4d450;
 	width: 80%;
 	border-radius: 10px;
+	padding: 10px;
 }
 
 .checkBox_inner>span {
 	margin: 10px;
-}
-
-.check1 {
-	width: 1.25em;
 }
 
 .submitBtn {
@@ -335,7 +286,6 @@ translateY
 	color: #709c91;
 	text-decoration: none;
 }
-
 /* footer 끝 */
 </style>
 <body>
@@ -400,7 +350,6 @@ translateY
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -424,7 +373,7 @@ translateY
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
 								<c:choose>
 									<c:when
 										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
@@ -440,76 +389,52 @@ translateY
 											href="/list.food">특가 식품</a></li>
 									</c:otherwise>
 								</c:choose>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-		<form action="/signup.user" id="joinForm">
-			<div
-				class="row cls_body d-flex align-items-center justify-content-center">
-				<div class="row cls_title">
-					<div
-						class="col-12 d-flex align-items-center justify-content-center title_div">
-						<h2>회원 가입</h2>
-					</div>
+		<div class="container">
+			<div class="row title" style="margin-bottom:70px;">
+				<div class="col d-flex justify-content-center">
+					<h1>회원 가입</h1>
 				</div>
-				<div class="empty"></div>
+			</div>
+		<form action="/signup.user" id="joinForm">
+			<div class="row cls_body d-flex align-items-center justify-content-center">
 				<div class="row d-flex align-items-center justify-content-center">
-					<div class="col-9 d-flex align-items-center justify-content-center">
+					<div class="col-9 inputDiv d-flex align-items-center justify-content-center">
 						<input type="text" class="form-control" id="user_id"
 							name="user_id" placeholder="이메일" readonly>
 					</div>
-					<div class="col-3">
-						<button type="button" class="btn btnAdd overBtn">중복확인</button>
+					<div class="col inputDiv">
+						<button type="button" class="btn overBtn">중복확인</button>
 					</div>
 				</div>
 				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
+					<div class="col-12 inputDiv d-flex align-items-center justify-content-center">
 						<input type="text" class="form-control textInput" id="user_name"
 							name="user_name" placeholder="이름">
 					</div>
 				</div>
-				<div class="empty"></div>
 				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
+					<div class="col-12 inputDiv d-flex align-items-center justify-content-center">
 						<input type="password" class="form-control textInput" id="user_pw"
 							name="user_pw" placeholder="비밀번호 (6~20자 특수문자(~!@#$%^&*))">
 					</div>
 				</div>
-				<div class="empty"></div>
 				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
+					<div class="col-12 inputDiv d-flex align-items-center justify-content-center">
 						<input type="password" class="form-control textInput"
 							id="user_pwOk" placeholder="비밀번호 확인">
 					</div>
 				</div>
-				<div class="empty"></div>
 				<div class="row">
-					<div
-						class="col-12 inputDiv d-flex align-items-center justify-content-center">
+					<div class="col-12 inputDiv d-flex align-items-center justify-content-center">
 						<input type="text" class="form-control textInput" id="user_phone"
 							name="user_phone" placeholder="핸드폰 번호 (-제외)">
 					</div>
@@ -517,19 +442,15 @@ translateY
 				<div class="empty2"></div>
 				<div class="row checkBox">
 					<div class="row">
-						<div
-							class="col-12 form-checkd-flex d-flex align-items-center justify-content-center checkBox_inner">
+						<div class="col-12 form-checkd-flex d-flex align-items-center justify-content-center checkBox_inner">
 							<input class="form-check-input check1" type="checkbox" value=""
-								id="flexCheckChecked"> <span>서비스 이용 약관 및 개인정보
-								취급방침에 동의합니다.</span>
+								id="flexCheckChecked"> <span style="padding-top: 10px;">서비스 이용 약관 및 개인정보 취급방침에 동의합니다.</span>
 						</div>
 					</div>
 					<div class="row">
-						<div
-							class="col-12 form-checkd-flex d-flex align-items-center justify-content-center checkBox_inner">
+						<div class="col-12 form-checkd-flex d-flex align-items-center justify-content-center checkBox_inner">
 							<input class="form-check-input check2" type="checkbox" value=""
-								id="flexCheckChecked"> <span>위치기반 서비스 이용약관에
-								동의합니다.</span>
+								id="flexCheckChecked"> <span style="padding-top: 10px;">위치기반 서비스 이용약관에 동의합니다.</span>
 						</div>
 					</div>
 				</div>
@@ -538,56 +459,48 @@ translateY
 				<div class="row">
 					<div
 						class="col-12 d-flex align-items-center justify-content-center">
-						<button type="button" class="btn btnAdd submitBtn">가입 완료</button>
+						<button type="button" class="btn submitBtn">가입 완료</button>
 					</div>
 				</div>
 			</div>
 		</form>
-
+	</div>
 
 		<div class="empty"></div>
-		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
+		 <!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
-	<!-- footer 끝 -->
-
-
 	<script>
 		$(".overBtn").on("click", function() { // 아이디 팝업창 띄우기
 			let url = "/idCheckPopup.user";
 			let name = "아이디 중복검사";
-			let option = "width=600, height=300, left=500, top=300";
+			let option = "width=600, height=350, left=500, top=300";
 
 			window.open(url, name, option);
 		})

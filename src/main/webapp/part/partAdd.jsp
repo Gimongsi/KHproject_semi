@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <link
@@ -18,8 +17,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>전체 메일 보내기</title>
-</head>
+<!-- text area auto size -->
+<script
+	src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<title>근육별 상세페이지</title>
 <style>
 /* 폰트 */
 @font-face {
@@ -38,13 +39,6 @@
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
-}
-
-@font-face {
-    font-family: 'LeferiPoint-WhiteA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
 }
 /* 폰트 끝 */
 * {
@@ -177,81 +171,64 @@
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 40px;
+	height: 20px;
 }
 
-/* 바디 타이틀 */
-.cls_title {
-	height: 100px;
-}
-
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 300px;
-	height: 45px;
-	text-align: center;
-	font-family: '양진체';
-}
-
-/* 타이틀 */
+/*컨텐츠*/
 .title {
 	color: #97C4B8;
 	border-bottom: 1px solid #97C4B8;
 	-bs-gutter-x: 0px;
 	margin-bottom: 20px;
 	margin-top: 10px;
-	font-family: '양진체';
+    font-family: 'LeferiPoint-WhiteA';
 }
 
-
-/* 메일 내용 */
-.mail-title>input {
-	width: 50%;
+#part_title {
+	width: 70%;
 	height: 4rem;
 	overflow: hidden;
 	border: none;
 	resize: none;
 	font-weight: 600;
 	text-align: center;
-	border-bottom: 1px solid #97C4B8;
-	font-family: 'LeferiPoint-WhiteA';
-	font-weight: 600;
-	font-size: large;
 }
 
-.mail-content>textarea {
+.partTextarea {
 	width: 70%;
 	height: 4rem;
 	overflow: hidden;
 	resize: none;
 	font-weight: 600;
 	text-align: center;
-	border: 1px solid #97C4B8;
+	border: none;
+	border-top: 1px solid #97C4B8;
+	border-bottom: 1px solid #97C4B8;
 	font-family: 'LeferiPoint-WhiteA';
 	font-weight: 600;
-	height: 500px;
-	font-size: large;
 }
 
-textarea:focus, input:focus {
+.partTextarea:focus, #part_title:focus {
 	outline: none;
 }
 
-textarea::placeholder, input::placeholder {
+.partTextarea::placeholder, #part_title::placeholder {
 	color: #adcabf !important;
 }
 
-/* 보내기 버튼 */
-#sendMailBtn, #backBtn {
-	width: 100px;
+#part_class, option{
+	font-weight: 600;
 }
 
-#sendMailBtn, #backBtn {
+/*버튼*/
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	justify-content: center;
+}
+
+#btnAdd, #btnCancle, .btnPics {
 	background-color: #73b1a1;
 	border: 1px solid #F0FFC2;
 	border-radius: 0.25rem;
@@ -264,12 +241,11 @@ textarea::placeholder, input::placeholder {
 	margin: 5px;
 }
 
-#sendMailBtn:hover, #backBtn:hover {
+#btnAdd:hover, #btnCancle:hover, .btnPics:hover {
 	background-color: #F0FFC2;
 	border: 1px solid #73b1a1;
 	color: #73b1a1;
 }
-
 
 /* footer */
 .footer {
@@ -300,7 +276,7 @@ textarea::placeholder, input::placeholder {
 }
 /* footer 끝 */
 </style>
-
+</head>
 <body>
 	<div class="container">
 		<!-- 헤더 -->
@@ -411,43 +387,55 @@ textarea::placeholder, input::placeholder {
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-
-		<!-- 메인 영역 -->
-		<div class="container row cls_body">
-			<div class="row title">
-				<div class="col-12 d-flex justify-content-center" style="margin-top: 50px;">
-					<h1>공지 메일 보내기</h1>
+		<div class="container" style="margin-top: 80px;">
+			<div class="partDetail">
+				<form action="/insert.part" method="post" id="insertForm" enctype="multipart/form-data">
+					<div class="row title">
+						<div class="col-2 d-flex align-items-center">
+							<select id="part_class" name="part_class" class="form-select">
+								<option selected>목록 선택</option>
+								<option value="상체">상체</option>
+								<option value="하체">하체</option>
+								<option value="유산소">유산소</option>
+							</select>
+						</div>
+						<div class="col-10">
+							<h2 class="class">
+								<input type="text" id="part_title" name="part_title"
+									style="width: 100%;" value="" placeholder="제목을 입력하세요.">
+							</h2>
+						</div>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<figure class="figure text-center">
+							<img src="/files/" id="part_src_img"
+								class="figure-img img-fluid rounded">
+							<figcaption class="figure-caption text-end">참고이미지</figcaption>
+							<label class="btn btnPics" for="part_src" style="width: 10rem;">사진
+								등록</label>
+							<input class="form-control" type="file" id="part_src"
+								name="part_src" style="display: none;">
+						</figure>
+					</div>
+					<div class="row">
+						<div class="col content d-flex justify-content-center">
+							<textarea class="partTextarea" id="part_content" name="part_content"
+								placeholder="내용을 입력하세요."></textarea>
+						</div>
+					</div>
+					<div class="empty"></div>
+				</form>
+				<div class="row">
+					<div class="col d-flex justify-content-end">
+						<button type="button" class="btnList" id="btnCancle">취소</button>
+					</div>
+					<div class="col d-flex justify-content-start">
+						<button type="button" class="btn" id="btnAdd">저장</button>
+					</div>
 				</div>
 			</div>
-			<div class="empty"></div>
-			<form action="/sendMail.manager" method="post" id="mailForm">
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-title">
-						<input type="text" class="" id="mail-title"
-							name="mail-title" placeholder="제목 입력">
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-content">
-						<textarea class="" id="mail-content"
-							name="mail-content"></textarea>
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col btnSpace d-flex justify-content-center">
-						<button type="submit" id="sendMailBtn" class="btn btnAdd">보내기</button>
-						<button type="button" id="backBtn" class="btn btnAdd">취소</button>
-					</div>
-
-				</div>
-			</form>
-			<div class="empty"></div>
 		</div>
-
-
+		<div class="empty" style="margin: 40px;"></div>
 		<!-- footer -->
         <div class="container footer">
             <div class="row footerInfo">
@@ -477,6 +465,49 @@ textarea::placeholder, input::placeholder {
         </div>
         <!-- footer 끝 -->
 	</div>
-</body>
+	<script>
+	$("#btnCancle").on("click", function(){
+		location.href="/listSign.part?curPage=1";
+	})
 
+	$("#btnAdd").on("click", function(){
+		if($("#part_class option:selected").val() === "목록 선택"){
+			alert("부위를 선택해주세요.");
+			$("#part_class").focus();
+			return;
+		} else if ($("#part_title").val() === ""){
+			alert("제목을 입력해주세요.");
+			$("#part_title").focus();
+			return;
+		} else if($("#part_src").val() === "") {
+			alert("사진등록은 필수입니다.");
+			return;
+		} else if ($("#part_content").val() === ""){
+			alert("내용을 입력하세요.");
+			$("#part_content").focus();
+			return;
+		} 
+		
+		$("#insertForm").submit();
+	})
+	
+	autosize($("textArea"));
+	
+	// 이미지 미리보기
+	$("#part_src").change(function(){
+    	setImageFromFile(this, "#part_src_img");
+	});
+
+	function setImageFromFile(input, expression) {
+    	if (input.files && input.files[0]) {
+        	var reader = new FileReader();
+        	reader.onload = function (e) {
+          	  $(expression).attr("src", e.target.result);
+        	}
+        reader.readAsDataURL(input.files[0]);
+    	}
+	}
+	</script>
+
+</body>
 </html>

@@ -51,6 +51,12 @@
 	font-style: normal;
 }
 
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -111,16 +117,13 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
 	width: 50%;
 	height: 50%;
 }
-
 /* 로고 효과 */
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
-
     .logoImg {
         position: relative;
         display: inline-block;
@@ -129,15 +132,12 @@
         animation: waviy 1s infinite;
         animation-delay: calc(.1s * var(--i));
     }
-
     @keyframes waviy {
-
         0%,
         40%,
         100% {
             transform: translateY(0)
         }
-
         20% {
             transform: translateY(-20px)
         }
@@ -349,11 +349,13 @@ input::placeholder, textarea::placeholder {
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -412,7 +414,10 @@ input::placeholder, textarea::placeholder {
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -432,28 +437,25 @@ input::placeholder, textarea::placeholder {
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -696,39 +698,33 @@ O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)">${programDTO
 		</div>
 		<div class="empty"></div>
 		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-		<!-- footer 끝 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/user/information.jsp">센터등록요청하기</a></div>
+                <div class="col"><a href="/user/information.jsp">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 
 	<script>
@@ -739,26 +735,45 @@ O.T(3개월 2회 / 6개월 4회 / 12개월 8회 세미 P.T 제공)">${programDTO
 	autosize($("textArea"));
 	
 	$(".btnAdd").on("click", function(){
-		let regexPrice = /[0-9]/;
+		let regexPrice = /^[0-9]+$/;
+		let nameReg = /^.{1,30}$/;
+		let commentReg = /^.{1,666}/;
 		
-		if ($(".srcVal").val() === 0) {
-			alert("메인 사진 등록은 필수입니다.");
-			$("#gym_src_main").focus();
-			return;
-		}
 		if ($("#gym_name").val() === "") {
 			alert("상호를 입력하세요.");
 			$("#gym_name").focus();
 			return;
-		}
-		if ($("#gym_comment").val() === "") {
+		} else if ($("#gym_time").val() === ""){
+			alert("운영 시간을 입력해주세요.");
+			$("#gym_time").focus();
+			return;
+		} else if ($("#gym_comment").val() === "") {
 			alert("설명을 입력하세요.");
 			$("#gym_comment").focus();
 			return;
-		}
-		if (!regexPrice.test($("#gym_price").val())) {
+		} else if($("#gym_program").val() === "") {
+			alert("운영 프로그램을 입력해주세요.");
+			$("#gym_program").focus();
+			return;
+		}else if (!regexPrice.test($("#gym_price").val())) {
 			alert("가격을 숫자로 입력하세요.");
 			$("#gym_price").focus();
+			return;
+		} else if (!regexPrice.test($("#gym_month").val())){
+			alert("개월수는 숫자만 입력해주세요.");
+			$("#gym_month").focus();
+			return;
+		} else if (!nameReg.test($("#gym_name").val())){
+			alert("상호명이 너무 깁니다.");
+			$("#gym_name").focus();
+			return;
+		} else if (!commentReg.test($("#gym_comment").val())){
+			alert("공지사항 글자수를 줄여주세요.");
+			$("#gym_comment").focus();
+			return;
+		} else if (!commentReg.test($("gym_program").val())){
+			alert("운영 프로그램 글자수를 줄여주세요.");
+			$("#gym_program").focus();
 			return;
 		}
 		

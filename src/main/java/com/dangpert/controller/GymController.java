@@ -84,6 +84,7 @@ public class GymController extends HttpServlet {
 				String gym_roadAddr = multi.getParameter("gym_roadAddr");
 				String gym_detailAddr = multi.getParameter("gym_detailAddr");
 				String gym_extraAddr = multi.getParameter("gym_extraAddr");
+				String gym_extraAddr2 = multi.getParameter("gym_roadAddr"); // 주소 없을 때
 				String gym_month = multi.getParameter("gym_month");
 				int gym_price = Integer.parseInt(multi.getParameter("gym_price"));
 				String gym_time = multi.getParameter("gym_time");
@@ -92,18 +93,19 @@ public class GymController extends HttpServlet {
 				String gym_program = multi.getParameter("gym_program");
 				String gym_src = multi.getFilesystemName("gym_src");
 				
+				
 				GymInfoDTO gymInfoDTO = new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main);
 				GymProgramDTO gymProgramDTO = new GymProgramDTO(gym_seq, gym_program);
 				GymFolderDTO gymFolderDTO = new GymFolderDTO(gym_seq, gym_src);
 				GymPriceDTO gymPriceDTO = new GymPriceDTO(gym_seq, 0, gym_month, gym_price);
 				
-				int rs = dao.addInfo(userDTO, gymInfoDTO);
+				int rs = dao.addInfo(userDTO, gymInfoDTO, gym_extraAddr2);
 				int rs2 = dao.addProgram(gymProgramDTO);
 				int rs3 = dao.addPic(gymFolderDTO);
-				int rs4 = dao.addPrice(gymPriceDTO);
+//				int rs4 = dao.addPrice(gymPriceDTO);
 				
 //				System.out.println("info" + rs + "pro" + rs2 + "pix" + rs3 + "price" + rs4);
-				if(rs > 0 && rs2 > 0 && rs4 > 0) {
+				if(rs > 0 && rs2 > 0) {
 					System.out.println("저장 성공");
 					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
 				}
@@ -183,6 +185,8 @@ public class GymController extends HttpServlet {
 					program.add(new GymProgramDTO(gym_seq, list));
 					}
 				}
+				
+				
 				System.out.println(program.toString());
 				
 				String gym_src = multi.getFilesystemName("gym_src");
@@ -197,6 +201,7 @@ public class GymController extends HttpServlet {
 //				}
 				
 				GymInfoDTO dtoMainPicName = dao.selectSeq(gym_seq);
+				GymPriceDTO gymPriceDTO = dao.selectSeqPriceDTO(gym_seq);
 				
 				String gym_name = multi.getParameter("gym_name");
 				String gym_phone = multi.getParameter("gym_phone");
@@ -206,24 +211,29 @@ public class GymController extends HttpServlet {
 				String gym_extraAddr = multi.getParameter("gym_extraAddr");
 				String gym_month = multi.getParameter("gym_month1");
 				int gym_price = Integer.parseInt(multi.getParameter("gym_price1"));
-				String gym_month2 = multi.getParameter("gym_month2");
-				int gym_price2 = Integer.parseInt(multi.getParameter("gym_price2"));
-				String gym_month3 = multi.getParameter("gym_month3");
-				int gym_price3 = Integer.parseInt(multi.getParameter("gym_price3"));
+//				String gym_month2 = multi.getParameter("gym_month2");
+//				int gym_price2 = Integer.parseInt(multi.getParameter("gym_price2"));
+//				String gym_month3 = multi.getParameter("gym_month3");
+//				int gym_price3 = Integer.parseInt(multi.getParameter("gym_price3"));
 				String gym_time = multi.getParameter("gym_time");
 				String gym_comment = multi.getParameter("gym_comment");
 				String gym_src_main = multi.getFilesystemName("gym_src_main");
 				String gymSrcMainNow = dtoMainPicName.getGym_src_main(); // 현재 사진
+				int gymPriceNow = gymPriceDTO.getGym_price_seq();
 				
 				GymFolderDTO gymfolderDTO = new GymFolderDTO(gym_seq, gym_src_add);
 				
+				System.out.println("개월수"+gym_month+"가격"+gym_price);
+				
 				System.out.println(gym_src_main);
+				System.out.println("현재사진 : " + gymSrcMainNow);
 				int rs = dao.modifyInfo(new GymInfoDTO(gym_seq, gym_name, gym_phone, gym_postcode, gym_roadAddr, gym_detailAddr, gym_extraAddr, gym_month, gym_price, gym_time, gym_comment, gym_src_main), gymSrcMainNow);
 				int rs2 = dao.modifyProgram(program);
 				int rs3 = dao.modifyPicDTO(new GymFolderDTO(gym_seq, gym_src));
-				int rs4 = dao.addPic(gymfolderDTO);
+				int rs4 = dao.modifyPrice(new GymPriceDTO(gym_seq, 0, gym_month, gym_price), gymPriceNow);
+				int rs5 = dao.addPic(gymfolderDTO);
 				
-				if(rs > 0 && rs2 > 0 ||rs3 > 0 || rs4 > 0) {
+				if(rs > 0 && rs2 > 0) {
 					System.out.println("수정 성공");
 					response.sendRedirect("/detail.gym?gym_seq=" + gym_seq);
 				}else {

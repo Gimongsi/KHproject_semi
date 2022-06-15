@@ -4,16 +4,15 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.activation.DataContentHandler;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.eclipse.jdt.internal.compiler.ast.NullAnnotationMatching;
 
 import com.dangpert.dto.UserDTO;
 import com.dangpert.dto.UserDataDTO;
@@ -32,7 +31,6 @@ private BasicDataSource bds;
 		}
 		
 	}
-	
 	
 	public int insert(UserDTO dto) throws Exception { // 회원가입
 		String sql = "insert into tbl_user values(user_seq.nextval, ?, ?, ?, ?, sysdate, default, null)";
@@ -137,7 +135,7 @@ private BasicDataSource bds;
 				int user_seq = rs.getInt("user_seq");
 				String user_name = rs.getString("user_name");
 				String user_phone = rs.getString("user_phone");
-				String signup_date = getStringDate(rs.getDate("signup_date"));
+				String signup_date = getStringDate(rs.getTimestamp("signup_date"));
 				String user_auth = rs.getString("user_auth");
 				String user_memo = rs.getString("user_memo");
 				
@@ -166,7 +164,7 @@ private BasicDataSource bds;
 				String user_pw = rs.getString("user_pw");
 				String user_name = rs.getString("user_name");
 				String user_phone = rs.getString("user_phone");
-				String signup_date = getStringDate(rs.getDate("signup_date"));
+				String signup_date = getStringDate(rs.getTimestamp("signup_date"));
 				String user_auth = rs.getString("user_auth");
 				String user_memo = rs.getString("user_memo");
 
@@ -176,6 +174,7 @@ private BasicDataSource bds;
 		}
 
 	}
+	
 	
 	public ArrayList<UserDTO> selectAllMail() throws Exception { // 유저 아이디들만 반환
 		String sql = "select * from tbl_user";
@@ -224,7 +223,7 @@ private BasicDataSource bds;
 				int user_seq = rs.getInt("user_seq");
 				String user_name = rs.getString("user_name");
 				String user_phone = rs.getString("user_phone");
-				String signup_date = this.getStringDate(rs.getDate("signup_date"));
+				String signup_date = this.getStringDate(rs.getTimestamp("signup_date"));
 				String user_auth = rs.getString("user_auth");
 				String user_memo = rs.getString("user_memo");
 				
@@ -247,7 +246,7 @@ private BasicDataSource bds;
 				int user_seq = rs.getInt("user_seq");
 				String user_id = rs.getString("user_id");
 				String user_phone = rs.getString("user_phone");
-				String signup_date = this.getStringDate(rs.getDate("signup_date"));
+				String signup_date = this.getStringDate(rs.getTimestamp("signup_date"));
 				String user_auth = rs.getString("user_auth");
 				String user_memo = rs.getString("user_memo");
 				
@@ -257,6 +256,22 @@ private BasicDataSource bds;
 		}
 		
 		
+	}
+	
+	public int manager_userUpdate(UserDTO dto) throws Exception {
+		String sql = "update tbl_user set user_name=?, user_phone=?, user_auth=? where user_id=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setString(1, dto.getUser_name());
+			pstmt.setString(2, dto.getUser_phone());
+			pstmt.setString(3, dto.getUser_auth());
+			pstmt.setString(4, dto.getUser_id());
+			
+			return pstmt.executeUpdate();
+			
+		}
 	}
 	
 	public UserDTO selectBySeq(int user_seq) throws Exception { // 시퀀스로 유저찾기
@@ -315,6 +330,21 @@ private BasicDataSource bds;
 		}
 	}
 	
+	public int weightModify(int user_seq, int user_weight) throws Exception {
+		String sql = "update user_data set weight=? where user_seq=?";
+		
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)) {
+			
+			pstmt.setInt(1, user_weight);
+			pstmt.setInt(2, user_seq);
+			
+			int rs = pstmt.executeUpdate();
+			return rs;
+		}
+		
+	}
+	
 	public int DataUpdate(int weight, int final_weight, int user_seq) throws Exception {	// 회원 DataDTO 값 수정
 		String sql = "update user_data set weight=?, final_weight=? where user_seq=?";
 		
@@ -344,7 +374,7 @@ private BasicDataSource bds;
 	}
 
 
-	public String getStringDate(Date date) {
+	public String getStringDate(Timestamp date) {
 		// 1900년 02월 02일 00시 00분 00초
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
 		return sdf.format(date);
@@ -410,6 +440,17 @@ private BasicDataSource bds;
 	}
 	
 	
-	
+	public int userLogin(int user_seq) throws Exception {
+	      String sql = "update tbl_user set signup_date=sysdate where user_seq=?";
+	      
+	      try(Connection con = bds.getConnection();
+	         PreparedStatement pstmt = con.prepareStatement(sql)) {
+	         
+	         pstmt.setInt(1, user_seq);
+	         
+	         int rs = pstmt.executeUpdate();
+	         return rs;
+	      }
+	   }
 	
 }

@@ -64,13 +64,13 @@ public class GymDAO {
 	
 	/* INFO CRUD */
 	
-	public int addInfo(UserDTO userDTO, GymInfoDTO gymInfoDTO) throws Exception { // info insert
+	public int addInfo(UserDTO userDTO, GymInfoDTO gymInfoDTO, String extraAddr) throws Exception { // info insert
 		String sql = "insert all into tbl_gym values(?, ?) into tbl_gym_info values(gym_seq.currval, ?, ?, ?, ?, ?, ?, ?, ?, ?) into tbl_gym_price values(gym_seq.currval, gym_price_seq.nextval, ?, ?) select * from dual";
 		
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
 			
-			if(gymInfoDTO.getGym_extraAddr().equals(null)) {
+			if(gymInfoDTO.getGym_extraAddr().equals(gymInfoDTO.getGym_detailAddr())) {
 				pstmt.setInt(1, gymInfoDTO.getGym_seq());
 				pstmt.setInt(2, userDTO.getUser_seq());
 				pstmt.setString(3, gymInfoDTO.getGym_name());
@@ -78,12 +78,14 @@ public class GymDAO {
 				pstmt.setString(5, gymInfoDTO.getGym_postcode());
 				pstmt.setString(6, gymInfoDTO.getGym_roadAddr());
 				pstmt.setString(7, gymInfoDTO.getGym_detailAddr());
-				pstmt.setString(8, "간략주소없음");
+				pstmt.setString(8, extraAddr);
 				pstmt.setString(9, gymInfoDTO.getGym_time());
 				pstmt.setString(10, gymInfoDTO.getGym_comment());
 				pstmt.setString(11, gymInfoDTO.getGym_src_main());
 				pstmt.setString(12, gymInfoDTO.getGym_month());
 				pstmt.setInt(13, gymInfoDTO.getGym_price());
+				
+				return pstmt.executeUpdate();
 				
 			}else {
 			pstmt.setInt(1, gymInfoDTO.getGym_seq());
@@ -307,7 +309,7 @@ public class GymDAO {
 		}
 	}
 	
-	public int modifyPrice(GymPriceDTO gymPriceDTO) throws Exception{
+	public int modifyPrice(GymPriceDTO gymPriceDTO, int price_seq) throws Exception{
 		String sql = "update tbl_gym_price set gym_month=?, gym_price=? where gym_seq=? and gym_price_seq=?";
 		
 		try(Connection con = bds.getConnection();
@@ -316,7 +318,7 @@ public class GymDAO {
 			pstmt.setString(1, gymPriceDTO.getGym_month());
 			pstmt.setInt(2, gymPriceDTO.getGym_price());			
 			pstmt.setInt(3, gymPriceDTO.getGym_seq());
-			pstmt.setInt(4, gymPriceDTO.getGym_price_seq());
+			pstmt.setInt(4, price_seq);
 			
 			return pstmt.executeUpdate();
 		}
@@ -361,6 +363,26 @@ public class GymDAO {
 				list.add(new GymPriceDTO(gym_seq, gym_price_seq, gym_month, gym_price));
 			}
 			return list;
+		}
+	}
+	
+	public GymPriceDTO selectSeqPriceDTO(int gym_seq) throws Exception{
+		String sql = "select * from tbl_gym_price where gym_seq=?";
+		
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setInt(1, gym_seq);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				int gym_price_seq = rs.getInt("gym_price_seq");
+				String gym_month = rs.getString("gym_month");
+				int gym_price = rs.getInt("gym_price");
+				
+				return new GymPriceDTO(gym_seq, gym_price_seq, gym_month, gym_price);
+			}
+			return null;
 		}
 	}
 	

@@ -47,6 +47,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -84,6 +85,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -101,47 +103,25 @@
 	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-%
-{
-transform
-
-
-:
-
-
-translateY
-(
-
-
--20px
-
-
-)
-
-
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -190,29 +170,7 @@ translateY
 	height: 20px;
 }
 
-.emptyTop {
-	background-color: white;
-	height: 50px;
-}
 
-h2 {
-	font-family: '양진체';
-	color: #73b1a1;
-}
-
-table {
-	border: 1px;
-	border-color: black;
-}
-
-.tableContainer {
-	width: 80%;
-	height: 500px;
-	background-color: white;
-	padding: 10px;
-	margin-left: auto;
-	margin-right: auto;
-}
 /*Pagination*/
 .page-link {
 	color: #5a9284;
@@ -224,37 +182,89 @@ table {
 }
 
 /* 버튼 */
-.btnSubmit {
+
+.dropdown-toggle{
+	margin: 5px;
+	background-color: #F0FFC2;
+	border: 1px solid white;
+}
+
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+.btnAdd, .btnModify {
 	background-color: #73b1a1;
 	border: 1px solid #F0FFC2;
 	border-radius: 0.25rem;
 	padding: 3px;
 	padding-left: 10px;
 	padding-right: 10px;
+	padding-top: 8px;
 	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: medium;
+	font-size: small;
 	color: white;
 	margin: 5px;
 }
 
-#dropdownMenuButton1 {
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: medium;
-	color: white;
-	margin: 5px;
+.btnAdd:hover, .btnModify:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
 }
 
-/*Pagination*/
+/* 목록 */
+.tblBorder {
+	border-right: 1px solid #e6ebd8;
+}
 
-/*footer*/
+.table td {
+	border-bottom: 1px solid #e6ebd8;
+}
+
+.tableTitle {
+	background-color: #F0FFC2;
+	color: #74a598;
+	text-align: center;
+	border-bottom: 2px solid #74a598;
+}
+
+.title {
+	color: #97C4B8;
+	border-bottom: 1px solid #97C4B8; -
+	-bs-gutter-x: 0px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	font-family: '양진체';
+}
+
+.page-item.active .page-link {
+	color: white;
+	background-color: #73b1a1;
+	border: 1px solid #e6ebd8;
+}
+
+.page-link {
+	color: #5a9284;
+	margin-bottom: 50px;
+	border: 1px solid #e6ebd8;
+}
+
+.page-link:focus {
+	color: #5a9284;
+}
+
+.page-link:hover {
+	color: #5a9284;
+	background-color: #F0FFC2;
+}
+
+/* footer */
 .footer {
-	/* font-family: 'SuncheonB';
-        font-weight: normal; */
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
 	font-size: small;
 	color: #709c91;
 	border-top: 1px solid #c9d4a9;
@@ -278,11 +288,13 @@ table {
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 </head>
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -341,9 +353,9 @@ table {
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
-						<li><a class="dropdown-item" href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -364,169 +376,144 @@ table {
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="emptyTop"></div>
-
-		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
-				<h2>근육별 운동목록</h2>
+	<div class="container">
+		<div class="row title">
+			<div class="col d-flex justify-content-center" style="margin-top:50px">
+				<h1>부위별로 태워보자!</h1>
 			</div>
 		</div>
-
-		<hr
-			style="height: 1px; width: 30%; border: none; background-color: gray; text-align: center; margin: auto;">
 		<div class="empty"></div>
 		<div class="row">
 			<div class="col-2 d-flex justify-content-center">
 				<c:if test="${loginSession.user_auth eq 'manager'}">
-					<button type="button" class="btnSubmit" id="btnSubmit">등록</button>
+					<button type="button" class="btnAdd" id="btnAdd">등록</button>
 				</c:if>
 			</div>
 			<div class="col-10 d-flex justify-content-end">
 				<div class="dropdown">
-				
-					<button class="btn btn-secondary dropdown-toggle" type="button"
+					<button class="btn dropdown-toggle" type="button"
 						id="dropdownMenuButton1" data-bs-toggle="dropdown"
-						aria-expanded="false">근육별 목록 선택</button>
+						aria-expanded="false">목록 선택</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" value="arm" href="#">팔</a></li>
-						<li><a class="dropdown-item" href="#">어깨</a></li>
-						<li><a class="dropdown-item" href="#">승모근</a></li>
-						<li><a class="dropdown-item" href="#">가슴</a></li>
-						<li><a class="dropdown-item" href="#">배</a></li>
-						<li><a class="dropdown-item" href="#">엉덩이</a></li>
-						<li><a class="dropdown-item" href="#">허벅지</a></li>
-						<li><a class="dropdown-item" href="#">종아리</a></li>
-						<li><a class="dropdown-item" href="#">유산소</a></li>
-						<li><a class="dropdown-item" href="#">전체</a></li>
+						<li><a class="dropdown-item" href="/listSign.part?curPage=1">전체보기</a></li>
+						<li><a class="dropdown-item" href="/list.part?part_class=상체&curPage=1">상체</a></li>
+						<li><a class="dropdown-item" href="/list.part?part_class=하체&curPage=1">하체</a></li>
+						<li><a class="dropdown-item" href="/list.part?part_class=유산소&curPage=1">유산소</a></li>
 					</ul>
-					<select name="part" style="margin-right: 20px;">
-						<option value="list" selected>근육별 목록 선택</option>
-	                	<option value="arm">팔</option>
-	                	<option value="shoulder">어깨</option>
-	                	<option value="trap">승모근</option>
-	                	<option value="chest">가슴</option>
-	                	<option value="abs">배</option>
-						<option value="back">등</option>
-	                  	<option value="butt">엉덩이</option>
-	                    <option value="thigh">허벅지</option>
-	                    <option value="calves">종아리</option>
-	                    <option value="cardio">유산소</option>
-	                    <option value="all">전체</option>
-	                </select>
 				</div>
-
 			</div>
 		</div>
-
-		<!-- 운동목록 테이블-->
-		<div class="tableContainer">
-			<table class="table table-bordered" id="partTable">
-				<thead class="thead-light">
-					<tr>
-						<th class="col-3">근육</th>
-						<th class="col-9">제목</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="col-3">내용</td>
-						<td class="col-9">내용</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-
-
-		<!-- 운동목록 테이블 끝-->
+		<table class="table">
+			<thead>
+				<tr class="tableTitle">
+					<th class="col-2 tblBorder">부위</th>
+					<th class="col">운동법</th>
+				</tr>
+			</thead>
+			<tbody class="bodyFood">
+				<c:choose>
+					<c:when test="${list.size() == 0}">
+						<tr>
+							<td colspan=2>등록된 게시글이 없습니다.</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${list}" var="dto">
+							<tr>
+								<td class="tblBorder" style="text-align: center;">
+									${dto.part_class}</td>
+								<td style="text-align: center;">
+									<a href="/partDetail.part?part_seq=${dto.part_seq}" style="text-decoration: none; color: black;">
+									${dto.part_title}</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</tbody>
+		</table>
+		<%--  페이징 --%>
 		<div class="row">
-			<div class="col-12 d-flex justify-content-center">
+			<div class="col d-flex justify-content-center">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+						<c:if test="${naviMap.needPrev eq true}">
+							<li class="page-item"><a class="page-link"
+								href="/listSign.part?curPage=${naviMap.startNavi-1}">←</a></li>
+						</c:if>
+						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+							end="${naviMap.endNavi}" step="1">
+							<li class="page-item"><a class="page-link"
+								href="/listSign.part?curPage=${pageNum}">${pageNum}</a></li>
+						</c:forEach>
+						<c:if test="${naviMap.needNext eq true}">
+							<li class="page-item"><a class="page-link"
+								href="/listSign.part?curPage=${naviMap.endNavi+1}">→</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</div>
 		</div>
-
+	</div>
 		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-		<!-- footer 끝 -->
-
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 	<script>
-		$("#btnSubmit").on("click", function(){
-			location.href="/writePart.part";
+		
+		$("#btnAdd").on("click", function(){
+			location.href = "/toPartInsert.part";
 		})
-	
-	
 	
 	</script>
 </body>

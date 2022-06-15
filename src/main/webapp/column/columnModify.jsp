@@ -2,12 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -20,8 +17,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>FAQ 수정</title>
-</head>
+<!-- text area auto size -->
+<script
+	src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<title>칼럼 수정페이지</title>
 <style>
 /* 폰트 */
 @font-face {
@@ -32,17 +31,33 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -80,6 +95,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -97,68 +113,30 @@
 	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-
-
-%
-{
-transform
-
-
-
-
-:
-
-
-
-
-translateY
-
-
-
-
-(
-
-
-
-
--20px
-
-
-
-
-)
-
-
-
-
-}
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -196,56 +174,110 @@ translateY
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
+
 /* 공백 */
 .empty {
 	background-color: white;
 	height: 20px;
 }
-/* 게시글 스타일 영역 */
+
+.empty1 {
+	background-color: white;
+	height: 10px;
+}
+
+.emptyTop {
+	background-color: white;
+	height: 50px;
+}
+
+/*컨텐츠*/
 .title {
-	padding: 10px;
-	text-align: center;
+	color: #97C4B8;
+	border-bottom: 1px solid #97C4B8;
+	-bs-gutter-x: 0px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	font-family: '양진체';
 }
 
-#content {
-	height: 500px;
-}
-/* 게시글 스타일 영역 끝 */
-/* 버튼 영역 */
-.boxBtn {
-	height: 10%;
-}
-
-.container {
-	width: 80%;
-	height: 100%;
-	padding: 10px;
-}
-
-form, table {
-	height: 100%;
-	text-align: center;
-}
-
-tr:first-child {
-	height: 10%;
-}
-
-input {
-	width: 100%;
-	height: 100%;
-}
-
-textarea {
-	width: 100%;
-	height: 100%;
+#column_title {
+	width: 70%;
+	height: 4rem;
+	overflow: hidden;
+	border: none;
 	resize: none;
+	font-weight: 600;
+	text-align: center;
+	font-family: 'LeferiPoint-WhiteA';
+    	font-weight: 600;
 }
 
-.boxBtn {
+.columnTextarea {
+	width: 70%;
+	height: 4rem;
+	overflow: hidden;
+	resize: none;
+	font-weight: 600;
 	text-align: center;
+	border: none;
+	border-top: 1px solid #b4ddd2;
+	border-bottom: 1px solid #97C4B8;
+	font-family: 'LeferiPoint-WhiteA';
+    	font-weight: 600;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
-/* 버튼 영역 끝 */
+
+.columnTextarea:focus {
+	outline: none;
+}
+
+.figure-caption{
+	font-family: 'LeferiPoint-WhiteA';
+    font-weight: 600;
+	}
+
+.content {
+	position: relative;
+}
+
+.dateLabel {
+	position: absolute;
+}
+
+img{
+		width: 800px;
+	}
+
+
+/*버튼*/
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	justify-content: center;
+}
+
+#btnCancle, #btnSave, .btnPics {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	color: white;
+	margin: 5px;
+}
+
+#btnCancle:hover, #btnSave:hover, .btnPics:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -275,10 +307,10 @@ textarea {
 }
 /* footer 끝 */
 </style>
-
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -337,7 +369,10 @@ textarea {
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -357,28 +392,25 @@ textarea {
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="/toColumnPage.column">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -386,115 +418,130 @@ textarea {
 		</div>
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
-	</div>
-
-	<!-- Column 수정 -->
-	<div class="empty"></div>
-	<div class="cls_body">
-		<div class="d-flex justify-content-center">
-			<div class="title d-flex justify-content-center">
-				<h3>Column 수정</h3>
-			</div>
-		</div>
-	</div>
-
-	<form id="modifyForm" action="/modifyProc.column" method="post">
-		<input class="d-none" value="${dto.column_seq}" name="column_seq"
-			id="column_seq">
 		<div class="container">
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>제목</h4>
-				</div>
-				<div class="col-10 p-2">
-					<input type="text" class="form-control" id="title"
-						name="column_title" value="${dto.column_title}">
+			<div class="partDetail">
+				<form action="/modifyProc.column?column_seq=${dto.column_seq}"
+					method="post" id="insertForm" enctype="multipart/form-data">
+					<div class="row title">
+						<div class="col d-flex justify-content-center"
+							style="margin-top: 40px;">
+							<figure class="figure text-center">
+								<img src="/files/${dto.column_src}" id="column_src_img"
+									class="figure-img img-fluid rounded">
+								<figcaption class="figure-caption text-end">참고이미지</figcaption>
+								<label class="btn btnPics" for="column_src" style="width: 10rem;">사진
+									등록</label>
+								<input class="form-control" type="file" id="column_src"
+									name="column_src" style="display: none;">
+							</figure>
+						</div>
+					</div>
+					<h1 class="class d-flex justify-content-center">
+						<input type="text" id="column_title" name="column_title"
+							value="${dto.column_title}">
+					</h1>
+					<div class="row">
+						<div class="col content d-flex justify-content-center">
+							<div>
+								<label class="figure-caption dateLabel text-end"
+									name="column_date">${dto.column_date}</label>
+							</div>
+							<textarea class="columnTextarea" name="column_content">${dto.column_content}</textarea>
+						</div>
+					</div>
+				</form>
+				<div class="empty"></div>
+				<div class="row">
+					<div class="col d-flex justify-content-end">
+						<button type="button" class="btn" id="btnCancle"
+							value="${dto.column_seq}">취소</button>
+					</div>
+					<div class="col-3 d-flex justify-content-start">
+						<button type="button" class="btn" id="btnSave">저장</button>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-2 d-flex justify-content-center align-items-center">
-					<h4>내용</h4>
-				</div>
-				<div class="col-10 p-2">
-					<textarea id="content" class="form-control" id="content"
-						name="column_content">${dto.column_content}</textarea>
-				</div>
-			</div>
-			<%--	<div class="row">
-						<div
-							class="col-2 d-flex justify-content-center align-items-center">
-							<h4>링크주소</h4>
-						</div>
-						<div class="col-10 p-2">
-							<textarea id="link" class="form-control" id="content"
-								name="qna_content"></textarea>
-						</div>
-					</div> --%>
 		</div>
-	</form>
-
-	<div class="boxBtn">
-		<button type="button" class="btn btn-secondary" id="btnBack">뒤로가기</button>
-		<button type="button" class="btn btn-primary" id="btnModify">수정</button>
+		<div class="empty" style="margin: 40px;"></div>
+		<!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
-
 	<script>
-		$("#btnModify").on("click", function() {
-			if ($("#title").val() === "") {
-				$("#title").val("제목없음");
-			}
-
-			if ($("#content").val() === "") {
-				alert("내용을 입력하세요.");
-				$("#content").focus();
-				return;
-			}
-			$("#modifyForm").submit();
+		$(".btnCancle").on("click", function() {
+			location.href = "/toColumnPage.column?curPage=1";
 		})
 
-		let btnBack = document.getElementById("btnBack");
+		autosize($("textArea"));
 
-		btnBack.addEventListener("click", function(e) {
-			let qna_seq = $("#qna_seq").val();
+		// 이미지 미리보기
+		$("#column_src").change(function() {
+			setImageFromFile(this, "#column_src_img");
+		});
 
-			location.href = "/view.column?qna_seq=" + qna_seq;
+		function setImageFromFile(input, expression) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$(expression).attr("src", e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		let lengthReg = /.{1,666}/;
+    	let titleReg = /.{1,30}/;
+		
+		$("#btnSave").on("click", function() {
+			if ($("#column_title").val() === ""){
+    			alert("제목을 입력해주세요.");
+    			$("#column_title").focus();
+    			return;
+    		} else if ($("#column_content").val() === ""){
+    			alert("내용을 입력해주세요.");
+    			$("#column_content").focus();
+    			return;
+    		} else if (!titleReg.test($("#column_title").val())){
+    			alert("제목이 너무 깁니다.");
+    			$("#column_title").focus();
+    			return;
+    		}else if (!lengthReg.test($("#column_content").val())){
+    			alert("내용이 너무 깁니다.");
+    			$("#column_content").focus();
+    			return;
+    		}
+			
+			$("#insertForm").submit();
+		})
+
+		$("#btnCancle").on("click", function(e) {
+			location.href = "/view.column?column_seq=" + $(e.target).val();
 		})
 	</script>
-	<!-- Column 수정 끝 -->
-
-	<!-- footer -->
-	<div class="container footer">
-		<div class="row footerInfo">
-			<div class="col-6">
-				제휴 및 서비스 이용문의<br>
-				<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-				AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-			</div>
-			<div class="col-6">
-				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
-				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-				kh.projectmail@gmail.com<br>
-			</div>
-		</div>
-		<div class="row footerMenu">
-			<div class="col">
-				<a href="">이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">개인정보처리방침</a>
-			</div>
-			<div class="col">
-				<a href="">위치정보이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">센터등록요청하기</a>
-			</div>
-			<div class="col">
-				<a href="">문의하기</a>
-			</div>
-		</div>
-		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-	</div>
-	<!-- footer 끝 -->
 </body>
 </html>

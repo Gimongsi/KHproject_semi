@@ -48,7 +48,7 @@ public class ManagerController extends HttpServlet {
 			request.getRequestDispatcher("/manager/search.jsp").forward(request, response);
 			
 			
-		} else if (uri.equals("/managerUpdate.user")) { //회원 수정버튼 눌렀을때 ajax 실행
+		} else if (uri.equals("/managerUpdate.manager")) { //회원 수정버튼 눌렀을때 ajax 실행
 			
 			int user_seq = Integer.parseInt(request.getParameter("user_seq"));
 			System.out.println(user_seq);
@@ -92,7 +92,26 @@ public class ManagerController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		} else if (uri.equals("")) {
+		} else if (uri.equals("/user_update.manager")) { // 유저정보 수정해주기
+			String user_id = request.getParameter("user_id");
+			String user_name = request.getParameter("user_name");
+			String user_phone = request.getParameter("user_phone");
+			String user_auth = request.getParameter("user_auth");
+			
+			
+			System.out.println(user_id + " : " + user_name + " : " + user_phone + " : "+ user_auth);
+			UserDAO dao = new UserDAO();
+			try {
+				int rs = dao.manager_userUpdate(new UserDTO(0, user_id, null, user_name, user_phone, null, user_auth, null));
+				if (rs > 0) {
+					System.out.println("업데이트 성공");
+					response.sendRedirect("/userSerch.manager?curPage=1");
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			
 		}
 	

@@ -21,32 +21,6 @@
 <title>전체 회원 목록</title>
 </head>
 <style>
-/* 버튼 */
-.btnSpace {
-	margin-bottom: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-weight: 600;
-}
-
-.btnAdd {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	font-size: small;
-	color: white;
-	margin: 5px;
-}
-
-.btnAdd:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
 /* 폰트 */
 @font-face {
 	font-family: '양진체';
@@ -65,6 +39,13 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -75,6 +56,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -112,6 +94,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -129,131 +112,25 @@
 	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%
-{
-transform
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-translateY
-
-
-
-
-
-
-
-
-
-
-
-
-(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--20px
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -303,21 +180,14 @@ translateY
 }
 
 /* 바디 타이틀 */
-.cls_title {
-	height: 100px;
-}
-
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 200px;
-	height: 45px;
-	text-align: center;
+.title {
+	color: #97C4B8;
+	border-bottom: 1px solid #97C4B8;
+	-bs-gutter-x: 0px;
+	margin-bottom: 50px;
+	margin-top: 50px;
 	font-family: '양진체';
+	text-align:center;
 }
 
 /* 바디 서치 */
@@ -328,12 +198,30 @@ translateY
 }
 
 /* 바디 테이블 */
+.cls_body{
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
+}
+
 .cls_table {
 	width: 100%;
 	margin: auto;
 }
 
 /* update table */
+.thTitle{
+	background-color: #61becd !important;
+	text-align: center;
+	color: white;
+	border-bottom: 2px solid #9fd9df !important;
+	vertical-align: middle;
+}
+
+td{
+	vertical-align: middle;
+	text-align: center;
+}
+
 .update_table {
 	margin: auto;
 	width: 80%;
@@ -353,6 +241,61 @@ translateY
 
 .update_table>tr>th {
 	background-color: rgb(231, 231, 231);
+}
+
+/* 버튼, 인풋 */
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+.btnAdd {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 80rem;
+	padding-top: 5px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-size: small;
+	color: white;
+	margin: 5px;
+}
+
+.btnAdd:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
+#userSearch {
+	background-color: #61becd;
+	color: white;
+}
+
+#userSearch:hover {
+	background-color: #31a6b9;
+}
+
+#search_input {
+	border: 1px solid #61becd;
+	border-radius: 0;
+	right: -10px;
+}
+
+#search_input::placeholder {
+	color: #adcabf;
+	text-align: center;
+}
+
+#search_input:focus {
+	outline: #adcabf !important;
+}
+
+input, select, option{
+	font-weight: 600 !important;
 }
 
 /* footer */
@@ -382,11 +325,13 @@ translateY
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -445,7 +390,6 @@ translateY
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -469,49 +413,42 @@ translateY
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-		<div class="row cls_body">
-			<div class="row cls_title">
-				<div
-					class="col-12 d-flex align-items-center justify-content-center title_div">
-					<h2>전체 회원 목록</h2>
-				</div>
+		<div class="container cls_body">
+			<div class="row title">
+				<h2>전체 회원 목록</h2>
 			</div>
 			<div class="row cls_search">
 				<div class="col-10 d-flex justify-content-end search_input">
 					<input type="text" class="form-control" id="search_input"
-						name="search_input">
+						name="search_input" placeholder="이름검색">
 				</div>
-				<div class="col-2 search_btn">
-					<button type="button" id="userSearch" class="btn btn-primary">찾기</button>
+				<div class="col-2 search_btn d-flex justify-content-end">
+					<button type="button" id="userSearch" class="btn">찾기</button>
 				</div>
 			</div>
 			<div class="empty"></div>
@@ -521,12 +458,12 @@ translateY
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">이메일</th>
-							<th scope="col">이름</th>
-							<th scope="col">휴대폰번호</th>
-							<th scope="col">마지막 접속 날짜</th>
-							<th scope="col">등급</th>
-							<th scope="col">수정 하기</th>
+							<th scope="col" class="thTitle">이메일</th>
+							<th scope="col" class="thTitle">이름</th>
+							<th scope="col" class="thTitle">휴대폰번호</th>
+							<th scope="col" class="thTitle">마지막 접속 날짜</th>
+							<th scope="col" class="thTitle">등급</th>
+							<th scope="col" class="thTitle">수정 하기</th>
 						</tr>
 					</thead>
 					<tbody id="user_table">
@@ -582,30 +519,30 @@ translateY
 							<tr>
 								<th class="update_col">이메일</th>
 								<td class="insert_col"><input type="text"
-									class="form-control user_id" value="" readonly></td>
+									class="form-control user_id" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control user_id" value="" name="user_id" readonly></td>
+									class="form-control user_id" name="user_id" readonly></td>
 							</tr>
 							<tr>
 								<th class="update_col">이름</th>
 								<td class="insert_col"><input type="text"
-									class="form-control" value="" readonly></td>
+									class="form-control" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control user_name" value="" name="user_name"
+									class="form-control user_name" name="user_name"
 									class="update_input"></td>
 							</tr>
 							<tr>
 								<th class="update_col">휴대폰 번호</th>
 								<td class="insert_col"><input type="text"
-									class="form-control" value="" readonly></td>
+									class="form-control" readonly></td>
 								<td class="insert_col"><input type="text"
-									class="form-control user_phone" value="" class="update_input"
+									class="form-control user_phone" class="update_input"
 									placeholder="-제외"></td>
 							</tr>
 							<tr>
 								<th class="update_col">등급</th>
 								<td class="insert_col"><input type="text"
-									class="form-control" value="" readonly></td>
+									class="form-control" readonly></td>
 								<td class="insert_col"><select
 									class="form-select user_auth" name="user_auth">
 										<option value="" selected>등급 선택</option>
@@ -623,7 +560,6 @@ translateY
 							</tr>
 						</tbody>
 					</table>
-
 					<div class="empty"></div>
 					<div class="row btn-before">
 						<div class="col-10 d-flex justify-content-end"></div>
@@ -642,39 +578,34 @@ translateY
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- footer 영역 -->
-	<div class="container footer">
-		<div class="row footerInfo">
-			<div class="col-6">
-				제휴 및 서비스 이용문의<br>
-				<h3>1588-0000</h3>
-				<br> AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-			</div>
-			<div class="col-6">
-				(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br> 사업자번호
-				: 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-				kh.projectmail@gmail.com<br>
-			</div>
-		</div>
-		<div class="row footerMenu">
-			<div class="col">
-				<a href="">이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">개인정보처리방침</a>
-			</div>
-			<div class="col">
-				<a href="">위치정보이용약관</a>
-			</div>
-			<div class="col">
-				<a href="">센터등록요청하기</a>
-			</div>
-			<div class="col">
-				<a href="">문의하기</a>
-			</div>
-		</div>
-		<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+		<!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 
 	<script>
@@ -682,7 +613,7 @@ translateY
 		let user_seq = $(e.target).val();
 
 		$.ajax({
-			url : "/managerUpdate.user?user_seq=" + user_seq,
+			url : "/managerUpdate.manager?user_seq=" + user_seq,
 			type : "get",
 			dataType : "json",
 			success : function(data) {
@@ -690,7 +621,7 @@ translateY
 				let tr1 = $("<tr>");
 				let th1_1 = $("<th>").addClass("update_col").html("이메일");
 				let td1_1 = $("<td>").addClass("insert_col");
-				let input1_1 = $("<input>").addClass("form-control user_id").attr({
+				let input1_1 = $("<input>").addClass("form-control").attr({
 					type : "text",
 					value : data.user_id,
 					readonly : true
@@ -711,7 +642,7 @@ translateY
 						"이름");
 				let td2_1 = $("<td>").addClass("insert_col");
 				let input2_1 = $("<input>").addClass(
-						"form-control user_name").attr({
+						"form-control").attr({
 					type : "text",
 					value : data.user_name,
 					readonly : true
@@ -731,7 +662,7 @@ translateY
 						"휴대폰 번호");
 				let td3_1 = $("<td>").addClass("insert_col");
 				let input3_1 = $("<input>").addClass(
-						"form-control user_phone").attr({
+						"form-control").attr({
 					type : "text",
 					value : data.user_phone,
 					readonly : true
@@ -749,10 +680,10 @@ translateY
 
 				let tr4 = $("<tr>");
 				let th4_1 = $("<th>").addClass("update_col").html(
-						"휴대폰 번호");
+						"등급");
 				let td4_1 = $("<td>").addClass("insert_col");
 				let input4_1 = $("<input>").addClass(
-						"form-control user_auth").attr({
+						"form-control").attr({
 					type : "text",
 					value : data.user_auth,
 					readonly : true
@@ -824,6 +755,15 @@ translateY
 		})
 
 		$(".toModify_btn").on("click", function() {
+			if($(".user_name").val() === ""){
+				alert("이름을 입력해주세요.");
+				$(".user_name").focus();
+				return;
+			} else if ($(".user_phone").val() === ""){
+				alert("핸드폰 번호를 입력해주세요.");
+				$(".user_phone").focus();
+				return;
+			}
 			$("#updateForm").submit();
 		})
 	

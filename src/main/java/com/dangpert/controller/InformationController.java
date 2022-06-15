@@ -99,6 +99,8 @@ public class InformationController extends HttpServlet {
 
 			System.out.println("qna_title : " + qna_title);
 			
+			System.out.println(qna_title);
+			
 			InformationDAO dao = new InformationDAO();
 			try {
 				int rs = dao.modify(new InformationDTO(qna_seq,qna_title,qna_content));
