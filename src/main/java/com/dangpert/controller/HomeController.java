@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dangpert.dao.ColumnDAO;
 import com.dangpert.dao.FoodDAO;
 import com.dangpert.dao.GymDAO;
+import com.dangpert.dto.ColumnDTO;
 import com.dangpert.dto.FoodDTO;
 import com.dangpert.dto.GymInfoDTO;
 
@@ -31,13 +33,17 @@ public class HomeController extends HttpServlet {
 			if(uri.equals("/home")) {
 				FoodDAO foodDAO = new FoodDAO();
 				GymDAO gymDAO = new GymDAO();
+				ColumnDAO columnDAO = new ColumnDAO();
 
 			try {
 				ArrayList<GymInfoDTO> gymList = gymDAO.selectAllGym();
 				ArrayList<FoodDTO> foodList = foodDAO.selectPromo();
-					
+				ArrayList<ColumnDTO> columnList = columnDAO.selectAllMain();
+				
+				System.out.println(columnList.get(0));
 				request.setAttribute("gymList", gymList);
 				request.setAttribute("foodList", foodList);
+				request.setAttribute("columnList", columnList);
 				
 			}catch(Exception e) {
 				e.printStackTrace();

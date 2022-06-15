@@ -43,6 +43,12 @@
 	font-style: normal;
 }
 
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -103,43 +109,31 @@
 	filter: invert(75%) sepia(12%) saturate(803%) hue-rotate(52deg)
 		brightness(99%) contrast(80%);
 }
-
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
 	width: 50%;
 	height: 50%;
 }
-
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-%
-{
-transform
-:
-translateY(
--20px
-)
-}
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -234,7 +228,7 @@ translateY(
 
 .title {
 	color: #97C4B8;
-	border-bottom: 1px solid #97C4B8; -
+	border-bottom: 1px solid #97C4B8;
 	-bs-gutter-x: 0px;
 	margin-bottom: 20px;
 	margin-top: 10px;
@@ -289,6 +283,7 @@ translateY(
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
@@ -353,7 +348,6 @@ translateY(
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -377,7 +371,7 @@ translateY(
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
 								<c:choose>
 									<c:when
 										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
@@ -393,23 +387,9 @@ translateY(
 											href="/list.food">특가 식품</a></li>
 									</c:otherwise>
 								</c:choose>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -464,7 +444,7 @@ translateY(
 					<ul class="pagination">
 						<c:if test="${naviMap.needPrev eq true}">
 							<li class="page-item"><a class="page-link"
-								href="/modifyList.food?curPage=${naviMap.startNavi-1}"><</a></li>
+								href="/modifyList.food?curPage=${naviMap.startNavi-1}">←</a></li>
 						</c:if>
 						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 							end="${naviMap.endNavi}" step="1">
@@ -473,46 +453,40 @@ translateY(
 						</c:forEach>
 						<c:if test="${naviMap.needNext eq true}">
 							<li class="page-item"><a class="page-link"
-								href="/modifyList.food?curPage=${naviMap.endNavi+1}">></a></li>
+								href="/modifyList.food?curPage=${naviMap.endNavi+1}">→</a></li>
 						</c:if>
 					</ul>
 				</nav>
 			</div>
 		</div>
 		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-		<!-- footer 끝 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 	<script>
 		$(".btnAdd").on("click", function(){

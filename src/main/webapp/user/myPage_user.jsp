@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- text area auto size -->        
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script> 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -16,7 +18,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>마이페이지</title>
 </head>
 <style>
 /* 폰트 */
@@ -28,12 +30,27 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
@@ -48,6 +65,8 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -78,7 +97,6 @@
 
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -90,42 +108,34 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-%
-{
-transform
-:
-translateY(
--20px
-)
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -171,42 +181,74 @@ translateY(
 }
 
 /* 바디 */
+.bodyContainer{
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
+}
+
 .inner-container-left {
 	margin: auto;
-	border: 1px solid black;
+	border: 1px solid #F0FFC2;
 	box-sizing: border-box;
 	height: 100%;
+	background-color: #F0FFC2;
 }
 
 .inner-container-left * {
 	margin: 20px;
+	font-weight: 600;
+	color: #80bdb7;
 }
 
 .inner-container-right {
 	height: 100%;
 }
 
-.inner-container-right div {
-	margin: 20px;
-	margin-top: 50px;
-}
-
 .inner-container-right h5 {
-	border-bottom: 2px solid grey;
+	border-bottom: 2px solid #97C4B8;
 	width: 400px;
 	text-align: center;
+	font-weight: 600;
 }
 
 .inner-container-right button {
 	margin-right: 40px;
+	font-weight: 600;
+	padding-top: 9px;
+	border: 1px solid #97C4B8;
+	color: #5b7272;
 }
 
 .bookmark {
-	border: 1px solid black;
+	margin-top: 10px;
+	border: 1px solid #97C4B8;
 	height: 600px;
+	border-radius: 0.25rem;
+	overflow-y: scroll;
+	padding: 20px;
+	margin-bottom: 50px;
 }
 
-/* 푸터 */
+.bookmark img{
+	width: 150px;
+	height: 100px;
+	margin-bottom: 2px;
+}
+
+.favBox{
+	border: 1px dotted #c9d4a9;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	padding: 5px;
+	border-radius: 0.25rem;
+}
+.favLabel{
+	color: #89b3a8;
+	
+}
+
+/* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
@@ -233,6 +275,7 @@ translateY(
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
@@ -297,7 +340,6 @@ translateY(
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -321,7 +363,7 @@ translateY(
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
 								<c:choose>
 									<c:when
 										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
@@ -337,23 +379,9 @@ translateY(
 											href="/list.food">특가 식품</a></li>
 									</c:otherwise>
 								</c:choose>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -362,10 +390,14 @@ translateY(
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
 		<!-- 바디 -->
-		<div class="cls_body">
+		<div class="container bodyContainer">
 			<div class="row justify-content-evenly">
 				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
+					<h3 class="text-center mb-3" style="font-weight: 600; color: #97C4B8">My Page</h3>
+				</div>
+				<div class="col-6"></div>
+			<div class="row justify-content-evenly">
+				<div class="col-3">
 					<div class="inner-container-left">
 						<div>
 							<button type="button" id="modifyBtn"
@@ -380,98 +412,120 @@ translateY(
 				<div class="col-6">
 					<div class="inner-container-right">
 						<div class="d-flex justify-content-center">
-							<h5>목표 몸무게까지 kg 남았습니다.</h5>
+							<h5>목표 몸무게까지 ${userWeight}kg 남았습니다.</h5>
 						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 접속일</button>
-							2022년 00월 00일
+						<div class="d-flex justify-content-center">
+							<button type="button" class="btn btn-sm" disabled>마지막 접속일</button>
+							<span style="align-self: center;">${dto.signup_date}</span>
 						</div>
-						<div>
-							<button type="button" class="btn btn-sm btn-outline-secondary"
-								disabled>마지막 기록일</button>
-							2022년 00월 00일
-						</div>
-						<div>즐겨찾기</div>
+						<!-- 즐겨찾기 목록 시작 -->
+						<div style="margin-top: 50px;"><h3 style="font-weight: 600; color: #97C4B8;">즐겨찾기 List</h3></div>
 						<div class="bookmark">
-							<table>
-								<thead>
-									<th>프로모션</th>
-								</thead>
-								<tbody>
-									<c:choose>
-										<c:when test="${ugi_dto.size() == 0 && ufi.size() == 0}">
-											<tr>
-												<td>등록된 프로모션 즐겨찾기가 없습니다.</td>
-											</tr>
-										</c:when>
-										<c:otherwise>
-											<th>헬스장 프로모션</th>
-											<c:forEach items="${ugi_dto}" var="dto">
-												<tr>
-													<td>${gym_dto.gym_seq}</td>
-													<td><a href="">${ugi_dto.gym_name}</a></td>
-												</tr>
+							<div class="interestBox"><label class="favLabel">식품 즐겨찾기</label>
+								<c:choose>
+									<c:when test="${listInterest.size() == 0}">
+										<div>등록된 푸드 프로모션이 없습니다.</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${listPromo}" var="listPromo">
+											<c:set var="checkInterestP" value="false" />
+											<c:forEach items="${listInterest}" var="listInterest">
+												<c:if test="${listPromo.food_seq eq listInterest.food_seq}">
+													<c:set var="checkInterestP" value="true" />
+												</c:if>
 											</c:forEach>
-											<th>푸드 프로모션</th>
-											<c:forEach items="${listInterest}" var="dto">
-												<tr>
-													<td>${gym_dto.food_seq}</td>
-													<td><a href="">${ufi_dto.food_name}</a></td>
-												</tr>
+											<c:if test="${checkInterestP}">
+												<div class="row favBox">
+													<div class="col-6" style="align-self: center;">
+														<label>${listPromo.food_name}</label><br>
+														<label>${listPromo.food_price}원</label>
+													</div>
+													<div class="col-6 d-flex justify-content-end">
+														<a href="${listPromo.food_com}">
+														<img src="/files/${listPromo.food_src}"></a>
+													</div>
+												</div>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="interestBox"><label class="favLabel">운동시설 즐겨찾기</label>
+								<c:choose>
+									<c:when test="${ugi_dto.size() == 0}">
+										<div>등록된 헬스장 프로모션이 없습니다.</div>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${gym_dto}" var="gym_dto">
+											<c:set var="checkInterest" value="false" />
+											<c:forEach items="${ugi_dto}" var="interestG">
+												<c:if test="${interestG.gym_seq eq gym_dto.gym_seq}">
+													<c:set var="checkInterest" value="true" />
+												</c:if>
 											</c:forEach>
-										</c:otherwise>
-									</c:choose>
-								</tbody>
-							</table>
+											<c:if test="${checkInterest}">
+												<div class="row favBox">
+													<div class="col-6" style="align-self: center;">
+														<label>${gym_dto.gym_name}</label><br>
+														<label>${gym_dto.gym_month}개월 ${gym_dto.gym_price}원</label>
+													</div>
+													<div class="col-6 d-flex justify-content-end">
+														<a href="/detail.gym?gym_seq=${gym_dto.gym_seq}">
+														<img src="/files/${gym_dto.gym_src_main}"></a>
+													</div>
+												</div>
+											</c:if>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</div>
+						<!-- 즐겨찾기 끝 -->
+						
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
+		<!-- 바디 끝 -->
+		<!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 	<script>
-    	document.getElementById("modifyBtn").onclick = function(){
-    		location.href = "/userModify.user";
-    	}
-    	document.getElementById("diaryBtn").onclick = function(){
-    		location.href = "/userDiary.user";
-    	}
-    </script>
+		document.getElementById("modifyBtn").onclick = function() {
+			location.href = "/userModify.user";
+		}
+		document.getElementById("diaryBtn").onclick = function() {
+			location.href = "/userDiary.user";
+		}
+		
+		autosize($("textArea"));
+	</script>
 </body>
 </html>

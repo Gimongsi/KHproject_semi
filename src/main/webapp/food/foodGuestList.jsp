@@ -42,6 +42,13 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -52,6 +59,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -89,6 +97,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -290,11 +299,13 @@
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
 	<div class="container">
-		<div class="row cls_header">
+		<!-- 헤더 -->
+	<div class="row cls_header">
 			<div class="col-3 logoImg">
 				<a href="/home"> <img id="logoImg" src="../imgs/dpt_Logo.png">
 				</a>
@@ -353,7 +364,10 @@
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+						<li><a class="dropdown-item"
+							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -373,28 +387,25 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.gym">내
-										주변 운동시설</a></li>
-								<li class="nav-item"><a class="nav-link" href="/list.food">특가
-										식품</a></li>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
+								<c:choose>
+									<c:when
+										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.gym">내 주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/listLogin.food">특가 식품</a></li>
+									</c:when>
+									<c:otherwise>
+										<li class="nav-item"><a class="nav-link" href="/list.gym">내
+												주변 운동시설</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/list.food">특가 식품</a></li>
+									</c:otherwise>
+								</c:choose>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -437,26 +448,6 @@
 										<p id="food_title" class="card-text">${dtoPromo.food_title}</p>
 										<p class="card-text food_price d-flex justify-content-end">${dtoPromo.food_price}&nbsp;원</p>
 										<div class="col favorite d-flex justify-content-end">
-											<%--<c:choose>
-												<c:when test="${listInterest.food_seq eq list.food_seq}">
-													<c:forEach items="${listInterest}" var="listInterest">
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="redHeartBtn"
-																value="${list.food_seq}">
-																<img id="redHeart" src="../imgs/red heart.png">
-															</button>
-														</div>
-													</c:forEach>
-												</c:when>
-												<c:otherwise>
-													<div class="ImgFavorite">
-														<button type="button" class="heartBtn" id="emptyHeartBtn"
-															value="${list.food_seq}">
-															<img id="emptyHeart" src="../imgs/empty heart.png">
-														</button>
-													</div>
-												</c:otherwise>
-											</c:choose> --%>
 										</div>
 									</div>
 								</div>
@@ -493,26 +484,6 @@
 											<p id="food_title" class="card-text">${dto.food_title}</p>
 											<p class="card-text d-flex food_price justify-content-end">${dto.food_price}&nbsp;원</p>
 											<div class="col favorite d-flex justify-content-end">
-												<%-- <c:choose>
-													<c:when test="${listInterest.food_seq eq dto.food_seq}">
-														<c:forEach items="${listInterest}" var="listInterest">
-															<div class="ImgFavorite">
-																<button type="button" class="heartBtn" id="redHeartBtn"
-																	value="${dto.food_seq}">
-																	<img id="redHeart" src="../imgs/red heart.png">
-																</button>
-															</div>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<div class="ImgFavorite">
-															<button type="button" class="heartBtn" id="emptyHeartBtn"
-																value="${dto.food_seq}">
-																<img id="emptyHeart" src="../imgs/empty heart.png">
-															</button>
-														</div>
-													</c:otherwise>
-												</c:choose>--%>
 											</div>
 										</div>
 									</div>
@@ -526,39 +497,33 @@
 		<!-- 헬린이 프로모션 목록 끝 -->
 		<div class="empty"></div>
 		<!-- footer -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
-		</div>
-		<!-- footer 끝 -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 	<script>
 	$(".btnAdd").on("click", function(){
@@ -585,9 +550,11 @@
 		let answer = confirm("회원 전용 메뉴입니다. 로그인하시겠습니까?");
 		if(answer){
 			$("a").attr("href", "/user/login.jsp");
-		}else
-			$("a").attr("href", "#");
 			return;
+		}else{
+			$("a").attr("href", "/list.food");
+			return;
+		}
 	}
          
         /* let num =  $(".food_price").html();

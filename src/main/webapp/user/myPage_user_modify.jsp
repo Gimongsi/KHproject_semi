@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>회원정보 수정</title>
 </head>
 <style>
 /* 폰트 */
@@ -38,6 +38,13 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
@@ -48,6 +55,7 @@
 .container {
 	margin: auto;
 }
+
 /* 헤더 */
 .cls_header {
 	height: 150px;
@@ -85,6 +93,7 @@
 .headMenu {
 	justify-content: end;
 }
+
 /* 로고 */
 .logoImg {
 	padding: 0%;
@@ -102,35 +111,25 @@
 	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-%
-{
-transform
-:
-translateY
-(
--20px
-)
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
@@ -180,28 +179,96 @@ translateY
 }
 
 /* 바디 */
+.cls_body{
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
+}
+
 .inner-container-left {
 	margin: auto;
-	border: 1px solid black;
+	border: 1px solid #F0FFC2;
 	box-sizing: border-box;
-	height: 85%;
+	height: 100%;
+	background-color: #F0FFC2;
 }
 
 .inner-container-left * {
 	margin: 20px;
+	font-weight: 600;
+	color: #80bdb7;
 }
 
 .inner-container-right input {
 	background-color: #80808030;
 	width: 100%;
 	border: none;
+	font-weight: 600;
 }
 
 .inner-container-right div {
 	margin: 20px;
 }
 
-/* 푸터 */
+input{
+	padding-left: 5px;
+}
+
+/* 버튼 */
+.btnSpace {
+	margin-bottom: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	justify-content: center;
+}
+
+#submitBtn, #cancleBtn {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	padding: 3px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	color: white;
+	margin: 5px;
+}
+
+#submitBtn:hover, #cancleBtn:hover, #pwOk:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
+#pwOk{
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	padding: 1px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	color: white;
+	margin-top: 2px;
+}
+
+#deleteBtn{
+	background-color: #a8b3b0;
+	border-radius: 0.25rem;
+	font-family: 'LeferiPoint-WhiteA';
+	color: white;
+	margin: 5px;
+	padding-top: 5px;
+	padding-bottom: 1px;
+	align-items:center;
+}
+
+#deleteBtn:hover{
+	background-color: #898d8c;
+}
+
+/* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
@@ -228,6 +295,7 @@ translateY
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
@@ -292,7 +360,6 @@ translateY
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -316,7 +383,7 @@ translateY
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
 								<c:choose>
 									<c:when
 										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
@@ -332,23 +399,9 @@ translateY
 											href="/list.food">특가 식품</a></li>
 									</c:otherwise>
 								</c:choose>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -357,10 +410,16 @@ translateY
 		<!-- 네비 끝 -->
 		<div class="empty"></div>
 		<!-- 바디 -->
-		<div class="cls_body">
+		<div class="container cls_body">
 			<div class="row justify-content-evenly">
 				<div class="col-3">
-					<h3 class="text-center mb-3">My Page</h3>
+					<h3 class="text-center mb-3" style="font-weight: 600; color: #97C4B8">My Page</h3>
+				</div>
+				<div class="col-6">
+					<h3 class="text-center mb-3" style="font-weight:600; color: #97C4B8">회원 정보 수정</h3>
+				</div>
+			<div class="row justify-content-evenly">
+				<div class="col-3">
 					<div class="inner-container-left">
 						<div>
 							<button type="button" id="modifyBtn"
@@ -373,7 +432,6 @@ translateY
 					</div>
 				</div>
 				<div class="col-6">
-					<h3 class="text-center mb-3">회원 정보 수정</h3>
 					<div class="inner-container-right">
 							<form action="/pwOk.user" method="post" id="pwOkForm">
 							<div class="mb-5">
@@ -381,25 +439,20 @@ translateY
 								<input type="text" value="${dto.getUser_id()}" name="user_id" disabled>
 							</div>
 							<div>
-<<<<<<< HEAD
-								<input type="text" disabled placeholder="현재 비밀번호"> <input
-									type="text" id="beforePw" name="beforPw" value="${user_pw}">
-=======
 								<input type="text" disabled placeholder="현재 비밀번호">
 								<input type="password" id="beforePw" name="beforPw" value="${user_pw}">
->>>>>>> 0b6af0306be05b1152e3591d066c77cf2e3714a2
-								<button type="button" id="pwOk">비밀번호 확인</button>
+								<button type="button" id="pwOk" style="font-size:small;">비밀번호 확인</button>
 							</div>
 							</form>
 							<c:choose>
 								<c:when test="${rs eq 'no'}">
 									<div>
-										<span>비밀번호가 일치하지 않습니다</span>
+										<span style="color: #d93737;">비밀번호가 일치하지 않습니다</span>
 									</div>
 								</c:when>
 								<c:when test="${rs eq 'ok'}">
 									<div>
-										<span>비밀번호가 일치합니다.</span>
+										<span style="color: #06a992;">비밀번호가 일치합니다.</span>
 									</div>
 								</c:when>
 							</c:choose>
@@ -431,21 +484,17 @@ translateY
 							</div>
 							<div>
 								<div class="d-flex justify-content-between">
-									<button class="btn btn-secondary col-2" id="deleteBtn"
-										type="button">회원 탈퇴</button>
-									<button class="btn btn-secondary col-2 invisible" type="button">더미</button>
-									<button class="btn btn-secondary col-2" id="cancleBtn" type="button">취소</button>
+									<button class="btn col-2" id="deleteBtn" type="button" style="">회원 탈퇴</button>
+									<button class="btn col-2 invisible" type="button">더미</button>
+									<button class="btn col-2" id="cancleBtn" type="button">취소</button>
 									<c:choose>
 										<c:when test="${rs eq 'ok'}">
-											<button class="btn btn-primary col-2" id="submitBtn"
-										type="button">수정 완료</button>
+											<button class="btn col-2" id="submitBtn" type="button">수정 완료</button>
 										</c:when>
 										<c:otherwise>
-											<button class="btn btn-primary col-2" id="submitBtn"
-										type="button" disabled>수정 완료</button>
+											<button class="btn col-2" id="submitBtn" type="button" disabled>수정 완료</button>
 										</c:otherwise>
 									</c:choose>
-
 								</div>
 							</div>
 						</form>
@@ -453,41 +502,36 @@ translateY
 				</div>
 			</div>
 		</div>
-		<!-- 바디 끝 -->
-		<div class="empty"></div>
-		<!-- 푸터 -->
-		<div class="container footer">
-			<div class="row footerInfo">
-				<div class="col-6">
-					제휴 및 서비스 이용문의<br>
-					<h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
-					AM 09:00 - PM 06:00<br> 토 일 공휴일 휴무
-				</div>
-				<div class="col-6">
-					(주)당퍼트<br> 서울특별시 영등포구 선유동2로 57<br> 대표 : 홍신영<br>
-					사업자번호 : 123-45-67890<br> 통신판매번호 : 제2000-서울영등포구-0000호<br>
-					kh.projectmail@gmail.com<br>
-				</div>
-			</div>
-			<div class="row footerMenu">
-				<div class="col">
-					<a href="">이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">개인정보처리방침</a>
-				</div>
-				<div class="col">
-					<a href="">위치정보이용약관</a>
-				</div>
-				<div class="col">
-					<a href="">센터등록요청하기</a>
-				</div>
-				<div class="col">
-					<a href="">문의하기</a>
-				</div>
-			</div>
-			<p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
 		</div>
+		<!-- 바디 끝 -->
+		<!-- footer -->
+        <div class="container footer">
+            <div class="row footerInfo">
+                <div class="col-6">
+                    제휴 및 서비스 이용문의<br>
+                    <h3 style="margin-top: 10px; font-weight: 600;">1588-0000</h3>
+                    AM 09:00 - PM 06:00<br>
+                    토 일 공휴일 휴무
+                </div>
+                <div class="col-6">
+                    (주)당퍼트<br>
+                    서울특별시 영등포구 선유동2로 57<br>
+                    대표 : 홍신영<br>
+                    사업자번호 : 123-45-67890<br>
+                    통신판매번호 : 제2000-서울영등포구-0000호<br>
+                    kh.projectmail@gmail.com<br>
+                </div>
+            </div>
+            <div class="row footerMenu">
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
+            </div>
+            <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
+        </div>
+        <!-- footer 끝 -->
 	</div>
 	<script>
 		
@@ -507,25 +551,35 @@ translateY
 		})
 		
 		
-		$("#submitBtn").on("click", function(e){ //
-		
-			if($("#afterPw").val() !== $("#afterPwCheck").val()){
-				alert("변경후 비밀번호가 맞지않습니다.");
-				return;
-			}
-			if($("#afterPw").val() === ""){
-				$("#afterPw").val("empty");
-			}
-			if($("#weight").val() === ""){
-				alert("몸무계를 입력해주세요.");
-				return;
-			} else if ($("#final_weight").val() === ""){
-				alert("목표 몸무계를 입력해주세요.");
-				return;
-			}
-		
-			$("#modifyForm").submit();	
-		})
+		$("#submitBtn").on("click", function(e){ 
+         let numberReg = /^[0-9]+$/;
+         if($("#afterPw").val() !== $("#afterPwCheck").val()){
+            alert("변경후 비밀번호가 맞지않습니다.");
+            return;
+         }
+         if($("#afterPw").val() === ""){
+            $("#afterPw").val("empty");
+         }
+         if($("#weight").val() === ""){
+            alert("몸무게를 입력해주세요.");
+            return;
+         } else if ($("#final_weight").val() === ""){
+            alert("목표 몸무게를 입력해주세요.");
+            return;
+         }
+         
+         if(!numberReg.test($("#weight").val())) {
+            alert("몸무게는 숫자만 입력해주세요.");
+            $("#weight").focus();
+            return;
+         } else if (!numberReg.test($("#final_weight").val())){
+            alert("목표 몸무게는 숫자만 입력해주세요.");
+            $("#final_weight").focus();
+            return;
+         }
+      
+         $("#modifyForm").submit();   
+      })
 		
 		$("#deleteBtn").on("click", function(e){
 			if(confirm("정말 회원탈퇴 하시겠습니까?")){

@@ -266,9 +266,9 @@
 	font-size: 3rem;
 	padding: 15px;
 	font-family: '양진체';
-	text-shadow: -1px 0px #ffea80, 0px 1px #ffea80, 1px 0px #ffea80, 0px
-		-1px #ffea80;
+	text-shadow: -1px 0px #ffea80, 0px 1px #ffea80, 1px 0px #ffea80, 0px -1px #ffea80;
 }
+
 /* 핸드폰사이즈 */
 .smTitle_promo {
 	height: 100px;
@@ -280,7 +280,6 @@
 	padding: 15px;
 	font-family: '양진체';
 }
-/* 핸드폰사이즈 */
 .smTitle_promo_gym {
 	height: 100px;
 	background-color: #ffea80;
@@ -289,8 +288,18 @@
 	font-size: 2rem;
 	padding: 15px;
 	font-family: '양진체';
-	text-shadow: -1px 0px #ffea80, 0px 1px #ffea80, 1px 0px #ffea80, 0px
-		-1px #ffea80;
+	text-shadow: -1px 0px #ffea80, 0px 1px #ffea80, 1px 0px #ffea80, 0px -1px #ffea80;
+}
+
+/* 칼럼 */
+.carousel-inner{
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+/* 부위별 */
+.cls_partEx *{
+	font-weight: 600;
 }
 
 /* 헬스장 목록 */
@@ -319,7 +328,7 @@
 	padding: 2px;
 	margin-left: 10px;
 }
-/* 헬스장 목록 끝 */
+
 /* 식품 목록*/
 .title_promo_food {
 	height: 100px;
@@ -341,11 +350,14 @@
 	font-family: '양진체';
 }
 
-.promo_food {
+.promo_food, .cls_partEx {
 	margin-top: 20px;
 	margin-bottom: 100px;
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
+}
+.promo_food img{
+	height: 15rem;
 }
 .card{
 	margin-bottom: 20px;
@@ -357,6 +369,7 @@
 .card_text{
 	margin-bottom: 10px;
 }
+
 /* 음식 프로모션 텍스트 효과 */
 @import url("https://fonts.googleapis.com/css?family=Baloo+Thambi");
 
@@ -386,6 +399,7 @@
         animation-delay: 0.25s;
     }
 /* 음식 프로모션 텍스트 효과 끝 */
+
 /* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
@@ -478,7 +492,6 @@
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -502,7 +515,7 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
 								<c:choose>
 									<c:when
 										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
@@ -518,23 +531,9 @@
 											href="/list.food">특가 식품</a></li>
 									</c:otherwise>
 								</c:choose>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -556,24 +555,24 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <a href="#"><img id="calumn_src" name="calumn_src" src="/imgs/man-g2cdda0662_1920.jpg" class="d-block w-100"></a>
+                            <a href="/view.column?column_seq=${columnList[17].column_seq}"><img id="calumn_src" name="calumn_src" src="/files/${columnList[17].column_src}" class="d-block w-100"></a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 id="calumn_title">함께 하는 운동</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
+                                <h3 id="calumn_title" style="font-weight:600;">${columnList[17].column_title}</h3>
+                                <%--<p>${columnList[0].column_content}</p> --%>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <a href="#"><img id="calumn_src" name="calumn_src" src="/imgs/crossfit-gee1621d57_1920.jpg" class="d-block w-100"></a>
+                            <a href="/view.column?column_seq=${columnList[15].column_seq}"><img id="calumn_src" name="calumn_src" src="/files/${columnList[15].column_src}" class="d-block w-100"></a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 id="calumn_title">근력 운동의 모든 것</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
+                                <h3 id="calumn_title" style="font-weight:600;">${columnList[15].column_title}</h3>
+                                <%-- <p>${columnList[1].column_content}</p> --%>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <a href="#"><img id="calumn_src" name="calumn_src" src="/imgs/sports-g92109f57b_1920.jpg" class="d-block w-100"></a>
+                            <a href="/view.column?column_seq=${columnList[10].column_seq}"><img id="calumn_src" name="calumn_src" src="/files/${columnList[10].column_src}" class="d-block w-100"></a>
                             <div class="carousel-caption d-none d-md-block">
-                                <h5 id="calumn_title">개구리</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
+                                <h3 id="calumn_title" style="font-weight:600;">${columnList[10].column_title}</h3>
+                                <%-- <p>${columnList[2].column_content}</p> --%>
                             </div>
                         </div>
                     </div>
@@ -611,15 +610,40 @@
             </div>
         </div>
         <div class="row cls_partEx">
-            <div class="col-6 d-flex justify-content-center">
-                <a href="#"><img style="width:100%;" src="/My/imgs/부위별01.jpg"></a>
-            </div>
-            <div class="col-6 d-flex justify-content-center">
-                <a href="#"><img style="width:100%;" src="/My/imgs/부위별05.jpg"></a>
-            </div>
+        
+        	<div class="col-12 d-flex justify-content-center">
+				<a href="/list.part?part_class=유산소&curPage=1" style="text-decoration: none; color: black;">
+					<div class="card" style="height: 100%;">
+						<img style="height: 100%; " src="../imgs/run.jpg" class="card-img-top" id="rowerBody">
+						<div class="card-body">
+							<h2 class="card-text d-flex justify-content-center">효율적인 유산소 운동</h2>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-6 d-flex justify-content-center" style="padding-right: 0px;">
+				<a href="/list.part?part_class=상체&curPage=1" style="text-decoration: none; color: black;">
+					<div class="card" style="height: 100%;">
+						<img style="height: 100%;" src="../imgs/upperBody.jpg" class="card-img-top" id="upperBody">
+						<div class="card-body">
+							<h2 class="card-text d-flex justify-content-center">상체 운동</h2>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-6 d-flex justify-content-center" style="padding-left: 0px;">
+				<a href="/list.part?part_class=하체&curPage=1" style="text-decoration: none; color: black;">
+					<div class="card" style="height: 100%;">
+						<img style="height: 100%;" src="../imgs/rowerBody.jpg" class="card-img-top" id="rowerBody">
+						<div class="card-body">
+							<h2 class="card-text d-flex justify-content-center">하체 운동</h2>
+						</div>
+					</div>
+				</a>
+			</div>
+			
         </div>
         <!-- 부위별 운동 끝 -->
-        <div class="empty"></div>
         <!-- 프로모션 -->
         <div class="smTitle_promo d-sm-none">
             <div class="content">
@@ -645,18 +669,18 @@
             	</c:when>
             	<c:otherwise>
             		<c:forEach items="${gymList}" var="dtoGymPromo">
-            			<div class="col-6 col-sm-3 d-flex justify-content-center">
+            			<div class="col-6 col-sm-3 d-flex justify-content-center" style="margin-botton: 20px;">
                				<div class="card card_gym" style="width: 18rem;">
-                    			<a href="/detail.gym?gym_seq=${dtoGymPromo.gym_seq}" style="text-decoration: none; color:black;">
-                        			<img id="gym_src" src="/files/${dtoGymPromo.gym_src_main}" class="card-img-top">
+                    			<a href="/detail.gym?gym_seq=${dtoGymPromo.gym_seq}" style="text-decoration: none; color:black; height: 100%;">
+                        			<img id="gym_src" src="/files/${dtoGymPromo.gym_src_main}" class="card-img-top" style="height: 100%;">
+                    			</a>
                         			<div class="card-body">
                             			<h5 class="card-title" id="gym_name">${dtoGymPromo.gym_name}</h5>
                         			</div>
-                    			</a>
                     			<ul class="list-group list-group-flush">
                         			<li class="list-group-item d-flex justify-content-end" id="gym_month">${dtoGymPromo.gym_month}개월</li>
                         			<li class="list-group-item d-flex justify-content-end" id="gym_price">${dtoGymPromo.gym_price}원</li>
-                        			<li class="list-group-item d-flex justify-content-end">O.T 1회 무료</li>
+                        			<li class="list-group-item d-flex justify-content-end">★당퍼트 쿠폰 OK★</li>
                     			</ul>
                 			</div>
             			</div>
@@ -683,14 +707,20 @@
             		<c:forEach items="${foodList}" var="dtoFoodPromo">
                 		<div class="col-6 col-sm-3 d-flex justify-content-center">
                 			<div class="card">
-                        		<%-- <a href="${dtoFoodPromo.food_com}" style="text-decoration: none; color:black;"> --%>
-                        		<a href="/guestList.food" style="text-decoration: none; color:black;">
-                            		<img src="/files/${dtoFoodPromo.food_src}" id="food_src" class="card-img-top"></a>
+                				<c:choose>
+                					<c:when test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
+                        				<a href="/listLogin.food" style="text-decoration: none; color:black;">
+                        				<img src="/files/${dtoFoodPromo.food_src}" id="food_src" class="card-img-top"></a>	
+                        			</c:when>
+                        			<c:otherwise>
+                        				<a href="/list.food" style="text-decoration: none; color:black;">
+                            			<img src="/files/${dtoFoodPromo.food_src}" id="food_src" class="card-img-top"></a>
+                            		</c:otherwise>
+                            	</c:choose>
                             	<div class="card-body">
                             		<h5 class="card-title card_text" id="food_title" style="height:40%;">${dtoFoodPromo.food_title}</h5>
                         			<p class="card-text card_text" id="food_name" style="height:35%;">${dtoFoodPromo.food_name}</p>
                         			<p class="card-text d-flex justify-content-end"><small class="text-muted" id="food_price">${dtoFoodPromo.food_price}&nbsp;원</small></p>
-                            		<input type="text" class="d-none" value="${dtoFoodPromo.food_seq}">
                     			</div>
                     		</div>
                 		</div>
@@ -722,8 +752,8 @@
                 <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
                 <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
                 <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
-                <div class="col"><a href="">센터등록요청하기</a></div>
-                <div class="col"><a href="">문의하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
             </div>
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>

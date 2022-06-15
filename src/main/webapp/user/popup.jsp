@@ -15,29 +15,93 @@
 	crossorigin="anonymous"></script>
 <title>아이디 중복 확인</title>
 </head>
-<body>
+<style>
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
+/* body */
+.container{
+	width: 500px;
+	height: 300px;
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
+	border: 1px dotted #73b1a1;
+	margin-top: 25px;
+}
+
+/* 버튼 */
+#checkId, #useBtn, #compareBtn {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 0.25rem;
+	font-family: 'LeferiPoint-WhiteA';
+	color: white;
+	margin: 5px;
+	padding-top: 5px;
+	padding-bottom: 1px;
+	align-items:center;
+}
+
+#checkId:hover, #useBtn:hover, #compareBtn:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
+#cancleBtn{
+	background-color: #a8b3b0;
+	border-radius: 0.25rem;
+	font-family: 'LeferiPoint-WhiteA';
+	color: white;
+	margin: 5px;
+	padding-top: 5px;
+	padding-bottom: 1px;
+	align-items:center;
+}
+
+#cancleBtn:hover{
+	background-color: #898d8c;
+}
+
+/* input */
+#user_id, #compare{
+	border: none;
+	border-bottom: 1px solid #73b1a1;
+	border-radius: 0;
+	font-weight: 600;
+}
+
+#compare:focus{
+	outline: none !important;
+}
+#user_id::placeholder {
+	color: #adcabf !important;
+}
+</style>
+<body>
 	<div class='container'>
 		<form action="/idCheck.user" method="get" id="checkIdForm">
-			<div class='row'>
-				<div class="col-6 m-2">
-					<input type="text" class="form-control" value="${user_id}"
-						id="user_id" pattern="^[a-zA-Z0-9_]{6,12}$" name="user_id"
-						placeholder="id 입력">
+			<div class='row' style="margin-top: 20px; margin-left: 20px;">
+				<div class="col m-2 d-flex justify-content-end">
+					<input type="text" class="form-control shadow-none" value="${user_id}"
+						id="user_id" pattern="^[a-zA-Z0-9_]{6,12}$" name="user_id" placeholder="사용할 e-mail 입력">
 				</div>
-				<div class='col-3 m-2'>
+				<div class='col-4 m-2 d-flex justify-content-start'>
 					<button type="button" class="btn btn-success" id="checkId">중복확인</button>
 				</div>
-
 			</div>
 		</form>
-		<div class="row m-2">
-			<div class="col-4">
-				<span>확인결과 : </span>
+		<div class="row m-2 d-flex justify-content-center" style=" margin-left: 20px !important;">
+			<div class="col-3 m-2 p-1">
+				<span>확인 결과 : </span>
 			</div>
-			<div class="col-8">
+			<div class="col d-flex align-items-center" style="text-align:center;">
 				<c:if test="${rs eq 'ok'}">
-					<span>사용 가능한 아이디입니다.</span>
+					<span style="color:green;">사용 가능한 아이디입니다.</span>
 				</c:if>
 				<c:if test="${rs eq 'no'}">
 					<span>사용 불가한 아이디입니다.</span>
@@ -46,32 +110,31 @@
 		</div>
 		<c:if test="${rs eq 'ok'}">
 			<form action="/compare.user" method="post" id="compareForm">
-				<div class="row m-2">
+				<div class="row m-2 d-flex justify-content-center" style=" margin-left: 20px !important;">
 					<div>
-						<input type="text" class="d-none" name="compareUser" value="${user_id}">
+						<input type="text" class="d-none" id="compareUser" name="compareUser" value="${user_id}">
 					</div>
-					<div class="col-4">
+					<div class="col-4 d-flex align-items-center">
 						<span>인증 번호 입력 : </span>
 					</div>
-					<div class="col-6">
-						<input type="text" class="form-control" id="compare"
-							name="compare">
+					<div class="col-4">
+						<input type="text" class="form-control shadow-none" id="compare" name="compare">
 					</div>
-					<div class="col-2">
-						<button type="button" id="compareBtn" class="btn btn-primary">확인</button>
+					<div class="col-4 d-flex justify-content-start">
+						<button type="button" id="compareBtn" class="btn">확인</button>
 					</div>
 				</div>
-				<div class="row m-2 d-none" id="okMessage">
-					<div class="col-12"><span>인증이 완료되었습니다.</span></div>
+				<div class="row d-none" id="okMessage" style="margin-top: 20px; margin-left: 20px !important; text-align:center;">
+					<div class="col-12"><span style="color:green;">인증이 완료되었습니다.</span></div>
 				</div>
 			</form>
 
 		</c:if>
-		<div class="row m-2">
-			<div class="col-4 d-flex justify-content-end">
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-6 d-flex justify-content-end">
 				<button type="button" class="btn btn-primary" id="useBtn" disabled>사용</button>
 			</div>
-			<div class="col-4">
+			<div class="col-6 d-flex justify-content-start">
 				<button type="button" class="btn btn-secondary" id="cancleBtn">취소</button>
 			</div>
 		</div>

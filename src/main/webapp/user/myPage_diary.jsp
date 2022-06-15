@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>일기</title>
 </head>
 <style>
 /* 폰트 */
@@ -29,12 +29,27 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-WhiteA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 끝 */
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	font-family: '양진체';
 }
 
 .container {
@@ -49,6 +64,8 @@
 	background-color: #BFFFF0;
 	color: #97C4B8;
 	align-items: center;
+	font-family: '양진체';
+	text-align: center;
 }
 
 .cls_header a {
@@ -79,7 +96,6 @@
 
 /* 로고 */
 .logoImg {
-	height: 100%;
 	padding: 0%;
 	filter: invert(87%) sepia(8%) saturate(806%) hue-rotate(113deg)
 		brightness(86%) contrast(86%);
@@ -91,42 +107,34 @@
 }
 /* 로고 이미지 사이즈 */
 .logoImg #logoImg {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 /* 로고 효과 */
-@import
-	url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap')
-	;
-
-.logoImg {
-	position: relative;
-	display: inline-block;
-	color: #fff;
-	text-transform: uppercase;
-	animation: waviy 1s infinite;
-	animation-delay: calc(.1s * var(- -i));
-}
-
-@
-keyframes waviy { 0%, 40%, 100% {
-	transform: translateY(0)
-}
-
-20
-%
-{
-transform
-:
-translateY(
--20px
-)
-}
-}
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+    .logoImg {
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        text-transform: uppercase;
+        animation: waviy 1s infinite;
+        animation-delay: calc(.1s * var(--i));
+    }
+    @keyframes waviy {
+        0%,
+        40%,
+        100% {
+            transform: translateY(0)
+        }
+        20% {
+            transform: translateY(-20px)
+        }
+    }
 /* 로고 효과 끝 */
 /* 네비바 */
 .navbar {
 	background-color: #F0FFC2 !important;
+	font-family: '양진체';
 }
 
 .container-fluid a {
@@ -173,37 +181,104 @@ translateY(
 
 /* 바디 */
 .title {
-	border-bottom: 2px solid grey;
+	border-bottom: 2px solid #97C4B8;
 	width: 250px;
+	padding:none;
+}
+
+.title h3 {
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+}
+
+.cls_body{
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
 }
 
 .inner-container-left {
 	margin: auto;
-	border: 1px solid black;
-	height: 800px;
+	border: 1px solid #F0FFC2;
+	box-sizing: border-box;
+	height: 100%;
+	background-color: #F0FFC2;
 }
 
 .inner-container-left * {
 	margin: 20px;
+	font-weight: 600;
+	color: #80bdb7;
 }
 
-.inner-container-right {
-	height: 80%;
-}
-
-.inner-contents-left {
+.contentWrapper {
 	margin: none;
 	border: 1px solid black;
-	height: 100%;
+	height: 500px;
+	border: 1px solid #97C4B8;
+	border-radius: 0.25rem;
+	font-weight: 600;
+	padding: 10px;
+	overflow-y: auto;
 }
 
-.inner-contents-right {
-	margin: none;
-	border: 1px solid black;
-	height: 100%;
+.diaryWrapper{
+	border-bottom: 1px dotted #97C4B8;
+	margin-top: 10px;
 }
 
-/* 푸터 */
+.seqTitle{
+	 color: #54af97;
+	
+}
+
+/* 버튼 */
+.btnSpace {
+	margin-bottom: 80px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	font-weight: 600;
+	justify-content: center;
+}
+
+#btnWrite, #btnModify {
+	background-color: #73b1a1;
+	border: 1px solid #F0FFC2;
+	border-radius: 50rem;
+	padding: 3px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	color: white;
+	margin: 5px;
+}
+
+#btnWrite:hover, #btnModify:hover {
+	background-color: #F0FFC2;
+	border: 1px solid #73b1a1;
+	color: #73b1a1;
+}
+
+#btnDelete{
+	background-color: #e3bda1;
+	border: 1px solid #F0FFC2;
+	border-radius: 50rem;
+	padding: 3px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-family: 'LeferiPoint-WhiteObliqueA';
+	color: white;
+	margin: 5px;
+}
+
+#btnDelete:hover {
+	background-color: #d5752ebf;
+	border: 1px solid #f1d78f;
+	color: white;
+}
+
+
+/* footer */
 .footer {
 	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
@@ -230,6 +305,7 @@ translateY(
 	color: #709c91;
 	text-decoration: none;
 }
+/* footer 끝 */
 </style>
 
 <body>
@@ -294,7 +370,6 @@ translateY(
 				<ul class="dropdown-menu headDropdown">
 					<li><a class="dropdown-item" href="/toInformation.info">자주
 							묻는 질문</a></li>
-					<li><a class="dropdown-item" href="#">이벤트</a></li>
 					<c:if test="${loginSession.user_auth eq 'manager'}">
 						<li><a class="dropdown-item"
 							href="/modifyList.food?curPage=1">음식 프로로션</a></li>
@@ -318,7 +393,7 @@ translateY(
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item"><a class="nav-link active"
-									aria-current="page" href="#">칼럼</a></li>
+									aria-current="page" href="/toColumnPage.column?curPage=1">칼럼</a></li>
 								<c:choose>
 									<c:when
 										test="${loginSession.user_auth eq 'member' || loginSession.user_auth eq 'admin' || loginSession.user_auth eq 'manager'}">
@@ -334,23 +409,9 @@ translateY(
 											href="/list.food">특가 식품</a></li>
 									</c:otherwise>
 								</c:choose>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-									role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										근육별 운동법 </a>
-									<ul class="dropdown-menu navDropdown"
-										aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">상체</a></li>
-										<li><a class="dropdown-item" href="#">하체</a></li>
-										<li><a class="dropdown-item" href="#">몸통</a></li>
-										<li><a class="dropdown-item" href="#">전체보기</a></li>
-									</ul></li>
+								<li class="nav-item"><a class="nav-link" href="/toList.part">근육별 운동법
+										</a></li>
 							</ul>
-							<form action="search.gym" method="post" class="d-flex searchForm">
-								<input class="form-control navSearchInput me-2" type="search"
-									placeholder="운동시설 검색" aria-label="Search">
-								<button class="btn btn-outline-light" type="button">Search!</button>
-							</form>
 						</div>
 					</div>
 				</nav>
@@ -360,9 +421,13 @@ translateY(
 		<div class="empty"></div>
         <!-- 바디 -->
         <div class="cls_body">
+        	<div class="row justify-content-evenly">
+				<div class="col-3">
+					<h3 class="text-center mb-3" style="font-weight: 600; color: #97C4B8">My Page</h3>
+				</div>
+				<div class="col-6 d-flex justify-content-center"></div>
             <div class="row justify-content-evenly">
                 <div class="col-3">
-                    <h3 class="text-center mb-3">My Page</h3>
                     <div class="inner-container-left">
                         <div>
                         	<button type="button" id="modifyBtn" style="border:none; background:none;">정보수정</button>
@@ -373,45 +438,33 @@ translateY(
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="d-flex justify-content-center">
-                        <div class="title d-flex justify-content-center mb-4">
-                            <h5>오늘의 기록!</h5>
-                        </div>
+                	<div class="row d-flex justify-content-center mb-4">
+                		<div class="row title d-flex justify-content-center mb-4 text-center">
+                    		<h3 style="margin-top: 50px;">오늘의 기록!</h3>
+                    	</div>
+                    	<div class="row inner-container-right d-flex justify-content-center">
+                        	<div class="col contentWrapper">
+                                <c:forEach items="${list}" var="dto">
+                                    <div class="diaryWrapper text-center">
+                                    	<span style="color:gray;">${dto.diary_date}</span><br>
+                                    	<a style="text-decoration:none; color:gray;" href="/toDiaryDetail.diary?diary_seq=${dto.diary_seq}">
+                                    	<span class="seqTitle">${dto.diary_seq}번째,&nbsp;</span>
+                                    	<span class="seqTitle" style="font-size: large;">-&nbsp;${dto.getDiary_part()}&nbsp;-</span><br>
+                                    	<span style="color:gray;">${dto.getDiary_content()}</span></a>
+                                    </div>
+                                 </c:forEach>
+                        	</div>
+                    	</div>
                     </div>
-                    <div class="row inner-container-right">
-                        <div class="col-7">
-                            <div class="inner-contents-left">
-                            
-                                <div>
-                                    <c:forEach items="${list}" var="dto">
-                                    	<div>${dto.diary_seq}. ${dto.getDiary_part()}</div>
-                                    	<div>${dto.getDiary_content()}</div>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="inner-contents-right">
-                                <div>
-                                    <c:forEach items="${list}" var="dto">
-                                    	<div>${dto.diary_date}</div> 
-                                    	<div></div>                                   	
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end mt-4 gap-3">
-                        <button class="btn btn-primary" id="btnWrite" type="button">일기 쓰기</button>
-                        <button class="btn btn-primary" type="button">일기 수정</button>
-                        <button class="btn btn-secondary" type="button">일기 삭제</button>
+                    <div class="btnSpace d-flex justify-content-end mt-4 gap-3">
+                        <button class="btn" id="btnWrite" type="button">일기 쓰기</button>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
         <!-- 바디 끝 -->
-        <div class="empty"> </div>
-        <!-- 푸터 -->
+        <!-- footer -->
         <div class="container footer">
             <div class="row footerInfo">
                 <div class="col-6">
@@ -430,14 +483,15 @@ translateY(
                 </div>
             </div>
             <div class="row footerMenu">
-                <div class="col"><a href="">이용약관</a></div>
-                <div class="col"><a href="">개인정보처리방침</a></div>
-                <div class="col"><a href="">위치정보이용약관</a></div>
-                <div class="col"><a href="">센터등록요청하기</a></div>
-                <div class="col"><a href="">문의하기</a></div>
+                <div class="col"><a href="/footer/ToS.jsp">이용약관</a></div>
+                <div class="col"><a href="/footer/privacyPolicy.jsp">개인정보처리방침</a></div>
+                <div class="col"><a href="/footer/location-based-service.jsp">위치정보이용약관</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">센터등록요청하기</a></div>
+                <div class="col"><a href="/toInformation.info?curPage=1">문의하기</a></div>
             </div>
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
+        <!-- footer 끝 -->
     </div>
 
 	<script>

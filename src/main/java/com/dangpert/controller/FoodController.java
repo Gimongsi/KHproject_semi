@@ -40,11 +40,7 @@ public class FoodController extends HttpServlet {
 		System.out.println("요청 uri : " + uri);
 		request.setCharacterEncoding("utf-8");
 
-
-
 		if (uri.equals("/list.food")) { // 식품 비회원 리스트 요청
-			HttpSession session = request.getSession(); 
-			UserDTO dto = (UserDTO)session.getAttribute("loginSession");
 			FoodDAO dao = new FoodDAO();
 
 			try {

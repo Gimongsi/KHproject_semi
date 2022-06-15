@@ -3,6 +3,8 @@ package com.dangpert.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +13,7 @@ import javax.naming.InitialContext;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-import com.dangpert.dto.CalumnDTO;
+import com.dangpert.dto.ColumnDTO;
 
 public class ColumnDAO {
 	private BasicDataSource bds;
@@ -27,120 +29,159 @@ public class ColumnDAO {
 	}
 	
 	public int getNewSeq() throws Exception{
-		String sql = "select calumn_seq.nextval from dual";
+		String sql = "select column_seq.nextval from dual";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			int calumn_seq = rs.getInt(1);
-			return calumn_seq;			
+			int column_seq = rs.getInt(1);
+			return column_seq;			
 		}
 	}
-
-	public ArrayList<CalumnDTO> searchByTitle(String searchKeyword) throws Exception{
-		String sql = "select * from tbl_calumn where title like '%'||?||'%' order by 1 desc";
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql)){
-
-			pstmt.setString(1, searchKeyword);
-			
-			ResultSet rs = pstmt.executeQuery();
-			ArrayList<CalumnDTO> list = new ArrayList<>();
-			while(rs.next()) {
-				int calumn_seq = rs.getInt("calumn_seq");
-				String calumn_title = rs.getString("calumn_title");
-				String calumn_content = rs.getString("calumn_content");
-				String calumn_date = rs.getString("calumn_date");
-				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
-			}
-			return list;
-		}
-	}
-
-	public ArrayList<CalumnDTO> selectAll() throws Exception{
-		String sql = "select * from tbl_calumn";
+	
+	public ArrayList<ColumnDTO> selectAllMain() throws Exception{
+		String sql = "select * from tbl_column";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
 			ResultSet rs = pstmt.executeQuery();
-			ArrayList<CalumnDTO> list = new ArrayList<>();
+			ArrayList<ColumnDTO> list = new ArrayList<>();
 			while(rs.next()) {
-				int calumn_seq = rs.getInt("calumn_seq");
-				String calumn_title = rs.getString("calumn_title");
-				String calumn_content = rs.getString("calumn_content");
-				String calumn_date = rs.getString("calumn_date");
-				list.add(new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date));
+				int column_seq = rs.getInt("column_seq");
+				String column_title = rs.getString("column_title");
+				String column_content = rs.getString("column_content");
+				String column_date = rs.getString("column_date");
+				String column_src = rs.getString("column_src");
+				
+				list.add(new ColumnDTO(column_seq, column_title, column_content, column_date, column_src));
+			}
+			return list;
+		}
+	}
+	
+	public ArrayList<ColumnDTO> selectAll(int start, int end) throws Exception{
+		String sql = "select * from (select tbl_column.*, row_number() over(order by column_seq desc) as num from tbl_column)"
+				+ " where num between ? and ?";
+
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			ResultSet rs = pstmt.executeQuery();
+			ArrayList<ColumnDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				int column_seq = rs.getInt("column_seq");
+				String column_title = rs.getString("column_title");
+				String column_content = rs.getString("column_content");
+				String column_date = this.getStringDate(rs.getTimestamp("column_date"));
+				String column_src = rs.getString("column_src");
+				list.add(new ColumnDTO(column_seq,column_title,column_content,column_date, column_src));
 			}
 			return list;
 		}
 	}
 
-	public int delete(int calumn_seq) throws Exception{
-		String sql = "delete from tbl_calumn where calumn_seq = ?";
+	public int delete(int column_seq) throws Exception{
+		String sql = "delete from tbl_column where column_seq = ?";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 
-			pstmt.setInt(1, calumn_seq);
+			pstmt.setInt(1, column_seq);
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public int modify(CalumnDTO dto) throws Exception{
-		String sql = "update tbl_calumn set calumn_title=?, calumn_content=? where calumn_seq=?";
-
-		try(Connection con = bds.getConnection();
-			PreparedStatement pstmt = con.prepareStatement(sql)){
-
-			pstmt.setInt(3, dto.getCalumn_seq());
-			pstmt.setString(1, dto.getCalumn_title());
-			pstmt.setString(2, dto.getCalumn_content());
-			int rs = pstmt.executeUpdate();
-			return rs;
-		}
-	}
-
-	public int write(CalumnDTO dto) throws Exception{
-		String sql = "insert into tbl_calumn values(infomation_seq.nextval,?,?,?)";
-
+	public int modify(ColumnDTO dto, String nowSrc) throws Exception{
+		String sql = "update tbl_column set column_title=?, column_content=?, column_src=? where column_seq=?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
-			pstmt.setString(1, dto.getCalumn_title());
-			pstmt.setString(2, dto.getCalumn_content());
-			pstmt.setString(3, dto.getCalumn_date());
+			if(dto.getColumn_src() == null){
+				pstmt.setInt(4, dto.getColumn_seq());
+				pstmt.setString(1, dto.getColumn_title());
+				pstmt.setString(2, dto.getColumn_content());
+				pstmt.setString(3, nowSrc);
+				int rs = pstmt.executeUpdate();
+				return rs;
+			}else {
+				pstmt.setInt(4, dto.getColumn_seq());
+				pstmt.setString(1, dto.getColumn_title());
+				pstmt.setString(2, dto.getColumn_content());
+				pstmt.setString(3, dto.getColumn_src());
+				int rs = pstmt.executeUpdate();
+				return rs;
+			}
+		}
+	}
+
+	public int write(ColumnDTO dto) throws Exception{
+		String sql = "insert into tbl_column values(?,?,?,sysdate,?)";
+
+
+		try(Connection con = bds.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, dto.getColumn_seq());
+			pstmt.setString(2, dto.getColumn_title());
+			pstmt.setString(3, dto.getColumn_content());
+			pstmt.setString(4, dto.getColumn_src());
 
 			int rs = pstmt.executeUpdate();
 			return rs;
 		}
 	}
 
-	public CalumnDTO selectBySeq(int qna_seq) throws Exception{
-		String sql = "select * from tbl_calumn where qna_seq = ?";
+	public ColumnDTO selectBySeq(int column_seq) throws Exception{
+		String sql = "select * from tbl_column where column_seq = ?";
 
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql);){
 
-			pstmt.setInt(1, qna_seq);
+			pstmt.setInt(1, column_seq);
 			ResultSet rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				int calumn_seq = rs.getInt("calumn_seq");
-				String calumn_title = rs.getString("calumn_title");
-				String calumn_content = rs.getString("calumn_content");
-				String calumn_date = rs.getString("calumn_date");
-				CalumnDTO dto = new CalumnDTO(calumn_seq,calumn_title,calumn_content,calumn_date);
+				String column_title = rs.getString("column_title");
+				String column_content = rs.getString("column_content");
+				String column_date = this.getStringDate(rs.getTimestamp("column_date"));
+				String column_src = rs.getString("column_src");
+				ColumnDTO dto = new ColumnDTO(column_seq,column_title,column_content,column_date, column_src);
 				return dto;
 			}
 			return null;
 		}
 	}
-
+	
+	public String selectBySeqNowSrc(int column_seq) throws Exception{
+		String sql = "select * from tbl_column where column_seq = ?";
+		
+		try(Connection con = bds.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);){
+			
+			pstmt.setInt(1, column_seq);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				String column_src = rs.getString("column_src");
+				return column_src;
+			}
+			return null;
+		}
+	}
+	
+	public String getStringDate(Timestamp date) {
+		// 1900년 02월 02일 00시 00분 00초
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+		return sdf.format(date);
+	}
+	
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception{
-		String sql = "select count(*) as totalCnt from tbl_calumn";
+		String sql = "select count(*) as totalCnt from tbl_column";
 		try(Connection con = bds.getConnection();
 			PreparedStatement pstmt = con.prepareStatement(sql)){
 			
@@ -148,7 +189,7 @@ public class ColumnDAO {
 			rs.next();
 			
 			int totalCnt = rs.getInt("totalCnt"); 
-			int recordCntPerPage = 10; 
+			int recordCntPerPage = 4; 
 			int naviCntPerPage = 5; 
 			int pageTotalCnt = 0; 
 		

@@ -3,25 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<title>전체 메일 보내기</title>
-</head>
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- text area auto size -->        
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>    
+<title>칼럼 상세페이지</title>
 <style>
-/* 폰트 */
+    /* 폰트 */
 @font-face {
 	font-family: '양진체';
 	src:
@@ -177,99 +172,107 @@
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 40px;
+	height: 20px;
+}
+.empty1{
+background-color: white;
+	height: 10px;
+}
+.emptyTop{
+	background-color: white;
+	height: 50px;
 }
 
-/* 바디 타이틀 */
-.cls_title {
-	height: 100px;
-}
-
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 300px;
-	height: 45px;
-	text-align: center;
-	font-family: '양진체';
-}
-
-/* 타이틀 */
+/*컨텐츠*/
 .title {
-	color: #97C4B8;
-	border-bottom: 1px solid #97C4B8;
-	-bs-gutter-x: 0px;
-	margin-bottom: 20px;
-	margin-top: 10px;
-	font-family: '양진체';
+    color: #97C4B8;
+    border-bottom: 1px solid #97C4B8;
+    -bs-gutter-x: 0px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    font-family: '양진체';
+    }
+    
+.columnDetail{
+	font-family: 'LeferiPoint-WhiteA';
+	font-weight: 600;
 }
 
-
-/* 메일 내용 */
-.mail-title>input {
-	width: 50%;
+  #column_title {
+	width: 70%;
 	height: 4rem;
 	overflow: hidden;
 	border: none;
 	resize: none;
 	font-weight: 600;
 	text-align: center;
-	border-bottom: 1px solid #97C4B8;
-	font-family: 'LeferiPoint-WhiteA';
-	font-weight: 600;
-	font-size: large;
-}
-
-.mail-content>textarea {
+	font-family: 'LeferiPoint-WhiteA' !important;
+    font-weight: 600;
+	}
+	
+  .columnTextarea {
 	width: 70%;
 	height: 4rem;
 	overflow: hidden;
 	resize: none;
 	font-weight: 600;
 	text-align: center;
-	border: 1px solid #97C4B8;
+	border: none;
+	border-top: 1px solid #b4ddd2;
+	border-bottom: 1px solid #97C4B8;
 	font-family: 'LeferiPoint-WhiteA';
-	font-weight: 600;
-	height: 500px;
-	font-size: large;
-}
-
-textarea:focus, input:focus {
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 20px;    
+	}
+	
+	.figure-caption{
+		font-family: 'LeferiPoint-WhiteA';
+    	font-weight: 600;
+	}
+	
+	.columnTextarea:focus, #column_title:focus {
 	outline: none;
-}
+	}
+	
+	.content{
+		position:relative;
+	}
+	
+	.dateLabel{
+		position:absolute;
+	}
+	
+	img{
+		width: 800px;
+	}
 
-textarea::placeholder, input::placeholder {
-	color: #adcabf !important;
-}
+/*버튼*/
+	.btnSpace {
+        margin-bottom: 10px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        font-weight: 600;
+        justify-content: center;
+    }
 
-/* 보내기 버튼 */
-#sendMailBtn, #backBtn {
-	width: 100px;
-}
+    .btnModify, #btnDelete, #btnModify, #btnList{
+        background-color: #73b1a1;
+        border: 1px solid #F0FFC2;
+        border-radius: 0.25rem;
+        padding: 3px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: 'LeferiPoint-WhiteObliqueA';
+        color: white;
+        margin: 5px;
+    }
 
-#sendMailBtn, #backBtn {
-	background-color: #73b1a1;
-	border: 1px solid #F0FFC2;
-	border-radius: 0.25rem;
-	padding: 3px;
-	padding-top: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-family: 'LeferiPoint-WhiteObliqueA';
-	color: white;
-	margin: 5px;
-}
-
-#sendMailBtn:hover, #backBtn:hover {
-	background-color: #F0FFC2;
-	border: 1px solid #73b1a1;
-	color: #73b1a1;
-}
-
+    .btnModify:hover, #btnDelete:hover, #btnModify:hover, btnList:hover{
+        background-color: #F0FFC2;
+        border: 1px solid #73b1a1;
+        color: #73b1a1;
+    }
 
 /* footer */
 .footer {
@@ -300,7 +303,7 @@ textarea::placeholder, input::placeholder {
 }
 /* footer 끝 */
 </style>
-
+</head>
 <body>
 	<div class="container">
 		<!-- 헤더 -->
@@ -411,44 +414,44 @@ textarea::placeholder, input::placeholder {
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-
-		<!-- 메인 영역 -->
-		<div class="container row cls_body">
+	<div class="container">
+		<div class="columnDetail">
 			<div class="row title">
-				<div class="col-12 d-flex justify-content-center" style="margin-top: 50px;">
-					<h1>공지 메일 보내기</h1>
+				<div class="col" style="margin-top: 40px; text-align: center;">
+					<figure class="figure d-felx justify-content-center">
+  						<img src="/files/${dto.column_src}" onerror="this.style.display='none'" class="figure-img img-fluid rounded">
+  						<figcaption class="figure-caption text-end">참고이미지</figcaption>
+					</figure>
 				</div>
 			</div>
+				<h1 class="class d-flex justify-content-center">
+					<input type="text" id="column_title" name="column_title" value="${dto.column_title}" readonly>
+				</h1>
+				
+			<div class="row">
+                <div class="col content d-flex justify-content-center">
+                	<div><label class="figure-caption dateLabel text-end" name="column_date">${dto.column_date}</label></div>
+                	<textarea class="columnTextarea" name="column_content" readonly>${dto.column_content}</textarea>
+                </div>
+            </div>
 			<div class="empty"></div>
-			<form action="/sendMail.manager" method="post" id="mailForm">
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-title">
-						<input type="text" class="" id="mail-title"
-							name="mail-title" placeholder="제목 입력">
-					</div>
+			<div class="row btnSpace">
+				<div class="col d-flex justify-content-center">
+					<button type="button" class="btnList" id="btnList">목록으로</button>
 				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-content">
-						<textarea class="" id="mail-content"
-							name="mail-content"></textarea>
-					</div>
+			<c:if test="${loginSession.user_auth eq 'manager'}">
+				<div class="col d-flex justify-content-end">
+					<button type="button" class="btn btn-warning" id="btnModify" value="${dto.column_seq}">수정</button>
 				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col btnSpace d-flex justify-content-center">
-						<button type="submit" id="sendMailBtn" class="btn btnAdd">보내기</button>
-						<button type="button" id="backBtn" class="btn btnAdd">취소</button>
-					</div>
-
+				<div class="col-3 d-flex justify-content-start">
+					<button type="button" class="btn btn-danger" id="btnDelete" value="${dto.column_seq}">삭제</button>
 				</div>
-			</form>
-			<div class="empty"></div>
+			</c:if>
+			</div>
 		</div>
-
-
-		<!-- footer -->
+	</div>
+	<div class="empty" style="margin: 20px;"></div>
+	<!-- footer -->
         <div class="container footer">
             <div class="row footerInfo">
                 <div class="col-6">
@@ -476,7 +479,30 @@ textarea::placeholder, input::placeholder {
             <p>Copyright ⓒ Dangpert Co., Ltd. All rights reserved.</p>
         </div>
         <!-- footer 끝 -->
-	</div>
-</body>
+    </div>
+	<script>
+	$("#btnList").on("click", function(){
+		location.href="/toColumnPage.column?curPage=1";
+	})
+	
+	$("#btnModify").on("click", function(e){
+		location.href="/modify.column?column_seq="+${dto.column_seq};
+	})
+	
+	$("#btnDelete").on("click", function(e){
+		if(confirm("정말 삭제하시겠습니까?")){
+			location.href="/deleteProc.column?column_seq="+$(e.target).val();
+		}
+		
+	})
+	
+	autosize($("textArea"));
+	
+	
 
-</html>
+
+
+
+	</script>
+</body>
+</html>	

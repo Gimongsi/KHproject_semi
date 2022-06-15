@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <link
@@ -11,15 +9,14 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<title>전체 메일 보내기</title>
-</head>
+<title>칼럼 목록</title>
 <style>
 /* 폰트 */
 @font-face {
@@ -173,32 +170,18 @@
 .navSearchInput::placeholder {
 	color: #FFE4C0;
 }
-
 /* 공백 */
 .empty {
 	background-color: white;
-	height: 40px;
+	height: 20px;
 }
 
-/* 바디 타이틀 */
-.cls_title {
-	height: 100px;
+.emptyTop {
+	background-color: white;
+	height: 50px;
 }
 
-.title_div {
-	height: 100%;
-	width: 100%;
-}
-
-.title_div h2 {
-	border-bottom: 2px solid rgb(221, 218, 218);
-	width: 300px;
-	height: 45px;
-	text-align: center;
-	font-family: '양진체';
-}
-
-/* 타이틀 */
+/* 칼럼 목록 */
 .title {
 	color: #97C4B8;
 	border-bottom: 1px solid #97C4B8;
@@ -208,50 +191,36 @@
 	font-family: '양진체';
 }
 
+.column{
+	position: relative;
+}
 
-/* 메일 내용 */
-.mail-title>input {
-	width: 50%;
-	height: 4rem;
-	overflow: hidden;
+.btnAddCls{
+	position: absolute;
+	left: 1rem;
+}
+
+.row h4, h1{
+	font-family: '양진체';
+	text-align: center;
+}
+
+.card{
 	border: none;
-	resize: none;
+}
+
+.card-body{
+	font-size: larger;
+}
+
+.card p{
+	font-family: 'LeferiPoint-WhiteObliqueA';
 	font-weight: 600;
-	text-align: center;
-	border-bottom: 1px solid #97C4B8;
-	font-family: 'LeferiPoint-WhiteA';
-	font-weight: 600;
-	font-size: large;
 }
 
-.mail-content>textarea {
-	width: 70%;
-	height: 4rem;
-	overflow: hidden;
-	resize: none;
-	font-weight: 600;
-	text-align: center;
-	border: 1px solid #97C4B8;
-	font-family: 'LeferiPoint-WhiteA';
-	font-weight: 600;
-	height: 500px;
-	font-size: large;
-}
+/* 버튼 */
 
-textarea:focus, input:focus {
-	outline: none;
-}
-
-textarea::placeholder, input::placeholder {
-	color: #adcabf !important;
-}
-
-/* 보내기 버튼 */
-#sendMailBtn, #backBtn {
-	width: 100px;
-}
-
-#sendMailBtn, #backBtn {
+.btnAdd {
 	background-color: #73b1a1;
 	border: 1px solid #F0FFC2;
 	border-radius: 0.25rem;
@@ -264,12 +233,11 @@ textarea::placeholder, input::placeholder {
 	margin: 5px;
 }
 
-#sendMailBtn:hover, #backBtn:hover {
+.btnAdd:hover {
 	background-color: #F0FFC2;
 	border: 1px solid #73b1a1;
 	color: #73b1a1;
 }
-
 
 /* footer */
 .footer {
@@ -301,6 +269,7 @@ textarea::placeholder, input::placeholder {
 /* footer 끝 */
 </style>
 
+</head>
 <body>
 	<div class="container">
 		<!-- 헤더 -->
@@ -411,43 +380,64 @@ textarea::placeholder, input::placeholder {
 			</div>
 		</div>
 		<!-- 네비 끝 -->
-		<div class="empty"></div>
-
-		<!-- 메인 영역 -->
-		<div class="container row cls_body">
+		<div class="container">
 			<div class="row title">
-				<div class="col-12 d-flex justify-content-center" style="margin-top: 50px;">
-					<h1>공지 메일 보내기</h1>
+				<div class="col-12 d-flex justify-content-center column" style="margin-top: 50px;">
+					<h1>칼럼</h1>
+					<c:if test="${loginSession.user_auth eq 'manager'}">
+					<div class="col d-flex btnAddCls">
+						<button class="btn btnAdd" type="button">칼럼 등록</button>
+					</div>
+					</c:if>
 				</div>
 			</div>
 			<div class="empty"></div>
-			<form action="/sendMail.manager" method="post" id="mailForm">
+			<!-- 근육 목록 시작 -->
+			<div class="pertList">
 				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-title">
-						<input type="text" class="" id="mail-title"
-							name="mail-title" placeholder="제목 입력">
+					<c:choose>
+						<c:when test="${empty list}">
+							<div>저장된 내용이 없습니다.</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="dto" varStatus="listStatus" end="6">
+								<div class="col-6 d-flex justify-content-center">
+									<a href="/view.column?column_seq=${dto.column_seq}" style="text-decoration: none; color: black;">
+										<div class="card" style="height: 100%;">
+											<img style="height: 100%;" src="/files/${dto.column_src}" class="card-img-top">
+											<div class="card-body">
+												<p class="card-text">${dto.column_title}</p>
+											</div>
+										</div>
+									</a>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col-12 d-flex justify-content-center mail-content">
-						<textarea class="" id="mail-content"
-							name="mail-content"></textarea>
-					</div>
-				</div>
-				<div class="empty"></div>
-				<div class="row">
-					<div class="col btnSpace d-flex justify-content-center">
-						<button type="submit" id="sendMailBtn" class="btn btnAdd">보내기</button>
-						<button type="button" id="backBtn" class="btn btnAdd">취소</button>
-					</div>
-
-				</div>
-			</form>
 			<div class="empty"></div>
+			<%--  페이징 --%>
+			<div class="row">
+				<div class="col d-flex justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<c:if test="${naviMap.needPrev eq true}">
+								<li class="page-item"><a class="page-link"
+								href="/toColumnPage.column?curPage=${naviMap.startNavi-1}">←</a></li>
+							</c:if>
+							<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}" step="1">
+								<li class="page-item"><a class="page-link" href="/toColumnPage.column?curPage=${pageNum}">${pageNum}</a></li>
+							</c:forEach>
+							<c:if test="${naviMap.needNext eq true}">
+								<li class="page-item"><a class="page-link" href="/toColumnPage.column?curPage=${naviMap.endNavi+1}">→</a></li>
+							</c:if>
+						</ul>
+					</nav>
+				</div>
+			</div>
 		</div>
-
-
+		<!-- 근육 목록 끝 -->
 		<!-- footer -->
         <div class="container footer">
             <div class="row footerInfo">
@@ -477,6 +467,13 @@ textarea::placeholder, input::placeholder {
         </div>
         <!-- footer 끝 -->
 	</div>
+	<script>
+		$(".btnAdd").on("click", function(){
+			location.href="/write.column";
+		})
+		
+	
+	
+	</script>
 </body>
-
 </html>
